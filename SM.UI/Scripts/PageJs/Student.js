@@ -13,7 +13,32 @@
         }
     });
 
+    $('#btnAddToGrid').click(function () {
+        AddToGrid();
+    });
+    $("#tblDetails").on("click", ".red", function () {
+        $(this).closest("tr").remove();
+    });
+
 });
+
+function AddToGrid() {
+
+    var ExamTypeID = $('#ExamType').val();
+    var GradeID = $('#SubjectGrade').val();
+
+    var Subject = $('#SubjectName').val();
+
+    $("#tableBody").append(
+        '<tr>' +
+        '<td hidden> ' + ExamTypeID + '</td>' +
+        '<td>' + $('#ExamType option:selected').text() + '</td>' +
+        '<td>' + Subject + '</td>' +
+        '<td hidden>' + GradeID + '</td>' +
+        '<td>' + $('#SubjectGrade option:selected').text() + '</td>' +
+        '<td><span class="button red"><i class="glyphicon glyphicon-remove"></i></span></td>' +
+        '</tr> ');
+}
 
 function Save() {
 

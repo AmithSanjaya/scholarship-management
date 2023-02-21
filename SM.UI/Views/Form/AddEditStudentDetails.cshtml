@@ -73,11 +73,11 @@
                                     <div class=" row align-items-center">
                                         <div class="form-group col-sm-6">
                                             <label for="fname">First Name:</label>
-                                            <input type="text" class="form-control" id="fname">
+                                            <input type="text" class="form-control" id="StudentFirstName">
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label for="lname">Last Name:</label>
-                                            <input type="text" class="form-control" id="lname">
+                                            <input type="text" class="form-control" id="StudentLastName">
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label class="d-block">Gender:</label>
@@ -92,11 +92,11 @@
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label for="dob">Date Of Birth:</label>
-                                            <input class="form-control" id="dob" type="date">
+                                            <input class="form-control" id="StudentDateOfBirth" type="date">
                                         </div>
                                         <div class="form-group col-sm-12">
                                             <label>Address:</label>
-                                            <textarea class="form-control" name="address" id="address" rows="5" style="line-height: 22px;">
+                                            <textarea class="form-control" name="StudentAddress" id="StudentAddress" rows="5" style="line-height: 22px;">
                                             </textarea>
                                         </div>
                                         <div class="form-group col-sm-6">
@@ -105,14 +105,14 @@
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label>Country:</label>
-                                            <select class="selectpicker form-control" id="county" data-style="py-0">
+                                            <select class="selectpicker form-control" id="StudentCounty" data-style="py-0">
                                                 <option selected="">Sri Lanka</option>
                                                 <option>India</option>
                                             </select>
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label for="lname">NIC:</label>
-                                            <input type="text" class="form-control" id="nic">
+                                            <input type="text" class="form-control" id="StudentNIC">
                                         </div>
 
                                     </div>
@@ -128,32 +128,32 @@
                                 <div class=" row align-items-center">
                                     <div class="form-group col-sm-12">
                                         <label for="fname">School Name:</label>
-                                        <input type="text" class="form-control" id="sclname">
+                                        <input type="text" class="form-control" id="SclName">
                                     </div>
                                     <div class="form-group col-sm-12">
                                         <label>School Address:</label>
-                                        <textarea class="form-control" name="scladdress" id="scladdress" rows="5" style="line-height: 22px;">
+                                        <textarea class="form-control" name="SclAddress" id="SclAddress" rows="5" style="line-height: 22px;">
                                             </textarea>
                                     </div>
                                     <div class="form-group col-sm-6">
                                         <label for="lname">Grade:</label>
-                                        <input type="text" class="form-control" id="sGrade">
+                                        <input type="text" class="form-control" id="CurrentGrade">
                                     </div>
                                     <div class="form-group col-sm-6">
                                         <label for="lname">Higest Grade in School:</label>
-                                        <input type="text" class="form-control" id="sHGrade">
+                                        <input type="text" class="form-control" id="HigestGrade">
                                     </div>
                                     <div class="form-group col-sm-12">
                                         <label for="fname">Highest Education Achievement:</label>
-                                        <input type="text" class="form-control" id="hsclAchment">
+                                        <input type="text" class="form-control" id="HigestAchievement">
                                     </div>
                                     <div class="form-group col-sm-6">
                                         <label for="lname">Achievement Year/Month:</label>
-                                        <input type="month" class="form-control" id="hsclAchmentMonth">
+                                        <input type="month" class="form-control" id="AchievementMonth">
                                     </div>
                                     <div class="form-group col-sm-6">
                                         <label for="dob">Register Date:</label>
-                                        <input class="form-control" id="rDate" type="date">
+                                        <input class="form-control" id="RegisterDate" type="date">
                                     </div>
 
                                     <div class="custom-control custom-checkbox">
@@ -162,17 +162,41 @@
                                     </div>
                                     <div class="form-group col-sm-12" id="FundDIV">
                                         <label for="fname">Name of Fund:</label>
-                                        <input type="text" class="form-control" id="nameOfFund">
+                                        <input type="text" class="form-control" id="NameOfFund">
                                     </div>
                                     <div class="form-group col-sm-6" id="NumberDIV">
                                         <label for="dob">Fund Amount:</label>
-                                        <input class="form-control" id="fAmount" type="number">
+                                        <input class="form-control" id="FundAmount" type="number">
                                     </div>
 
                                 </div>
                                 <hr />
                                 <p>Examination Results</p>
                                 <hr />
+                                <div class="row">
+                                    <div class="form-group col-6 .col-md-4">
+                                        <label for="lname">Exam Type:</label>
+                                        <select class="selectpicker form-control" id="ExamType" data-style="py-0">
+                                            <option selected="">G.C.E A/L</option>
+                                            <option>G.C.E O/L</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-6 .col-md-4">
+                                        <label for="lname">Subject Name:</label>
+                                        <input type="text" class="form-control" id="SubjectName">
+                                    </div>
+                                    <div class="form-group col-6 .col-md-4">
+                                        <label>Grade:</label>
+                                        <select class="selectpicker form-control" id="SubjectGrade" data-style="py-0">
+                                            <option selected="">A</option>
+                                            <option>B</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-6 .col-md-4">
+                                        <label></label>
+                                        <button type="button" id="btnAddToGrid" class="btn btn-primary" onclick="AddtoGrid();">Add to Grid</button>
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col-md-12 col-sm-12 col-xs-12">
                                         <div class="table-responsive">
@@ -181,7 +205,6 @@
                                                     <tr class="headings">
                                                         <th hidden>Type ID</th>
                                                         <th>Exam Type</th>
-                                                        <th hidden>Subject ID</th>
                                                         <th>Subject Name</th>
                                                         <th hidden>Grade ID</th>
                                                         <th>Grade</th>
@@ -189,15 +212,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody id="tableBody">
-                                                    <tr>
-                                                        <td hidden>1</td>
-                                                        <td>G.C.E A/L</td>
-                                                        <td hidden>1</td>
-                                                        <td>Chemistry</td>
-                                                        <td hidden>1</td>
-                                                        <td>B</td>
-                                                        <td>x</td>
-                                                    </tr>
+
                                                 </tbody>
                                             </table>
                                         </div>
@@ -219,35 +234,35 @@
                                     <div class=" row align-items-center">
                                         <div class="form-group col-sm-12">
                                             <label for="fname">Father's Name:</label>
-                                            <input type="text" class="form-control" id="farthername">
+                                            <input type="text" class="form-control" id="FatherName">
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label for="lname">Father's Occupation:</label>
-                                            <input type="text" class="form-control" id="fartherOccupation">
+                                            <input type="text" class="form-control" id="FartherOccupation">
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label for="dob">Monthly Income:</label>
-                                            <input class="form-control" id="fAmount" type="number">
+                                            <input class="form-control" id="fatherAmount" type="number">
                                         </div>
                                         <div class="form-group col-sm-12">
                                             <label for="fname">Mother's Name:</label>
-                                            <input type="text" class="form-control" id="mothername">
+                                            <input type="text" class="form-control" id="MotherName">
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label for="lname">Mother's Occupation:</label>
-                                            <input type="text" class="form-control" id="motherOccupation">
+                                            <input type="text" class="form-control" id="MotherOccupation">
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label for="dob">Monthly Income:</label>
-                                            <input class="form-control" id="mAmount" type="number">
+                                            <input class="form-control" id="MotherAmount" type="number">
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label for="dob">No Of Brothers:</label>
-                                            <input class="form-control" id="nBrothers" type="number">
+                                            <input class="form-control" id="NoOfBrothers" type="number">
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label for="dob">No Of Sisters:</label>
-                                            <input class="form-control" id="nSisters" type="number">
+                                            <input class="form-control" id="NoOfSisters" type="number">
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label for="dob">Are any brothers employed, Monthly Income:</label>
@@ -274,11 +289,11 @@
                                 <form>
                                     <div class="form-group">
                                         <label for="cno">Contact Number:</label>
-                                        <input type="text" class="form-control" id="cno">
+                                        <input type="text" class="form-control" id="StudentContactNo">
                                     </div>
                                     <div class="form-group">
                                         <label for="email">Email:</label>
-                                        <input type="text" class="form-control" id="email">
+                                        <input type="text" class="form-control" id="StudentEmail">
                                     </div>
                                 </form>
                             </div>
