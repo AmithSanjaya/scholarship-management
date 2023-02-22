@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace SM.DataAccess
 {
@@ -137,6 +138,27 @@ namespace SM.DataAccess
                 lstMenu.Add(tempMenu);
             }
             return lstMenu;
+        }
+
+        public List<User> UserLogin(User model)
+        {
+            List<User> lstUser = null;
+
+            using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required, new System.TimeSpan(0, 15, 0)))
+            {
+                try
+                {
+                    lstUser = exe.SpExecutesSelect<User, User>("spUserLogin", model, false);
+                    scope.Complete();
+                }
+                catch (Exception ex)
+                {
+                    lstUser = null;
+                    scope.Dispose();
+                }
+            }
+
+            return lstUser;
         }
     }
 }

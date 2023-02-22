@@ -1,4 +1,17 @@
-﻿function BindDropDown(id, display, value, data) {
+﻿$(document).ready(function () {
+
+    $Msg = new Date($.now()).toDateString();
+ 
+    $('#HomeDisplay').text($Msg);
+
+    $(document).keypress(function (e) {
+        if (e.which === 13) {
+            $('#btnLogin').click();
+        }
+    });
+});
+
+function BindDropDown(id, display, value, data) {
     $("#" + id).html("");
     $("#" + id).append($("<option></option>").val("-1").html("<b>---- PLEASE SELECT ----</b>"));
     for (var i = 0; i < data.length; i++) {
@@ -62,19 +75,19 @@ function MsgBox(Type, Msg, callback, reload) {
     var Class_hr = '';
 
     if (Type == 'Error') {
-        title_hr = '<h3>Error!</h3>';
+        title_hr = '<h4>Error!</h4>';
         Class_hr = 'btn-danger btn-lg';
     }
     else if (Type == 'Info') {
-        title_hr = '<h3>Information!</h3>';
+        title_hr = '<h4>Information!</h4>';
         Class_hr = 'btn-info btn-lg';
     }
     else if (Type == 'Warn') {
-        title_hr = '<h3>Warning!</h3>';
+        title_hr = '<h4>Warning!</h4>';
         Class_hr = 'btn-warning btn-lg';
     }
     else if (Type == 'Confirm') {
-        title_hr = '<h3>Confirmation</h3>';
+        title_hr = '<h4>Confirmation</h4>';
         Class_hr = 'btn-info btn-lg';
     }
 

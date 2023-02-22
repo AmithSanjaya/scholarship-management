@@ -61,10 +61,10 @@
                                         <div class="col-md-12">
                                             <div class="profile-img-edit">
                                                 <div class="crm-profile-img-edit">
-                                                    <img class="crm-profile-pic rounded-circle avatar-100" src="~/assets/images/user/11.png" alt="profile-pic">
+                                                    <img class="crm-profile-pic rounded-circle avatar-100" src="~/assets/images/user/11.png" alt="profile-pic" id="imgPreview">
                                                     <div class="crm-p-image bg-primary">
                                                         <i class="las la-pen upload-button"></i>
-                                                        <input class="file-upload" type="file" accept="image/*">
+                                                        <input class="file-upload" type="file" accept="image/*" id="photo">
                                                     </div>
                                                 </div>
                                             </div>
@@ -122,184 +122,190 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="education-information" role="tabpanel">
-                        <div class="card-body">
-                            <form>
-
-                                <div class=" row align-items-center">
-                                    <div class="form-group col-sm-12">
-                                        <label for="fname">School Name:</label>
-                                        <input type="text" class="form-control" id="SclName">
-                                    </div>
-                                    <div class="form-group col-sm-12">
-                                        <label>School Address:</label>
-                                        <textarea class="form-control" name="SclAddress" id="SclAddress" rows="5" style="line-height: 22px;">
-                                            </textarea>
-                                    </div>
-                                    <div class="form-group col-sm-6">
-                                        <label for="lname">Grade:</label>
-                                        <input type="text" class="form-control" id="CurrentGrade">
-                                    </div>
-                                    <div class="form-group col-sm-6">
-                                        <label for="lname">Higest Grade in School:</label>
-                                        <input type="text" class="form-control" id="HigestGrade">
-                                    </div>
-                                    <div class="form-group col-sm-12">
-                                        <label for="fname">Highest Education Achievement:</label>
-                                        <input type="text" class="form-control" id="HigestAchievement">
-                                    </div>
-                                    <div class="form-group col-sm-6">
-                                        <label for="lname">Achievement Year/Month:</label>
-                                        <input type="month" class="form-control" id="AchievementMonth">
-                                    </div>
-                                    <div class="form-group col-sm-6">
-                                        <label for="dob">Register Date:</label>
-                                        <input class="form-control" id="RegisterDate" type="date">
-                                    </div>
-
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="rbSchol">
-                                        <label class="custom-control-label" for="rbSchol">Have another Scholarship ?</label>
-                                    </div>
-                                    <div class="form-group col-sm-12" id="FundDIV">
-                                        <label for="fname">Name of Fund:</label>
-                                        <input type="text" class="form-control" id="NameOfFund">
-                                    </div>
-                                    <div class="form-group col-sm-6" id="NumberDIV">
-                                        <label for="dob">Fund Amount:</label>
-                                        <input class="form-control" id="FundAmount" type="number">
-                                    </div>
-
-                                </div>
-                                <hr />
-                                <p>Examination Results</p>
-                                <hr />
-                                <div class="row">
-                                    <div class="form-group col-6 .col-md-4">
-                                        <label for="lname">Exam Type:</label>
-                                        <select class="selectpicker form-control" id="ExamType" data-style="py-0">
-                                            <option selected="">G.C.E A/L</option>
-                                            <option>G.C.E O/L</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-6 .col-md-4">
-                                        <label for="lname">Subject Name:</label>
-                                        <input type="text" class="form-control" id="SubjectName">
-                                    </div>
-                                    <div class="form-group col-6 .col-md-4">
-                                        <label>Grade:</label>
-                                        <select class="selectpicker form-control" id="SubjectGrade" data-style="py-0">
-                                            <option selected="">A</option>
-                                            <option>B</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-6 .col-md-4">
-                                        <label></label>
-                                        <button type="button" id="btnAddToGrid" class="btn btn-primary" onclick="AddtoGrid();">Add to Grid</button>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12 col-sm-12 col-xs-12">
-                                        <div class="table-responsive">
-                                            <table class="table table-striped jambo_table bulk_action" id="tblDetails">
-                                                <thead>
-                                                    <tr class="headings">
-                                                        <th hidden>Type ID</th>
-                                                        <th>Exam Type</th>
-                                                        <th>Subject Name</th>
-                                                        <th hidden>Grade ID</th>
-                                                        <th>Grade</th>
-                                                        <th width="20"></th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody id="tableBody">
-
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </form>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="family-information" role="tabpanel">
                         <div class="card">
                             <div class="card-header d-flex justify-content-between">
                                 <div class="iq-header-title">
-                                    <h4 class="card-title">Family Information</h4>
+                                    <h4 class="card-title">Education Information</h4>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <form>
+
                                     <div class=" row align-items-center">
                                         <div class="form-group col-sm-12">
-                                            <label for="fname">Father's Name:</label>
-                                            <input type="text" class="form-control" id="FatherName">
-                                        </div>
-                                        <div class="form-group col-sm-6">
-                                            <label for="lname">Father's Occupation:</label>
-                                            <input type="text" class="form-control" id="FartherOccupation">
-                                        </div>
-                                        <div class="form-group col-sm-6">
-                                            <label for="dob">Monthly Income:</label>
-                                            <input class="form-control" id="fatherAmount" type="number">
+                                            <label for="fname">School Name:</label>
+                                            <input type="text" class="form-control" id="SclName">
                                         </div>
                                         <div class="form-group col-sm-12">
-                                            <label for="fname">Mother's Name:</label>
-                                            <input type="text" class="form-control" id="MotherName">
+                                            <label>School Address:</label>
+                                            <textarea class="form-control" name="SclAddress" id="SclAddress" rows="5" style="line-height: 22px;">
+                                            </textarea>
                                         </div>
                                         <div class="form-group col-sm-6">
-                                            <label for="lname">Mother's Occupation:</label>
-                                            <input type="text" class="form-control" id="MotherOccupation">
+                                            <label for="lname">Grade:</label>
+                                            <input type="text" class="form-control" id="CurrentGrade">
                                         </div>
                                         <div class="form-group col-sm-6">
-                                            <label for="dob">Monthly Income:</label>
-                                            <input class="form-control" id="MotherAmount" type="number">
+                                            <label for="lname">Higest Grade in School:</label>
+                                            <input type="text" class="form-control" id="HigestGrade">
+                                        </div>
+                                        <div class="form-group col-sm-12">
+                                            <label for="fname">Highest Education Achievement:</label>
+                                            <input type="text" class="form-control" id="HigestAchievement">
                                         </div>
                                         <div class="form-group col-sm-6">
-                                            <label for="dob">No Of Brothers:</label>
-                                            <input class="form-control" id="NoOfBrothers" type="number">
+                                            <label for="lname">Achievement Year/Month:</label>
+                                            <input type="month" class="form-control" id="AchievementMonth">
                                         </div>
                                         <div class="form-group col-sm-6">
-                                            <label for="dob">No Of Sisters:</label>
-                                            <input class="form-control" id="NoOfSisters" type="number">
+                                            <label for="dob">Register Date:</label>
+                                            <input class="form-control" id="RegisterDate" type="date">
                                         </div>
-                                        <div class="form-group col-sm-6">
-                                            <label for="dob">Are any brothers employed, Monthly Income:</label>
-                                            <input class="form-control" id="BrotherIncome" type="number">
+
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="rbSchol">
+                                            <label class="custom-control-label" for="rbSchol">Have another Scholarship ?</label>
                                         </div>
-                                        <div class="form-group col-sm-6">
-                                            <label for="dob">Are any sisters employed, Monthly Income:</label>
-                                            <input class="form-control" id="SisterIncome" type="number">
+                                        <div class="form-group col-sm-12" id="FundDIV">
+                                            <label for="fname">Name of Fund:</label>
+                                            <input type="text" class="form-control" id="NameOfFund">
+                                        </div>
+                                        <div class="form-group col-sm-6" id="NumberDIV">
+                                            <label for="dob">Fund Amount:</label>
+                                            <input class="form-control" id="FundAmount" type="number">
                                         </div>
 
                                     </div>
+                                    <hr />
+                                    <p>Examination Results</p>
+                                    <hr />
+                                    <div class="row">
+                                        <div class="form-group col-6 .col-md-4">
+                                            <label for="lname">Exam Type:</label>
+                                            <select class="selectpicker form-control" id="ExamType" data-style="py-0">
+                                                <option selected="">G.C.E A/L</option>
+                                                <option>G.C.E O/L</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-6 .col-md-4">
+                                            <label for="lname">Subject Name:</label>
+                                            <input type="text" class="form-control" id="SubjectName">
+                                        </div>
+                                        <div class="form-group col-6 .col-md-4">
+                                            <label>Grade:</label>
+                                            <select class="selectpicker form-control" id="SubjectGrade" data-style="py-0">
+                                                <option selected="">A</option>
+                                                <option>B</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-6 .col-md-4">
+                                            <label></label>
+                                            <button type="button" id="btnAddToGrid" class="btn btn-primary" onclick="AddtoGrid();">Add to Grid</button>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <div class="table-responsive">
+                                                <table class="table table-striped jambo_table bulk_action" id="tblDetails">
+                                                    <thead>
+                                                        <tr class="headings">
+                                                            <th hidden>Type ID</th>
+                                                            <th>Exam Type</th>
+                                                            <th>Subject Name</th>
+                                                            <th hidden>Grade ID</th>
+                                                            <th>Grade</th>
+                                                            <th width="20">Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="tableBody">
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </form>
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="contact-information" role="tabpanel">
-                        <div class="card">
-                            <div class="card-header d-flex justify-content-between">
-                                <div class="iq-header-title">
-                                    <h4 class="card-title">Contact Information</h4>
+                        <div class="tab-pane fade" id="family-information" role="tabpanel">
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between">
+                                    <div class="iq-header-title">
+                                        <h4 class="card-title">Family Information</h4>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <form>
+                                        <div class=" row align-items-center">
+                                            <div class="form-group col-sm-12">
+                                                <label for="fname">Father's Name:</label>
+                                                <input type="text" class="form-control" id="FatherName">
+                                            </div>
+                                            <div class="form-group col-sm-6">
+                                                <label for="lname">Father's Occupation:</label>
+                                                <input type="text" class="form-control" id="FartherOccupation">
+                                            </div>
+                                            <div class="form-group col-sm-6">
+                                                <label for="dob">Monthly Income:</label>
+                                                <input class="form-control" id="fatherAmount" type="number">
+                                            </div>
+                                            <div class="form-group col-sm-12">
+                                                <label for="fname">Mother's Name:</label>
+                                                <input type="text" class="form-control" id="MotherName">
+                                            </div>
+                                            <div class="form-group col-sm-6">
+                                                <label for="lname">Mother's Occupation:</label>
+                                                <input type="text" class="form-control" id="MotherOccupation">
+                                            </div>
+                                            <div class="form-group col-sm-6">
+                                                <label for="dob">Monthly Income:</label>
+                                                <input class="form-control" id="MotherAmount" type="number">
+                                            </div>
+                                            <div class="form-group col-sm-6">
+                                                <label for="dob">No Of Brothers:</label>
+                                                <input class="form-control" id="NoOfBrothers" type="number">
+                                            </div>
+                                            <div class="form-group col-sm-6">
+                                                <label for="dob">No Of Sisters:</label>
+                                                <input class="form-control" id="NoOfSisters" type="number">
+                                            </div>
+                                            <div class="form-group col-sm-6">
+                                                <label for="dob">Are any brothers employed, Monthly Income:</label>
+                                                <input class="form-control" id="BrotherIncome" type="number">
+                                            </div>
+                                            <div class="form-group col-sm-6">
+                                                <label for="dob">Are any sisters employed, Monthly Income:</label>
+                                                <input class="form-control" id="SisterIncome" type="number">
+                                            </div>
+
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
-                            <div class="card-body">
-                                <form>
-                                    <div class="form-group">
-                                        <label for="cno">Contact Number:</label>
-                                        <input type="text" class="form-control" id="StudentContactNo">
+                        </div>
+                        <div class="tab-pane fade" id="contact-information" role="tabpanel">
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between">
+                                    <div class="iq-header-title">
+                                        <h4 class="card-title">Contact Information</h4>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="email">Email:</label>
-                                        <input type="text" class="form-control" id="StudentEmail">
-                                    </div>
-                                </form>
+                                </div>
+                                <div class="card-body">
+                                    <form>
+                                        <div class="form-group">
+                                            <label for="cno">Contact Number:</label>
+                                            <input type="text" class="form-control" id="StudentContactNo">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="email">Email:</label>
+                                            <input type="text" class="form-control" id="StudentEmail">
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
             </div>
         </div>
     </div>

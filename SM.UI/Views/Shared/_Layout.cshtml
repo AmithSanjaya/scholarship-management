@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="~/assets/vendor/remixicon/fonts/remixicon.css">
 
     <script src="~/assets/js/jquery.min.js" type="text/javascript"></script>
-
+    <script src="~/Scripts/PageJs/Layout.js"></script>
 
     <script type="text/javascript">
         var rootUrl = '@Url.Content("~")';
@@ -32,6 +32,23 @@
         </div>
     </div>
     <!-- loader END -->
+    <div id="SessionDiglog" class="modal " role="dialog">
+        <div class="modal-dialog  ">
+            <!-- Modal content-->
+            <div id="hrmYesNoMessageboxPanel" class="modal-content panel-success">
+                <div class="modal-header   panel-heading">
+                    <h4 class="modal-title">SMAdmin | Session Timeout</h4>
+                </div>
+                <div class="modal-body">
+                    <label id="s" for="">Your Session has expired. Please Login again..</label>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="RedirectLogin()">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" id="pageid" />
     <!-- Wrapper Start -->
     <div class="wrapper">
         <!-- ======= Sidebar ======= -->
@@ -236,8 +253,7 @@
                                                          class="rounded profile-img img-fluid avatar-70">
                                                 </div>
                                                 <div class="p-3">
-                                                    <h5 class="mb-1">JoanDuo@property.com</h5>
-                                                    <p class="mb-0">Since 10 march, 2020</p>
+                                                    <h5 class="mb-1">@SM.UserObjects.UserDetail.FirstName</h5>
                                                     <div class="d-flex align-items-center justify-content-center mt-3">
                                                         <a href="../app/user-profile.html" class="btn border mr-2">Profile</a>
                                                         <a href="@Url.Action("LogOut", "Admin", new { area = "" })" class="btn border">Sign Out</a>
