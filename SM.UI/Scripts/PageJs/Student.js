@@ -13,6 +13,19 @@
         }
     });
 
+    var model = {}
+    ajaxCall('Form/StudentExamType', { 'model': model }, function (data) {
+        BindDropDown("ExamType", "ExamTypeName", "StudentExamTypeID", data);
+    });
+
+    ajaxCall('Form/SubjectGrade', { 'model': model }, function (data) {
+        BindDropDown("SubjectGrade", "GradeName", "GradeID", data);
+    });
+
+    ajaxCall('Form/Country', { 'model': model }, function (data) {
+        BindDropDownDefault("StudentCounty", "CountryName", "CountryID", data);
+    });
+
     $('#btnAddToGrid').click(function () {
         AddToGrid();
     });
@@ -40,31 +53,30 @@ function ImageUpload(StudentID) {
     var formdata = new FormData();
     var fileInput = document.getElementById('photo');
 
-    if (fileInput.files.length <= 0) {
-        MsgBox('Error', 'Please upload the Image!', '', false);
-        return false;
-    }
+    if (fileInput.files.length > 0) {
 
-    for (i = 0; i < fileInput.files.length; i++) {
-        var fileType = fileInput.files[i].name.split('.').pop();
-        if (fileType === 'jpg' || fileType === 'jpeg' || fileType === 'png') {
-            formdata.append(fileInput.files[i].name, fileInput.files[i]);
-            formdata.append('StudentID', StudentID);
+        for (i = 0; i < fileInput.files.length; i++) {
+            var fileType = fileInput.files[i].name.split('.').pop();
+            if (fileType === 'jpg' || fileType === 'jpeg' || fileType === 'png') {
+                formdata.append(fileInput.files[i].name, fileInput.files[i]);
+                formdata.append('StudentID', StudentID);
+                formdata.append('UploadType', "Student");
+            }
+            else {
+                MsgBox('Error', 'File Type Not Supported..!', '', false);
+                return false;
+            }
         }
-        else {
-            MsgBox('Error', 'File Type Not Supported..!', '', false);
-            return false;
-        }
-    }
 
-    var xhr = new XMLHttpRequest();
-    var url = rootUrl + '/SM/Uploads/Student';
-    xhr.open('POST', url);
-    xhr.send(formdata);
+        var xhr = new XMLHttpRequest();
+        var url = rootUrl + '/Admin/Upload';
+        xhr.open('POST', url);
+        xhr.send(formdata);
 
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            document.getElementById("photo").value = '';
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                document.getElementById("photo").value = '';
+            }
         }
     }
     return true;
@@ -96,67 +108,129 @@ function Save() {
         MsgBox('Confirm', 'Do you want to Save ?', function () {
 
             var model = new Student();
+            model.Fill();
 
-            model.FirstName = $("#StudentFirstName").val();
-            model.LastName = $("#StudentLastName").val();
-            model.BirthDate = $("#StudentDateOfBirth").val();
-            model.IsMale = $("#rbMGender").val();
-            model.Address = $("#StudentAddress").val();
-            model.City = $("#city").val();
-            model.CountryID = $("#StudentCounty").val();
-            model.ContactNo = $("#StudentContactNo").val();
-            model.Email = $("#StudentEmail").val();
-            model.NICNo = $("#StudentNIC").val();
-            model.Photo = $("#").val();
-            model.Grade = $("#CurrentGrade").val();
-            model.SchoolName = $("#SclName").val();
-            model.SchoolAddress = $("#SclAddress").val();
-            model.HighestGradeInSchool = $("#HigestGrade").val();
-            model.HighestEduAchievement = $("#HigestAchievement").val();
-            model.AchievementMon = $("#AchievementMonth").val();
-            model.AchievementYear = $("#AchievementMonth").val();
-            model.RegisterDate = $("#RegisterDate").val();
-            model.IsHaveOtherSchol = $("#rbSchol").val();
-            model.NameOfFund = $("#NameOfFund").val();
-            model.FundAmount = $("#FundAmount").val();
             model.Mode = 1;
+            model.Photo = Date.now();
 
-            ajaxCall('Form/UpdateStudent', { 'model': model }, function (data) {
+            if (ImageUpload(model.Photo)) {
 
-                if (data.IsValid) {
-                    MsgBox('Info', data.SucessMessage, '', true);
-                } else {
-                    MsgBox('Error', data.ErrorMessage, '', false);
+                var rowCount = document.getElementById("tblDetails").rows.length;
+                var rowData = document.getElementById("tblDetails");
+                var lstSubject = [];
+
+                for (var i = 1; i < rowCount; i++) {
+                    var SubjectModel = new StudentSubject();
+
+                    SubjectModel.StudentExamTypeID = rowData.rows[i].cells[0].innerHTML;
+                    SubjectModel.Subject = rowData.rows[i].cells[2].innerHTML;
+                    SubjectModel.GradeID = rowData.rows[i].cells[3].innerHTML;
+
+                    lstSubject.push(SubjectModel);
                 }
-            });
+
+                model.lstSubject = lstSubject;
+
+                ajaxCall('Form/UpdateStudent', { 'model': model }, function (data) {
+
+                    if (data.IsValid) {
+                        MsgBox('Info', data.SucessMessage, '', true);
+                    } else {
+                        MsgBox('Error', data.ErrorMessage, '', false);
+                    }
+                });
+            }
         }, true);
     }
 }
 
 var Student = function () {
-    FirstName = "";
-    LastName = "";
-    BirthDate = "";
-    IsMale = "";
-    Address = "";
-    City = "";
-    CountryID = 0;
-    ContactNo = "";
-    Email = "";
-    NICNo = "";
-    Photo = "";
-    Grade = "";
-    SchoolName = "";
-    SchoolAddress = "";
-    HighestGradeInSchool = "";
-    HighestEduAchievement = "";
-    AchievementMon = 0;
-    AchievementYear = 0;
-    RegisterDate = "";
-    IsHaveOtherSchol = "";
-    NameOfFund = "";
-    FundAmount = 0;
+
+    this.FirstName = "";
+    this.LastName = "";
+    this.BirthDate = "";
+    this.IsMale = "";
+    this.Address = "";
+    this.City = "";
+    this.CountryID = 0;
+    this.ContactNo = "";
+    this.Email = "";
+    this.NICNo = "";
+    this.Photo = "";
+    this.Grade = "";
+    this.SchoolName = "";
+    this.SchoolAddress = "";
+    this.HighestGradeInSchool = "";
+    this.HighestEduAchievement = "";
+    this.AchievementMon = 0;
+    this.AchievementYear = 0;
+    this.RegisterDate = "";
+    this.IsHaveOtherSchol = "";
+    this.NameOfFund = "";
+    this.FundAmount = 0;
+    this.ExamSubjects=[],
+    this.FatherName = "",
+    this.FatherOccupation = "",
+    this.FatherIncomeAmount = 0,
+    this.MotherName = "",
+    this.MotherOccupation = "",
+    this.MotherIncomeAmount = "",
+    this.NoOfBrothers = 0,
+    this.NoOfSisters = 0,
+    this.BrotherIncomeAmount = 0,
+    this.SisterIncomeAmount = 0
+
     Mode = 1;
+
+    this.Fill = function () {
+        this.FirstName = $("#StudentFirstName").val();
+        this.LastName = $("#StudentLastName").val();
+        this.BirthDate = $("#StudentDateOfBirth").val();
+        this.IsMale = $("input[name='rbGender']:checked").val();
+        this.Address = $("#StudentAddress").val();
+        this.City = $("#city").val();
+        this.CountryID = $("#StudentCounty").val();
+        this.NICNo = $("#StudentNIC").val();
+        this.Photo = $("#Photo").val();
+
+        this.ContactNo = $("#StudentContactNo").val() || '-';
+        this.Email = $("#StudentEmail").val() || '-';
+
+        this.Grade = $("#CurrentGrade").val() || '-';
+        this.SchoolName = $("#SclName").val() || '-';
+        this.SchoolAddress = $("#SclAddress").val() || '-';
+        this.HighestGradeInSchool = $("#HigestGrade").val() || '-';
+        this.HighestEduAchievement = $("#HigestAchievement").val() || '-';
+        this.AchievementMon = $("#AchievementMonth").val().split("-",2)[1];
+        this.AchievementYear = $("#AchievementMonth").val().split("-", 2)[0];
+        this.RegisterDate = $("#RegisterDate").val() || '-';
+        this.IsHaveOtherSchol = $("#rbSchol").val() || 0;
+        this.NameOfFund = $("#NameOfFund").val() || '-';
+        this.FundAmount = $("#FundAmount").val() || 0;
+
+        this.FatherName = $("#FatherName").val() || '';
+        this.FatherOccupation = $("#FartherOccupation").val() || '-';
+        this.FatherIncomeAmount = $("#fatherAmount").val() || 0;
+        this.MotherName = $("#MotherName").val() || '-';
+        this.MotherOccupation = $("#MotherOccupation").val() || '-';
+        this.MotherIncomeAmount = $("#MotherAmount").val() || 0;
+        this.NoOfBrothers = $("#NoOfBrothers").val() || 0;
+        this.NoOfSisters = $("#NoOfSisters").val() || 0;
+        this.BrotherIncomeAmount = $("#BrotherIncome").val() || 0;
+        this.SisterIncomeAmount = $("#SisterIncome").val() || 0;
+    }
+}
+
+var StudentSubject = function () {
+    this.StudentExamTypeID = 0,
+    this.Subject = "",
+    this.GradeID = 0
+
+    this.Fill = function (StudentExamTypeID, Subject, GradeID) {
+        this.StudentExamTypeID = StudentExamTypeID,
+        this.Subject = Subject,
+        this.GradeID=GradeID
+    }
 }
 
 function ValidateSave() {

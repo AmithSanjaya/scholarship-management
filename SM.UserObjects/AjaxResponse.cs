@@ -20,5 +20,7 @@ namespace SM.UserObjects
         public string SucessMessage { get { return _SucessMessage; } set { IsValid = true; _SucessMessage = value; } }
         public string ErrorMessage { get { return _ErrorMessage; } set { IsValid = false; _ErrorMessage = value; } }
 
+        public int ReturnID { get; set; }
+
     }
 }

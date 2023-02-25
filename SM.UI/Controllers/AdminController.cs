@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using SM.DataAccess;
+using System.IO;
 
 namespace SM.UI.Controllers
 {
@@ -15,7 +16,7 @@ namespace SM.UI.Controllers
 
         public AdminController()
         {
-            ajaxResponse = new AjaxResponse();
+            
         }
 
         public ActionResult Index()
@@ -30,10 +31,6 @@ namespace SM.UI.Controllers
             return View();
         }
 
-        /// <summary>
-        /// Menu
-        /// </summary>
-        /// <returns></returns>
         public ActionResult SideMenu()
         {
             //int id = UserDetail.UserID;
@@ -43,10 +40,6 @@ namespace SM.UI.Controllers
             return PartialView("SideMenu", lstMenu);
         }
 
-        /// <summary>
-        /// User Right
-        /// </summary>
-        /// <returns></returns>
         public ActionResult UserRight()
         {
             return View();
@@ -67,6 +60,7 @@ namespace SM.UI.Controllers
         public JsonResult UserLogin(User model)
         {
             List<User> lstUser = new List<User>();
+            ajaxResponse = new AjaxResponse();
 
             lstUser = new AdminDataAccess().UserLogin(model);
 
@@ -118,6 +112,7 @@ namespace SM.UI.Controllers
 
         public JsonResult CheckSession()
         {
+            ajaxResponse = new AjaxResponse();
 
             if ((System.Web.HttpContext.Current.Session["SM"] != null) && (Request.Cookies["UserID"].Value != null || Request.Cookies["UserID"].Value != ""))
             {
@@ -129,6 +124,35 @@ namespace SM.UI.Controllers
             }
 
             return Json(ajaxResponse.SucessMessage, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult Upload()
+        {
+            for (int i = 0; i < Request.Files.Count; i++)
+            {
+                HttpPostedFileBase file = Request.Files[i];
+
+                int fileSize = file.ContentLength;
+                string fileName = file.FileName;
+                string UploadType = Request["UploadType"].ToString();
+                string strPath = "";
+
+                if (UploadType == "Student")
+                {
+                    strPath = "~/Uploads/Student/";
+                }
+
+                fileName = Request["StudentID"].ToString();
+                string mimeType = file.ContentType;
+                System.IO.Stream fileContent = file.InputStream;
+                var InputFileName = Path.GetFileName(file.FileName);
+                InputFileName = fileName + ".jpg";
+
+                var ServerSavePath = Path.Combine(Server.MapPath(strPath) + InputFileName);
+                file.SaveAs(ServerSavePath);
+            }
+
+            return Json("Uploaded " + Request.Files.Count + " files");
         }
     }
 }

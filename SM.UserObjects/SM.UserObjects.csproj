@@ -43,7 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AjaxResponse.cs" />
-    <Compile Include="Country.cs" />
+    <Compile Include="DBUpdate.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

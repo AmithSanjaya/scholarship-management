@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace SM.UserObjects
 {
-    public class Country
+    public class DBUpdate
     {
-        public int CountryID { get; set; }
-        public int CountryName { get; set; }
+        public bool Update { get; set; }
+        public int ReturnID { get; set; }
     }
 }
