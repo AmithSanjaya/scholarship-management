@@ -13,10 +13,11 @@
 
 function BindDropDown(id, display, value, data) {
     $("#" + id).html("");
-    $("#" + id).append($("<option></option>").val("-1").html("<b>---- PLEASE SELECT ----</b>"));
+    $("#" + id).append($("<option></option>").val("-1").html("<b>Please Select</b>"));
     for (var i = 0; i < data.length; i++) {
         $("#" + id).append($("<option></option>").val(data[i][value]).html(data[i][display]));
     }
+    $('.selectpicker').selectpicker('refresh');
 }
 
 function BindDropDownWithSelectAll(id, display, value, data, text) {
@@ -25,12 +26,67 @@ function BindDropDownWithSelectAll(id, display, value, data, text) {
     for (var i = 0; i < data.length; i++) {
         $("#" + id).append($("<option></option>").val(data[i][value]).html(data[i][display]));
     }
+    $('.selectpicker').selectpicker('refresh');
 }
 
 function BindDropDownDefault(id, display, value, data) {
     $("#" + id).html("");
     for (var i = 0; i < data.length; i++) {
         $("#" + id).append($("<option></option>").val(data[i][value]).html(data[i][display]));
+    }
+    $('.selectpicker').selectpicker('refresh');
+}
+
+function ValidateError(lstValidate) {
+
+    var lstMsg = [];
+
+    /*
+     Type ID    Type Name
+     1          Text
+     2          Date
+     3          Select (Dropdown)
+     */
+    for (var i = 0; i < lstValidate.length; i++) {
+
+        if (lstValidate[i].TypeID == 1) {
+            $is_valid = $("#" + lstValidate[i].FiledName).val();
+
+            if (!$is_valid) {
+                lstMsg = {
+                        Msg: lstValidate[i].Msg,
+                        FieldName: lstValidate[i].FiledName
+                    }
+                return lstMsg;
+            }
+        }
+        else if (lstValidate[i].TypeID == 2) {
+            $d = new Date($("#" + lstValidate[i].FiledName).val());
+            $is_valid = $d instanceof Date && !isNaN($d);
+
+            if (!$is_valid) {
+                lstMsg = {
+                    Msg: lstValidate[i].Msg,
+                    FieldName: lstValidate[i].FiledName
+                }
+                return lstMsg;
+            }
+        }
+        else if (lstValidate[i].TypeID == 3) {
+            $is_valid = $("#" + lstValidate[i].FiledName).val();
+
+            if (!$is_valid || $is_valid =="-1") {
+                lstMsg = {
+                    Msg: lstValidate[i].Msg,
+                    FieldName: lstValidate[i].FiledName
+                }
+                return lstMsg;
+            }
+        }
+    }
+    return {
+        Msg: "",
+        FieldName: ""
     }
 }
 

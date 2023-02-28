@@ -23,8 +23,9 @@
     });
 
     ajaxCall('Form/Country', { 'model': model }, function (data) {
-        BindDropDownDefault("StudentCounty", "CountryName", "CountryID", data);
+        BindDropDown("StudentCounty", "CountryName", "CountryID", data);
     });
+    $('#StudentCounty').selectpicker('refresh');
 
     $('#btnAddToGrid').click(function () {
         AddToGrid();
@@ -144,6 +145,11 @@ function Save() {
     }
 }
 
+var FormValidate = function (){
+    this.FieldName = "";
+    this.FieldValue = "";
+}
+
 var Student = function () {
 
     this.FirstName = "";
@@ -236,24 +242,72 @@ var StudentSubject = function () {
 function ValidateSave() {
 
     var msg = "";
+    var lstMsg = [];
 
-    if ($('#StudentFirstName').val() == "") {
-        msg = 'Please Select The Student First Name!';
-    }
-    else if ($('#StudentLastName').val() == "") {
-        msg = 'Please Select The Student Last Name';
-    }
-    else if ($('#StudentCounty option:selected').index() < 0) {
-        msg = 'Please Select The Student Country!';
-    }
-    else {
-        msg = "";
-    }
+    $lstValidate = [
+        {
+            FiledName: "StudentFirstName",
+            TypeID: 1,
+            Msg:"Please Enter The Student First Name!"
+        },
+        {
+            FiledName: "StudentLastName",
+            TypeID: 1,
+            Msg: "Please Enter The Student Last Name!"
+        },
+        {
+            FiledName: "StudentDateOfBirth",
+            TypeID: 2,
+            Msg: "Please Enter The Student Date of Birth!"
+        },
+        {
+            FiledName: "StudentAddress",
+            TypeID: 1,
+            Msg: "Please Enter The Student Address!"
+        },
+        {
+            FiledName: "city",
+            TypeID: 1,
+            Msg: "Please Enter The Student City!"
+        },
+        {
+            FiledName: "StudentCounty",
+            TypeID: 3,
+            Msg: "Please Enter The Student Country!"
+        },
+        {
+            FiledName: "StudentNIC",
+            TypeID: 1,
+            Msg: "Please Enter The Student NIC!"
+        },
+        {
+            FiledName: "SclName",
+            TypeID: 1,
+            Msg: "Please Enter The Student School Name!"
+        },
+        {
+            FiledName: "SclAddress",
+            TypeID: 1,
+            Msg: "Please Enter The Student School Address!"
+        },
+        {
+            FiledName: "CurrentGrade",
+            TypeID: 1,
+            Msg: "Please Enter The Student Current Grade!"
+        }
+    ];
 
-    if (msg === "") {
-        return true;
-    } else {
+    lstMsg = ValidateError($lstValidate);
+
+    if (lstMsg["Msg"] != "") {
+        msg = lstMsg["Msg"];
         MsgBox('Error', msg, '', false);
+
+        var txt = document.getElementById(lstMsg["FieldName"]);
+        txt.focus();
+
         return false;
     }
+
+    return true;
 }
