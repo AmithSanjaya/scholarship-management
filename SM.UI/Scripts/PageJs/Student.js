@@ -77,9 +77,42 @@ function GetStudent(StudentPassID) {
         $('td.StudentNIC').text(data[0].NICNo);
         $('td.StudentAddress').text(data[0].Address);
 
-        $('td.StudentGender').text(data[0].GenderName);
-        $('td.StudentNIC').text(data[0].NICNo);
-        $('td.StudentAddress').text(data[0].Address);
+        $('td.StudentSchool').text(data[0].SchoolName);
+        $('td.SchoolAddress').text(data[0].SchoolAddress);
+        $('td.StudentGrade').text(data[0].Grade);
+        $('td.StudentHighestGrade').text(data[0].HighestGradeInSchool);
+        $('td.StudentHighestAchievement').text(data[0].HighestEduAchievement);
+        $('td.StudentAchievementYearMonth').text(data[0].AchievementYear);
+        $('td.StudentRegisterDate').text(data[0].RegisterDate);
+
+        $('td.StudentHaveScholarship').text(data[0].IsHaveOtherSchol);
+        $('td.StudentFundName').text(data[0].NameOfFund);
+        $('td.StudentFundAmount').text(data[0].FundAmount);
+
+        //Exam Results
+        $("#tblExam").find("tbody").remove();
+        $("#tblExam").find("tbody").empty();
+
+        for (var i = 0; i < data.length; i++) {
+            tr = $('<tr/>');
+            tr.append("<td>" + data[i].ExamTypeName + "</td>")
+            tr.append("<td>" + data[i].Subject + "</td>")
+            tr.append("<td>" + data[i].GradeName + "</td>")
+            tr.append("</tr>")
+
+            $('#tblExam').append(tr);
+        }
+
+        $('td.StudentFatherName').text(data[0].FatherName);
+        $('td.StudentFatherOccupation').text(data[0].FatherOccupation);
+        $('td.StudentFatherIncome').text(data[0].FatherIncomeAmount);
+        $('td.StudentMotherName').text(data[0].MotherName);
+        $('td.StudentMotherOccupation').text(data[0].MotherOccupation);
+        $('td.StudentMotherIncome').text(data[0].MotherIncomeAmount);
+        $('td.StudentNoBrothers').text(data[0].NoOfBrothers);
+        $('td.StudentBrotherIncome').text(data[0].BrotherIncomeAmount);
+        $('td.StudentNoSisters').text(data[0].NoOfSisters);
+        $('td.StudentBSisterIncome').text(data[0].SisterIncomeAmount);
 
     });
 

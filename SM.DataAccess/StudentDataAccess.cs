@@ -55,17 +55,20 @@ namespace SM.DataAccess
                     {
                         ReturnID = (int)exe.SpExecutesGetIdentity<Student>("spSaveStudent", model, false);
 
-                        if (model.lstSubject.Count > 0)
+                        if (model.lstSubject != null)
                         {
-                            foreach (var item in model.lstSubject)
+                            if (model.lstSubject.Count > 0)
                             {
-                                StudentSubject submodel = new StudentSubject();
-                                submodel.StudentID = ReturnID;
-                                submodel.StudentExamTypeID = item.StudentExamTypeID;
-                                submodel.Subject = item.Subject;
-                                submodel.GradeID = item.GradeID;
+                                foreach (var item in model.lstSubject)
+                                {
+                                    StudentSubject submodel = new StudentSubject();
+                                    submodel.StudentID = ReturnID;
+                                    submodel.StudentExamTypeID = item.StudentExamTypeID;
+                                    submodel.Subject = item.Subject;
+                                    submodel.GradeID = item.GradeID;
 
-                                exe.SpExecutes<StudentSubject>("spSaveStudentSubject", submodel, false);
+                                    exe.SpExecutes<StudentSubject>("spSaveStudentSubject", submodel, false);
+                                }
                             }
                         }
                     }
