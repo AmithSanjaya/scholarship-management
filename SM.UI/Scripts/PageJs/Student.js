@@ -250,9 +250,7 @@ function ValidateSave() {
         msg = "";
     }
 
-    if (msg === "") {
-        return true;
-    } else {
+
         MsgBox('Error', msg, '', false);
         return false;
     }
