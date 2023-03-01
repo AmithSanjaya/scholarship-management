@@ -237,6 +237,7 @@ function ValidateSave() {
 
     var msg = "";
 
+
     if ($('#StudentFirstName').val() == "") {
         msg = 'Please Select The Student First Name!';
     }
