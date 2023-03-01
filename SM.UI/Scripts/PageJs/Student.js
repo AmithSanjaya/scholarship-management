@@ -253,6 +253,7 @@ function ValidateSave() {
     });
 
     if (lstMsg["Msg"] != "") {
+
         msg = lstMsg["Msg"];       
 
         MsgBox('Error', msg, '', false);
