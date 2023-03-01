@@ -9,8 +9,8 @@ namespace SM.UserObjects
     public class FormValidate
     {
         public int MenuID { get; set; }
-        public string InputID { get; set; }
+        public string RequiredTypeID { get; set; }
         public string FieldName { get; set; }
-        public string FieldValue { get; set; }
+        public string Message { get; set; }
     }
 }
