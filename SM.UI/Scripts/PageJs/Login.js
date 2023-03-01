@@ -37,9 +37,9 @@ function UserLogin() {
         return;
     }
     if (model.UserName !== "" && model.Password !== "") {
-        ajaxCall('Admin/UserLogin', { 'model': model }, function (data) {
+        ajaxCallWithoutAsync('Admin/UserLogin', { 'model': model }, function (data) {
             if (data.IsValid) {
-                window.location.href += '/SM/Index';
+                window.location.href = rootUrl + '/SM/Index';
             } else {
                 MsgBox('Error', data.ErrorMessage, '', false);
             }

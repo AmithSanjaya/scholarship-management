@@ -23,9 +23,8 @@
     });
 
     ajaxCall('Form/Country', { 'model': model }, function (data) {
-        BindDropDown("StudentCounty", "CountryName", "CountryID", data);
+        BindDropDownDefault("StudentCounty", "CountryName", "CountryID", data);
     });
-    $('#StudentCounty').selectpicker('refresh');
 
     $('#btnAddToGrid').click(function () {
         AddToGrid();
@@ -145,11 +144,6 @@ function Save() {
     }
 }
 
-var FormValidate = function (){
-    this.FieldName = "";
-    this.FieldValue = "";
-}
-
 var Student = function () {
 
     this.FirstName = "";
@@ -192,7 +186,7 @@ var Student = function () {
         this.FirstName = $("#StudentFirstName").val();
         this.LastName = $("#StudentLastName").val();
         this.BirthDate = $("#StudentDateOfBirth").val();
-        this.IsMale = $("input[name='rbGender']:checked").val()=='M' ? 1 : 0;
+        this.IsMale = $("input[name='rbGender']:checked").val();
         this.Address = $("#StudentAddress").val();
         this.City = $("#city").val();
         this.CountryID = $("#StudentCounty").val();
@@ -210,11 +204,11 @@ var Student = function () {
         this.AchievementMon = $("#AchievementMonth").val().split("-",2)[1];
         this.AchievementYear = $("#AchievementMonth").val().split("-", 2)[0];
         this.RegisterDate = $("#RegisterDate").val() || '-';
-        this.IsHaveOtherSchol = $('#rbSchol').prop('checked');
+        this.IsHaveOtherSchol = $("#rbSchol").val() || 0;
         this.NameOfFund = $("#NameOfFund").val() || '-';
         this.FundAmount = $("#FundAmount").val() || 0;
 
-        this.FatherName = $("#FatherName").val() || '';
+        this.FatherName = $("#FatherName").val() || '-';
         this.FatherOccupation = $("#FartherOccupation").val() || '-';
         this.FatherIncomeAmount = $("#fatherAmount").val() || 0;
         this.MotherName = $("#MotherName").val() || '-';
@@ -242,24 +236,24 @@ var StudentSubject = function () {
 function ValidateSave() {
 
     var msg = "";
-    var lstMsg = [];
 
-    var model = {
-        MenuID:9
+    if ($('#StudentFirstName').val() == "") {
+        msg = 'Please Select The Student First Name!';
+    }
+    else if ($('#StudentLastName').val() == "") {
+        msg = 'Please Select The Student Last Name';
+    }
+    else if ($('#StudentCounty option:selected').index() < 0) {
+        msg = 'Please Select The Student Country!';
+    }
+    else {
+        msg = "";
     }
 
-    ajaxCallWithoutAsync('Admin/FormValidate', { 'model': model }, function (data) {
-        lstMsg = ValidateError(data);
-    });
-
-    if (lstMsg["Msg"] != "") {
-        msg = lstMsg["Msg"];       
-
+    if (msg === "") {
+        return true;
+    } else {
         MsgBox('Error', msg, '', false);
-        document.getElementById(lstMsg["FieldName"]).focus();
-
         return false;
     }
-
-    return true;
 }
