@@ -60,7 +60,7 @@ function GetStudent(StudentPassID) {
 
     ajaxCall('Form/StudentData', { 'model': model }, function (data) {
 
-        $("h4.mb-1").text(data[0].FirstName + ' ' + data[0].LastName);
+        $("h4.mb-1").text(data[0].StudentName);
 
         if (data[0].ImageName == "") {
             $('img.StudentImg').attr("src", "../assets/images/user/i1.jpg");
@@ -72,6 +72,14 @@ function GetStudent(StudentPassID) {
         $('p.StudentBirthDay').text(data[0].BirthDate);
         $('p.StudentContactNo').text(data[0].ContactNo);
         $('p.StudentEmail').text(data[0].Email);
+
+        $('td.StudentGender').text(data[0].GenderName);
+        $('td.StudentNIC').text(data[0].NICNo);
+        $('td.StudentAddress').text(data[0].Address);
+
+        $('td.StudentGender').text(data[0].GenderName);
+        $('td.StudentNIC').text(data[0].NICNo);
+        $('td.StudentAddress').text(data[0].Address);
 
     });
 
@@ -241,7 +249,7 @@ var Student = function () {
         this.NameOfFund = $("#NameOfFund").val() || '-';
         this.FundAmount = $("#FundAmount").val() || 0;
 
-        this.FatherName = $("#FatherName").val() || '';
+        this.FatherName = $("#FatherName").val() || '-';
         this.FatherOccupation = $("#FartherOccupation").val() || '-';
         this.FatherIncomeAmount = $("#fatherAmount").val() || 0;
         this.MotherName = $("#MotherName").val() || '-';
