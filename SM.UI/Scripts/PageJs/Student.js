@@ -192,7 +192,7 @@ var Student = function () {
         this.FirstName = $("#StudentFirstName").val();
         this.LastName = $("#StudentLastName").val();
         this.BirthDate = $("#StudentDateOfBirth").val();
-        this.IsMale = $("input[name='rbGender']:checked").val();
+        this.IsMale = $("input[name='rbGender']:checked").val()=='M' ? 1 : 0;
         this.Address = $("#StudentAddress").val();
         this.City = $("#city").val();
         this.CountryID = $("#StudentCounty").val();
@@ -210,7 +210,7 @@ var Student = function () {
         this.AchievementMon = $("#AchievementMonth").val().split("-",2)[1];
         this.AchievementYear = $("#AchievementMonth").val().split("-", 2)[0];
         this.RegisterDate = $("#RegisterDate").val() || '-';
-        this.IsHaveOtherSchol = $("#rbSchol").val() || 0;
+        this.IsHaveOtherSchol = $('#rbSchol').prop('checked');
         this.NameOfFund = $("#NameOfFund").val() || '-';
         this.FundAmount = $("#FundAmount").val() || 0;
 
@@ -244,67 +244,19 @@ function ValidateSave() {
     var msg = "";
     var lstMsg = [];
 
-    $lstValidate = [
-        {
-            FiledName: "StudentFirstName",
-            TypeID: 1,
-            Msg:"Please Enter The Student First Name!"
-        },
-        {
-            FiledName: "StudentLastName",
-            TypeID: 1,
-            Msg: "Please Enter The Student Last Name!"
-        },
-        {
-            FiledName: "StudentDateOfBirth",
-            TypeID: 2,
-            Msg: "Please Enter The Student Date of Birth!"
-        },
-        {
-            FiledName: "StudentAddress",
-            TypeID: 1,
-            Msg: "Please Enter The Student Address!"
-        },
-        {
-            FiledName: "city",
-            TypeID: 1,
-            Msg: "Please Enter The Student City!"
-        },
-        {
-            FiledName: "StudentCounty",
-            TypeID: 3,
-            Msg: "Please Enter The Student Country!"
-        },
-        {
-            FiledName: "StudentNIC",
-            TypeID: 1,
-            Msg: "Please Enter The Student NIC!"
-        },
-        {
-            FiledName: "SclName",
-            TypeID: 1,
-            Msg: "Please Enter The Student School Name!"
-        },
-        {
-            FiledName: "SclAddress",
-            TypeID: 1,
-            Msg: "Please Enter The Student School Address!"
-        },
-        {
-            FiledName: "CurrentGrade",
-            TypeID: 1,
-            Msg: "Please Enter The Student Current Grade!"
-        }
-    ];
+    var model = {
+        MenuID:9
+    }
 
-    lstMsg = ValidateError($lstValidate);
+    ajaxCallWithoutAsync('Admin/FormValidate', { 'model': model }, function (data) {
+        lstMsg = ValidateError(data);
+    });
 
     if (lstMsg["Msg"] != "") {
-        msg = lstMsg["Msg"];
-        MsgBox('Error', msg, '', false);
+        msg = lstMsg["Msg"];       
 
-        var txt = document.getElementById(lstMsg["FieldName"]);
-        txt.focus();
+        MsgBox('Error', msg, '', false);
+        document.getElementById(lstMsg["FieldName"]).focus();
 
         return false;
     }

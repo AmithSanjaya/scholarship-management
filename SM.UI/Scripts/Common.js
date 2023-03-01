@@ -49,36 +49,36 @@ function ValidateError(lstValidate) {
      */
     for (var i = 0; i < lstValidate.length; i++) {
 
-        if (lstValidate[i].TypeID == 1) {
-            $is_valid = $("#" + lstValidate[i].FiledName).val();
+        if (lstValidate[i].RequiredTypeID == 1) {
+            $is_valid = $("#" + lstValidate[i].FieldName).val();
 
             if (!$is_valid) {
                 lstMsg = {
-                        Msg: lstValidate[i].Msg,
-                        FieldName: lstValidate[i].FiledName
+                        Msg: lstValidate[i].Message,
+                        FieldName: lstValidate[i].FieldName
                     }
                 return lstMsg;
             }
         }
-        else if (lstValidate[i].TypeID == 2) {
-            $d = new Date($("#" + lstValidate[i].FiledName).val());
+        else if (lstValidate[i].RequiredTypeID == 2) {
+            $d = new Date($("#" + lstValidate[i].FieldName).val());
             $is_valid = $d instanceof Date && !isNaN($d);
 
             if (!$is_valid) {
                 lstMsg = {
-                    Msg: lstValidate[i].Msg,
-                    FieldName: lstValidate[i].FiledName
+                    Msg: lstValidate[i].Message,
+                    FieldName: lstValidate[i].FieldName
                 }
                 return lstMsg;
             }
         }
-        else if (lstValidate[i].TypeID == 3) {
-            $is_valid = $("#" + lstValidate[i].FiledName).val();
+        else if (lstValidate[i].RequiredTypeID == 3) {
+            $is_valid = $("#" + lstValidate[i].FieldName).val();
 
             if (!$is_valid || $is_valid =="-1") {
                 lstMsg = {
-                    Msg: lstValidate[i].Msg,
-                    FieldName: lstValidate[i].FiledName
+                    Msg: lstValidate[i].Message,
+                    FieldName: lstValidate[i].FieldName
                 }
                 return lstMsg;
             }
@@ -175,6 +175,8 @@ function MsgBox(Type, Msg, callback, reload) {
                     callback: function () {
                         if (reload) {
                             location.reload();
+                        } else {
+                            callback
                         }
                     }
                 }

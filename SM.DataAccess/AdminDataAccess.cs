@@ -160,5 +160,26 @@ namespace SM.DataAccess
 
             return lstUser;
         }
+
+        public List<FormValidate> FormValidate(FormValidate model)
+        {
+            List<FormValidate> lsFormValidate = null;
+
+            using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required, new System.TimeSpan(0, 15, 0)))
+            {
+                try
+                {
+                    lsFormValidate = exe.SpExecutesSelect<FormValidate, FormValidate>("spValidateForm", model, false);
+                    scope.Complete();
+                }
+                catch (Exception ex)
+                {
+                    lsFormValidate = null;
+                    scope.Dispose();
+                }
+            }
+
+            return lsFormValidate;
+        }
     }
 }

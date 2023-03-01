@@ -154,5 +154,13 @@ namespace SM.UI.Controllers
 
             return Json("Uploaded " + Request.Files.Count + " files");
         }
+
+        public JsonResult FormValidate(FormValidate model)
+        {
+            List<FormValidate> lst = new List<FormValidate>();
+            lst = new AdminDataAccess().FormValidate(model);
+
+            return Json(lst, JsonRequestBehavior.AllowGet);
+        }
     }
 }
