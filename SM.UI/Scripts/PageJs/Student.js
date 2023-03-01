@@ -49,6 +49,33 @@
 
 });
 
+function GetStudent(StudentPassID) {
+
+    $('#smodel').modal();
+
+    var model = {
+        StudentID : StudentPassID,
+        ViewTypeID:2
+    }
+
+    ajaxCall('Form/StudentData', { 'model': model }, function (data) {
+
+        $("h4.mb-1").text(data[0].FirstName + ' ' + data[0].LastName);
+
+        if (data[0].ImageName == "") {
+            $('img.StudentImg').attr("src", "../assets/images/user/i1.jpg");
+        } else {
+            $('img.StudentImg').attr("src", "../Uploads/Student/" + data[0].ImageName);
+        }
+
+        $('p.StudentCity').text(data[0].City + ', ' + data[0].CountryName);
+        $('p.StudentBirthDay').text(data[0].BirthDate);
+        $('p.StudentContactNo').text(data[0].ContactNo);
+        $('p.StudentEmail').text(data[0].Email);
+
+    });
+
+}
 function ImageUpload(StudentID) {
 
     var formdata = new FormData();
