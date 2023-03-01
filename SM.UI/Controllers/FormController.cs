@@ -65,6 +65,15 @@ namespace SM.UI.Controllers
             return View(lstStudent);
         }
 
+        public ActionResult StudentView()
+        {
+            List<StudentVM> lst = new List<StudentVM>();
+            StudentVM model = new StudentVM {};
+            lst = new StudentDataAccess().StudentData(model);
+
+            return PartialView("StudentView", lst);
+        }
+
         public ActionResult AddEditStudentDetails()
         {
             int StudentID=0, TypeID=0;
@@ -88,6 +97,14 @@ namespace SM.UI.Controllers
             lstStudent = new StudentDataAccess().StudentData(model);
 
             return View(lstStudent);
+        }
+
+        public JsonResult StudentData(StudentVM model)
+        {
+            List<StudentVM> lst = new List<StudentVM>();
+            lst = new StudentDataAccess().StudentData(model);
+
+            return Json(lst, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult UpdateStudent (Student model)

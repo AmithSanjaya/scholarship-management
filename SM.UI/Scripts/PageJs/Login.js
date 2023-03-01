@@ -39,7 +39,7 @@ function UserLogin() {
     if (model.UserName !== "" && model.Password !== "") {
         ajaxCallWithoutAsync('Admin/UserLogin', { 'model': model }, function (data) {
             if (data.IsValid) {
-                window.location.href = rootUrl + '/SM/Index';
+                window.location.href += '/SM/Index';
             } else {
                 MsgBox('Error', data.ErrorMessage, '', false);
             }
