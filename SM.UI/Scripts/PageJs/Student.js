@@ -236,7 +236,7 @@ var StudentSubject = function () {
 function ValidateSave() {
 
     var msg = "";
-
+    //ttt
     if ($('#StudentFirstName').val() == "") {
         msg = 'Please Select The Student First Name!';
     }
