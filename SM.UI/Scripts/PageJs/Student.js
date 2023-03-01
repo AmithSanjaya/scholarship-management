@@ -23,8 +23,9 @@
     });
 
     ajaxCall('Form/Country', { 'model': model }, function (data) {
-        BindDropDownDefault("StudentCounty", "CountryName", "CountryID", data);
+        BindDropDown("StudentCounty", "CountryName", "CountryID", data);
     });
+    $('#StudentCounty').selectpicker('refresh');
 
     $('#btnAddToGrid').click(function () {
         AddToGrid();
@@ -144,6 +145,11 @@ function Save() {
     }
 }
 
+var FormValidate = function () {
+    this.FieldName = "";
+    this.FieldValue = "";
+}
+
 var Student = function () {
 
     this.FirstName = "";
@@ -168,17 +174,17 @@ var Student = function () {
     this.IsHaveOtherSchol = "";
     this.NameOfFund = "";
     this.FundAmount = 0;
-    this.ExamSubjects=[],
-    this.FatherName = "",
-    this.FatherOccupation = "",
-    this.FatherIncomeAmount = 0,
-    this.MotherName = "",
-    this.MotherOccupation = "",
-    this.MotherIncomeAmount = "",
-    this.NoOfBrothers = 0,
-    this.NoOfSisters = 0,
-    this.BrotherIncomeAmount = 0,
-    this.SisterIncomeAmount = 0
+    this.ExamSubjects = [],
+        this.FatherName = "",
+        this.FatherOccupation = "",
+        this.FatherIncomeAmount = 0,
+        this.MotherName = "",
+        this.MotherOccupation = "",
+        this.MotherIncomeAmount = "",
+        this.NoOfBrothers = 0,
+        this.NoOfSisters = 0,
+        this.BrotherIncomeAmount = 0,
+        this.SisterIncomeAmount = 0
 
     Mode = 1;
 
@@ -186,7 +192,7 @@ var Student = function () {
         this.FirstName = $("#StudentFirstName").val();
         this.LastName = $("#StudentLastName").val();
         this.BirthDate = $("#StudentDateOfBirth").val();
-        this.IsMale = $("input[name='rbGender']:checked").val();
+        this.IsMale = $("input[name='rbGender']:checked").val() == 'M' ? 1 : 0;
         this.Address = $("#StudentAddress").val();
         this.City = $("#city").val();
         this.CountryID = $("#StudentCounty").val();
@@ -201,14 +207,14 @@ var Student = function () {
         this.SchoolAddress = $("#SclAddress").val() || '-';
         this.HighestGradeInSchool = $("#HigestGrade").val() || '-';
         this.HighestEduAchievement = $("#HigestAchievement").val() || '-';
-        this.AchievementMon = $("#AchievementMonth").val().split("-",2)[1];
+        this.AchievementMon = $("#AchievementMonth").val().split("-", 2)[1];
         this.AchievementYear = $("#AchievementMonth").val().split("-", 2)[0];
         this.RegisterDate = $("#RegisterDate").val() || '-';
-        this.IsHaveOtherSchol = $("#rbSchol").val() || 0;
+        this.IsHaveOtherSchol = $('#rbSchol').prop('checked');
         this.NameOfFund = $("#NameOfFund").val() || '-';
         this.FundAmount = $("#FundAmount").val() || 0;
 
-        this.FatherName = $("#FatherName").val() || '-';
+        this.FatherName = $("#FatherName").val() || '';
         this.FatherOccupation = $("#FartherOccupation").val() || '-';
         this.FatherIncomeAmount = $("#fatherAmount").val() || 0;
         this.MotherName = $("#MotherName").val() || '-';
@@ -223,35 +229,37 @@ var Student = function () {
 
 var StudentSubject = function () {
     this.StudentExamTypeID = 0,
-    this.Subject = "",
-    this.GradeID = 0
+        this.Subject = "",
+        this.GradeID = 0
 
     this.Fill = function (StudentExamTypeID, Subject, GradeID) {
         this.StudentExamTypeID = StudentExamTypeID,
-        this.Subject = Subject,
-        this.GradeID=GradeID
+            this.Subject = Subject,
+            this.GradeID = GradeID
     }
 }
 
 function ValidateSave() {
 
     var msg = "";
-    //tttttt
-    if ($('#StudentFirstName').val() == "") {
-        msg = 'Please Select The Student First Name!';
-    }
-    else if ($('#StudentLastName').val() == "") {
-        msg = 'Please Select The Student Last Name';
-    }
-    else if ($('#StudentCounty option:selected').index() < 0) {
-        msg = 'Please Select The Student Country!';
-    }
-    else {
-        msg = "";
+    var lstMsg = [];
+
+    var model = {
+        MenuID: 9
     }
 
+    ajaxCallWithoutAsync('Admin/FormValidate', { 'model': model }, function (data) {
+        lstMsg = ValidateError(data);
+    });
+
+    if (lstMsg["Msg"] != "") {
+        msg = lstMsg["Msg"];
 
         MsgBox('Error', msg, '', false);
+        document.getElementById(lstMsg["FieldName"]).focus();
+
         return false;
     }
+
+    return true;
 }
