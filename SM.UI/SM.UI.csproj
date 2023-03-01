@@ -4382,6 +4382,7 @@
     <Content Include="Views\SM\SponsershipDetails.cshtml" />
     <Content Include="Views\Form\StudentDetail.cshtml" />
     <Content Include="Views\Form\AddEditStudentDetails.cshtml" />
+    <Content Include="Views\SM\AddEditSponserDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

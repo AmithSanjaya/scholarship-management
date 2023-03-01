@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SM.DataAccess;
+using SM.UserObjects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -15,10 +17,24 @@ namespace SM.UI.Controllers
         }
 
         #region Master Files
+        #region Sponsers
         public ActionResult SponsershipDetails()
         {
-            return View();
+            SponserVM model = new SponserVM();
+
+            List<SponserVM> lst = new List<SponserVM>();
+            return View(lst);
         }
+
+        public ActionResult AddEditSponserDetails()
+        {
+            SponserVM model = new SponserVM();
+
+            List<SponserVM> lst = new List<SponserVM>();
+
+            return View(lst);
+        }
+        #endregion
         #endregion
     }
 }
