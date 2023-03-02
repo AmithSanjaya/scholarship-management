@@ -54,21 +54,26 @@ namespace SM.DataAccess
                     if (model.Mode == 1)
                     {
                         ReturnID = (int)exe.SpExecutesGetIdentity<Student>("spSaveStudent", model, false);
+                    }
+                    else if(model.Mode == 2)
+                    {
+                        ReturnID = model.StudentID;
+                        exe.SpExecutes<Student>("spUpdateStudent", model, false);
+                    }
 
-                        if (model.lstSubject != null)
+                    if (model.lstSubject != null)
+                    {
+                        if (model.lstSubject.Count > 0)
                         {
-                            if (model.lstSubject.Count > 0)
+                            foreach (var item in model.lstSubject)
                             {
-                                foreach (var item in model.lstSubject)
-                                {
-                                    StudentSubject submodel = new StudentSubject();
-                                    submodel.StudentID = ReturnID;
-                                    submodel.StudentExamTypeID = item.StudentExamTypeID;
-                                    submodel.Subject = item.Subject;
-                                    submodel.GradeID = item.GradeID;
+                                StudentSubject submodel = new StudentSubject();
+                                submodel.StudentID = ReturnID;
+                                submodel.StudentExamTypeID = item.StudentExamTypeID;
+                                submodel.Subject = item.Subject;
+                                submodel.GradeID = item.GradeID;
 
-                                    exe.SpExecutes<StudentSubject>("spSaveStudentSubject", submodel, false);
-                                }
+                                exe.SpExecutes<StudentSubject>("spSaveStudentSubject", submodel, false);
                             }
                         }
                     }

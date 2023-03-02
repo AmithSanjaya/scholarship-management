@@ -119,5 +119,8 @@ namespace SM.UserObjects
         public string CountryName { get; set; }
         public int TypeID { get; set; }
         public int ViewTypeID { get; set; }
+        public string HaveOtherSchol { get; set; }
+        public string DateOfBirth { get; set; }
+        public string RegisterFullDate { get; set; }
     }
 }

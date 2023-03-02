@@ -2,29 +2,15 @@
 @{
     ViewBag.Title = "AddEditStudentDetails";
 
-    bool ViewMode = false;
     bool AddMode = true;
-    bool EditMode = false;
     string Title = "Add Student";
-    string strProperty = "false";
     int StudentID = 0;
 }
 
 @if (Model != null && Model.Count() != 0)
 {
-    if (Model.First().TypeID == 1) {
-        ViewMode = true;
+    if (Model.First().TypeID == 2) {
         AddMode = false;
-        EditMode = false;
-        strProperty = "disabled";
-        Title = "Preview Student";
-        StudentID = Model.First().StudentID;
-    }
-    else if (Model.First().TypeID == 2) {
-        ViewMode = false;
-        AddMode = false;
-        EditMode = true;
-        strProperty = "false";
         Title = "Edit Student";
         StudentID = Model.First().StudentID;
     }
@@ -38,13 +24,10 @@
                     <div class="header-title">
                         <h4 class="card-title">@Title</h4>
                     </div>
-                    @if (ViewMode == false)
-                    {
                     <div class="btn btn-primary add-list">
                         <button type="button" class="btn btn-primary" onclick="Save();">Submit</button>
                         <button type="reset" class="btn iq-bg-danger">Cancel</button>
                     </div>
-                    }
 
                 </div>
                 <div class="card-body p-0">
@@ -99,13 +82,10 @@
                                                     {
                                                         <img class="crm-profile-pic rounded-circle avatar-100" src="~/Uploads/Student/@Model.First().ImageName" alt="profile-pic" id="imgPreview">
                                                     }
-                                                    @if (ViewMode == false)
-                                                    {
                                                         <div class="crm-p-image bg-primary">
                                                             <i class="las la-pen upload-button"></i>
                                                             <input class="file-upload" type="file" accept="image/*" id="photo">
                                                         </div>
-                                                    }
                                                 </div>
                                             </div>
                                         </div>
@@ -113,35 +93,35 @@
                                     <div class=" row align-items-center">
                                         <div class="form-group col-sm-6">
                                             <label for="fname">First Name:</label>
-                                            <input type="text" class="form-control" id="StudentFirstName" @strProperty value="@(AddMode == true ? string.Empty : Model.First().FirstName)">
+                                            <input type="text" class="form-control" id="StudentFirstName" >
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label for="lname">Last Name:</label>
-                                            <input type="text" class="form-control" id="StudentLastName" @strProperty value="@(AddMode == true ? string.Empty : Model.First().LastName)">
+                                            <input type="text" class="form-control" id="StudentLastName">
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label class="d-block">Gender:</label>
                                             <div class="custom-control custom-radio custom-control-inline">
-                                                <input type="radio" id="rbMGender" name="rbGender" class="custom-control-input" value="M" checked="" @strProperty>
+                                                <input type="radio" id="rbMGender" name="rbGender" class="custom-control-input" value="M" checked>
                                                 <label class="custom-control-label" for="rbMGender"> Male </label>
                                             </div>
                                             <div class="custom-control custom-radio custom-control-inline">
-                                                <input type="radio" id="rbFGender" name="rbGender" class="custom-control-input" value="F" @strProperty>
+                                                <input type="radio" id="rbFGender" name="rbGender" class="custom-control-input" value="F" >
                                                 <label class="custom-control-label" for="rbFGender"> Female </label>
                                             </div>
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label for="dob">Date Of Birth:</label>
-                                            <input class="form-control" id="StudentDateOfBirth" type="date" @strProperty >
+                                            <input class="form-control" id="StudentDateOfBirth" type="date">
                                         </div>
                                         <div class="form-group col-sm-12">
                                             <label>Address:</label>
-                                            <textarea class="form-control" name="StudentAddress" id="StudentAddress" rows="4" @strProperty value="@(AddMode == true ? string.Empty : Model.First().Address)">
+                                            <textarea class="form-control" name="StudentAddress" id="StudentAddress" rows="4">
                                             </textarea>
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label for="lname">City:</label>
-                                            <input type="text" class="form-control" id="city" @strProperty value="@(AddMode == true ? string.Empty : Model.First().City)">
+                                            <input type="text" class="form-control" id="city">
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label>Country:</label>
@@ -151,7 +131,7 @@
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label for="lname">NIC:</label>
-                                            <input type="text" class="form-control" id="StudentNIC" @strProperty value="@(AddMode == true ? string.Empty : Model.First().NICNo)">
+                                            <input type="text" class="form-control" id="StudentNIC">
                                         </div>
 
                                     </div>
@@ -173,45 +153,45 @@
                                     <div class=" row align-items-center">
                                         <div class="form-group col-sm-12">
                                             <label for="fname">School Name:</label>
-                                            <input type="text" class="form-control" id="SclName" @strProperty value="@(AddMode == true ? string.Empty : Model.First().SchoolName)">
+                                            <input type="text" class="form-control" id="SclName">
                                         </div>
                                         <div class="form-group col-sm-12">
                                             <label>School Address:</label>
-                                            <textarea class="form-control" name="SclAddress" id="SclAddress" rows="5" style="line-height: 22px;" @strProperty value="@(AddMode == true ? string.Empty : Model.First().SchoolAddress)">
+                                            <textarea class="form-control" name="SclAddress" id="SclAddress" rows="5" style="line-height: 22px;">
                                             </textarea>
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label for="lname">Grade:</label>
-                                            <input type="text" class="form-control" id="CurrentGrade" @strProperty value="@(AddMode == true ? string.Empty : Model.First().Grade)">
+                                            <input type="text" class="form-control" id="CurrentGrade" >
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label for="lname">Higest Grade in School:</label>
-                                            <input type="text" class="form-control" id="HigestGrade" @strProperty value="@(AddMode == true ? string.Empty : Model.First().HighestGradeInSchool)">
+                                            <input type="text" class="form-control" id="HigestGrade" >
                                         </div>
                                         <div class="form-group col-sm-12">
                                             <label for="fname">Highest Education Achievement:</label>
-                                            <input type="text" class="form-control" id="HigestAchievement" @strProperty value="@(AddMode == true ? string.Empty : Model.First().HighestEduAchievement)">
+                                            <input type="text" class="form-control" id="HigestAchievement">
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label for="lname">Achievement Year/Month:</label>
-                                            <input type="month" class="form-control" id="AchievementMonth" @strProperty>
+                                            <input type="month" class="form-control" id="AchievementMonth">
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label for="dob">Register Date:</label>
-                                            <input class="form-control" id="RegisterDate" type="date" @strProperty>
+                                            <input class="form-control" id="RegisterDate" type="date">
                                         </div>
 
                                         <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="rbSchol" @strProperty>
+                                            <input type="checkbox" class="custom-control-input" id="rbSchol">
                                             <label class="custom-control-label" for="rbSchol">Have another Scholarship ?</label>
                                         </div>
                                         <div class="form-group col-sm-12" id="FundDIV">
                                             <label for="fname">Name of Fund:</label>
-                                            <input type="text" class="form-control" id="NameOfFund" @strProperty value="@(AddMode == true ? string.Empty : Model.First().NameOfFund)">
+                                            <input type="text" class="form-control" id="NameOfFund">
                                         </div>
                                         <div class="form-group col-sm-6" id="NumberDIV">
                                             <label for="dob">Fund Amount:</label>
-                                            <input class="form-control" id="FundAmount" type="number" @strProperty >
+                                            <input class="form-control" id="FundAmount" type="number">
                                         </div>
 
                                     </div>
@@ -275,43 +255,43 @@
                                     <div class=" row align-items-center">
                                         <div class="form-group col-sm-12">
                                             <label for="fname">Father's Name:</label>
-                                            <input type="text" class="form-control" id="FatherName" @strProperty value="@(AddMode == true ? string.Empty : Model.First().FatherName)">
+                                            <input type="text" class="form-control" id="FatherName">
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label for="lname">Father's Occupation:</label>
-                                            <input type="text" class="form-control" id="FartherOccupation" @strProperty value="@(AddMode == true ? string.Empty : Model.First().FatherOccupation)">
+                                            <input type="text" class="form-control" id="FartherOccupation">
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label for="dob">Monthly Income:</label>
-                                            <input class="form-control" id="fatherAmount" type="number" @strProperty >
+                                            <input class="form-control" id="fatherAmount" type="number">
                                         </div>
                                         <div class="form-group col-sm-12">
                                             <label for="fname">Mother's Name:</label>
-                                            <input type="text" class="form-control" id="MotherName" @strProperty value="@(AddMode == true ? string.Empty : Model.First().MotherName)">
+                                            <input type="text" class="form-control" id="MotherName">
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label for="lname">Mother's Occupation:</label>
-                                            <input type="text" class="form-control" id="MotherOccupation" @strProperty value="@(AddMode == true ? string.Empty : Model.First().MotherOccupation)">
+                                            <input type="text" class="form-control" id="MotherOccupation">
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label for="dob">Monthly Income:</label>
-                                            <input class="form-control" id="MotherAmount" type="number" @strProperty v>
+                                            <input class="form-control" id="MotherAmount" type="number" >
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label for="dob">No Of Brothers:</label>
-                                            <input class="form-control" id="NoOfBrothers" type="number" @strProperty>
+                                            <input class="form-control" id="NoOfBrothers" type="number" >
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label for="dob">No Of Sisters:</label>
-                                            <input class="form-control" id="NoOfSisters" type="number" @strProperty>
+                                            <input class="form-control" id="NoOfSisters" type="number" >
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label for="dob">Are any brothers employed, Monthly Income:</label>
-                                            <input class="form-control" id="BrotherIncome" type="number" @strProperty>
+                                            <input class="form-control" id="BrotherIncome" type="number">
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label for="dob">Are any sisters employed, Monthly Income:</label>
-                                            <input class="form-control" id="SisterIncome" type="number" @strProperty>
+                                            <input class="form-control" id="SisterIncome" type="number">
                                         </div>
 
                                     </div>
@@ -330,11 +310,11 @@
                                 <form>
                                     <div class="form-group">
                                         <label for="cno">Contact Number:</label>
-                                        <input type="text" class="form-control" id="StudentContactNo" @strProperty value="@(AddMode == true ? string.Empty : Model.First().ContactNo)">
+                                        <input type="text" class="form-control" id="StudentContactNo">
                                     </div>
                                     <div class="form-group">
                                         <label for="email">Email:</label>
-                                        <input type="text" class="form-control" id="StudentEmail" @strProperty value="@(AddMode == true ? string.Empty : Model.First().Email)">
+                                        <input type="text" class="form-control" id="StudentEmail">
                                     </div>
                                 </form>
                             </div>

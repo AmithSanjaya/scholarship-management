@@ -3,6 +3,8 @@
     $("#FundDIV").hide();
     $("#NumberDIV").hide();
 
+    $("#StudentID").val(0);
+
     $("#rbSchol").change(function () {
         if (this.checked) {
             $("#FundDIV").show();
@@ -47,6 +49,79 @@
         }
     });
 
+    let searchParams = new URLSearchParams(window.location.search)
+
+    if (searchParams.has('StudentID') == true) {
+
+        let param = searchParams.get('StudentID');
+        var model = {
+            StudentID: param,
+            ViewTypeID: 2
+        }
+
+        $("#StudentID").val(model.StudentID);
+
+        ajaxCall('Form/StudentData', { 'model': model }, function (data) {
+
+            $("#StudentFirstName").val(data[0].FirstName);
+            $("#StudentLastName").val(data[0].LastName);
+            $("#StudentDateOfBirth").val(data[0].DateOfBirth);
+            $('#rbMGender').prop('checked', data[0].IsMale);
+            $('#rbFGender').prop('checked', !data[0].IsMale);
+
+            $("#StudentAddress").val(data[0].Address);
+            $("#city").val(data[0].City);
+            $("#StudentCounty").val(data[0].CountryID);
+
+            $("#StudentNIC").val(data[0].NICNo);
+
+            $("#SclName").val(data[0].SchoolName);
+            $("#SclAddress").val(data[0].SchoolAddress);
+            $("#CurrentGrade").val(data[0].Grade);
+            $("#HigestGrade").val(data[0].HighestGradeInSchool);
+            $("#HigestAchievement").val(data[0].HighestEduAchievement);
+            $("#AchievementMonth").val(data[0].AchievementYear);
+            $("#RegisterDate").val(data[0].RegisterFullDate);
+
+            $('#rbSchol').prop('checked', data[0].IsHaveOtherSchol);
+            $("#NameOfFund").val(data[0].NameOfFund);
+            $("#FundAmount").val(data[0].FundAmount);
+
+            //Exam Results
+            $("#tableBody").empty();
+
+            for (var i = 0; i < data.length; i++) {
+
+                if (data[i].ExamTypeName != null) {
+                    tr = $('<tr/>');
+                    tr.append("<td hidden>" + data[i].ExamTypeID + "</td>")
+                    tr.append("<td>" + data[i].ExamTypeName + "</td>")
+                    tr.append("<td>" + data[i].Subject + "</td>")
+                    tr.append("<td hidden>" + data[i].GradeID + "</td>")
+                    tr.append("<td>" + data[i].GradeName + "</td>")
+                    tr.append("<td><a class='badge bg-warning mr-2 red' data-toggle='tooltip' data-placement='top' title='' data-original-title='Delete' href='#'> <i class='ri-delete-bin-line mr-0'></i></a ></td>")
+                    tr.append("</tr>")
+
+                    $('#tblDetails').append(tr);
+                }
+            }
+
+            $("#FatherName").val(data[0].FatherName);
+            $("#FartherOccupation").val(data[0].FatherOccupation);
+            $("#fatherAmount").val(data[0].FatherIncomeAmount);
+            $("#MotherName").val(data[0].MotherName);
+            $("#MotherOccupation").val(data[0].MotherOccupation);
+            $("#MotherAmount").val(data[0].MotherIncomeAmount);
+            $("#NoOfBrothers").val(data[0].NoOfBrothers);
+            $("#NoOfSisters").val(data[0].NoOfSisters);
+            $("#BrotherIncome").val(data[0].BrotherIncomeAmount);
+            $("#SisterIncome").val(data[0].SisterIncomeAmount);
+
+            $("#StudentContactNo").val(data[0].ContactNo);
+            $("#StudentEmail").val(data[0].Email);
+        });
+    }
+
 });
 
 function GetStudent(StudentPassID) {
@@ -69,7 +144,7 @@ function GetStudent(StudentPassID) {
         }
 
         $('p.StudentCity').text(data[0].City + ', ' + data[0].CountryName);
-        $('p.StudentBirthDay').text(data[0].BirthDate);
+        $('p.StudentBirthDay').text(data[0].DateOfBirth);
         $('p.StudentContactNo').text(data[0].ContactNo);
         $('p.StudentEmail').text(data[0].Email);
 
@@ -83,24 +158,26 @@ function GetStudent(StudentPassID) {
         $('td.StudentHighestGrade').text(data[0].HighestGradeInSchool);
         $('td.StudentHighestAchievement').text(data[0].HighestEduAchievement);
         $('td.StudentAchievementYearMonth').text(data[0].AchievementYear);
-        $('td.StudentRegisterDate').text(data[0].RegisterDate);
+        $('td.StudentRegisterDate').text(data[0].RegisterFullDate);
 
-        $('td.StudentHaveScholarship').text(data[0].IsHaveOtherSchol);
+        $('td.StudentHaveScholarship').text(data[0].HaveOtherSchol);
         $('td.StudentFundName').text(data[0].NameOfFund);
         $('td.StudentFundAmount').text(data[0].FundAmount);
 
         //Exam Results
-        $("#tblExam").find("tbody").remove();
-        $("#tblExam").find("tbody").empty();
+        $("#tbodyid").empty();
 
         for (var i = 0; i < data.length; i++) {
-            tr = $('<tr/>');
-            tr.append("<td>" + data[i].ExamTypeName + "</td>")
-            tr.append("<td>" + data[i].Subject + "</td>")
-            tr.append("<td>" + data[i].GradeName + "</td>")
-            tr.append("</tr>")
 
-            $('#tblExam').append(tr);
+            if (data[i].ExamTypeName != null) {
+                tr = $('<tr/>');
+                tr.append("<td>" + data[i].ExamTypeName + "</td>")
+                tr.append("<td>" + data[i].Subject + "</td>")
+                tr.append("<td>" + data[i].GradeName + "</td>")
+                tr.append("</tr>")
+
+                $('#tblExam').append(tr);
+            }
         }
 
         $('td.StudentFatherName').text(data[0].FatherName);
@@ -180,6 +257,10 @@ function Save() {
             model.Fill();
 
             model.Mode = 1;
+            
+            if (model.StudentID !=0) {
+                model.Mode = 2;
+            }
             model.Photo = Date.now();
 
             if (ImageUpload(model.Photo)) {
@@ -220,6 +301,7 @@ var FormValidate = function () {
 
 var Student = function () {
 
+    this.StudentID = 0;
     this.FirstName = "";
     this.LastName = "";
     this.BirthDate = "";
@@ -257,6 +339,7 @@ var Student = function () {
     Mode = 1;
 
     this.Fill = function () {
+        this.StudentID = $("#StudentID").val() || 0;
         this.FirstName = $("#StudentFirstName").val();
         this.LastName = $("#StudentLastName").val();
         this.BirthDate = $("#StudentDateOfBirth").val();
