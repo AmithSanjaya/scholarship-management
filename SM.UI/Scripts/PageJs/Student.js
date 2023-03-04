@@ -65,11 +65,10 @@
 
         ajaxCall('Form/StudentData', { 'model': model }, function (data) {
 
-            $('#StudentImgID').val(data[0].Photo);
-
-            if (data[0].Photo == "") {
+            if (data[0].Photo == "" || data[0].Photo == null) {
                 $('#imgPreview').attr("src", "../assets/images/user/11.png");
             } else {
+                $('#StudentImgID').val(data[0].Photo);
                 $('#imgPreview').attr("src", "../Uploads/Student/" + data[0].ImageName);
             }
 

@@ -36,7 +36,14 @@
                                 <td hidden>@d.StudentID</td>
                                 <td>
                                     <div class="d-flex align-items-center">
-                                        <img src="~/Uploads/Student/@d.ImageName" class="img-fluid rounded avatar-50 mr-3" alt="image">
+                                        @if (d.ImageName != "" && d.ImageName != null)
+                                        {
+                                            <img src="~/Uploads/Student/@d.ImageName" class="img-fluid rounded avatar-50 mr-3" alt="image">
+                                        }
+                                        else
+                                        {
+                                            <img src="~/assets/images/user/11.png" class="img-fluid rounded avatar-50 mr-3" alt="image">
+                                        }
                                         <div>
                                             @d.StudentName
                                             <p class="mb-0"><small>@d.CountryName</small></p>
