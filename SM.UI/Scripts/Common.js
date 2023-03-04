@@ -125,6 +125,77 @@ function ajaxCallWithoutAsync(url, parameters, successCallback) {
 
 }
 
+function GetStudent(StudentPassID) {
+
+    $('#smodel').modal();
+
+    var model = {
+        StudentID: StudentPassID,
+        ViewTypeID: 2
+    }
+
+    ajaxCall('Form/StudentData', { 'model': model }, function (data) {
+
+        $("h4.mb-1").text(data[0].StudentName);
+
+        if (data[0].ImageName == "") {
+            $('img.StudentImg').attr("src", "../assets/images/user/i1.jpg");
+        } else {
+            $('img.StudentImg').attr("src", "../Uploads/Student/" + data[0].ImageName);
+        }
+
+        $('p.StudentCity').text(data[0].City + ', ' + data[0].CountryName);
+        $('p.StudentBirthDay').text(data[0].DateOfBirth);
+        $('p.StudentContactNo').text(data[0].ContactNo);
+        $('p.StudentEmail').text(data[0].Email);
+
+        $('td.StudentGender').text(data[0].GenderName);
+        $('td.StudentNIC').text(data[0].NICNo);
+        $('td.StudentAddress').text(data[0].Address);
+
+        $('td.StudentSchool').text(data[0].SchoolName);
+        $('td.SchoolAddress').text(data[0].SchoolAddress);
+        $('td.StudentGrade').text(data[0].Grade);
+        $('td.StudentHighestGrade').text(data[0].HighestGradeInSchool);
+        $('td.StudentHighestAchievement').text(data[0].HighestEduAchievement);
+        $('td.StudentAchievementYearMonth').text(data[0].AchievementYear);
+        $('td.StudentRegisterDate').text(data[0].RegisterFullDate);
+
+        $('td.StudentHaveScholarship').text(data[0].HaveOtherSchol);
+        $('td.StudentFundName').text(data[0].NameOfFund);
+        $('td.StudentFundAmount').text(data[0].FundAmount);
+
+        //Exam Results
+        $("#tbodyid").empty();
+
+        for (var i = 0; i < data.length; i++) {
+
+            if (data[i].ExamTypeName != null) {
+                tr = $('<tr/>');
+                tr.append("<td>" + data[i].ExamTypeName + "</td>")
+                tr.append("<td>" + data[i].Subject + "</td>")
+                tr.append("<td>" + data[i].GradeName + "</td>")
+                tr.append("</tr>")
+
+                $('#tblExam').append(tr);
+            }
+        }
+
+        $('td.StudentFatherName').text(data[0].FatherName);
+        $('td.StudentFatherOccupation').text(data[0].FatherOccupation);
+        $('td.StudentFatherIncome').text(data[0].FatherIncomeAmount);
+        $('td.StudentMotherName').text(data[0].MotherName);
+        $('td.StudentMotherOccupation').text(data[0].MotherOccupation);
+        $('td.StudentMotherIncome').text(data[0].MotherIncomeAmount);
+        $('td.StudentNoBrothers').text(data[0].NoOfBrothers);
+        $('td.StudentBrotherIncome').text(data[0].BrotherIncomeAmount);
+        $('td.StudentNoSisters').text(data[0].NoOfSisters);
+        $('td.StudentBSisterIncome').text(data[0].SisterIncomeAmount);
+
+    });
+
+}
+
 function MsgBox(Type, Msg, callback, reload) {
 
     var title_hr = '';

@@ -1,28 +1,15 @@
-﻿@model IEnumerable<SM.UserObjects.StudentVM>
+﻿
 @{
     ViewBag.Title = "AddEditStudentDetails";
-
-    bool AddMode = true;
-    string Title = "Add Student";
-    int StudentID = 0;
 }
-
-@if (Model != null && Model.Count() != 0)
-{
-    if (Model.First().TypeID == 2) {
-        AddMode = false;
-        Title = "Edit Student";
-        StudentID = Model.First().StudentID;
-    }
-}
-<input type="hidden" id="StudentID" value="@StudentID"/>
+<input type="hidden" id="StudentID"/>
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <div class="header-title">
-                        <h4 class="card-title">@Title</h4>
+                        <h4 class="card-title">Add Student</h4>
                     </div>
                     <div class="btn btn-primary add-list">
                         <button type="button" class="btn btn-primary" onclick="Save();">Submit</button>
@@ -74,18 +61,12 @@
                                         <div class="col-md-12">
                                             <div class="profile-img-edit">
                                                 <div class="crm-profile-img-edit">
-                                                    @if (AddMode == true)
-                                                    {
-                                                        <img class="crm-profile-pic rounded-circle avatar-100" src="~/assets/images/user/11.png" alt="profile-pic" id="imgPreview">
-                                                    }
-                                                    else
-                                                    {
-                                                        <img class="crm-profile-pic rounded-circle avatar-100" src="~/Uploads/Student/@Model.First().ImageName" alt="profile-pic" id="imgPreview">
-                                                    }
-                                                        <div class="crm-p-image bg-primary">
-                                                            <i class="las la-pen upload-button"></i>
-                                                            <input class="file-upload" type="file" accept="image/*" id="photo">
-                                                        </div>
+                                                    <img class="crm-profile-pic rounded-circle avatar-100" src="~/assets/images/user/11.png" alt="profile-pic" id="imgPreview">
+                                                    <div class="crm-p-image bg-primary">
+                                                        <i class="las la-pen upload-button"></i>
+                                                        <input class="file-upload" type="file" accept="image/*" id="photo">
+                                                        <input type="hidden" id="StudentImgID"/>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
