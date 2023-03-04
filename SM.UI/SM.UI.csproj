@@ -17,7 +17,7 @@
     <AssemblyName>SM.UI</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -4291,8 +4291,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="assets\images\icon\expand-window.json" />
     <Content Include="assets\images\icon\open-letter.json" />
     <Content Include="assets\images\small\data.json" />
@@ -4340,10 +4338,20 @@
     <Content Include="assets\vendor\line-awesome\dist\line-awesome\fonts\la-solid-900.ttf" />
     <Content Include="assets\vendor\line-awesome\dist\line-awesome\fonts\la-solid-900.woff" />
     <Content Include="assets\vendor\line-awesome\dist\line-awesome\fonts\la-solid-900.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Properties\PublishProfiles\scholarship-management - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\scholarship-management - ReadOnly - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\scholarship-management - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\Common.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -4357,6 +4365,7 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\PageJs\Layout.js" />
     <Content Include="Scripts\PageJs\Login.js" />
+    <Content Include="Scripts\PageJs\Sponser.js" />
     <Content Include="Scripts\PageJs\Student.js" />
     <Content Include="Uploads\Student\1677668841139.jpg" />
     <Content Include="Web.config">
@@ -4397,14 +4406,6 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
