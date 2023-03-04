@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SM.UserObjects.StudentVM>
+﻿@model IEnumerable<SM.UserObjects.SponserVM>
 @{
     ViewBag.Title = "SponsershipDetails";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -6,10 +6,11 @@
 
 <div class="container-fluid">
     <div class="row">
+        @{ Html.RenderAction("SponserView", "SM");}
         <div class="col-lg-12">
             <div class="d-flex flex-wrap flex-wrap align-items-center justify-content-between mb-4">
                 <div>
-                    <h4 class="mb-3">Sonsers Details</h4>
+                    <h4 class="mb-3">Sponsers Details</h4>
                 </div>
                 <a href="@Url.Action("AddEditSponserDetails", "SM")" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Add Sponser</a>
             </div>
@@ -19,7 +20,7 @@
                 <table class="data-tables table mb-0 tbl-server-info">
                     <thead class="bg-white text-uppercase">
                         <tr class="ligth ligth-data">
-                            <th hidden>StudentID</th>
+                            <th hidden>SponserID</th>
                             <th>Sponser Name</th>
                             <th>Email</th>
                             <th>Contact No</th>
@@ -29,24 +30,27 @@
                         </tr>
                     </thead>
                     <tbody class="ligth-body">
-                        <tr>
-                            <td hidden></td>
-                            <td>Sponser Name 1</td>
-                            <td>email@email.com</td>
-                            <td>0771234567</td>
-                            <td>India</td>
-                            <td>Active</td>
-                            <td>
-                                <div class="d-flex align-items-center list-action">
-                                    <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="View"
-                                       href="#"><i class="ri-eye-line mr-0"></i></a>
-                                    <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"
-                                       href="#"><i class="ri-pencil-line mr-0"></i></a>
-                                    <a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"
-                                       href="#"><i class="ri-delete-bin-line mr-0"></i></a>
-                                </div>
-                            </td>
-                        </tr>
+                        @foreach (var d in Model)
+                        {
+                            <tr>
+                                <td hidden>@d.SponserID</td>
+                                <td>@d.SponserName</td>
+                                <td>@d.Email</td>
+                                <td>@d.ContactNo</td>
+                                <td>@d.CountryName</td>
+                                <td>@d.Status</td>
+                                <td>
+                                    <div class="d-flex align-items-center list-action">
+                                        <a class="badge badge-info mr-2" data-placement="top" title="" data-original-title="View"
+                                           data-toggle="modal" onclick="GetSponser(@d.SponserID)"><i class="ri-eye-line mr-0"></i></a>
+                                        <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"
+                                           href="@Url.Action("AddEditSponserDetails", "SM", new { SponserID = @d.SponserID,TypeID=2 })"><i class="ri-pencil-line mr-0"></i></a>
+                                        <a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"
+                                           onclick="DeleteSponser(@d.SponserID)"><i class="ri-delete-bin-line mr-0"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
             </div>
@@ -55,3 +59,4 @@
     <!-- Page end  -->
 </div>
 
+<script async src="~/Scripts/PageJs/Sponser.js"></script>

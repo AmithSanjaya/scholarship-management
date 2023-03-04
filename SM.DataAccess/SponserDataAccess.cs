@@ -41,8 +41,8 @@ namespace SM.DataAccess
                     else if (model.Mode == 2)
                     {
                         ReturnID = model.SponserID;
-                        exe.SpExecutes<Sponser>("spUpdateStudent", model, false);
-                    }                   
+                        exe.SpExecutes<Sponser>("spEditSponser", model, false);
+                    }
 
                     dBUpdate.ReturnID = ReturnID;
                     dBUpdate.Update = true;
@@ -74,6 +74,34 @@ namespace SM.DataAccess
             }
 
             return lstSponserData;
+        }
+
+        public DBUpdate DeleteSponser(Sponser model)
+        {
+            int ReturnID = 0;
+            dBUpdate = new DBUpdate();
+
+            using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required, new System.TimeSpan(0, 15, 0)))
+            {
+                try
+                {
+                    ReturnID = model.SponserID;
+                    exe.SpExecutes<Sponser>("spDeleteSponser", model, false);
+
+                    dBUpdate.ReturnID = ReturnID;
+                    dBUpdate.Update = true;
+
+                    scope.Complete();
+                }
+                catch (Exception ex)
+                {
+                    dBUpdate.ReturnID = ReturnID;
+                    dBUpdate.Update = false;
+                    scope.Dispose();
+                }
+            }
+
+            return dBUpdate;
         }
     }
 }

@@ -48,10 +48,35 @@ namespace SM.UI.Controllers
             return Json(lst, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult SponserData(SponserVM model)
+        {
+            List<SponserVM> lst = new List<SponserVM>();
+            lst = new SponserDataAccess().SponsersData(model);
+
+            return Json(lst, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult AddEditSponserDetails()
         {
+            int SponserID = 0, TypeID = 0;
+
+            if (!string.IsNullOrEmpty(Request["SponserID"]) && Request["SponserID"].ToString() != "")
+            {
+                SponserID = Convert.ToInt32(Request["SponserID"].ToString());
+            }
+            if (!string.IsNullOrEmpty(Request["TypeID"]) && Request["TypeID"].ToString() != "")
+            {
+                TypeID = Convert.ToInt32(Request["TypeID"].ToString());
+            }
+
             SponserVM model = new SponserVM();
+
+            model.SponserID = SponserID;
+            model.TypeID = TypeID;
+            model.ViewTypeID = 2;
+
             List<SponserVM> lst = new List<SponserVM>();
+            lst = new SponserDataAccess().SponsersData(model);            
             return View(lst);
         }
 
@@ -73,6 +98,29 @@ namespace SM.UI.Controllers
             {
                 ajaxResponse.IsValid = false;
                 ajaxResponse.ErrorMessage = "Error in Data Updating..!";
+            }
+
+            return Json(ajaxResponse, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult DeleteSponser(Sponser model)
+        {
+            ajaxResponse = new AjaxResponse();
+            dBUpdate = new DBUpdate();
+            model.EnteredBy = UserDetail.UserID;
+
+            dBUpdate = new SponserDataAccess().DeleteSponser(model);
+
+            if (dBUpdate.Update)
+            {
+                ajaxResponse.IsValid = true;
+                ajaxResponse.ReturnID = dBUpdate.ReturnID;
+                ajaxResponse.SucessMessage = "Deleted Successfully..!";
+            }
+            else
+            {
+                ajaxResponse.IsValid = false;
+                ajaxResponse.ErrorMessage = "Error in Data Deleting..!";
             }
 
             return Json(ajaxResponse, JsonRequestBehavior.AllowGet);

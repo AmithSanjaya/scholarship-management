@@ -4,12 +4,41 @@
     ajaxCall('SM/PaymentSchems', { 'model': model }, function (data) {
         BindDropDown("SponserPayScheme", "PaymentSchemeName", "PaymentSchemeID", data);
     });
+    $('#SponserPayScheme').selectpicker('refresh');
 
     ajaxCall('Form/Country', { 'model': model }, function (data) {
         BindDropDown("SponserCounty", "CountryName", "CountryID", data);
     }); 
+    
     $('#SponserCounty').selectpicker('refresh');
+    
+
+    FillSponser();
 });
+
+function FillSponser() {
+    let searchParams = new URLSearchParams(window.location.search)
+
+    if (searchParams.has('SponserID') == true) {
+
+        let param = searchParams.get('SponserID');
+        var model = {
+            SponserID: param,
+            ViewTypeID: 2
+        }
+        //debugger;
+        ajaxCall('SM/SponserData', { 'model': model }, function (data) {
+            //alert(data[0].SponserID);
+            $("#SponserID").val(data[0].SponserID);
+            $("#SponserName").val(data[0].SponserName);
+            $("#SponserAddress").val(data[0].SponserAddress);
+            $("#SponserEmail").val(data[0].Email);
+            $("#SponserPhoneNo").val(data[0].ContactNo);
+            $("#SponserCounty").val(data[0].CountryID);
+            $("#SponserPayScheme").val(data[0].PaymentSchemeID);
+        });
+    }
+}
 
 function Save() {
 
@@ -88,4 +117,46 @@ function ValidateSave() {
 
 
     return true;
+}
+
+function GetSponser(SponserPassID) {
+
+    $('#sponsermodel').modal();
+
+    var model = {
+        SponserID: SponserPassID,
+        ViewTypeID: 2
+    }
+
+    ajaxCall('SM/SponserData', { 'model': model }, function (data) {
+
+        $("h4.mb-1").text(data[0].SponserName);
+
+        $('td.SponcerContactNo').text(data[0].ContactNo);
+        $('td.SponcerEmail').text(data[0].Email);
+        $('td.SponcerAddress').text(data[0].SponserAddress);
+        $('td.SponcerCountry').text(data[0].CountryName);
+        $('td.SponcerPayTerm').text(data[0].PaymentSchemeName);
+        
+    });
+
+}
+
+function DeleteSponser(sponserID) {
+    MsgBox('Confirm', 'Do you want to Delete Record ?', function () {
+
+        var model = {
+            SponserID: sponserID
+        }
+
+        ajaxCall('SM/DeleteSponser', { 'model': model }, function (data) {
+
+            if (data.IsValid) {
+                MsgBox('Info', data.SucessMessage, '', true);
+                location.reload();
+            } else {
+                MsgBox('Error', data.ErrorMessage, '', false);
+            }
+        });
+    }, true);
 }
