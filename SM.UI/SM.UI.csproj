@@ -17,7 +17,7 @@
     <AssemblyName>SM.UI</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -4393,6 +4393,7 @@
     <Content Include="Views\Form\AddEditStudentDetails.cshtml" />
     <Content Include="Views\SM\AddEditSponserDetails.cshtml" />
     <Content Include="Views\Form\StudentView.cshtml" />
+    <Content Include="Views\SM\SponserView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
