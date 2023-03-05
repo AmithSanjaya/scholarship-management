@@ -111,6 +111,13 @@ namespace SM.UI.Controllers
         }
         #endregion
 
+        #region Common Model
+        public ActionResult CommonView()
+        {
+            return PartialView("CommonView");
+        }
+        #endregion
+
         #region Send Application to Sponser
         public ActionResult SendApplicationtoSponser()
         {
@@ -122,6 +129,33 @@ namespace SM.UI.Controllers
             model.ViewTypeID = 1;
 
             lst = new StudentDataAccess().StudentData(model);
+
+            return View(lst);
+        }
+        #endregion
+
+        #region Link Sponser Student
+        public ActionResult LinkSponserStudent()
+        {
+            StudentVM model = new StudentVM();
+
+            List<StudentVM> lst = new List<StudentVM>();
+
+            model.StudentID = 0;
+            model.ViewTypeID = 1;
+
+            lst = new StudentDataAccess().StudentData(model);
+
+            return View(lst);
+        }
+        #endregion
+
+        #region Send Payment Notification
+        public ActionResult SendPaymentNotification()
+        {
+            StudentVM model = new StudentVM();
+
+            List<StudentVM> lst = new List<StudentVM>();
 
             return View(lst);
         }

@@ -4364,8 +4364,10 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\PageJs\Layout.js" />
+    <Content Include="Scripts\PageJs\LinkSponserStudent.js" />
     <Content Include="Scripts\PageJs\Login.js" />
     <Content Include="Scripts\PageJs\SendApplicationSponser.js" />
+    <Content Include="Scripts\PageJs\SendPaymentNotification.js" />
     <Content Include="Scripts\PageJs\Sponser.js" />
     <Content Include="Scripts\PageJs\Student.js" />
     <Content Include="Uploads\Student\1677668841139.jpg" />
@@ -4396,6 +4398,9 @@
     <Content Include="Views\Form\StudentView.cshtml" />
     <Content Include="Views\SM\SponserView.cshtml" />
     <Content Include="Views\Form\SendApplicationtoSponser.cshtml" />
+    <Content Include="Views\Form\LinkSponserStudent.cshtml" />
+    <Content Include="Views\Form\CommonView.cshtml" />
+    <Content Include="Views\Form\SendPaymentNotification.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
