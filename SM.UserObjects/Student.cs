@@ -96,6 +96,7 @@ namespace SM.UserObjects
         public string HighestEduAchievement { get; set; }
         public int AchievementMon { get; set; }
         public int AchievementYear { get; set; }
+        public string AchievementYearMonth { get; set; }
         public DateTime RegisterDate { get; set; }
         public bool IsHaveOtherSchol { get; set; }
         public string NameOfFund { get; set; }
@@ -122,5 +123,6 @@ namespace SM.UserObjects
         public string HaveOtherSchol { get; set; }
         public string DateOfBirth { get; set; }
         public string RegisterFullDate { get; set; }
+        public string CurrentDate { get; set; }
     }
 }

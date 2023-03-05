@@ -76,27 +76,7 @@ namespace SM.UI.Controllers
 
         public ActionResult AddEditStudentDetails()
         {
-            int StudentID=0, TypeID=0;
-
-            if (!string.IsNullOrEmpty(Request["StudentID"]) && Request["StudentID"].ToString() != "")
-            {
-                StudentID = Convert.ToInt32(Request["StudentID"].ToString());
-            }
-            if (!string.IsNullOrEmpty(Request["TypeID"]) && Request["TypeID"].ToString() != "")
-            {
-                TypeID = Convert.ToInt32(Request["TypeID"].ToString());
-            }
-
-            StudentVM model = new StudentVM();
-
-            model.StudentID = StudentID;
-            model.TypeID = TypeID;
-            model.ViewTypeID = 2;
-
-            List<StudentVM> lstStudent = new List<StudentVM>();
-            lstStudent = new StudentDataAccess().StudentData(model);
-
-            return View(lstStudent);
+            return View();
         }
 
         public JsonResult StudentData(StudentVM model)
@@ -131,5 +111,20 @@ namespace SM.UI.Controllers
         }
         #endregion
 
+        #region Send Application to Sponser
+        public ActionResult SendApplicationtoSponser()
+        {
+            StudentVM model = new StudentVM();
+
+            List<StudentVM> lst = new List<StudentVM>();
+
+            model.StudentID = 0;
+            model.ViewTypeID = 1;
+
+            lst = new StudentDataAccess().StudentData(model);
+
+            return View(lst);
+        }
+        #endregion
     }
 }

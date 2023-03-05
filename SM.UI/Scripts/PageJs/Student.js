@@ -61,7 +61,7 @@
         }
 
         $("#StudentID").val(model.StudentID);
-        $("h4.card-title").text('Edit Student');
+        $("h4.FormHead").text('Edit Student');
 
         ajaxCall('Form/StudentData', { 'model': model }, function (data) {
 
@@ -89,10 +89,12 @@
             $("#CurrentGrade").val(data[0].Grade);
             $("#HigestGrade").val(data[0].HighestGradeInSchool);
             $("#HigestAchievement").val(data[0].HighestEduAchievement);
-            $("#AchievementMonth").val(data[0].AchievementYear);
+            $("#AchievementMonth").val(data[0].AchievementYearMonth);
             $("#RegisterDate").val(data[0].RegisterFullDate);
 
             $('#rbSchol').prop('checked', data[0].IsHaveOtherSchol);
+            $('#rbSchol').trigger("change");
+
             $("#NameOfFund").val(data[0].NameOfFund);
             $("#FundAmount").val(data[0].FundAmount);
 

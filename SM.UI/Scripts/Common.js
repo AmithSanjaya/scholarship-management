@@ -139,7 +139,7 @@ function GetStudent(StudentPassID) {
         $("h4.mb-1").text(data[0].StudentName);
 
         if (data[0].ImageName == "" || (data[0].ImageName == null)) {
-            $('img.StudentImg').attr("src", "../assets/images/user/i1.jpg");
+            $('img.StudentImg').attr("src", "../assets/images/user/11.png");
         } else {
             $('img.StudentImg').attr("src", "../Uploads/Student/" + data[0].ImageName);
         }

@@ -4365,6 +4365,7 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\PageJs\Layout.js" />
     <Content Include="Scripts\PageJs\Login.js" />
+    <Content Include="Scripts\PageJs\SendApplicationSponser.js" />
     <Content Include="Scripts\PageJs\Sponser.js" />
     <Content Include="Scripts\PageJs\Student.js" />
     <Content Include="Uploads\Student\1677668841139.jpg" />
@@ -4394,6 +4395,7 @@
     <Content Include="Views\SM\AddEditSponserDetails.cshtml" />
     <Content Include="Views\Form\StudentView.cshtml" />
     <Content Include="Views\SM\SponserView.cshtml" />
+    <Content Include="Views\Form\SendApplicationtoSponser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
