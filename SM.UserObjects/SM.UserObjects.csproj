@@ -50,6 +50,7 @@
     <Compile Include="PaymentScheme.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sponser.cs" />
+    <Compile Include="SponserStudent.cs" />
     <Compile Include="Student.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>

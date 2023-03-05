@@ -100,4 +100,7 @@ function AddToGrid(event) {
                 '</tr> ');
         });
     }
+    else {
+        MsgBox('Error', 'Already Exists', '', false);
+    }
 }
