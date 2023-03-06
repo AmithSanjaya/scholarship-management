@@ -78,7 +78,7 @@ function FillSponser() {
     $('#cmbSponser').selectpicker('refresh');
 }
 
-function SaveSponserApplication() {
+function Save() {
 
     MsgBox('Confirm', 'Do you want to Save ?', function () {
 
