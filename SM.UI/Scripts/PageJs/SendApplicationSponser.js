@@ -1,6 +1,13 @@
 ﻿$(document).ready(function () {
     $("#SponserStudentDetial").on("click", ".red", function () {
-        $(this).closest("tr").remove();
+        debugger;
+        var row = $(this).closest('tr');
+        var id = $(this).closest('tr').find(".thStudentID").html();
+        MsgBox('Confirm', 'Do you want to Remove this Record ?', function () {
+
+            DeleteStudentFromSponserApplication(id);
+            row.remove();
+        }, true);
     });
 
     FillSponser();
@@ -128,6 +135,7 @@ function FillStudentsBySponser() {
     var sponserID = $("#cmbSponser").val();
     if (sponserID > 0) {
 
+        GetAllStudents();
         var model = {
             SponserID: sponserID
         }
@@ -142,7 +150,7 @@ function FillStudentsBySponser() {
         ajaxCallWithoutAsync('Form/SponsersApplicationStudentData', { 'model': model }, function (data) {
 
             for (var j = 0; j < data.length; j++) {
-                debugger;
+                //debugger;
                 var rowCount = document.getElementById("studentDetails").rows.length;
                 for (var i = 0; i < rowCount; i++) {
                     if (table.rows[i].cells[0].innerHTML == data[j].StudentID) {
@@ -186,4 +194,77 @@ function AddSavedStudentsToGrid(studentid) {
             '<td><a class="badge bg-warning mr-2 red" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"> <i class="ri-delete-bin-line mr-0"></i></a ></td>' +
             '</tr> ');
     });
+}
+
+
+function DeleteStudentFromSponserApplication(studentid) {
+    var sponserID = $("#cmbSponser").val();
+    if (sponserID > 0) {
+
+        var model = {
+            SponserID: sponserID,
+            StudentID: studentid
+        }
+        ajaxCall('Form/DeleteStudentFromSponserApplication', { 'model': model }, function (data) {
+
+            if (data.IsValid) {
+                
+            } else {
+                
+            }
+        });
+
+    }
+}
+
+function GetAllStudents() {
+
+    $("#studentDetails").find("tr").remove();
+
+    ajaxCallWithoutAsync('Form/GetAllStudents', {  }, function (data) {
+        //debugger;
+        for (var j = 0; j < data.length; j++) {
+            if (data[0].Photo == "" || data[0].Photo == null) {
+                $Img = "../assets/images/user/11.png";
+            } else {
+                $Img = "../Uploads/Student/" + data[0].ImageName;
+            }
+
+            $StudentName = data[i].FirstName + " " + data[i].LastName;
+            $Country = data[i].CountryName;
+            $ImgName = "<img src='" + $Img + "' class='img-fluid rounded avatar-50 mr-3' alt='image'>";
+
+            $("#studentDetails").append(
+                '<tr>' +
+                '<td hidden>' + data[i].StudentID + '</td>' +
+                '<td><div class="d-flex align-items-center">' + $ImgName + '<div>' + $StudentName + '</div></div></td>' +
+                '<td>' + data[i].GenderName + '</td>' +
+                '<td>' + data[i].CountryName + '</td>' +
+                '<td>' + data[i].SchoolName + '</td>' +
+                '<td><div class="d-flex align-items-center list-action">< a class= "badge badge-info mr-2" data - placement="top" title = "" data - original - title="View" '+
+                'data - toggle="modal" onclick = "GetStudent(' + data[i].StudentID + ')"><i class="ri-eye-line mr-0"></i></a> ' +
+                '< button type = "button" class= "btn btn-primary btn-sm mr-2" onclick = "AddToGrid(event)" > Add to Grid</button ></div ></td > ' +               
+                '</tr> ');
+        }
+
+        //if (data[0].Photo == "" || data[0].Photo == null) {
+        //    $Img = "../assets/images/user/11.png";
+        //} else {
+        //    $Img = "../Uploads/Student/" + data[0].ImageName;
+        //}
+
+        //$StudentName = data[0].FirstName + " " + data[0].LastName;
+        //$Country = data[0].CountryName;
+        //$ImgName = "<img src='" + $Img + "' class='img-fluid rounded avatar-50 mr-3' alt='image'>";
+
+        //$("#studentDetails").append(
+        //    '<tr>' +
+        //    '<td hidden>' + studentid + '</td>' +
+        //    '<td><div class="d-flex align-items-center">' + $ImgName + '<div>' + $StudentName + '</div></div></td>' +
+        //    '<td>' + $Country + '</td>' +
+        //    '<td>' + data[0].CurrentDate + '</td>' +
+        //    '<td><a class="badge bg-warning mr-2 red" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"> <i class="ri-delete-bin-line mr-0"></i></a ></td>' +
+        //    '</tr> ');
+    });
+}
 }

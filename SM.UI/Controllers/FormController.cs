@@ -158,10 +158,43 @@ namespace SM.UI.Controllers
             return Json(ajaxResponse, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult DeleteStudentFromSponserApplication(SponserStudent model)
+        {
+            ajaxResponse = new AjaxResponse();
+            dBUpdate = new DBUpdate();
+            model.EnteredBy = UserDetail.UserID;
+            
+            dBUpdate = new StudentSponserDataAccess().DeleteStudentFromSponserApplication(model);
+
+            if (dBUpdate.Update)
+            {
+                ajaxResponse.IsValid = true;
+                ajaxResponse.ReturnID = dBUpdate.ReturnID;
+                ajaxResponse.SucessMessage = "Deleted Successfully..!";
+            }
+            else
+            {
+                ajaxResponse.IsValid = false;
+                ajaxResponse.ErrorMessage = "Error in Data Deleting..!";
+            }
+
+            return Json(ajaxResponse, JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult SponsersApplicationStudentData(SponserStudent model)
         {
             List<SponserStudent> lst = new List<SponserStudent>();
             lst = new StudentSponserDataAccess().SponsersApplicationStudentData(model);
+            return Json(lst, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetAllStudents()
+        {
+            StudentVM model = new StudentVM();
+            List<StudentVM> lst = new List<StudentVM>();
+            model.StudentID = 0;
+            model.ViewTypeID = 1;
+            lst = new StudentDataAccess().StudentData(model);
             return Json(lst, JsonRequestBehavior.AllowGet);
         }
 
