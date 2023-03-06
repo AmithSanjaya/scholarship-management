@@ -26,16 +26,23 @@ function FillSponser() {
             SponserID: param,
             ViewTypeID: 2
         }
-        //debugger;
+
         ajaxCall('SM/SponserData', { 'model': model }, function (data) {
-            //alert(data[0].SponserID);
+
+            $("h4.FormHead").text('Edit Sponser');
+
             $("#SponserID").val(data[0].SponserID);
             $("#SponserName").val(data[0].SponserName);
             $("#SponserAddress").val(data[0].SponserAddress);
             $("#SponserEmail").val(data[0].Email);
             $("#SponserPhoneNo").val(data[0].ContactNo);
+
             $("#SponserCounty").val(data[0].CountryID);
+            $('#SponserCounty').selectpicker('refresh');
+
             $("#SponserPayScheme").val(data[0].PaymentSchemeID);
+            $('#SponserPayScheme').selectpicker('refresh');
+
         });
     }
 }
@@ -153,7 +160,6 @@ function DeleteSponser(sponserID) {
 
             if (data.IsValid) {
                 MsgBox('Info', data.SucessMessage, '', true);
-                location.reload();
             } else {
                 MsgBox('Error', data.ErrorMessage, '', false);
             }
