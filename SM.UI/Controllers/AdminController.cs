@@ -33,11 +33,16 @@ namespace SM.UI.Controllers
 
         public ActionResult SideMenu()
         {
-            //int id = UserDetail.UserID;
+            int id = UserDetail.UserID;
             List<Menu> lstMenu = new List<Menu>();
-            Menu obj = new Menu { userID = 0 };
+            Menu obj = new Menu { userID = id };
             lstMenu = new AdminDataAccess().GetUserAllowedMenu(obj);
             return PartialView("SideMenu", lstMenu);
+        }
+
+        public ActionResult FormButton()
+        {
+            return PartialView("FormButton");
         }
 
         public ActionResult UserRight()

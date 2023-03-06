@@ -4401,6 +4401,7 @@
     <Content Include="Views\Form\LinkSponserStudent.cshtml" />
     <Content Include="Views\Form\CommonView.cshtml" />
     <Content Include="Views\Form\SendPaymentNotification.cshtml" />
+    <Content Include="Views\Admin\FormButton.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

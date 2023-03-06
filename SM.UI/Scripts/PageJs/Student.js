@@ -19,18 +19,18 @@
     ajaxCall('Form/StudentExamType', { 'model': model }, function (data) {
         BindDropDown("ExamType", "ExamTypeName", "StudentExamTypeID", data);
     });
+    $('#ExamType').selectpicker('refresh');
 
     ajaxCall('Form/SubjectGrade', { 'model': model }, function (data) {
         BindDropDown("SubjectGrade", "GradeName", "GradeID", data);
     });
+    $('#SubjectGrade').selectpicker('refresh');
 
     ajaxCall('Form/Country', { 'model': model }, function (data) {
         BindDropDown("StudentCounty", "CountryName", "CountryID", data);
     });
-
     $('#StudentCounty').selectpicker('refresh');
-    $('#ExamType').selectpicker('refresh');
-    $('#SubjectGrade').selectpicker('refresh');
+ 
 
     $('#btnAddToGrid').click(function () {
         AddToGrid();
@@ -80,7 +80,9 @@
 
             $("#StudentAddress").val(data[0].Address);
             $("#city").val(data[0].City);
+
             $("#StudentCounty").val(data[0].CountryID);
+            $('#StudentCounty').selectpicker('refresh');
 
             $("#StudentNIC").val(data[0].NICNo);
 
