@@ -22,7 +22,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Sponser :</label>
-                                    <select id="SponserPayScheme" class="selectpicker form-control" data-style="py-0"></select>
+                                    <select id="cmbSponser" class="selectpicker form-control" data-style="py-0" onchange="FillStudentsBySponser()"></select>
                                 </div>
                                 <button type="button" class="btn btn-secondary mt-2" data-toggle="modal" id="PreviewApp">Preview Sent Application</button>
                             </div>
@@ -42,7 +42,7 @@
                                     <th>Action</th>
                                 </tr>
                             </thead>
-                            <tbody class="ligth-body">
+                            <tbody class="ligth-body" id="studentDetails">
                                 @foreach (var d in Model)
                                 {
                                     <tr>

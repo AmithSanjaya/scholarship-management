@@ -12,5 +12,6 @@ namespace SM.UserObjects
         public int SponserID { get; set; }
         public int StudentID { get; set; }
         public List<SponserStudent> lstStudents { get; set; }
+        public string LinkedOn { get; set; }
     }
 }

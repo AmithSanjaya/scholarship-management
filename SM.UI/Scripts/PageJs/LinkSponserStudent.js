@@ -1,6 +1,16 @@
 ﻿$(document).ready(function () {
+    FillSponser();
+
     $("#SponserStudentDetial").on("click", ".red", function () {
-        $(this).closest("tr").remove();
+        debugger;
+        var row = $(this).closest('tr');
+        var id = $(this).closest('tr').children('td:eq(0)').text();
+        MsgBox('Confirm', 'Do you want to Remove this Record ?', function () {
+
+            DeleteStudentFromSponser(id);
+            row.remove();
+            FillStudentsBySponser();
+        }, true);
     });
 
     $("#PreviewApp").on("click", function () {
@@ -49,8 +59,22 @@
             }
 
         });
-    });    
+    });  
+
+    
 });
+
+
+function FillSponser() {
+    var model = {
+        SponserID: 0,
+        ViewTypeID: 2
+    }
+    ajaxCall('SM/SponserData', { 'model': model }, function (data) {
+        BindDropDown("cmbSponser", "SponserName", "SponserID", data);
+    });
+    $('#cmbSponser').selectpicker('refresh');
+}
 
 function AddToGrid(event) {
 
@@ -103,4 +127,184 @@ function AddToGrid(event) {
     else {
         MsgBox('Error', 'Already Exists', '', false);
     }
+}
+
+var StudentSponser = function () {
+    this.SponserID = 0,
+        this.StudentID = 0
+
+    this.Fill = function (SponserID, StudentID) {
+        this.SponserID = SponserID,
+            this.StudentID = StudentID
+    }
+}
+
+function Save() {
+
+    MsgBox('Confirm', 'Do you want to Save ?', function () {
+
+        var rowCount = document.getElementById("SponserStudentDetial").rows.length;
+        var rowData = document.getElementById("SponserStudentDetial");
+
+        if (rowCount > 0) {
+
+            var lstStudentSponser = [];
+
+            for (var i = 0; i < rowCount; i++) {
+                debugger;
+                var StudentSponserModel = new StudentSponser();
+
+                StudentSponserModel.SponserID = $("#cmbSponser").val();
+                StudentSponserModel.StudentID = rowData.rows[i].cells[0].innerHTML;
+                //alert(StudentSponserModel.SponserID);
+                lstStudentSponser.push(StudentSponserModel);
+            }
+
+            var model = {
+                lstStudents: lstStudentSponser
+            }
+
+            ajaxCall('Form/SaveSponserLinkedStudents', { 'model': model }, function (data) {
+
+                if (data.IsValid) {
+                    MsgBox('Info', data.SucessMessage, '', true);
+                    location.reload();
+                } else {
+                    MsgBox('Error', data.ErrorMessage, '', false);
+                }
+            });
+        }
+        else {
+            MsgBox('Error', 'No Record(s) to Save', '', false);
+        }
+
+    }, true);
+}
+
+function FillStudentsBySponser() {
+
+    var sponserID = $("#cmbSponser").val();
+    if (sponserID > 0) {
+
+        GetAllStudents();
+        var model = {
+            SponserID: sponserID
+        }
+        ///debugger;
+        //var rowCount = document.getElementById("SponserStudentDetial").rows.length;
+        var rowData = document.getElementById("SponserStudentDetial");
+
+        var table = document.getElementById("studentDetails");
+
+        $("#SponserStudentDetial").find("tr").remove();
+
+        ajaxCallWithoutAsync('Form/SponsersLinkedStudentData', { 'model': model }, function (data) {
+
+            for (var j = 0; j < data.length; j++) {
+                AddSavedStudentsToGrid(data[j].StudentID, data[j].LinkedOn);
+                //debugger;
+                //var rowCount = document.getElementById("studentDetails").rows.length;
+                //for (var i = 0; i < rowCount; i++) {
+                //    if (table.rows[i].cells[0].innerHTML == data[j].StudentID) {
+                //        //alert(data[j].StudentID);
+                //        AddSavedStudentsToGrid(data[j].StudentID);
+                //        table.deleteRow(i);
+                //        break;
+                //    }
+                //}
+
+
+            }
+        });
+    }
+}
+
+function AddSavedStudentsToGrid(studentid, linkedOn) {
+    //debugger;
+    var model = {
+        StudentID: studentid,
+        ViewTypeID: 2
+    }
+
+    ajaxCallWithoutAsync('Form/StudentData', { 'model': model }, function (data) {
+        //debugger;
+        if (data[0].Photo == "" || data[0].Photo == null) {
+            $Img = "../assets/images/user/11.png";
+        } else {
+            $Img = "../Uploads/Student/" + data[0].ImageName;
+        }
+
+        $StudentName = data[0].FirstName + " " + data[0].LastName;
+        $Country = data[0].CountryName;
+        $ImgName = "<img src='" + $Img + "' class='img-fluid rounded avatar-50 mr-3' alt='image'>";
+
+        $("#SponserStudentDetial").append(
+            '<tr>' +
+            '<td hidden>' + studentid + '</td>' +
+            '<td><div class="d-flex align-items-center">' + $ImgName + '<div>' + $StudentName + '</div></div></td>' +
+            '<td>' + $Country + '</td>' +
+            '<td>Payment Scheme</td>' +
+            '<td>' + linkedOn + '</td>' +
+            '<td><a class="badge bg-warning mr-2 red" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"> <i class="ri-delete-bin-line mr-0"></i></a ></td>' +
+            '</tr> ');
+    });
+}
+
+function DeleteStudentFromSponser(studentid) {
+    var sponserID = $("#cmbSponser").val();
+    if (sponserID > 0) {
+
+        var model = {
+            SponserID: sponserID,
+            StudentID: studentid
+        }
+        ajaxCall('Form/DeleteStudentFromSponser', { 'model': model }, function (data) {
+
+            if (data.IsValid) {
+
+            } else {
+
+            }
+        });
+
+    }
+}
+
+function GetAllStudents() {
+
+    $("#studentDetails").find("tr").remove();
+
+    ajaxCallWithoutAsync('Form/GetSponserNotLinkedStudents', {}, function (data) {
+        //debugger;
+        for (var i = 0; i < data.length; i++) {
+
+            var model = {
+                StudentID: data[i].StudentID,
+                ViewTypeID: 2
+            }
+            ajaxCallWithoutAsync('Form/StudentData', { 'model': model }, function (data) {
+                if (data[0].Photo == "" || data[0].Photo == null) {
+                    $Img = "../assets/images/user/11.png";
+                } else {
+                    $Img = "../Uploads/Student/" + data[0].ImageName;
+                }
+
+                $StudentName = data[0].FirstName + " " + data[0].LastName;
+                $Country = data[0].CountryName;
+                $ImgName = "<img src='" + $Img + "' class='img-fluid rounded avatar-50 mr-3' alt='image'>";
+
+                $("#studentDetails").append(
+                    '<tr>' +
+                    '<td hidden>' + data[0].StudentID + '</td>' +
+                    '<td><div class="d-flex align-items-center">' + $ImgName + '<div>' + $StudentName + '</div></div></td>' +
+                    '<td>' + data[0].GenderName + '</td>' +
+                    '<td>' + data[0].CountryName + '</td>' +
+                    '<td>' + data[0].SchoolName + '</td>' +
+                    '<td><div class="d-flex align-items-center list-action"><a class= "badge badge-info mr-2" data -placement="top" title = "" data -original -title="View" data -toggle="modal" onclick = "GetStudent(' + data[0].StudentID + ')"><i class="ri-eye-line mr-0"></i></a> ' +
+                    '<button type = "button" class= "btn btn-primary btn-sm mr-2" onclick = "AddToGrid(event)" > Add to Grid</button ></div ></td > ' +
+                    '</tr> ');
+
+            });
+        }
+    });
 }
