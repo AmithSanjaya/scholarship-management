@@ -3,6 +3,7 @@ using SM.UserObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 
@@ -132,6 +133,38 @@ namespace SM.UI.Controllers
 
             return View(lst);
         }
+
+        public JsonResult SaveSponserApplication(SponserStudent model)
+        {
+            ajaxResponse = new AjaxResponse();
+            dBUpdate = new DBUpdate();
+            model.EnteredBy = UserDetail.UserID;
+
+            model.lstStudents.ForEach(x => x.EnteredBy.Equals(UserDetail.UserID));
+            dBUpdate = new StudentSponserDataAccess().SaveSponserApplication(model);
+
+            if (dBUpdate.Update)
+            {
+                ajaxResponse.IsValid = true;
+                ajaxResponse.ReturnID = dBUpdate.ReturnID;
+                ajaxResponse.SucessMessage = "Saved Successfully..!";
+            }
+            else
+            {
+                ajaxResponse.IsValid = false;
+                ajaxResponse.ErrorMessage = "Error in Data Saving..!";
+            }
+
+            return Json(ajaxResponse, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult SponsersApplicationStudentData(SponserStudent model)
+        {
+            List<SponserStudent> lst = new List<SponserStudent>();
+            lst = new StudentSponserDataAccess().SponsersApplicationStudentData(model);
+            return Json(lst, JsonRequestBehavior.AllowGet);
+        }
+
         #endregion
 
         #region Link Sponser Student

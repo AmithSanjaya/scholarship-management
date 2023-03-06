@@ -160,3 +160,4 @@ function DeleteSponser(sponserID) {
         });
     }, true);
 }
+

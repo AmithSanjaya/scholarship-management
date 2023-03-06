@@ -14,7 +14,7 @@
                         <h4 class="card-title">Send Application to Sponser</h4>
                     </div>
                     <div class="btn btn-primary add-list">
-                        <button type="button" class="btn btn-primary" onclick="Save();">Submit</button>
+                        <button type="button" class="btn btn-primary" onclick="SaveSponserApplication();">Submit</button>
                         <button type="reset" class="btn iq-bg-danger">Cancel</button>
                     </div>
                 </div>
@@ -24,7 +24,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Sponser :</label>
-                                    <select id="SponserPayScheme" class="selectpicker form-control" data-style="py-0"></select>
+                                    <select id="cmbSponser" class="selectpicker form-control" data-style="py-0" onchange="FillStudentsBySponser()"></select>
                                 </div>
                             </div>
                         </div>
@@ -43,7 +43,7 @@
                                     <th>Action</th>
                                 </tr>
                             </thead>
-                            <tbody class="ligth-body">
+                            <tbody class="ligth-body" id="studentDetails">
                                 @foreach (var d in Model)
                                 {
                                     <tr>
@@ -95,7 +95,7 @@
                                     <th>Action</th>
                                 </tr>
                             </thead>
-                            <tbody class="ligth-body" id="SponserStudentDetial">
+                            <tbody class="ligth-body" id="SponserStudentDetial" name ="SponserStudentDetial">
                             </tbody>
                         </table>
                     </div>
