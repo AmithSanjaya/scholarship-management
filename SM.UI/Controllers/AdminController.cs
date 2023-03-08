@@ -167,5 +167,13 @@ namespace SM.UI.Controllers
 
             return Json(lst, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult FormDBValidate(FormDBValidate model)
+        {
+            List<FormDBValidate> lst = new List<FormDBValidate>();
+            lst = new AdminDataAccess().FormDBValidate(model);
+
+            return Json(lst, JsonRequestBehavior.AllowGet);
+        }
     }
 }

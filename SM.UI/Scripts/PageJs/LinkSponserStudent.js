@@ -1,8 +1,9 @@
 ﻿$(document).ready(function () {
+
     FillSponser();
 
     $("#SponserStudentDetial").on("click", ".red", function () {
-        debugger;
+
         var row = $(this).closest('tr');
         var id = $(this).closest('tr').children('td:eq(0)').text();
         MsgBox('Confirm', 'Do you want to Remove this Record ?', function () {
@@ -14,6 +15,7 @@
     });
 
     $("#PreviewApp").on("click", function () {
+
         $('#CommonModel').modal();
 
         var model = {
@@ -60,12 +62,12 @@
 
         });
     });  
-
     
 });
 
 
 function FillSponser() {
+
     var model = {
         SponserID: 0,
         ViewTypeID: 2
@@ -74,11 +76,58 @@ function FillSponser() {
         BindDropDown("cmbSponser", "SponserName", "SponserID", data);
     });
     $('#cmbSponser').selectpicker('refresh');
+
+    ajaxCall('SM/SponserData', { 'model': model }, function (data) {
+        BindDropDownDefault("cmbPayScheme", "SponserName", "SponserID", data);
+    });
+    $('#cmbPayScheme').selectpicker('refresh');
+}
+
+function AddToGridFromModel() {
+
+    $StudentID = $('#SponserStudentID').val();
+
+    var model = {
+        StudentID: $StudentID,
+        ViewTypeID: 2
+    }
+
+    ajaxCall('Form/StudentData', { 'model': model }, function (data) {
+
+        if (data[0].Photo == "" || data[0].Photo == null) {
+            $Img = "../assets/images/user/11.png";
+        } else {
+            $Img = "../Uploads/Student/" + data[0].ImageName;
+        }
+
+        $StudentName = data[0].FirstName + " " + data[0].LastName;
+        $Country = data[0].CountryName;
+        $ImgName = "<img src='" + $Img + "' class='img-fluid rounded avatar-50 mr-3' alt='image'>";
+
+        $PaymentSchemeID = $("#cmbPayScheme").val();
+        $PaymentScheme = $('#cmbPayScheme option:selected').text();
+
+        $("#SponserStudentDetial").append(
+            '<tr>' +
+            '<td hidden>' + $StudentID + '</td>' +
+            '<td><div class="d-flex align-items-center">' + $ImgName + '<div>' + $StudentName + '</div></div></td>' +
+            '<td>' + $Country + '</td>' +
+            '<td hidden>' + $PaymentSchemeID + '</td>' +
+            '<td>' + $PaymentScheme + '</td>' +
+            '<td>' + data[0].CurrentDate + '</td>' +
+            '<td><a class="badge bg-warning mr-2 red" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"> <i class="ri-delete-bin-line mr-0"></i></a ></td>' +
+            '</tr> ');
+    });
+
+    $('#SponserStudentID').val(0);
+    $('#AddGrid').hide();
+
 }
 
 function AddToGrid(event) {
 
     var isAdded = false;
+
     var RowCount = document.getElementById("SponserStudentDetial").rows.length;
     var RowData = document.getElementById("SponserStudentDetial");
 
@@ -93,36 +142,11 @@ function AddToGrid(event) {
     }
 
     if (isAdded === false) {
-
         $StudentID = $row.find("td:nth-child(1)").text();
 
-        var model = {
-            StudentID: $StudentID,
-            ViewTypeID: 2
-        }
+        $('#AddGrid').modal();
 
-        ajaxCall('Form/StudentData', { 'model': model }, function (data) {
-
-            if (data[0].Photo == "" || data[0].Photo == null) {
-                $Img = "../assets/images/user/11.png";
-            } else {
-                $Img = "../Uploads/Student/" + data[0].ImageName;
-            }
-
-            $StudentName = data[0].FirstName + " " + data[0].LastName;
-            $Country = data[0].CountryName;
-            $ImgName = "<img src='" + $Img + "' class='img-fluid rounded avatar-50 mr-3' alt='image'>";
-
-            $("#SponserStudentDetial").append(
-                '<tr>' +
-                '<td hidden>' + $StudentID + '</td>' +
-                '<td><div class="d-flex align-items-center">' + $ImgName + '<div>' + $StudentName + '</div></div></td>' +
-                '<td>' + $Country + '</td>' +
-                '<td>Payment Scheme</td>' +
-                '<td>' + data[0].CurrentDate + '</td>' +
-                '<td><a class="badge bg-warning mr-2 red" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"> <i class="ri-delete-bin-line mr-0"></i></a ></td>' +
-                '</tr> ');
-        });
+        $('#SponserStudentID').val($StudentID);
     }
     else {
         MsgBox('Error', 'Already Exists', '', false);
@@ -151,12 +175,11 @@ function Save() {
             var lstStudentSponser = [];
 
             for (var i = 0; i < rowCount; i++) {
-                debugger;
+
                 var StudentSponserModel = new StudentSponser();
 
                 StudentSponserModel.SponserID = $("#cmbSponser").val();
                 StudentSponserModel.StudentID = rowData.rows[i].cells[0].innerHTML;
-                //alert(StudentSponserModel.SponserID);
                 lstStudentSponser.push(StudentSponserModel);
             }
 
@@ -168,7 +191,6 @@ function Save() {
 
                 if (data.IsValid) {
                     MsgBox('Info', data.SucessMessage, '', true);
-                    location.reload();
                 } else {
                     MsgBox('Error', data.ErrorMessage, '', false);
                 }
@@ -190,8 +212,7 @@ function FillStudentsBySponser() {
         var model = {
             SponserID: sponserID
         }
-        ///debugger;
-        //var rowCount = document.getElementById("SponserStudentDetial").rows.length;
+
         var rowData = document.getElementById("SponserStudentDetial");
 
         var table = document.getElementById("studentDetails");
@@ -201,18 +222,8 @@ function FillStudentsBySponser() {
         ajaxCallWithoutAsync('Form/SponsersLinkedStudentData', { 'model': model }, function (data) {
 
             for (var j = 0; j < data.length; j++) {
-                AddSavedStudentsToGrid(data[j].StudentID, data[j].LinkedOn);
-                //debugger;
-                //var rowCount = document.getElementById("studentDetails").rows.length;
-                //for (var i = 0; i < rowCount; i++) {
-                //    if (table.rows[i].cells[0].innerHTML == data[j].StudentID) {
-                //        //alert(data[j].StudentID);
-                //        AddSavedStudentsToGrid(data[j].StudentID);
-                //        table.deleteRow(i);
-                //        break;
-                //    }
-                //}
 
+                AddSavedStudentsToGrid(data[j].StudentID, data[j].LinkedOn);
 
             }
         });
@@ -220,14 +231,14 @@ function FillStudentsBySponser() {
 }
 
 function AddSavedStudentsToGrid(studentid, linkedOn) {
-    //debugger;
+
     var model = {
         StudentID: studentid,
         ViewTypeID: 2
     }
 
     ajaxCallWithoutAsync('Form/StudentData', { 'model': model }, function (data) {
-        //debugger;
+
         if (data[0].Photo == "" || data[0].Photo == null) {
             $Img = "../assets/images/user/11.png";
         } else {
@@ -243,7 +254,8 @@ function AddSavedStudentsToGrid(studentid, linkedOn) {
             '<td hidden>' + studentid + '</td>' +
             '<td><div class="d-flex align-items-center">' + $ImgName + '<div>' + $StudentName + '</div></div></td>' +
             '<td>' + $Country + '</td>' +
-            '<td>Payment Scheme</td>' +
+            '<td hidden>' + $Country + '</td>' +
+            '<td>' + $Country + '</td>' +
             '<td>' + linkedOn + '</td>' +
             '<td><a class="badge bg-warning mr-2 red" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"> <i class="ri-delete-bin-line mr-0"></i></a ></td>' +
             '</tr> ');
@@ -251,6 +263,7 @@ function AddSavedStudentsToGrid(studentid, linkedOn) {
 }
 
 function DeleteStudentFromSponser(studentid) {
+
     var sponserID = $("#cmbSponser").val();
     if (sponserID > 0) {
 
@@ -275,7 +288,7 @@ function GetAllStudents() {
     $("#studentDetails").find("tr").remove();
 
     ajaxCallWithoutAsync('Form/GetSponserNotLinkedStudents', {}, function (data) {
-        //debugger;
+
         for (var i = 0; i < data.length; i++) {
 
             var model = {

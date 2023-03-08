@@ -4,6 +4,31 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<div class="modal fade" id="AddGrid" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="popup text-left">
+                    <h4 class="mb-3">Link Sponser / Student</h4>
+                    <input type="hidden" id="SponserStudentID" />
+                    <div class="content create-workform bg-body">
+                        <div class="pb-3">
+                            <div class="form-group">
+                                <label>Payment Scheme :</label>
+                                <select id="cmbPayScheme" class="selectpicker form-control" data-style="py-0"></select>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" onclick="AddToGridFromModel()" data-dismiss="modal" >Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="container-fluid">
     <div class="row">
         @{ Html.RenderAction("StudentView", "Form");}
@@ -67,7 +92,7 @@
                                             <div class="d-flex align-items-center list-action">
                                                 <a class="badge badge-info mr-2" data-placement="top" title="" data-original-title="View"
                                                    data-toggle="modal" onclick="GetStudent(@d.StudentID)"><i class="ri-eye-line mr-0"></i></a>
-                                                <button type="button" class="btn btn-primary btn-sm mr-2" onclick="AddToGrid(event)">Add to Grid</button>
+                                                <button type="button" class="btn btn-primary btn-sm mr-2" onclick="AddToGrid(event)" id="AddGrid">Add to Grid</button>
 
                                             </div>
                                         </td>
@@ -90,6 +115,7 @@
                                     <th hidden>StudentID</th>
                                     <th>Student Name</th>
                                     <th>Country</th>
+                                    <th hidden>Payment Scheme ID</th>
                                     <th>Payment Scheme</th>
                                     <th>Added Date</th>
                                     <th>Action</th>

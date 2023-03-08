@@ -181,5 +181,26 @@ namespace SM.DataAccess
 
             return lsFormValidate;
         }
+
+        public List<FormDBValidate> FormDBValidate(FormDBValidate model)
+        {
+            List<FormDBValidate> lsFormValidate = null;
+
+            using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required, new System.TimeSpan(0, 15, 0)))
+            {
+                try
+                {
+                    lsFormValidate = exe.SpExecutesSelect<FormDBValidate, FormDBValidate>("spValidateForm", model, false);
+                    scope.Complete();
+                }
+                catch (Exception ex)
+                {
+                    lsFormValidate = null;
+                    scope.Dispose();
+                }
+            }
+
+            return lsFormValidate;
+        }
     }
 }

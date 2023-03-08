@@ -110,6 +110,15 @@ namespace SM.DataAccess
             return lstStudentData;
         }
 
+        public List<FormValidate> ValidateStudent(StudentVM model)
+        {
+            List<FormValidate> lst = new List<FormValidate>();
+
+            lst = exe.SpExecutesSelect<FormValidate, StudentVM>("spValidateStudent", model, false);
+
+            return lst;
+        }
+
         public List<StudentVM> SponserNotLinkedStudentData(StudentVM model)
         {
             List<StudentVM> lstStudentData = new List<StudentVM>();

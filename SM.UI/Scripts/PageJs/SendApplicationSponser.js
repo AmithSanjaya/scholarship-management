@@ -1,6 +1,7 @@
 ﻿$(document).ready(function () {
+
     $("#SponserStudentDetial").on("click", ".red", function () {
-        debugger;
+
         var row = $(this).closest('tr');
         var id = $(this).closest('tr').children('td:eq(0)').text();
         MsgBox('Confirm', 'Do you want to Remove this Record ?', function () {

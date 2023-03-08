@@ -88,6 +88,14 @@ namespace SM.UI.Controllers
             return Json(lst, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult ValidateStudent(StudentVM model)
+        {
+            List<FormValidate> lst = new List<FormValidate>();
+            lst = new StudentDataAccess().ValidateStudent(model);
+
+            return Json(lst, JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult UpdateStudent (Student model)
         {
             ajaxResponse = new AjaxResponse();

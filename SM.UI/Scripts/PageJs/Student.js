@@ -50,6 +50,12 @@
         }
     });
 
+    FillStudent();
+
+});
+
+function FillStudent() {
+
     let searchParams = new URLSearchParams(window.location.search)
 
     if (searchParams.has('StudentID') == true) {
@@ -134,8 +140,7 @@
             $("#StudentEmail").val(data[0].Email);
         });
     }
-
-});
+}
 
 function ImageUpload(StudentID) {
 
@@ -359,7 +364,29 @@ function ValidateSave() {
 
         return false;
     }
+    else {
+        var model = new Student();
+        model.Fill();
+        msg = "";
 
+        model.Mode = 1;
+
+        if (model.StudentID != 0) {
+            model.Mode = 2;
+        }
+
+        ajaxCallWithoutAsync('Form/ValidateStudent', { 'model': model }, function (dataV) {
+            if (dataV.length > 0) {
+                msg = dataV[0].Message;
+            }
+        });
+
+        if (msg != "") {
+            MsgBox('Error', msg, '', false);
+
+            return false;
+        }
+    }
 
     return true;
 }
