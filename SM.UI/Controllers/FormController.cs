@@ -285,6 +285,13 @@ namespace SM.UI.Controllers
             lst = new StudentSponserDataAccess().SponsersLinkedStudentData(model);
             return Json(lst, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult StudentDataofSponserLinked(SponserStudent model)
+        {
+            List<SponserStudent> lst = new List<SponserStudent>();
+            lst = new StudentSponserDataAccess().StudentDataofSponserLinked(model);
+            return Json(lst, JsonRequestBehavior.AllowGet);
+        }
         #endregion
 
         #region Send Payment Notification

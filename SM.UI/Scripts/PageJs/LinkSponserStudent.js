@@ -57,8 +57,8 @@
             }
 
         });
-    });  
-    
+    });
+
 });
 
 
@@ -73,9 +73,12 @@ function FillSponser() {
     });
     $('#cmbSponser').selectpicker('refresh');
 
-    ajaxCall('SM/SponserData', { 'model': model }, function (data) {
-        BindDropDownDefault("cmbPayScheme", "SponserName", "SponserID", data);
+    model = {}
+    ajaxCall('SM/PaymentSchems', { 'model': model }, function (data) {
+        BindDropDown("cmbPayScheme", "PaymentSchemeName", "PaymentSchemeID", data);
     });
+    
+
     $('#cmbPayScheme').selectpicker('refresh');
 }
 
@@ -147,7 +150,8 @@ function AddToGrid(event) {
 
 var StudentSponser = function () {
     this.SponserID = 0,
-        this.StudentID = 0
+        this.StudentID = 0,
+        this.PaymentSchemeID = 0
 
     this.Fill = function (SponserID, StudentID) {
         this.SponserID = SponserID,
@@ -172,6 +176,7 @@ function Save() {
 
                 StudentSponserModel.SponserID = $("#cmbSponser").val();
                 StudentSponserModel.StudentID = rowData.rows[i].cells[0].innerHTML;
+                StudentSponserModel.PaymentSchemeID = rowData.rows[i].cells[3].innerHTML;
                 lstStudentSponser.push(StudentSponserModel);
             }
 
@@ -215,14 +220,14 @@ function FillStudentsBySponser() {
 
             for (var j = 0; j < data.length; j++) {
 
-                AddSavedStudentsToGrid(data[j].StudentID, data[j].LinkedOn);
+                AddSavedStudentsToGrid(data[j].StudentID, data[j].LinkedOn, data[j].PaymentSchemeID, data[j].PaymentSchemeName);
 
             }
         });
     }
 }
 
-function AddSavedStudentsToGrid(studentid, linkedOn) {
+function AddSavedStudentsToGrid(studentid, linkedOn, paymentSchemeID, paymentSchemeName ) {
 
     var model = {
         StudentID: studentid,
@@ -242,8 +247,8 @@ function AddSavedStudentsToGrid(studentid, linkedOn) {
             '<td hidden>' + studentid + '</td>' +
             '<td><div class="d-flex align-items-center">' + $ImgName + '<div>' + $StudentName + '</div></div></td>' +
             '<td>' + $Country + '</td>' +
-            '<td hidden>' + $Country + '</td>' +
-            '<td>' + $Country + '</td>' +
+            '<td hidden>' + paymentSchemeID + '</td>' +
+            '<td>' + paymentSchemeName + '</td>' +
             '<td>' + linkedOn + '</td>' +
             '<td><a class="badge bg-warning mr-2 red" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"> <i class="ri-delete-bin-line mr-0"></i></a ></td>' +
             '</tr> ');

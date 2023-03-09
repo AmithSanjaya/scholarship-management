@@ -11,6 +11,8 @@ namespace SM.UserObjects
         public int SponserStudentApplicationID { get; set; }
         public int SponserID { get; set; }
         public int StudentID { get; set; }
+        public int PaymentSchemeID { get; set; }
+        public string PaymentSchemeName { get; set; }
         public List<SponserStudent> lstStudents { get; set; }
         public string LinkedOn { get; set; }
     }
