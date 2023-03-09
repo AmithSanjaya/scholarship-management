@@ -124,6 +124,6 @@ namespace SM.DataAccess
             List<StudentVM> lstStudentData = new List<StudentVM>();
             lstStudentData = exe.SpExecutesSelect<StudentVM, StudentVM>("spSponserNotLinkedStudentData", model, false);
             return lstStudentData;
-        }
+        } 
     }
 }

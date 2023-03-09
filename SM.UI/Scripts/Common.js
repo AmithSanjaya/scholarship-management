@@ -138,11 +138,8 @@ function GetStudent(StudentPassID) {
 
         $("h4.mb-1").text(data[0].StudentName);
 
-        if (data[0].ImageName == "" || (data[0].ImageName == null)) {
-            $('img.StudentImg').attr("src", "../assets/images/user/11.png");
-        } else {
-            $('img.StudentImg').attr("src", "../Uploads/Student/" + data[0].ImageName);
-        }
+        $Img = GetStudentImage(data[0].Photo);
+        $('img.StudentImg').attr("src", $Img);
 
         $('p.StudentCity').text(data[0].City + ', ' + data[0].CountryName);
         $('p.StudentBirthDay').text(data[0].DateOfBirth);
@@ -193,6 +190,18 @@ function GetStudent(StudentPassID) {
         $('td.StudentBSisterIncome').text(data[0].SisterIncomeAmount);
 
     });
+
+}
+
+function GetStudentImage(Img) {
+
+    if (Img == "" || Img == null) {
+        $Img = "../assets/images/user/11.png";
+    } else {
+        $Img = "../Uploads/Student/" + Img +".jpg";
+    }
+
+    return $Img;
 
 }
 

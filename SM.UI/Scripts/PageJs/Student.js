@@ -71,11 +71,11 @@ function FillStudent() {
 
         ajaxCall('Form/StudentData', { 'model': model }, function (data) {
 
-            if (data[0].Photo == "" || data[0].Photo == null) {
-                $('#imgPreview').attr("src", "../assets/images/user/11.png");
-            } else {
+            $Img = GetStudentImage(data[0].Photo);
+            $('#imgPreview').attr("src", $Img);
+
+            if ((data[0].Photo != "") && (data[0].Photo != null)) {
                 $('#StudentImgID').val(data[0].Photo);
-                $('#imgPreview').attr("src", "../Uploads/Student/" + data[0].ImageName);
             }
 
             $("#StudentFirstName").val(data[0].FirstName);

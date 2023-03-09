@@ -124,5 +124,7 @@ namespace SM.UserObjects
         public string DateOfBirth { get; set; }
         public string RegisterFullDate { get; set; }
         public string CurrentDate { get; set; }
+
+        public decimal PaidAmount { get; set; }
     }
 }

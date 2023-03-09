@@ -297,5 +297,19 @@ namespace SM.UI.Controllers
             return View(lst);
         }
         #endregion
+
+        #region Payment of Sponser
+        public ActionResult SponserPayment()
+        {
+            return View();
+        }
+
+        public JsonResult SponsersStudentData(SponserStudent model)
+        {
+            List<StudentVM> lst = new List<StudentVM>();
+            lst = new StudentSponserDataAccess().SponsersStudentData(model);
+            return Json(lst, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
     }
 }

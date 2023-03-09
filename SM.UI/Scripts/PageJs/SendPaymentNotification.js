@@ -29,11 +29,7 @@
 
             for (var i = 0; i < data.length; i++) {
 
-                if (data[i].Photo == "" || data[i].Photo == null) {
-                    $Img = "../assets/images/user/11.png";
-                } else {
-                    $Img = "../Uploads/Student/" + data[i].ImageName;
-                }
+                $Img = GetStudentImage(data[i].Photo);
 
                 $StudentName = data[i].FirstName + " " + data[i].LastName;
                 $Country = data[i].CountryName;
@@ -79,6 +75,7 @@ function AddToGrid(event) {
 
         ajaxCall('Form/StudentData', { 'model': model }, function (data) {
 
+            $Img = GetStudentImage(data[0].Photo);
             $StudentName = data[0].FirstName + " " + data[0].LastName;
             $Country = data[0].CountryName;
             $ImgName = "<img src='" + $Img + "' class='img-fluid rounded avatar-50 mr-3' alt='image'>";

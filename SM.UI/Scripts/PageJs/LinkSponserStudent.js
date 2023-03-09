@@ -41,11 +41,7 @@
 
             for (var i = 0; i < data.length; i++) {
 
-                if (data[i].Photo == "" || data[i].Photo == null) {
-                    $Img = "../assets/images/user/11.png";
-                } else {
-                    $Img = "../Uploads/Student/" + data[i].ImageName;
-                }
+                $Img = GetStudentImage(data[0].Photo);
 
                 $StudentName = data[i].FirstName + " " + data[i].LastName;
                 $Country = data[i].CountryName;
@@ -94,11 +90,7 @@ function AddToGridFromModel() {
 
     ajaxCall('Form/StudentData', { 'model': model }, function (data) {
 
-        if (data[0].Photo == "" || data[0].Photo == null) {
-            $Img = "../assets/images/user/11.png";
-        } else {
-            $Img = "../Uploads/Student/" + data[0].ImageName;
-        }
+        $Img = GetStudentImage(data[0].Photo);
 
         $StudentName = data[0].FirstName + " " + data[0].LastName;
         $Country = data[0].CountryName;
@@ -239,11 +231,7 @@ function AddSavedStudentsToGrid(studentid, linkedOn) {
 
     ajaxCallWithoutAsync('Form/StudentData', { 'model': model }, function (data) {
 
-        if (data[0].Photo == "" || data[0].Photo == null) {
-            $Img = "../assets/images/user/11.png";
-        } else {
-            $Img = "../Uploads/Student/" + data[0].ImageName;
-        }
+        $Img = GetStudentImage(data[0].Photo);
 
         $StudentName = data[0].FirstName + " " + data[0].LastName;
         $Country = data[0].CountryName;
@@ -296,11 +284,7 @@ function GetAllStudents() {
                 ViewTypeID: 2
             }
             ajaxCallWithoutAsync('Form/StudentData', { 'model': model }, function (data) {
-                if (data[0].Photo == "" || data[0].Photo == null) {
-                    $Img = "../assets/images/user/11.png";
-                } else {
-                    $Img = "../Uploads/Student/" + data[0].ImageName;
-                }
+                $Img = GetStudentImage(data[0].Photo);
 
                 $StudentName = data[0].FirstName + " " + data[0].LastName;
                 $Country = data[0].CountryName;

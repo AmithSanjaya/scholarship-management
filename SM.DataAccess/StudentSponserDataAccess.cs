@@ -145,5 +145,12 @@ namespace SM.DataAccess
             lstSponserStudentData = exe.SpExecutesSelect<SponserStudent, SponserStudent>("spSponserLinkedStudentData", model, false);
             return lstSponserStudentData;
         }
+
+        public List<StudentVM> SponsersStudentData(SponserStudent model)
+        {
+            List<StudentVM> lstSponserStudentData = new List<StudentVM>();
+            lstSponserStudentData = exe.SpExecutesSelect<StudentVM, SponserStudent>("spSponserLinkedStudentData", model, false);
+            return lstSponserStudentData;
+        }
     }
 }

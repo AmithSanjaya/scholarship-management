@@ -1,0 +1,107 @@
+﻿@model IEnumerable<SM.UserObjects.StudentVM>
+@{
+    ViewBag.Title = "SponserPayment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="modal fade" id="AddGrid" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="popup text-left">
+                    <h4 class="mb-3">Add Payment Sponser / Student</h4>
+                    <input type="hidden" id="SponserStudentID" />
+                    <div class="content create-workform bg-body">
+                        <div class="pb-3">
+                            <div class="form-group">
+                                <label>Payment Amount :</label>
+                                <input class="form-control" id="PaidAmount" type="number">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" onclick="AddToGridFromModel()" data-dismiss="modal">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        @{ Html.RenderAction("StudentView", "Form");}
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                    <div class="header-title">
+                        <h4 class="card-title">Sponser Payment</h4>
+                    </div>
+                    @{ Html.RenderAction("FormButton", "Admin");}
+                </div>
+                <div class="card-body">
+                    <form action="page-list-customers.html" data-toggle="validator">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Sponser :</label>
+                                    <select id="cmbSponser" class="selectpicker form-control" data-style="py-0"></select>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Effective Month :</label>
+                                    <input type="month" class="form-control" id="EffectiveMonth">
+                                </div>
+                                <button type="button" class="btn btn-secondary mt-2" data-toggle="modal" id="PreviewApp">Preview Previous Sponser Payments</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg-12">
+                    <div class="table-responsive rounded mb-3">
+                        <table class="data-table table mb-0 tbl-server-info">
+                            <thead class="bg-white text-uppercase">
+                                <tr class="ligth ligth-data">
+                                    <th hidden>StudentID</th>
+                                    <th>Student Name</th>
+                                    <th>Gender</th>
+                                    <th>Country</th>
+                                    <th>School Name</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="ligth-body" id="studentDetails"></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <hr />
+                    <p>Payment Details</p>
+                    <hr />
+
+                    <div class="table-responsive rounded mb-3">
+                        <table class="data-table table mb-0 tbl-server-info">
+                            <thead class="bg-white text-uppercase">
+                                <tr class="ligth ligth-data">
+                                    <th hidden>StudentID</th>
+                                    <th>Student Name</th>
+                                    <th>Country</th>
+                                    <th>Paid Amount</th>
+                                    <th>Added Date</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="ligth-body" id="SponserPayment"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- Page end  -->
+        </div>
+    </div>
+</div>
+
+<script async src="~/Scripts/PageJs/SponserPayment.js"></script>
+
