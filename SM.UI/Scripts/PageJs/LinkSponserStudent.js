@@ -14,49 +14,65 @@
         }, true);
     });
 
-    $("#PreviewApp").on("click", function () {
+    $("#PreviewApp").on("click", function () {       
 
-        $('#CommonModel').modal();
+        var sponserID = $("#cmbSponser").val();
+        if (sponserID > 0) {
+            $('#CommonModel').modal();       
+            //GetAllStudents();
+            var model = {
+                SponserID: sponserID
+            }
+            ajaxCallWithoutAsync('Form/SponsersLinkedStudentData', { 'model': model }, function (linkeddata) {
 
-        var model = {
-            StudentID: 1,
-            ViewTypeID: 2
+                for (var j = 0; j < linkeddata.length; j++) {
+
+                    var model = {
+                        StudentID: linkeddata[j].StudentID,
+                        ViewTypeID: 2
+                    }
+
+                    $("#CommonModelTableHeader").empty();
+                    $("#CommonModelTableDetial").empty();
+
+                    $("h5.CommonHead").text('Preview Sponser/Student Details');
+
+                    ajaxCallWithoutAsync('Form/StudentData', { 'model': model }, function (data) {
+
+                        tr = $('<tr class="ligth ligth-data"/>');
+                        tr.append("<th hidden>StudentID</th>")
+                        tr.append("<th>Student Name</th>")
+                        tr.append("<th>Country</th>")
+                        tr.append("<th>Added Date</th>")
+                        tr.append("</tr>")
+
+                        $('#CommonModelTableHeader').append(tr);
+
+                        for (var i = 0; i < data.length; i++) {
+
+                            $Img = GetStudentImage(data[0].Photo);
+
+                            $StudentName = data[i].FirstName + " " + data[i].LastName;
+                            $Country = data[i].CountryName;
+                            $ImgName = "<img src='" + $Img + "' class='img-fluid rounded avatar-50 mr-3' alt='image'>";
+
+                            $("#CommonModelTableDetial").append(
+                                '<tr>' +
+                                '<td><div class="d-flex align-items-center">' + $ImgName + '<div>' + $StudentName + '</div></div></td>' +
+                                '<td>' + $Country + '</td>' +
+                                '<td>' + linkeddata[j].LinkedOn + '</td>' +
+                                '</tr> ');
+                        }
+
+                    });
+
+                }
+            });
+        }
+        else {
+            MsgBox('Error', 'Please select the Sponser', '', false);
         }
 
-        $("#CommonModelTableHeader").empty();
-        $("#CommonModelTableDetial").empty();
-
-        $("h5.CommonHead").text('Preview Sponser/Student Details');
-
-        ajaxCall('Form/StudentData', { 'model': model }, function (data) {
-
-            tr = $('<tr class="ligth ligth-data"/>');
-            tr.append("<th hidden>StudentID</th>")
-            tr.append("<th>Student Name</th>")
-            tr.append("<th>Country</th>")
-            tr.append("<th>Added Date</th>")
-            tr.append("</tr>")
-
-            $('#CommonModelTableHeader').append(tr);
-
-            for (var i = 0; i < data.length; i++) {
-
-                $Img = GetStudentImage(data[0].Photo);
-
-                $StudentName = data[i].FirstName + " " + data[i].LastName;
-                $Country = data[i].CountryName;
-                $ImgName = "<img src='" + $Img + "' class='img-fluid rounded avatar-50 mr-3' alt='image'>";
-
-                $("#CommonModelTableDetial").append(
-                    '<tr>' +
-                    '<td><div class="d-flex align-items-center">' + $ImgName + '<div>' + $StudentName + '</div></div></td>' +
-                    '<td>' + $Country + '</td>' +
-                    '<td>' + data[i].CurrentDate + '</td>' +
-                    '</tr> ');
-
-            }
-
-        });
     });
 
 });
