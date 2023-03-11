@@ -2,6 +2,7 @@
 using SM.UserObjects;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Web;
@@ -228,7 +229,10 @@ namespace SM.UI.Controllers
             dBUpdate = new DBUpdate();
             model.EnteredBy = UserDetail.UserID;
 
-            model.lstStudents.ForEach(x => x.EnteredBy.Equals(UserDetail.UserID));
+            foreach (SponserStudent obj in model.lstStudents)
+            {               
+                obj.EnteredBy = UserDetail.UserID;
+            }
             dBUpdate = new StudentSponserDataAccess().SaveSponserLinkedStudents(model);
 
             if (dBUpdate.Update)
@@ -317,6 +321,82 @@ namespace SM.UI.Controllers
             lst = new StudentSponserDataAccess().SponsersStudentData(model);
             return Json(lst, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult SaveSponserPaymentDetails(SponserStudent model)
+        {
+            ajaxResponse = new AjaxResponse();
+            dBUpdate = new DBUpdate();
+            model.EnteredBy = UserDetail.UserID;
+            int year = Convert.ToInt32(model.EffectiveMonth.Substring(0, 4));
+            int month = Convert.ToInt32(model.EffectiveMonth.Substring(5, 2));
+
+            foreach (SponserStudent obj in model.lstStudents)
+            {
+                obj.Year = year;
+                obj.Month = month;
+                obj.EnteredBy = UserDetail.UserID;
+            }
+            
+            dBUpdate = new StudentSponserDataAccess().SaveSponserPaymentDetails(model);
+
+            if (dBUpdate.Update)
+            {
+                ajaxResponse.IsValid = true;
+                ajaxResponse.ReturnID = dBUpdate.ReturnID;
+                ajaxResponse.SucessMessage = "Saved Successfully..!";
+            }
+            else
+            {
+                ajaxResponse.IsValid = false;
+                ajaxResponse.ErrorMessage = "Error in Data Saving..!";
+            }
+
+            return Json(ajaxResponse, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult DeleteStudentPaymentFromSponser(SponserStudent model)
+        {
+            ajaxResponse = new AjaxResponse();
+            dBUpdate = new DBUpdate();
+            model.EnteredBy = UserDetail.UserID;
+
+            dBUpdate = new StudentSponserDataAccess().DeleteStudentPaymentFromSponser(model);
+
+            if (dBUpdate.Update)
+            {
+                ajaxResponse.IsValid = true;
+                ajaxResponse.ReturnID = dBUpdate.ReturnID;
+                ajaxResponse.SucessMessage = "Deleted Successfully..!";
+            }
+            else
+            {
+                ajaxResponse.IsValid = false;
+                ajaxResponse.ErrorMessage = "Error in Data Deleting..!";
+            }
+
+            return Json(ajaxResponse, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult SponserPaidStudentByYearandMonth(SponserStudent model)
+        {
+            List<SponserStudent> lst = new List<SponserStudent>();
+            int year = Convert.ToInt32(model.EffectiveMonth.Substring(0, 4));
+            int month = Convert.ToInt32(model.EffectiveMonth.Substring(5, 2));
+            model.Year = year;
+            model.Month = month;
+            lst = new StudentSponserDataAccess().SponserPaidStudentByYearandMonth(model);
+            return Json(lst, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult SponserPaidStudentHistoryData(SponserStudent model)
+        {
+            List<SponserStudent> lst = new List<SponserStudent>();           
+            
+            lst = new StudentSponserDataAccess().SponserPaidStudentHistoryData(model);
+            return Json(lst, JsonRequestBehavior.AllowGet);
+        }
+
+
         #endregion
     }
 }

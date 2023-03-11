@@ -15,5 +15,10 @@ namespace SM.UserObjects
         public string PaymentSchemeName { get; set; }
         public List<SponserStudent> lstStudents { get; set; }
         public string LinkedOn { get; set; }
+        public decimal PaidAmount { get; set; }
+        public string PaidDate { get; set; }
+        public string EffectiveMonth { get; set; }
+        public int Year { get; set; }
+        public int Month { get; set; }
     }
 }

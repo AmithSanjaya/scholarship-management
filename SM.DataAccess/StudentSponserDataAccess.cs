@@ -159,5 +159,76 @@ namespace SM.DataAccess
             lstSponserStudentData = exe.SpExecutesSelect<SponserStudent, SponserStudent>("spStudentDataofSponserLinked", model, false);
             return lstSponserStudentData;
         }
+
+        public DBUpdate SaveSponserPaymentDetails(SponserStudent model)
+        {
+            int ReturnID = 0;
+            dBUpdate = new DBUpdate();
+
+            using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required, new System.TimeSpan(0, 15, 0)))
+            {
+                try
+                {
+                    ReturnID = model.lstStudents[0].SponserID;
+                    foreach (SponserStudent obj in model.lstStudents)
+                    {
+                        exe.SpExecutes<SponserStudent>("spSaveSponserPayment", obj, false);
+                    }
+
+                    dBUpdate.ReturnID = ReturnID;
+                    dBUpdate.Update = true;
+
+                    scope.Complete();
+                }
+                catch (Exception ex)
+                {
+                    dBUpdate.ReturnID = ReturnID;
+                    dBUpdate.Update = false;
+                    scope.Dispose();
+                }
+            }
+
+            return dBUpdate;
+        }
+
+        public DBUpdate DeleteStudentPaymentFromSponser(SponserStudent model)
+        {
+            int ReturnID = 0;
+            dBUpdate = new DBUpdate();
+
+            using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required, new System.TimeSpan(0, 15, 0)))
+            {
+                try
+                {
+                    ReturnID = model.SponserID;
+                    exe.SpExecutes<SponserStudent>("spDeleteStudentPaymentFromSponser", model, false);
+                    dBUpdate.ReturnID = ReturnID;
+                    dBUpdate.Update = true;
+                    scope.Complete();
+                }
+                catch (Exception ex)
+                {
+                    dBUpdate.ReturnID = ReturnID;
+                    dBUpdate.Update = false;
+                    scope.Dispose();
+                }
+            }
+
+            return dBUpdate;
+        }
+
+        public List<SponserStudent> SponserPaidStudentByYearandMonth(SponserStudent model)
+        {
+            List<SponserStudent> lstSponserStudentData = new List<SponserStudent>();
+            lstSponserStudentData = exe.SpExecutesSelect<SponserStudent, SponserStudent>("spSponserPaidStudentByYearandMonth", model, false);
+            return lstSponserStudentData;
+        }
+
+        public List<SponserStudent> SponserPaidStudentHistoryData(SponserStudent model)
+        {
+            List<SponserStudent> lstSponserStudentData = new List<SponserStudent>();
+            lstSponserStudentData = exe.SpExecutesSelect<SponserStudent, SponserStudent>("spSponserPaidStudentHistoryData", model, false);
+            return lstSponserStudentData;
+        }
     }
 }
