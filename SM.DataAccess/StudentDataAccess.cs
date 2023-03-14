@@ -124,6 +124,15 @@ namespace SM.DataAccess
             List<StudentVM> lstStudentData = new List<StudentVM>();
             lstStudentData = exe.SpExecutesSelect<StudentVM, StudentVM>("spSponserNotLinkedStudentData", model, false);
             return lstStudentData;
-        } 
+        }
+
+        public List<StudentAchievementVM> StudentAchievementData(StudentAchievementVM model)
+        {
+            List<StudentAchievementVM> lst = new List<StudentAchievementVM>();
+
+            lst = exe.SpExecutesSelect<StudentAchievementVM, StudentAchievementVM>("spStudentAchievementData", model, false);
+
+            return lst;
+        }
     }
 }

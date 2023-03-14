@@ -4371,6 +4371,7 @@
     <Content Include="Scripts\PageJs\Sponser.js" />
     <Content Include="Scripts\PageJs\SponserPayment.js" />
     <Content Include="Scripts\PageJs\Student.js" />
+    <Content Include="Scripts\PageJs\StudentAchievement.js" />
     <Content Include="Uploads\Student\1677668841139.jpg" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -4404,6 +4405,7 @@
     <Content Include="Views\Form\SendPaymentNotification.cshtml" />
     <Content Include="Views\Admin\FormButton.cshtml" />
     <Content Include="Views\Form\SponserPayment.cshtml" />
+    <Content Include="Views\Form\AddEditStudentAchievement.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

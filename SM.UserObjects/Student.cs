@@ -127,4 +127,28 @@ namespace SM.UserObjects
 
         public decimal PaidAmount { get; set; }
     }
+
+    public class StudentAchievement : User
+    {
+        public int StudentAchievementID { get; set; }
+        public int StudentID { get; set; }
+        public string AchievementTitle { get; set; }
+        public string AchievementName { get; set; }
+        public bool EmailSend { get; set; }
+    }
+
+    public class StudentAchievementVM
+    {
+        public int StudentAchievementID { get; set; }
+        public int StudentID { get; set; }
+        public string StudentName { get; set; }
+
+        public string AchievementTitle { get; set; }
+        public string AchievementName { get; set; }
+        public bool EmailSend { get; set; }
+
+        public string EmailSendName { get; set; }
+
+        public string AddedDate { get; set; }
+    }
 }

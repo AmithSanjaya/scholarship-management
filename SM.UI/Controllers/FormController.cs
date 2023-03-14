@@ -118,6 +118,11 @@ namespace SM.UI.Controllers
 
             return Json(ajaxResponse, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult AddEditStudentAchievement()
+        {
+            return View();
+        }
         #endregion
 
         #region Common Model
@@ -315,6 +320,15 @@ namespace SM.UI.Controllers
         {
             List<StudentVM> lst = new List<StudentVM>();
             lst = new StudentSponserDataAccess().SponsersStudentData(model);
+            return Json(lst, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+        #region Student Achievement
+        public JsonResult StudentAchievementData(StudentAchievementVM model)
+        {
+            List<StudentAchievementVM> lst = new List<StudentAchievementVM>();
+            lst = new StudentDataAccess().StudentAchievementData(model);
             return Json(lst, JsonRequestBehavior.AllowGet);
         }
         #endregion
