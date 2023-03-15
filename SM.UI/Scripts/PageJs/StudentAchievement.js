@@ -53,7 +53,7 @@ function FillGrid() {
             $AchievementTitle = data[i].AchievementTitle;
             $AchievementName = data[i].AchievementName;
             $EmailSendName = data[i].EmailSendName;
-            $AddedDate = data[i].AddedDate;
+            $AddedDate = data[i].EffectiveDateName;
 
             $("#StudentAchievementDetail").append(
                 '<tr>' +

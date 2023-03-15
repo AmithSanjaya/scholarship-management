@@ -19,10 +19,16 @@
                 <div class="card-body">
                     <form action="page-list-customers.html" data-toggle="validator">
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Student : <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="View Student" href="#" id="PreviewStudent"> <i class="ri-eye-line mr-0"></i></a></label>
                                     <select id="cmbStudent" class="selectpicker form-control" data-style="py-0"></select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Effective Date :</label>
+                                    <input class="form-control" id="EffectiveDate" type="date">
                                 </div>
                             </div>
                         </div>
@@ -67,7 +73,7 @@
                                     <th>Achievement Title</th>
                                     <th>Achievement Description</th>
                                     <th>Send Email</th>
-                                    <th>Added Date</th>
+                                    <th>Effective Date</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>

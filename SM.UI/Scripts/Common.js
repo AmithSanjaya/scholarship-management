@@ -189,6 +189,54 @@ function GetStudent(StudentPassID) {
         $('td.StudentNoSisters').text(data[0].NoOfSisters);
         $('td.StudentBSisterIncome').text(data[0].SisterIncomeAmount);
 
+        //Achievement Data
+        $("#AchievementData").empty();
+
+        var modelAchievement = {
+            StudentID: StudentPassID
+        }
+
+        ajaxCall('Form/StudentAchievementData', { 'model': modelAchievement }, function (data) {
+
+            if (data.length > 0) {
+
+                $div = "<ul class='list-inline p-0 m-0 w-100'>";
+
+                for (var i = 0; i < data.length; i++) {
+
+                    $div += "<li>";
+                    $div += "<div class='row align-items-top'>";
+                    if (i == (data.length - 1)) {
+                        $div += "<div class='col-3'>";
+                    } else {
+                        $div += "<div class='col-md-3'>";
+                    }
+                    $div += "<h6 class='mb-2'>" + data[i].EffectiveDateName + "</h6>";
+                    $div += "</div>";
+                    if (i == (data.length - 1)) {
+                        $div += "<div class='col-9'>";
+                        $div += "<div class='media profile-media pb-0 align-items-top'>";
+                    } else {
+                        $div += "<div class='col-md-9'>";
+                        $div += "<div class='media profile-media align-items-top'>";
+                    }
+                    $div += "<div class='profile-dots border-primary mt-1'></div>";
+                    $div += "<div class='ml-4'>";
+                    $div += "<h6 class='mb-1'>" + data[i].AchievementTitle + "</h6>";
+                    $div += "<p class='mb-0 font-size-14'>" + data[i].AchievementName + "</p>";
+                    $div += "</div>";
+                    $div += "</div>";
+                    $div += "</div>";
+                    $div += "</div>";
+                    $div += "</li>";
+
+                }
+
+                $div += "</ul>";
+                $('#AchievementData').append($div);
+            }
+        });
+
     });
 
 }

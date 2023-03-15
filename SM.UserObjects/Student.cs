@@ -134,6 +134,7 @@ namespace SM.UserObjects
         public int StudentID { get; set; }
         public string AchievementTitle { get; set; }
         public string AchievementName { get; set; }
+        public DateTime EffectiveDate { get; set; }
         public bool EmailSend { get; set; }
     }
 
@@ -149,6 +150,6 @@ namespace SM.UserObjects
 
         public string EmailSendName { get; set; }
 
-        public string AddedDate { get; set; }
+        public string EffectiveDateName { get; set; }
     }
 }
