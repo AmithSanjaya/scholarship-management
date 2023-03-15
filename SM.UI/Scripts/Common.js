@@ -138,6 +138,16 @@ function GetStudent(StudentPassID) {
 
         $("h4.mb-1").text(data[0].StudentName);
 
+        if (data[0].bIsActive == true) {
+            $("#StudentStatus").removeClass("btn btn-danger");
+            $("#StudentStatus").addClass("btn btn-success");
+            $("#StudentStatus").text("Active");
+        } else {
+            $("#StudentStatus").removeClass("btn btn-success");
+            $("#StudentStatus").addClass("btn btn-danger");
+            $("#StudentStatus").text("Inactive");
+        }
+
         $Img = GetStudentImage(data[0].Photo);
         $('img.StudentImg').attr("src", $Img);
 

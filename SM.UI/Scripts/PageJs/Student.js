@@ -2,6 +2,9 @@
 
     $("#FundDIV").hide();
     $("#NumberDIV").hide();
+    $("#InactiveDIV").hide();
+
+    $("#ReasonForInactive").val("");
 
     $("#StudentID").val(0);
 
@@ -12,6 +15,15 @@
         } else {
             $("#FundDIV").hide();
             $("#NumberDIV").hide();
+        }
+    });
+
+    $("#rbInactive").change(function () {
+        if (this.checked) {
+            $("#InactiveDIV").show();
+        } else {
+            $("#ReasonForInactive").val("");
+            $("#InactiveDIV").hide();
         }
     });
 
@@ -91,6 +103,10 @@ function FillStudent() {
             $('#StudentCounty').selectpicker('refresh');
 
             $("#StudentNIC").val(data[0].NICNo);
+            $('#rbInactive').prop('checked', !data[0].bIsActive);
+            $('#rbInactive').trigger("change");
+
+            $("#ReasonForInactive").val(data[0].InactiveReason);
 
             $("#SclName").val(data[0].SchoolName);
             $("#SclAddress").val(data[0].SchoolAddress);
@@ -265,6 +281,8 @@ var Student = function () {
     this.ContactNo = "";
     this.Email = "";
     this.NICNo = "";
+    this.bIsActive = "";
+    this.InactiveReason = "";
     this.Photo = "";
     this.Grade = "";
     this.SchoolName = "";
@@ -302,6 +320,8 @@ var Student = function () {
         this.CountryID = $("#StudentCounty").val();
         this.NICNo = $("#StudentNIC").val();
         this.Photo = $("#Photo").val();
+        this.bIsActive = $('#rbInactive').prop('checked');
+        this.InactiveReason = $("#ReasonForInactive").val();
 
         this.ContactNo = $("#StudentContactNo").val() || '-';
         this.Email = $("#StudentEmail").val() || '-';

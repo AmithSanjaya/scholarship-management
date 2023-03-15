@@ -44,6 +44,8 @@ namespace SM.UserObjects
         public decimal BrotherIncomeAmount { get; set; }
         public decimal SisterIncomeAmount { get; set; }
         public int Mode { get; set; }
+        public bool bIsActive { get; set; }
+        public string InactiveReason { get; set; }
     }
 
     public class StudentSubject
@@ -124,6 +126,8 @@ namespace SM.UserObjects
         public string DateOfBirth { get; set; }
         public string RegisterFullDate { get; set; }
         public string CurrentDate { get; set; }
+        public bool bIsActive { get; set; }
+        public string InactiveReason { get; set; }
 
         public decimal PaidAmount { get; set; }
     }
