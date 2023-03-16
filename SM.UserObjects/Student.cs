@@ -155,5 +155,6 @@ namespace SM.UserObjects
         public string EmailSendName { get; set; }
 
         public string EffectiveDateName { get; set; }
+        //Push
     }
 }
