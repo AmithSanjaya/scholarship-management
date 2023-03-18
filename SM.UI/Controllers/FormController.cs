@@ -411,6 +411,34 @@ namespace SM.UI.Controllers
             lst = new StudentDataAccess().StudentAchievementData(model);
             return Json(lst, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult SaveStudentAchievements(StudentAchievement model)
+        {
+            ajaxResponse = new AjaxResponse();
+            dBUpdate = new DBUpdate();
+            model.EnteredBy = UserDetail.UserID;
+
+            foreach (StudentAchievement obj in model.lstStudentAchievements)
+            {
+                obj.EnteredBy = UserDetail.UserID;
+                obj.EffectiveDate = Convert.ToDateTime(obj.strEffectiveDate);
+            }
+            dBUpdate = new StudentDataAccess().SaveStudentAchievements(model);
+
+            if (dBUpdate.Update)
+            {
+                ajaxResponse.IsValid = true;
+                ajaxResponse.ReturnID = dBUpdate.ReturnID;
+                ajaxResponse.SucessMessage = "Saved Successfully..!";
+            }
+            else
+            {
+                ajaxResponse.IsValid = false;
+                ajaxResponse.ErrorMessage = "Error in Data Saving..!";
+            }
+
+            return Json(ajaxResponse, JsonRequestBehavior.AllowGet);
+        }
         #endregion
     }
 }

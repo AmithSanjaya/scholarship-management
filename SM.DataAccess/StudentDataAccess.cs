@@ -134,5 +134,40 @@ namespace SM.DataAccess
 
             return lst;
         }
+
+        public DBUpdate SaveStudentAchievements(StudentAchievement model)
+        {
+            int ReturnID = 0;
+            dBUpdate = new DBUpdate();
+
+            using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required, new System.TimeSpan(0, 15, 0)))
+            {
+                try
+                {
+                    StudentAchievement studentAchievement = new StudentAchievement();
+                    studentAchievement = model.lstStudentAchievements[0];
+                    exe.SpExecutes<StudentAchievement>("spInActiveStudentAchievementsBeforeSave", studentAchievement, false);  
+
+                    ReturnID = model.lstStudentAchievements[0].StudentID;
+                    foreach (StudentAchievement obj in model.lstStudentAchievements)
+                    {
+                        exe.SpExecutes<StudentAchievement>("spSaveStudentAchievements", obj, false);
+                    }
+
+                    dBUpdate.ReturnID = ReturnID;
+                    dBUpdate.Update = true;
+
+                    scope.Complete();
+                }
+                catch (Exception ex)
+                {
+                    dBUpdate.ReturnID = ReturnID;
+                    dBUpdate.Update = false;
+                    scope.Dispose();
+                }
+            }
+
+            return dBUpdate;
+        }
     }
 }

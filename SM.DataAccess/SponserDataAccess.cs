@@ -70,7 +70,7 @@ namespace SM.DataAccess
             }
             else if (model.ViewTypeID == 2)
             {
-                lstSponserData = exe.SpExecutesSelect<SponserVM, SponserVM>("spSponserData", model, false);
+                lstSponserData = exe.SpExecutesSelect<SponserVM, SponserVM>("spSponserDataBySponserID", model, false);
             }
 
             return lstSponserData;

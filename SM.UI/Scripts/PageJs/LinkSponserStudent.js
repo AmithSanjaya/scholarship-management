@@ -82,7 +82,7 @@ function FillSponser() {
 
     var model = {
         SponserID: 0,
-        ViewTypeID: 2
+        ViewTypeID: 1
     }
     ajaxCall('SM/SponserData', { 'model': model }, function (data) {
         BindDropDown("cmbSponser", "SponserName", "SponserID", data);

@@ -322,3 +322,26 @@ function MsgBox(Type, Msg, callback, reload) {
         });
     }
 }
+
+function GetSponser(SponserPassID) {
+
+    $('#sponsermodel').modal();
+
+    var model = {
+        SponserID: SponserPassID,
+        ViewTypeID: 2
+    }
+
+    ajaxCall('SM/SponserData', { 'model': model }, function (data) {
+
+        $("h4.mb-1").text(data[0].SponserName);
+
+        $('td.SponcerContactNo').text(data[0].ContactNo);
+        $('td.SponcerEmail').text(data[0].Email);
+        $('td.SponcerAddress').text(data[0].SponserAddress);
+        $('td.SponcerCountry').text(data[0].CountryName);
+        $('td.SponcerPayTerm').text(data[0].PaymentSchemeName);
+
+    });
+
+}

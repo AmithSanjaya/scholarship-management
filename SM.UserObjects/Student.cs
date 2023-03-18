@@ -139,7 +139,9 @@ namespace SM.UserObjects
         public string AchievementTitle { get; set; }
         public string AchievementName { get; set; }
         public DateTime EffectiveDate { get; set; }
+        public string strEffectiveDate { get; set; }
         public bool EmailSend { get; set; }
+        public List<StudentAchievement> lstStudentAchievements { get; set; }
     }
 
     public class StudentAchievementVM
@@ -147,7 +149,8 @@ namespace SM.UserObjects
         public int StudentAchievementID { get; set; }
         public int StudentID { get; set; }
         public string StudentName { get; set; }
-
+        public int SponserID { get; set; }
+        public string SponserName { get; set; }
         public string AchievementTitle { get; set; }
         public string AchievementName { get; set; }
         public bool EmailSend { get; set; }

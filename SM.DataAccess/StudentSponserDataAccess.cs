@@ -230,5 +230,7 @@ namespace SM.DataAccess
             lstSponserStudentData = exe.SpExecutesSelect<SponserStudent, SponserStudent>("spSponserPaidStudentHistoryData", model, false);
             return lstSponserStudentData;
         }
+
+        
     }
 }
