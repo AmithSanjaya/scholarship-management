@@ -4372,6 +4372,7 @@
     <Content Include="Scripts\PageJs\SponserPayment.js" />
     <Content Include="Scripts\PageJs\Student.js" />
     <Content Include="Scripts\PageJs\StudentAchievement.js" />
+    <Content Include="Scripts\PageJs\StudentProgress.js" />
     <Content Include="Uploads\Student\1677668841139.jpg" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -4382,7 +4383,9 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -4406,6 +4409,7 @@
     <Content Include="Views\Admin\FormButton.cshtml" />
     <Content Include="Views\Form\SponserPayment.cshtml" />
     <Content Include="Views\Form\AddEditStudentAchievement.cshtml" />
+    <Content Include="Views\Form\AddEditStudentProgress.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

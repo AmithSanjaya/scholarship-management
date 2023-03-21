@@ -345,3 +345,10 @@ function GetSponser(SponserPassID) {
     });
 
 }
+
+function GetStudentProgressPDF(StudentID) {
+
+    $('#PDFModel').modal({ backdrop: 'static', keyboard: true });
+
+
+}

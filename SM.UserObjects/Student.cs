@@ -160,4 +160,17 @@ namespace SM.UserObjects
         public string EffectiveDateName { get; set; }
         //Push
     }
+
+    public class StudentProgress : User
+    {
+        public int StudentProgressID { get; set; }
+        public int StudentID { get; set; }
+        public int Year { get; set; }
+        public int Month { get; set; }
+        public string ProgressTitle { get; set; }
+        public string ProgressFileName { get; set; }
+        public bool EmailSend { get; set; }
+        public string EmailSendName { get; set; }
+        public int EnteredBy { get; set; }
+    }
 }
