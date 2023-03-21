@@ -124,6 +124,11 @@ namespace SM.UI.Controllers
         {
             return View();
         }
+
+        public ActionResult AddEditStudentProgress()
+        {
+            return View();
+        }
         #endregion
 
         #region Common Model
@@ -439,6 +444,9 @@ namespace SM.UI.Controllers
 
             return Json(ajaxResponse, JsonRequestBehavior.AllowGet);
         }
+        #endregion
+
+        #region Student Progress
         #endregion
     }
 }
