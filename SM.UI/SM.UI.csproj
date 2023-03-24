@@ -263,14 +263,17 @@
     <Content Include="assets\images\page-img\a2.png" />
     <Content Include="assets\images\page-img\a3.png" />
     <Content Include="assets\images\page-img\a4.png" />
+    <Content Include="assets\images\page-img\birthday.png" />
     <Content Include="assets\images\page-img\diamond.png" />
     <Content Include="assets\images\page-img\img-success.png" />
     <Content Include="assets\images\page-img\man.svg" />
     <Content Include="assets\images\page-img\p1.jpg" />
     <Content Include="assets\images\page-img\p2.jpg" />
     <Content Include="assets\images\page-img\page-load-loader.gif" />
+    <Content Include="assets\images\page-img\profile - Copy.png" />
     <Content Include="assets\images\page-img\profile-bg.jpg" />
     <Content Include="assets\images\page-img\profile.png" />
+    <Content Include="assets\images\page-img\viewpdf.png" />
     <Content Include="assets\images\plugins\picture.jpg" />
     <Content Include="assets\images\product\01.png" />
     <Content Include="assets\images\product\02.png" />
@@ -4374,6 +4377,16 @@
     <Content Include="Scripts\PageJs\StudentAchievement.js" />
     <Content Include="Scripts\PageJs\StudentProgress.js" />
     <Content Include="Uploads\Student\1677668841139.jpg" />
+    <Content Include="Uploads\Student\1677672582466.jpg" />
+    <Content Include="Uploads\Student\1677673184668.jpg" />
+    <Content Include="Uploads\Student\1677673624118.jpg" />
+    <Content Include="Uploads\Student\1677695077697.jpg" />
+    <Content Include="Uploads\Student\1677698390040.jpg" />
+    <Content Include="Uploads\Student\1677698904874.jpg" />
+    <Content Include="Uploads\Student\1677777210076.jpg" />
+    <Content Include="Uploads\Student\1677777694329.jpg" />
+    <Content Include="Uploads\Student\1677778190548.jpg" />
+    <Content Include="Uploads\Student\1677778246084.jpg" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
