@@ -34,7 +34,7 @@
                             </li>
                             <li class="col-md-3 p-0">
                                 <a class="nav-link" data-toggle="pill" href="#contact-information">
-                                    Contact Information
+                                    Other Information
                                 </a>
                             </li>
                         </ul>
@@ -69,6 +69,18 @@
                                         </div>
                                     </div>
                                     <div class=" row align-items-center">
+                                        <div class="form-group col-sm-12">
+                                            <div class="alert alert-primary" role="alert">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="Photographpublished">
+                                                    <label class="custom-control-label" for="rbTerm">
+                                                        Photograph is published in
+                                                        publication material produced by Lak Saviya Foundation or nay
+                                                        other party funding this scholarship program.
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="form-group col-sm-6">
                                             <label for="fname">First Name:</label>
                                             <input type="text" class="form-control" id="StudentFirstName">
@@ -76,6 +88,10 @@
                                         <div class="form-group col-sm-6">
                                             <label for="lname">Last Name:</label>
                                             <input type="text" class="form-control" id="StudentLastName">
+                                        </div>
+                                        <div class="form-group col-sm-12">
+                                            <label for="lname">Full Name:</label>
+                                            <input type="text" class="form-control" id="StudentFullName">
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label class="d-block">Gender:</label>
@@ -94,22 +110,37 @@
                                         </div>
                                         <div class="form-group col-sm-12">
                                             <label>Address:</label>
-                                            <textarea class="form-control" name="StudentAddress" id="StudentAddress" rows="4">
-                                            </textarea>
+                                            <textarea class="form-control" rows="4" id="StudentAddress"></textarea>
                                         </div>
                                         <div class="form-group col-sm-6">
-                                            <label for="lname">City:</label>
-                                            <input type="text" class="form-control" id="city">
+                                            <label for="lname">District:</label>
+                                            <select id="StudentDistrict" class="selectpicker form-control" data-style="py-0"></select>
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label>Country:</label>
                                             <select id="StudentCounty" class="selectpicker form-control" data-style="py-0"></select>
                                         </div>
                                         <div class="form-group col-sm-6">
+                                            <label for="lname">Polling Division:</label>
+                                            <input type="text" class="form-control" id="StudentPollingDivision">
+                                        </div>
+                                        <div class="form-group col-sm-6">
+                                            <label>Divisional Secretariat Division:</label>
+                                            <input type="text" class="form-control" id="StudentSecretariaDivision">
+                                        </div>
+                                        <div class="form-group col-sm-6">
+                                            <label for="lname">Race:</label>
+                                            <select id="StudentRace" class="selectpicker form-control" data-style="py-0"></select>
+                                        </div>
+                                        <div class="form-group col-sm-6">
+                                            <label>Religion:</label>
+                                            <select id="StudentReligion" class="selectpicker form-control" data-style="py-0"></select>
+                                        </div>
+                                        <div class="form-group col-sm-6">
                                             <label for="lname">NIC:</label>
                                             <input type="text" class="form-control" id="StudentNIC">
                                         </div>
-                                        
+
                                         <div class="form-group col-sm-12">
                                             <div class="custom-control custom-checkbox">
                                                 <input type="checkbox" class="custom-control-input" id="rbInactive">
@@ -143,16 +174,19 @@
                                         </div>
                                         <div class="form-group col-sm-12">
                                             <label>School Address:</label>
-                                            <textarea class="form-control" name="SclAddress" id="SclAddress" rows="5" style="line-height: 22px;">
-                                            </textarea>
+                                            <textarea class="form-control" rows="5" id="SclAddress"></textarea>
+                                        </div>
+                                        <div class="form-group col-sm-6">
+                                            <label for="lname">Distance from home to school (Km):</label>
+                                            <input type="number" class="form-control" id="DistancetoSchool">
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label for="lname">Grade:</label>
-                                            <input type="text" class="form-control" id="CurrentGrade" >
+                                            <input type="text" class="form-control" id="CurrentGrade">
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label for="lname">Higest Grade in School:</label>
-                                            <input type="text" class="form-control" id="HigestGrade" >
+                                            <input type="text" class="form-control" id="HigestGrade">
                                         </div>
                                         <div class="form-group col-sm-12">
                                             <label for="fname">Highest Education Achievement:</label>
@@ -261,22 +295,46 @@
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label for="dob">Monthly Income:</label>
-                                            <input class="form-control" id="MotherAmount" type="number" >
+                                            <input class="form-control" id="MotherAmount" type="number">
+                                        </div>
+                                        <div class="form-group col-sm-12">
+                                            <label>Are the parents alive?</label>
+                                            <textarea class="form-control" rows="2" id="StudentParents"></textarea>
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label for="dob">No Of Brothers:</label>
-                                            <input class="form-control" id="NoOfBrothers" type="number" >
+                                            <input class="form-control" id="NoOfBrothers" type="number">
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label for="dob">No Of Sisters:</label>
-                                            <input class="form-control" id="NoOfSisters" type="number" >
+                                            <input class="form-control" id="NoOfSisters" type="number">
                                         </div>
                                         <div class="form-group col-sm-6">
-                                            <label for="dob">Are any brothers employed, Monthly Income:</label>
+                                            <label for="dob">No Of Brothers Studying:</label>
+                                            <input class="form-control" id="NoOfBrothersStudy" type="number">
+                                        </div>
+                                        <div class="form-group col-sm-6">
+                                            <label for="dob">No Of Sisters Studying:</label>
+                                            <input class="form-control" id="NoOfSistersStudy" type="number">
+                                        </div>
+                                        <div class="form-group col-sm-6">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="rbBrotherEmployed">
+                                                <label class="custom-control-label" for="rbBrotherEmployed">Are any brothers employed ?</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-6">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="rbSisterEmployed">
+                                                <label class="custom-control-label" for="rbSisterEmployed">Are any sisters employed ?</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-6">
+                                            <label for="dob" id="BIncomeL">Monthly Income:</label>
                                             <input class="form-control" id="BrotherIncome" type="number">
                                         </div>
                                         <div class="form-group col-sm-6">
-                                            <label for="dob">Are any sisters employed, Monthly Income:</label>
+                                            <label for="dob" id="BIncomeS">Monthly Income:</label>
                                             <input class="form-control" id="SisterIncome" type="number">
                                         </div>
 
@@ -294,15 +352,72 @@
                             </div>
                             <div class="card-body">
                                 <form>
-                                    <div class="form-group">
-                                        <label for="cno">Contact Number:</label>
-                                        <input type="text" class="form-control" id="StudentContactNo">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="email">Email:</label>
-                                        <input type="text" class="form-control" id="StudentEmail">
+                                    <div class=" row align-items-center">
+
+                                        <div class="form-group col-sm-6">
+                                            <label for="cno">Contact Number:</label>
+                                            <input type="text" class="form-control" id="StudentContactNo">
+                                        </div>
+                                        <div class="form-group col-sm-6">
+                                            <label for="email">Email:</label>
+                                            <input type="text" class="form-control" id="StudentEmail">
+                                        </div>
                                     </div>
                                 </form>
+
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between">
+                                <div class="iq-header-title">
+                                    <h4 class="card-title">Bank Information</h4>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <form>
+                                    <div class=" row align-items-center">
+                                        <div class="form-group col-sm-12">
+                                            <label for="fname">Account Holder's Name:</label>
+                                            <input type="text" class="form-control" id="AccountName">
+                                        </div>
+                                        <div class="form-group col-sm-6">
+                                            <label for="cno">Bank/Branch:</label>
+                                            <select class="selectpicker form-control" id="StudentBank" data-style="py-0"></select>
+                                        </div>
+                                        <div class="form-group col-sm-6">
+                                            <label for="email">Account No:</label>
+                                            <input type="text" class="form-control" id="AccountNo">
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between">
+                                <div class="iq-header-title">
+                                    <h4 class="card-title">Other Information</h4>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <form>
+                                    <div class=" row align-items-center">
+
+                                        <div class="form-group col-sm-12">
+                                            <label for="cno">Describe why do you need this scholarship?</label>
+                                            <textarea class="form-control" rows="3" id="DescribeWhyScholarship"></textarea>
+                                        </div>
+                                        <div class="form-group col-sm-12">
+                                            <label for="email">Describe how you intend to utilize scholarship funds ?</label>
+                                            <textarea class="form-control" rows="3" id="DescribeScholarshipFund"></textarea>
+                                        </div>
+                                        <div class="form-group col-sm-12">
+                                            <label for="email">Describe your future aspirations and how you intend to achieve?</label>
+                                            <textarea class="form-control" rows="3" id="DescribeFutureIntend"></textarea>
+                                        </div>
+                                    </div>
+                                </form>
+
                             </div>
                         </div>
                     </div>

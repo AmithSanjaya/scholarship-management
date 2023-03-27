@@ -42,6 +42,38 @@ namespace SM.DataAccess
             return lstGrade;
         }
 
+        public List<Distict> District(Distict model)
+        {
+            List<Distict> lst = new List<Distict>();
+            lst = exe.SpExecutesSelect<Distict, Distict>("spStudentDistrict", model, false);
+
+            return lst;
+        }
+
+        public List<Religion> Religion(Religion model)
+        {
+            List<Religion> lst = new List<Religion>();
+            lst = exe.SpExecutesSelect<Religion, Religion>("spStudentReligion", model, false);
+
+            return lst;
+        }
+
+        public List<Race> Race(Race model)
+        {
+            List<Race> lst = new List<Race>();
+            lst = exe.SpExecutesSelect<Race, Race>("spStudentRace", model, false);
+
+            return lst;
+        }
+
+        public List<BankBranch> BankBranch(BankBranch model)
+        {
+            List<BankBranch> lst = new List<BankBranch>();
+            lst = exe.SpExecutesSelect<BankBranch, BankBranch>("spStudentBankBranch", model, false);
+
+            return lst;
+        }
+
         public DBUpdate UpdateStudent(Student model)
         {
             int ReturnID = 0;

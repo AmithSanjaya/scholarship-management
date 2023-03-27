@@ -27,6 +27,36 @@
         }
     });
 
+    $("#BIncomeL").hide();
+    $("#BrotherIncome").hide();
+    $("#BrotherIncome").val(0);
+
+    $("#rbBrotherEmployed").change(function () {
+        if (this.checked) {
+            $("#BIncomeL").show();
+            $("#BrotherIncome").show();
+        } else {
+            $("#BIncomeL").hide();
+            $("#BrotherIncome").hide();
+            $("#BrotherIncome").val(0);
+        }
+    });
+
+    $("#BIncomeS").hide();
+    $("#SisterIncome").hide();
+    $("#SisterIncome").val(0);
+
+    $("#rbSisterEmployed").change(function () {
+        if (this.checked) {
+            $("#BIncomeS").show();
+            $("#SisterIncome").show();
+        } else {
+            $("#BIncomeS").hide();
+            $("#SisterIncome").hide();
+            $("#SisterIncome").val(0);
+        }
+    });
+
     var model = {}
     ajaxCall('Form/StudentExamType', { 'model': model }, function (data) {
         BindDropDown("ExamType", "ExamTypeName", "StudentExamTypeID", data);
@@ -42,7 +72,26 @@
         BindDropDown("StudentCounty", "CountryName", "CountryID", data);
     });
     $('#StudentCounty').selectpicker('refresh');
- 
+
+    ajaxCall('Form/District', { 'model': model }, function (data) {
+        BindDropDown("StudentDistrict", "DistrictName", "DistictID", data);
+    });
+    $('#StudentDistrict').selectpicker('refresh');
+
+    ajaxCall('Form/Race', { 'model': model }, function (data) {
+        BindDropDown("StudentRace", "RaceName", "RaceID", data);
+    });
+    $('#StudentRace').selectpicker('refresh');
+
+    ajaxCall('Form/Religion', { 'model': model }, function (data) {
+        BindDropDown("StudentReligion", "ReligionName", "ReligionID", data);
+    });
+    $('#StudentReligion').selectpicker('refresh');
+
+    ajaxCall('Form/BankBranch', { 'model': model }, function (data) {
+        BindDropDown("StudentBank", "BankBranchName", "BankBranchID", data);
+    });
+    $('#StudentBank').selectpicker('refresh');
 
     $('#btnAddToGrid').click(function () {
         AddToGrid();
@@ -97,7 +146,6 @@ function FillStudent() {
             $('#rbFGender').prop('checked', !data[0].IsMale);
 
             $("#StudentAddress").val(data[0].Address);
-            $("#city").val(data[0].City);
 
             $("#StudentCounty").val(data[0].CountryID);
             $('#StudentCounty').selectpicker('refresh');
@@ -273,12 +321,17 @@ var Student = function () {
     this.StudentID = 0;
     this.FirstName = "";
     this.LastName = "";
+    this.FullName = "";
     this.BirthDate = "";
     this.IsMale = "";
     this.Address = "";
-    this.City = "";
+    this.DistictID = 0;
     this.CountryID = 0;
+    this.RaceID = 0;
+    this.ReligionID = 0;
     this.ContactNo = "";
+    this.PollingDivision = "";
+    this.DivisionalSecretariatDivision = "";
     this.Email = "";
     this.NICNo = "";
     this.bIsActive = "";
@@ -289,37 +342,62 @@ var Student = function () {
     this.SchoolAddress = "";
     this.HighestGradeInSchool = "";
     this.HighestEduAchievement = "";
+    this.DistancetoSchool = 0;
     this.AchievementMon = 0;
     this.AchievementYear = 0;
     this.RegisterDate = "";
     this.IsHaveOtherSchol = "";
     this.NameOfFund = "";
     this.FundAmount = 0;
-    this.ExamSubjects = [],
-        this.FatherName = "",
-        this.FatherOccupation = "",
-        this.FatherIncomeAmount = 0,
-        this.MotherName = "",
-        this.MotherOccupation = "",
-        this.MotherIncomeAmount = "",
-        this.NoOfBrothers = 0,
-        this.NoOfSisters = 0,
-        this.BrotherIncomeAmount = 0,
-        this.SisterIncomeAmount = 0
+    this.ExamSubjects = [];
+    this.FatherName = "";
+    this.FatherOccupation = "";
+    this.FatherIncomeAmount = 0;
+    this.MotherName = "";
+    this.MotherOccupation = "";
+    this.MotherIncomeAmount = "";
+    this.ParentsAlive = "";
+    this.NoOfBrothers = 0;
+    this.NoOfSisters = 0;
+    this.NoOfBrothersStudying = 0;
+    this.NoOfSistersStudying = 0;
+    this.AreAnyBrotherEmployed = "";
+    this.AreAnySisterEmployed = "";
+    this.BrotherIncomeAmount = 0;
+    this.SisterIncomeAmount = 0;
+    this.Photographpublished = "";
+    this.AccountName = "";
+    this.BankBranchID = 0;
+    this.AccountNo = "";
+    this.DescribeWhyScholarship = "";
+    this.DescribeScholarshipFund = "";
+    this.DescribeFutureIntend = "";
 
     Mode = 1;
 
     this.Fill = function () {
+
         this.StudentID = $("#StudentID").val() || 0;
         this.FirstName = $("#StudentFirstName").val();
         this.LastName = $("#StudentLastName").val();
+        this.FullName = $("#StudentFullName").val();
         this.BirthDate = $("#StudentDateOfBirth").val();
         this.IsMale = $("input[name='rbGender']:checked").val() == 'M' ? 1 : 0;
         this.Address = $("#StudentAddress").val();
-        this.City = $("#city").val();
+        this.DistictID = $("#StudentDistrict").val();
         this.CountryID = $("#StudentCounty").val();
         this.NICNo = $("#StudentNIC").val();
         this.Photo = $("#Photo").val();
+
+        this.Photographpublished = $('#Photographpublished').prop('checked');
+
+        this.PollingDivision = $("#StudentPollingDivision").val() || '-';
+        this.DivisionalSecretariatDivision = $("#StudentSecretariaDivision").val() || '-';
+        this.RaceID = $("#StudentRace").val();
+        this.ReligionID = $("#StudentReligion").val();
+
+        this.bIsActive = $('#rbInactive').prop('checked');
+
         this.bIsActive = $('#rbInactive').prop('checked');
         this.InactiveReason = $("#ReasonForInactive").val();
 
@@ -329,6 +407,7 @@ var Student = function () {
         this.Grade = $("#CurrentGrade").val() || '-';
         this.SchoolName = $("#SclName").val() || '-';
         this.SchoolAddress = $("#SclAddress").val() || '-';
+        this.DistancetoSchool = $("#DistancetoSchool").val() || 0;
         this.HighestGradeInSchool = $("#HigestGrade").val() || '-';
         this.HighestEduAchievement = $("#HigestAchievement").val() || '-';
         this.AchievementMon = $("#AchievementMonth").val().split("-", 2)[1];
@@ -346,8 +425,24 @@ var Student = function () {
         this.MotherIncomeAmount = $("#MotherAmount").val() || 0;
         this.NoOfBrothers = $("#NoOfBrothers").val() || 0;
         this.NoOfSisters = $("#NoOfSisters").val() || 0;
+        this.NoOfBrothersStudying = $("#NoOfBrothersStudy").val() || 0;
+        this.NoOfSistersStudying = $("#NoOfSistersStudy").val() || 0;
+
         this.BrotherIncomeAmount = $("#BrotherIncome").val() || 0;
         this.SisterIncomeAmount = $("#SisterIncome").val() || 0;
+
+        this.AreAnyBrotherEmployed = $('#rbBrotherEmployed').prop('checked');
+        this.AreAnySisterEmployed = $('#rbSisterEmployed').prop('checked');
+
+        this.ParentsAlive = $("#StudentParents").val() || '-';
+
+        this.AccountName = $("#AccountName").val();
+        this.BankBranchID = $("#StudentBank").val();
+        this.AccountNo = $("#AccountNo").val();
+
+        this.DescribeWhyScholarship = $("#DescribeWhyScholarship").val() || '-';
+        this.DescribeScholarshipFund = $("#DescribeScholarshipFund").val() || '-';
+        this.DescribeFutureIntend = $("#DescribeFutureIntend").val() || '-';
     }
 }
 

@@ -45,6 +45,42 @@ namespace SM.UI.Controllers
             return Json(lst, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult District()
+        {
+            Distict model = new Distict();
+            List<Distict> lst = new List<Distict>();
+            lst = new StudentDataAccess().District(model);
+
+            return Json(lst, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult Religion()
+        {
+            Religion model = new Religion();
+            List<Religion> lst = new List<Religion>();
+            lst = new StudentDataAccess().Religion(model);
+
+            return Json(lst, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult Race()
+        {
+            Race model = new Race();
+            List<Race> lst = new List<Race>();
+            lst = new StudentDataAccess().Race(model);
+
+            return Json(lst, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult BankBranch()
+        {
+            BankBranch model = new BankBranch();
+            List<BankBranch> lst = new List<BankBranch>();
+            lst = new StudentDataAccess().BankBranch(model);
+
+            return Json(lst, JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult SubjectGrade()
         {
             SubjectGrade model = new SubjectGrade();
