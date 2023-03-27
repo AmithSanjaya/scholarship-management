@@ -14,11 +14,11 @@
                 </button>
             </div>
 
-            <div class="modal-body">
+            @*<div class="modal-body">
                 <iframe src="http://docs.google.com/gview?url=http://www.pdf995.com/samples/pdf.pdf&embedded=true"
                             scrolling="yes" seamless="seamless" style="display:block; width:100%; height:100vh;" frameborder="0"></iframe>
 
-            </div>
+            </div>*@
         </div>
     </div>
 </div>
@@ -68,8 +68,8 @@
                                 <div class="form-group">
                                     <label>Attachment :</label>
                                     <div class="custom-file mb-3">
-                                        <input type="file" class="custom-file-input" id="customFile" name="filename">
-                                        <label class="custom-file-label" for="customFile">Choose file</label>
+                                        <input type="file" class="custom-file-input" id="customFile" name="customFile">
+                                        <label class="custom-file-label" for="customFile" id="customFileLabel" name="customFileLabel">Choose file</label>
                                     </div>
                                 </div>
                             </div>
@@ -101,6 +101,9 @@
                                     <th>Send Email</th>
                                     <th>Effective Month</th>
                                     <th>Action</th>
+                                    <th hidden>FileName</th>
+                                    <th hidden>FilePath</th>
+                                    <th hidden>File</th>
                                 </tr>
                             </thead>
                             <tbody class="ligth-body" id="StudentProgress"></tbody>

@@ -483,6 +483,44 @@ namespace SM.UI.Controllers
         #endregion
 
         #region Student Progress
+
+        public JsonResult StudentProgressData(StudentProgress model)
+        {
+            List<StudentProgress> lst = new List<StudentProgress>();
+            lst = new StudentDataAccess().StudentProgressData(model);
+            return Json(lst, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult SaveStudentProgress(StudentProgress model)
+        {
+            ajaxResponse = new AjaxResponse();
+            dBUpdate = new DBUpdate();
+            model.EnteredBy = UserDetail.UserID;
+            int year = Convert.ToInt32(model.EffectiveMonth.Substring(0, 4));
+            int month = Convert.ToInt32(model.EffectiveMonth.Substring(5, 2));
+
+            foreach (StudentProgress obj in model.lstStudentProgress)
+            {
+                obj.EnteredBy = UserDetail.UserID;
+                obj.Year = year;
+                obj.Month = month;
+            }
+            dBUpdate = new StudentDataAccess().SaveStudentProgress(model);
+
+            if (dBUpdate.Update)
+            {
+                ajaxResponse.IsValid = true;
+                ajaxResponse.ReturnID = dBUpdate.ReturnID;
+                ajaxResponse.SucessMessage = "Saved Successfully..!";
+            }
+            else
+            {
+                ajaxResponse.IsValid = false;
+                ajaxResponse.ErrorMessage = "Error in Data Saving..!";
+            }
+
+            return Json(ajaxResponse, JsonRequestBehavior.AllowGet);
+        }
         #endregion
     }
 }

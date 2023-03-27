@@ -222,7 +222,10 @@ namespace SM.UserObjects
         public string ProgressTitle { get; set; }
         public string ProgressFileName { get; set; }
         public bool EmailSend { get; set; }
-        public string EmailSendName { get; set; }
-        public int EnteredBy { get; set; }
+        public string EmailSendName { get; set; }        
+        public List<StudentProgress> lstStudentProgress { get; set; }        
+        public string FilePath { get; set; }
+        public string EffectiveMonth { get; set; }
+        
     }
 }
