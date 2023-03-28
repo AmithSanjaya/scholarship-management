@@ -19,7 +19,6 @@ namespace SM.UI.Controllers
             return View();
         }
 
-        #region Master Files
         #region Sponsers
         public ActionResult SponsershipDetails()
         {
@@ -126,7 +125,6 @@ namespace SM.UI.Controllers
             return Json(ajaxResponse, JsonRequestBehavior.AllowGet);
         }
 
-        #endregion
         #endregion
     }
 }

@@ -9,7 +9,9 @@ namespace SM.UserObjects
     public class Student : User
     {
         public int StudentID { get; set; }
+        public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string FullName { get; set; }
         public DateTime BirthDate { get; set; }
         public bool IsMale { get; set; }
         public string Address { get; set; }
@@ -30,6 +32,27 @@ namespace SM.UserObjects
         public bool IsHaveOtherSchol { get; set; }
         public string NameOfFund { get; set; }
         public decimal FundAmount { get; set; }
+
+        public int DistictID { get; set; }
+        public int RaceID { get; set; }
+        public int ReligionID { get; set; }
+        public int Age { get; set; }
+        public string PollingDivision { get; set; }
+        public string DivisionalSecretariatDivision { get; set; }
+        public decimal DistancetoSchool { get; set; }
+        public string ParentsAlive { get; set; }
+        public int NoOfBrothersStudying { get; set; }
+        public int NoOfSistersStudying { get; set; }
+        public bool AreAnyBrotherEmployed { get; set; }
+        public bool AreAnySisterEmployed { get; set; }
+        public bool Photographpublished { get; set; }
+        public string AccountName { get; set; }
+        public int BankBranchID { get; set; }
+        public string AccountNo { get; set; }
+
+        public string DescribeWhyScholarship { get; set; }
+        public string DescribeScholarshipFund { get; set; }
+        public string DescribeFutureIntend { get; set; }
 
         public List<StudentSubject> lstSubject { get; set; }
 
@@ -106,7 +129,9 @@ namespace SM.UserObjects
     {
         public int StudentID { get; set; }
         public string StudentName { get; set; }
+        public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string FullName { get; set; }
         public string Status { get; set; }
         public string GenderName { get; set; }
         public string ImageName { get; set; }
@@ -117,6 +142,7 @@ namespace SM.UserObjects
         public int CountryID { get; set; }
         public int RaceID { get; set; }
         public int ReligionID { get; set; }
+        public int Age { get; set; }
         public string PollingDivision { get; set; }
         public string DivisionalSecretariatDivision { get; set; }
         public string ContactNo { get; set; }
@@ -148,8 +174,8 @@ namespace SM.UserObjects
         public int NoOfSisters { get; set; }
         public int NoOfBrothersStudying { get; set; }
         public int NoOfSistersStudying { get; set; }
-        public int AreAnyBrotherEmployed { get; set; }
-        public int AreAnySisterEmployed { get; set; }
+        public bool AreAnyBrotherEmployed { get; set; }
+        public bool AreAnySisterEmployed { get; set; }
         public decimal BrotherIncomeAmount { get; set; }
         public decimal SisterIncomeAmount { get; set; }
         public int Mode { get; set; }

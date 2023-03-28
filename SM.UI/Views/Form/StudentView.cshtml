@@ -68,6 +68,18 @@
                                             <p class="mb-0 StudentEmail"></p>
                                         </div>
                                     </li>
+                                    <li>
+                                        <div class="d-flex align-items-center">
+                                            <svg class="svg-icon mr-3" height="16" width="16" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                                <circle cx="9" cy="7" r="4"></circle>
+                                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                            </svg>
+                                            
+                                            <p class="mb-0 StudentRace"></p>
+                                        </div>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -86,7 +98,7 @@
                                         <a class="nav-link" data-toggle="pill" href="#FamilyInformation" role="tab" aria-selected="false">Family</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" data-toggle="pill" href="#AchievementsInformation" role="tab" aria-selected="false">Achievements</a>
+                                        <a class="nav-link" data-toggle="pill" href="#AchievementsInformation" role="tab" aria-selected="false">Achievements/Progress</a>
                                     </li>
                                 </ul>
                                 <div class="profile-content tab-content">
@@ -94,6 +106,16 @@
                                     <div id="PersonalInformation" class="tab-pane fade active show">
 
                                         <div class="row">
+                                            <div class="alert alert-danger" role="alert" id="PhotographPublish">
+                                                <div class="iq-alert-icon">
+                                                    <i class="ri-information-line"></i>
+                                                </div>
+                                                <div class="iq-alert-text">
+                                                    Photograph not published in
+                                                    publication material produced by Lak Saviya Foundation or nay
+                                                    other party funding this scholarship program.
+                                                </div>
+                                            </div>
                                             <div class="table-responsive">
                                                 <table class="table table-striped jambo_table bulk_action" id="tblDetails">
 
@@ -108,6 +130,18 @@
                                                     <tr>
                                                         <td>Address</td>
                                                         <td class="StudentAddress"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Polling Division </td>
+                                                        <td class="PollingDivision"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Divisional Secretariat Division</td>
+                                                        <td class="DivisionalSecretariatDivision"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Bank Account Details</td>
+                                                        <td class="BankAccount"></td>
                                                     </tr>
                                                 </table>
                                             </div>
@@ -124,6 +158,10 @@
                                                 <tr>
                                                     <td>Address</td>
                                                     <td class="SchoolAddress"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Distance from home to school</td>
+                                                    <td class="Distancetoschool"></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Current Grade</td>
@@ -217,6 +255,10 @@
                                                 <tr>
                                                     <td>Are any brothers employed, Monthly Income</td>
                                                     <td class="StudentBSisterIncome"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Are the parents alive?</td>
+                                                    <td class="ParentsAlive"></td>
                                                 </tr>
                                             </table>
                                         </div>

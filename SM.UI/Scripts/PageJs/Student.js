@@ -141,14 +141,30 @@ function FillStudent() {
 
             $("#StudentFirstName").val(data[0].FirstName);
             $("#StudentLastName").val(data[0].LastName);
+            $("#StudentFullName").val(data[0].FullName);
             $("#StudentDateOfBirth").val(data[0].DateOfBirth);
+
             $('#rbMGender').prop('checked', data[0].IsMale);
             $('#rbFGender').prop('checked', !data[0].IsMale);
+
+            $('#Photographpublished').prop('checked', data[0].Photographpublished);
 
             $("#StudentAddress").val(data[0].Address);
 
             $("#StudentCounty").val(data[0].CountryID);
             $('#StudentCounty').selectpicker('refresh');
+
+            $("#StudentDistrict").val(data[0].DistictID);
+            $('#StudentDistrict').selectpicker('refresh');
+
+            $("#StudentRace").val(data[0].RaceID);
+            $('#StudentRace').selectpicker('refresh');
+
+            $("#StudentReligion").val(data[0].ReligionID);
+            $('#StudentReligion').selectpicker('refresh');
+
+            $("#StudentPollingDivision").val(data[0].PollingDivision);
+            $("#StudentSecretariaDivision").val(data[0].DivisionalSecretariatDivision);
 
             $("#StudentNIC").val(data[0].NICNo);
             $('#rbInactive').prop('checked', !data[0].bIsActive);
@@ -158,6 +174,8 @@ function FillStudent() {
 
             $("#SclName").val(data[0].SchoolName);
             $("#SclAddress").val(data[0].SchoolAddress);
+            $("#DistancetoSchool").val(data[0].DistancetoSchool);
+
             $("#CurrentGrade").val(data[0].Grade);
             $("#HigestGrade").val(data[0].HighestGradeInSchool);
             $("#HigestAchievement").val(data[0].HighestEduAchievement);
@@ -195,13 +213,33 @@ function FillStudent() {
             $("#MotherName").val(data[0].MotherName);
             $("#MotherOccupation").val(data[0].MotherOccupation);
             $("#MotherAmount").val(data[0].MotherIncomeAmount);
+            $("#StudentParents").val(data[0].ParentsAlive);
+
             $("#NoOfBrothers").val(data[0].NoOfBrothers);
             $("#NoOfSisters").val(data[0].NoOfSisters);
+            $("#NoOfBrothersStudy").val(data[0].NoOfBrothersStudying);
+            $("#NoOfSistersStudy").val(data[0].NoOfSistersStudying);
             $("#BrotherIncome").val(data[0].BrotherIncomeAmount);
             $("#SisterIncome").val(data[0].SisterIncomeAmount);
 
+            $('#rbBrotherEmployed').prop('checked', data[0].AreAnyBrotherEmployed);
+            $('#rbBrotherEmployed').trigger("change");
+
+            $('#rbSisterEmployed').prop('checked', data[0].AreAnySisterEmployed);
+            $('#rbSisterEmployed').trigger("change");
+
             $("#StudentContactNo").val(data[0].ContactNo);
             $("#StudentEmail").val(data[0].Email);
+            $("#AccountName").val(data[0].AccountName);
+            $("#AccountNo").val(data[0].AccountNo);
+
+            $("#StudentBank").val(data[0].BankBranchID);
+            $('#StudentBank').selectpicker('refresh');
+
+            $("#DescribeWhyScholarship").val(data[0].DescribeWhyScholarship);
+            $("#DescribeScholarshipFund").val(data[0].DescribeScholarshipFund);
+            $("#DescribeFutureIntend").val(data[0].DescribeFutureIntend);
+
         });
     }
 }

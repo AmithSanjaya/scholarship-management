@@ -87,7 +87,7 @@ namespace SM.UI.Controllers
                 this.ControllerContext.HttpContext.Response.Cookies.Add(UserID);
 
                 HttpCookie FullName = new HttpCookie("FullName");
-                FullName.Value = lstUser[0].FullName.ToString();
+                FullName.Value = lstUser[0].UserFullName.ToString();
                 this.ControllerContext.HttpContext.Response.Cookies.Add(FullName);
             }
             else
