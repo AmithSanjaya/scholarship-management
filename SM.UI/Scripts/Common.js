@@ -363,9 +363,60 @@ function GetSponser(SponserPassID) {
 
 }
 
-function GetStudentProgressPDF(StudentID) {
+function GetStudentProgressPDF(FileID) {
+
+    var site = rootUrl + 'Uploads/StudentProgress/' + FileID+'.pdf';
+    document.getElementById('IframID').src = site;
 
     $('#PDFModel').modal({ backdrop: 'static', keyboard: true });
 
+}
 
+function UploadFile(UploadFileType, FileName, FileID, UploadType, Required = false) {
+
+    //UploadFileType
+    //1 - Images
+    //2 - Pdf
+
+    var fileInput = document.getElementById(FileName);
+
+    var formdata = new FormData();
+
+    if ((fileInput.files.length > 0) && (Required == true)) {
+
+        for (i = 0; i < fileInput.files.length; i++) {
+
+            var fileType = fileInput.files[i].name.split('.').pop();
+
+            if (((UploadFileType == 2) & (fileType === 'pdf')) ||
+                ((UploadFileType == 1) & (fileType === 'jpg' || fileType === 'jpeg' || fileType === 'png'))) {
+
+                formdata.append(fileInput.files[i].name, fileInput.files[i]);
+                formdata.append('FileID', FileID);
+                formdata.append('UploadType', UploadType);
+            }
+            else {
+                MsgBox('Error', 'File Type Not Supported..!', '', false);
+                return false;
+            }
+        }
+
+        var xhr = new XMLHttpRequest();
+        var url = rootUrl + '/Admin/Upload';
+        xhr.open('POST', url);
+        xhr.send(formdata);
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                document.getElementById(FileName).value = '';
+            }
+        }
+
+        return true;
+    }
+    else {
+        MsgBox('Error', 'File Type Not Uploaded..!', '', false);
+        return false;
+    }
+    return true;
 }

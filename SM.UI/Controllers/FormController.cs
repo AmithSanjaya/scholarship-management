@@ -112,6 +112,11 @@ namespace SM.UI.Controllers
             return PartialView("StudentView", lst);
         }
 
+        public ActionResult DocumentView()
+        {
+            return PartialView("DocumentView");
+        }
+
         public ActionResult AddEditStudentDetails()
         {
             return View();
@@ -496,27 +501,18 @@ namespace SM.UI.Controllers
             ajaxResponse = new AjaxResponse();
             dBUpdate = new DBUpdate();
             model.EnteredBy = UserDetail.UserID;
-            int year = Convert.ToInt32(model.EffectiveMonth.Substring(0, 4));
-            int month = Convert.ToInt32(model.EffectiveMonth.Substring(5, 2));
 
-            foreach (StudentProgress obj in model.lstStudentProgress)
-            {
-                obj.EnteredBy = UserDetail.UserID;
-                obj.Year = year;
-                obj.Month = month;
-            }
             dBUpdate = new StudentDataAccess().SaveStudentProgress(model);
 
             if (dBUpdate.Update)
             {
                 ajaxResponse.IsValid = true;
-                ajaxResponse.ReturnID = dBUpdate.ReturnID;
-                ajaxResponse.SucessMessage = "Saved Successfully..!";
+                ajaxResponse.SucessMessage = "Updated Successfully..!";
             }
             else
             {
                 ajaxResponse.IsValid = false;
-                ajaxResponse.ErrorMessage = "Error in Data Saving..!";
+                ajaxResponse.ErrorMessage = "Error in Data Updating..!";
             }
 
             return Json(ajaxResponse, JsonRequestBehavior.AllowGet);

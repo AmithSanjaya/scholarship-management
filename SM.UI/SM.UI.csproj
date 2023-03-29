@@ -4413,6 +4413,7 @@
     <Content Include="Views\Form\AddEditStudentAchievement.cshtml" />
     <Content Include="Views\Form\AddEditStudentProgress.cshtml" />
     <Content Include="Views\Master\EmailTemplate.cshtml" />
+    <Content Include="Views\Form\DocumentView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

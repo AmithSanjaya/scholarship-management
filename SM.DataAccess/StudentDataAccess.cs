@@ -211,27 +211,19 @@ namespace SM.DataAccess
 
         public DBUpdate SaveStudentProgress(StudentProgress model)
         {
-            int ReturnID = 0;
             dBUpdate = new DBUpdate();
 
             using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required, new System.TimeSpan(0, 15, 0)))
             {
                 try
-                {                
-                    ReturnID = model.lstStudentProgress[0].StudentID;
-                    foreach (StudentProgress obj in model.lstStudentProgress)
-                    {
-                        exe.SpExecutes<StudentProgress>("spSaveStudentProgress", obj, false);
-                    }
+                {
+                    exe.SpExecutes<StudentProgress>("spSaveStudentProgress", model, false);
 
-                    dBUpdate.ReturnID = ReturnID;
                     dBUpdate.Update = true;
-
                     scope.Complete();
                 }
                 catch (Exception ex)
                 {
-                    dBUpdate.ReturnID = ReturnID;
                     dBUpdate.Update = false;
                     scope.Dispose();
                 }

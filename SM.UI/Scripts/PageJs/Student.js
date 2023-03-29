@@ -244,41 +244,6 @@ function FillStudent() {
     }
 }
 
-function ImageUpload(StudentID) {
-
-    var fileInput = document.getElementById('photo');
-
-    var formdata = new FormData();  
-
-    if (fileInput.files.length > 0) {
-
-        for (i = 0; i < fileInput.files.length; i++) {
-            var fileType = fileInput.files[i].name.split('.').pop();
-            if (fileType === 'jpg' || fileType === 'jpeg' || fileType === 'png') {
-                formdata.append(fileInput.files[i].name, fileInput.files[i]);
-                formdata.append('StudentID', StudentID);
-                formdata.append('UploadType', "Student");
-            }
-            else {
-                MsgBox('Error', 'File Type Not Supported..!', '', false);
-                return false;
-            }
-        }
-
-        var xhr = new XMLHttpRequest();
-        var url = rootUrl + '/Admin/Upload';
-        xhr.open('POST', url);
-        xhr.send(formdata);
-
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                document.getElementById("photo").value = '';
-            }
-        }
-    }
-    return true;
-}
-
 function AddToGrid() {
 
     var ExamTypeID = $('#ExamType').val();
@@ -318,7 +283,7 @@ function Save() {
                 model.Photo = Date.now();
             }              
 
-            if (ImageUpload(model.Photo)) {
+            if (UploadFile(2, 'photo', model.Photo, 'Student', false)) {
 
                 var rowCount = document.getElementById("tblDetails").rows.length;
                 var rowData = document.getElementById("tblDetails");
