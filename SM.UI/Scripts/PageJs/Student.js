@@ -265,6 +265,7 @@ function AddToGrid() {
 function Save() {
 
     var model = {};
+
     if (ValidateSave()) {
         MsgBox('Confirm', 'Do you want to Save ?', function () {
 
