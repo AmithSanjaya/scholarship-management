@@ -134,9 +134,11 @@ function GetStudent(StudentPassID) {
         ViewTypeID: 2
     }
 
+    $('#PhotographPublish').hide();
+
     ajaxCall('Form/StudentData', { 'model': model }, function (data) {
 
-        $("h4.mb-1").text(data[0].StudentName);
+        $("h4.mb-1").text(data[0].FullName);
 
         if (data[0].bIsActive == true) {
             $("#StudentStatus").removeClass("btn btn-danger");
@@ -151,17 +153,30 @@ function GetStudent(StudentPassID) {
         $Img = GetStudentImage(data[0].Photo);
         $('img.StudentImg').attr("src", $Img);
 
-        $('p.StudentCity').text(data[0].City + ', ' + data[0].CountryName);
-        $('p.StudentBirthDay').text(data[0].DateOfBirth);
+        $('p.StudentCity').text(data[0].DistrictName + ', ' + data[0].CountryName);
+        $('p.StudentBirthDay').text(data[0].DateOfBirth + ' (' + data[0].Age+'y)');
         $('p.StudentContactNo').text(data[0].ContactNo);
         $('p.StudentEmail').text(data[0].Email);
+        $('p.StudentRace').text(data[0].RaceName + ', ' + data[0].ReligionName);
+
+        $('p.PollingDivision').text(data[0].PollingDivision);
+        $('p.DivisionalSecretariatDivision').text(data[0].DivisionalSecretariatDivision);
+
+        if (data[0].Photographpublished == false) {
+            $('#PhotographPublish').show();
+        }
+
+        $BankDetails = data[0].AccountName + "<br>A/C : " + data[0].AccountNo + "<br>" + data[0].BankBranchName;    
 
         $('td.StudentGender').text(data[0].GenderName);
         $('td.StudentNIC').text(data[0].NICNo);
         $('td.StudentAddress').text(data[0].Address);
+        $('td.BankAccount').html($BankDetails);
 
         $('td.StudentSchool').text(data[0].SchoolName);
         $('td.SchoolAddress').text(data[0].SchoolAddress);
+        $('td.Distancetoschool').text(data[0].DistancetoSchool+" km");
+
         $('td.StudentGrade').text(data[0].Grade);
         $('td.StudentHighestGrade').text(data[0].HighestGradeInSchool);
         $('td.StudentHighestAchievement').text(data[0].HighestEduAchievement);
@@ -198,6 +213,8 @@ function GetStudent(StudentPassID) {
         $('td.StudentBrotherIncome').text(data[0].BrotherIncomeAmount);
         $('td.StudentNoSisters').text(data[0].NoOfSisters);
         $('td.StudentBSisterIncome').text(data[0].SisterIncomeAmount);
+
+        $('td.ParentsAlive').text(data[0].ParentsAlive);
 
         //Achievement Data
         $("#AchievementData").empty();
@@ -346,9 +363,60 @@ function GetSponser(SponserPassID) {
 
 }
 
-function GetStudentProgressPDF(StudentID) {
+function GetStudentProgressPDF(FileID) {
+
+    var site = rootUrl + 'Uploads/StudentProgress/' + FileID+'.pdf';
+    document.getElementById('IframID').src = site;
 
     $('#PDFModel').modal({ backdrop: 'static', keyboard: true });
 
+}
 
+function UploadFile(UploadFileType, FileName, FileID, UploadType, Required = false) {
+
+    //UploadFileType
+    //1 - Images
+    //2 - Pdf
+
+    var fileInput = document.getElementById(FileName);
+
+    var formdata = new FormData();
+
+    if ((fileInput.files.length > 0) && (Required == true)) {
+
+        for (i = 0; i < fileInput.files.length; i++) {
+
+            var fileType = fileInput.files[i].name.split('.').pop();
+
+            if (((UploadFileType == 2) & (fileType === 'pdf')) ||
+                ((UploadFileType == 1) & (fileType === 'jpg' || fileType === 'jpeg' || fileType === 'png'))) {
+
+                formdata.append(fileInput.files[i].name, fileInput.files[i]);
+                formdata.append('FileID', FileID);
+                formdata.append('UploadType', UploadType);
+            }
+            else {
+                MsgBox('Error', 'File Type Not Supported..!', '', false);
+                return false;
+            }
+        }
+
+        var xhr = new XMLHttpRequest();
+        var url = rootUrl + '/Admin/Upload';
+        xhr.open('POST', url);
+        xhr.send(formdata);
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                document.getElementById(FileName).value = '';
+            }
+        }
+
+        return true;
+    }
+    else {
+        MsgBox('Error', 'File Type Not Uploaded..!', '', false);
+        return false;
+    }
+    return true;
 }

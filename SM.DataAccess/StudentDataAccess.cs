@@ -42,6 +42,38 @@ namespace SM.DataAccess
             return lstGrade;
         }
 
+        public List<Distict> District(Distict model)
+        {
+            List<Distict> lst = new List<Distict>();
+            lst = exe.SpExecutesSelect<Distict, Distict>("spStudentDistrict", model, false);
+
+            return lst;
+        }
+
+        public List<Religion> Religion(Religion model)
+        {
+            List<Religion> lst = new List<Religion>();
+            lst = exe.SpExecutesSelect<Religion, Religion>("spStudentReligion", model, false);
+
+            return lst;
+        }
+
+        public List<Race> Race(Race model)
+        {
+            List<Race> lst = new List<Race>();
+            lst = exe.SpExecutesSelect<Race, Race>("spStudentRace", model, false);
+
+            return lst;
+        }
+
+        public List<BankBranch> BankBranch(BankBranch model)
+        {
+            List<BankBranch> lst = new List<BankBranch>();
+            lst = exe.SpExecutesSelect<BankBranch, BankBranch>("spStudentBankBranch", model, false);
+
+            return lst;
+        }
+
         public DBUpdate UpdateStudent(Student model)
         {
             int ReturnID = 0;
@@ -169,5 +201,36 @@ namespace SM.DataAccess
 
             return dBUpdate;
         }
+
+        public List<StudentProgress> StudentProgressData(StudentProgress model)
+        {
+            List<StudentProgress> lst = new List<StudentProgress>();
+            lst = exe.SpExecutesSelect<StudentProgress, StudentProgress>("spStudentProgressData", model, false);
+            return lst;
+        }
+
+        public DBUpdate SaveStudentProgress(StudentProgress model)
+        {
+            dBUpdate = new DBUpdate();
+
+            using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required, new System.TimeSpan(0, 15, 0)))
+            {
+                try
+                {
+                    exe.SpExecutes<StudentProgress>("spSaveStudentProgress", model, false);
+
+                    dBUpdate.Update = true;
+                    scope.Complete();
+                }
+                catch (Exception ex)
+                {
+                    dBUpdate.Update = false;
+                    scope.Dispose();
+                }
+            }
+
+            return dBUpdate;
+        }
+
     }
 }

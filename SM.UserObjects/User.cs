@@ -11,8 +11,8 @@ namespace SM.UserObjects
     {
         public int UserID { get; set; }
         public string UserName { get; set; }
-        public string FirstName { get; set; }
-        public string FullName { get; set; }
+        public string UserFirstName { get; set; }
+        public string UserFullName { get; set; }
         public string Password { get; set; }
         public DateTime EnteredOn { get; set; }
         public int EnteredBy { get; set; }

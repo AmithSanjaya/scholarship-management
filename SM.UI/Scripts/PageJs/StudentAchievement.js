@@ -61,7 +61,7 @@ $(document).ready(function () {
             if (currentRow.closest('tr').children('td:eq(4)').text() == 'No') {
                 document.getElementById("rbSchol").checked = false;
             }
-            document.getElementById("EffectiveDate").value = currentRow.closest('tr').children('td:eq(5)').text();
+            //document.getElementById("EffectiveDate").value = currentRow.closest('tr').children('td:eq(5)').text();
         }, true);
     });
     

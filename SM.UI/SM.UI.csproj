@@ -123,6 +123,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\FormController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MasterController.cs" />
     <Compile Include="Controllers\SMController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -4366,6 +4367,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\PageJs\EmailTemplate.js" />
     <Content Include="Scripts\PageJs\Layout.js" />
     <Content Include="Scripts\PageJs\LinkSponserStudent.js" />
     <Content Include="Scripts\PageJs\Login.js" />
@@ -4423,6 +4425,8 @@
     <Content Include="Views\Form\SponserPayment.cshtml" />
     <Content Include="Views\Form\AddEditStudentAchievement.cshtml" />
     <Content Include="Views\Form\AddEditStudentProgress.cshtml" />
+    <Content Include="Views\Master\EmailTemplate.cshtml" />
+    <Content Include="Views\Form\DocumentView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

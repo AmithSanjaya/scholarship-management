@@ -45,6 +45,42 @@ namespace SM.UI.Controllers
             return Json(lst, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult District()
+        {
+            Distict model = new Distict();
+            List<Distict> lst = new List<Distict>();
+            lst = new StudentDataAccess().District(model);
+
+            return Json(lst, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult Religion()
+        {
+            Religion model = new Religion();
+            List<Religion> lst = new List<Religion>();
+            lst = new StudentDataAccess().Religion(model);
+
+            return Json(lst, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult Race()
+        {
+            Race model = new Race();
+            List<Race> lst = new List<Race>();
+            lst = new StudentDataAccess().Race(model);
+
+            return Json(lst, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult BankBranch()
+        {
+            BankBranch model = new BankBranch();
+            List<BankBranch> lst = new List<BankBranch>();
+            lst = new StudentDataAccess().BankBranch(model);
+
+            return Json(lst, JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult SubjectGrade()
         {
             SubjectGrade model = new SubjectGrade();
@@ -74,6 +110,11 @@ namespace SM.UI.Controllers
             lst = new StudentDataAccess().StudentData(model);
 
             return PartialView("StudentView", lst);
+        }
+
+        public ActionResult DocumentView()
+        {
+            return PartialView("DocumentView");
         }
 
         public ActionResult AddEditStudentDetails()
@@ -447,6 +488,35 @@ namespace SM.UI.Controllers
         #endregion
 
         #region Student Progress
+
+        public JsonResult StudentProgressData(StudentProgress model)
+        {
+            List<StudentProgress> lst = new List<StudentProgress>();
+            lst = new StudentDataAccess().StudentProgressData(model);
+            return Json(lst, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult SaveStudentProgress(StudentProgress model)
+        {
+            ajaxResponse = new AjaxResponse();
+            dBUpdate = new DBUpdate();
+            model.EnteredBy = UserDetail.UserID;
+
+            dBUpdate = new StudentDataAccess().SaveStudentProgress(model);
+
+            if (dBUpdate.Update)
+            {
+                ajaxResponse.IsValid = true;
+                ajaxResponse.SucessMessage = "Updated Successfully..!";
+            }
+            else
+            {
+                ajaxResponse.IsValid = false;
+                ajaxResponse.ErrorMessage = "Error in Data Updating..!";
+            }
+
+            return Json(ajaxResponse, JsonRequestBehavior.AllowGet);
+        }
         #endregion
     }
 }
