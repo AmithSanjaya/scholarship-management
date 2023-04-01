@@ -21,4 +21,17 @@ namespace SM.UserObjects
         public int Year { get; set; }
         public int Month { get; set; }
     }
+
+    public class SponserRecievePayment : User
+    {
+        public int SponserPaymentHeaderID { get; set; }
+        public string InvoiceNo { get; set; }
+        public DateTime InvoiceDate { get; set; }
+        public string InvoiceDateName { get; set; }
+        public int SponserID { get; set; }
+        public string SponserName { get; set; }
+        public decimal PaidAmount { get; set; }
+        public string PaidAmountName { get; set; }
+        public string InvoiceEmail { get; set; }
+    }
 }
