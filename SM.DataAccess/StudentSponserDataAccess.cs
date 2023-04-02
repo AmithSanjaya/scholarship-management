@@ -217,6 +217,13 @@ namespace SM.DataAccess
             return dBUpdate;
         }
 
+        public List<SponserRecievePayment> SponserPaymentInvoicesData(SponserRecievePayment model)
+        {
+            List<SponserRecievePayment> lst = new List<SponserRecievePayment>();
+            lst = exe.SpExecutesSelect<SponserRecievePayment, SponserRecievePayment>("spSponserPaymentInvoicesData", model, false);
+            return lst;
+        }
+
         public List<SponserStudent> SponserPaidStudentByYearandMonth(SponserStudent model)
         {
             List<SponserStudent> lstSponserStudentData = new List<SponserStudent>();

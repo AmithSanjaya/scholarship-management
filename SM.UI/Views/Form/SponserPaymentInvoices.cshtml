@@ -1,0 +1,60 @@
+﻿@model IEnumerable<SM.UserObjects.SponserRecievePayment>
+@{
+    ViewBag.Title = "SponserPaymentInvoices";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        @{ Html.RenderAction("CommonView", "Form");}
+        <div class="col-lg-12">
+            <div class="d-flex flex-wrap flex-wrap align-items-center justify-content-between mb-4">
+                <div>
+                    <h4 class="mb-3">Payment Invoices from Sponsor</h4>
+                </div>
+                <a href="@Url.Action("SponserPayment", "Form")" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Add Payment</a>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="table-responsive rounded mb-3">
+                <table class="data-tables table mb-0 tbl-server-info">
+                    <thead class="bg-white text-uppercase">
+                        <tr class="ligth ligth-data">
+                            <th hidden>HeaderID</th>
+                            <th>Invoice Date</th>
+                            <th>Invoice No</th>
+                            <th hidden>SponserID</th>
+                            <th>Sponser Name</th>
+                            <th>Amount</th>
+                            <th hidden>TestID</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="ligth-body" id="SponserPaymentInvoices">
+                        @foreach (var d in Model)
+                        {
+                        <tr>
+                            <td hidden>@d.SponserPaymentHeaderID</td>
+                            <td>@d.InvoiceDateName</td>
+                            <td>@d.InvoiceNo</td>
+                            <td hidden>@d.SponserID</td>
+                            <td>@d.SponserName</td>
+                            <td>@d.PaidAmountName</td>
+                            <td hidden>@d.SponserID</td>
+                            <td>
+                                <div class="d-flex align-items-center list-action">
+                                    <button type="button" class="btn btn-secondary btn-sm mr-2" onclick="GetInvoice(@d.SponserPaymentHeaderID)">View Invoice</button>
+                                </div>
+                            </td>
+                        </tr>
+                        }
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- Page end  -->
+</div>
+
+<script async src="~/Scripts/PageJs/SponserPaymentInvoices.js"></script>
+
