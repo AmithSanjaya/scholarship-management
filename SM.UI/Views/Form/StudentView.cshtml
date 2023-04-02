@@ -1,0 +1,281 @@
+﻿<div class="modal fade student-modal" tabindex="-1" role="dialog" aria-hidden="true" id="smodel">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Preview Student</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <input type="hidden" id="ModelStudentID"/>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card car-transparent">
+                            <div class="card-body p-0">
+                                <div class="profile-image position-relative">
+                                    <img src="../assets/images/page-img/profile.png" class="img-fluid rounded w-100" alt="profile-image">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row m-sm-0 px-3">
+                    <div class="col-lg-4 card-profile">
+                        <div class="card card-block card-stretch card-height">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="profile-img position-relative">
+                                        <img src="../assets/images/user/1.png" class="img-fluid rounded avatar-110 StudentImg" alt="profile-image" id="StudentImg">
+                                    </div>
+                                    <div class="ml-3">
+                                        <h4 class="mb-1" id="#StudentName"></h4>
+                                        <a href="#" class="font-size-14" id="StudentStatus"></a>
+                                    </div>
+                                </div>
+
+                                <ul class="list-inline p-0 m-0">
+                                    <li class="mb-2">
+                                        <div class="d-flex align-items-center">
+                                            <svg class="svg-icon mr-3" height="16" width="16" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                            </svg>
+                                            <p class="mb-0 StudentCity" id="#StudentCity"></p>
+                                        </div>
+                                    </li>
+                                    <li class="mb-2">
+                                        <div class="d-flex align-items-center">
+                                            <svg class="svg-icon mr-3" height="16" width="16" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.701 2.701 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M21 21v-7a2 2 0 00-2-2H5a2 2 0 00-2 2v7h18zm-3-9v-2a2 2 0 00-2-2H8a2 2 0 00-2 2v2h12z" />
+                                            </svg>
+                                            <p class="mb-0 StudentBirthDay"></p>
+                                        </div>
+                                    </li>
+                                    <li class="mb-2">
+                                        <div class="d-flex align-items-center">
+                                            <svg class="svg-icon mr-3" height="16" width="16" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                                            </svg>
+                                            <p class="mb-0 StudentContactNo"></p>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="d-flex align-items-center">
+                                            <svg class="svg-icon mr-3" height="16" width="16" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                            </svg>
+                                            <p class="mb-0 StudentEmail"></p>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="d-flex align-items-center">
+                                            <svg class="svg-icon mr-3" height="16" width="16" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                                <circle cx="9" cy="7" r="4"></circle>
+                                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                            </svg>
+                                            
+                                            <p class="mb-0 StudentRace"></p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 card-profile">
+                        <div class="card card-block card-stretch card-height">
+                            <div class="card-body">
+                                <ul class="d-flex nav nav-pills mb-3 text-center profile-tab" id="profile-pills-tab" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active show" data-toggle="pill" href="#PersonalInformation" role="tab" aria-selected="false">Personal</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-toggle="pill" href="#EducationInformation" role="tab" aria-selected="false">Education</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-toggle="pill" href="#FamilyInformation" role="tab" aria-selected="false">Family</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-toggle="pill" href="#AchievementsInformation" role="tab" aria-selected="false">Achievements/Progress</a>
+                                    </li>
+                                </ul>
+                                <div class="profile-content tab-content">
+
+                                    <div id="PersonalInformation" class="tab-pane fade active show">
+
+                                        <div class="row">
+                                            <div class="alert alert-danger" role="alert" id="PhotographPublish">
+                                                <div class="iq-alert-icon">
+                                                    <i class="ri-information-line"></i>
+                                                </div>
+                                                <div class="iq-alert-text">
+                                                    Photograph not published in
+                                                    publication material produced by Lak Saviya Foundation or nay
+                                                    other party funding this scholarship program.
+                                                </div>
+                                            </div>
+                                            <div class="table-responsive">
+                                                <table class="table table-striped jambo_table bulk_action" id="tblDetails">
+
+                                                    <tr>
+                                                        <td>Gender</td>
+                                                        <td class="StudentGender"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>NIC No.</td>
+                                                        <td class="StudentNIC"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Address</td>
+                                                        <td class="StudentAddress"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Polling Division </td>
+                                                        <td class="PollingDivision"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Divisional Secretariat Division</td>
+                                                        <td class="DivisionalSecretariatDivision"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Bank Account Details</td>
+                                                        <td class="BankAccount"></td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="EducationInformation" class="tab-pane fade">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped jambo_table bulk_action" id="tblDetails">
+
+                                                <tr>
+                                                    <td>School Name</td>
+                                                    <td class="StudentSchool"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Address</td>
+                                                    <td class="SchoolAddress"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Distance from home to school</td>
+                                                    <td class="Distancetoschool"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Current Grade</td>
+                                                    <td class="StudentGrade"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Highest Grade in School</td>
+                                                    <td class="StudentHighestGrade"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Highest Education Achievement</td>
+                                                    <td class="StudentHighestAchievement"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Achievement Year/Month</td>
+                                                    <td class="StudentAchievementYearMonth"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Register Date</td>
+                                                    <td class="StudentRegisterDate"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Have another Scholarship ?</td>
+                                                    <td class="StudentHaveScholarship"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Name of Fund</td>
+                                                    <td class="StudentFundName"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Fund Amount</td>
+                                                    <td class="StudentFundAmount"></td>
+                                                </tr>
+                                            </table>
+
+                                            <hr />
+                                            <p>Examination Details</p>
+                                            <hr />
+                                            <table id="tblExam" class="table">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <th class="column-title">Exam Type</th>
+                                                        <th class="column-title">Subject Name</th>
+                                                        <th class="column-title">Grade</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tbodyid"></tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div id="FamilyInformation" class="tab-pane fade">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped jambo_table bulk_action" id="tblDetails">
+
+                                                <tr>
+                                                    <td>Father's Name</td>
+                                                    <td class="StudentFatherName"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Father's Occupation</td>
+                                                    <td class="StudentFatherOccupation"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Father's Monthly Income</td>
+                                                    <td class="StudentFatherIncome"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Mother's Name</td>
+                                                    <td class="StudentMotherName"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Mother's Occupation</td>
+                                                    <td class="StudentMotherOccupation"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Mother's Monthly Income</td>
+                                                    <td class="StudentMotherIncome"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>No Of Brothers</td>
+                                                    <td class="StudentNoBrothers"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Are any brothers employed, Monthly Income</td>
+                                                    <td class="StudentBrotherIncome"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>No Of Sisters</td>
+                                                    <td class="StudentNoSisters"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Are any brothers employed, Monthly Income</td>
+                                                    <td class="StudentBSisterIncome"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Are the parents alive?</td>
+                                                    <td class="ParentsAlive"></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div id="AchievementsInformation" class="tab-pane fade">
+
+                                        <div class="profile-line m-0 d-flex align-items-center justify-content-between position-relative" id="AchievementData">
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -42,6 +42,38 @@ namespace SM.DataAccess
             return lstGrade;
         }
 
+        public List<Distict> District(Distict model)
+        {
+            List<Distict> lst = new List<Distict>();
+            lst = exe.SpExecutesSelect<Distict, Distict>("spStudentDistrict", model, false);
+
+            return lst;
+        }
+
+        public List<Religion> Religion(Religion model)
+        {
+            List<Religion> lst = new List<Religion>();
+            lst = exe.SpExecutesSelect<Religion, Religion>("spStudentReligion", model, false);
+
+            return lst;
+        }
+
+        public List<Race> Race(Race model)
+        {
+            List<Race> lst = new List<Race>();
+            lst = exe.SpExecutesSelect<Race, Race>("spStudentRace", model, false);
+
+            return lst;
+        }
+
+        public List<BankBranch> BankBranch(BankBranch model)
+        {
+            List<BankBranch> lst = new List<BankBranch>();
+            lst = exe.SpExecutesSelect<BankBranch, BankBranch>("spStudentBankBranch", model, false);
+
+            return lst;
+        }
+
         public DBUpdate UpdateStudent(Student model)
         {
             int ReturnID = 0;
@@ -54,7 +86,15 @@ namespace SM.DataAccess
                     if (model.Mode == 1)
                     {
                         ReturnID = (int)exe.SpExecutesGetIdentity<Student>("spSaveStudent", model, false);
+                    }
+                    else if(model.Mode == 2)
+                    {
+                        ReturnID = model.StudentID;
+                        exe.SpExecutes<Student>("spUpdateStudent", model, false);
+                    }
 
+                    if (model.lstSubject != null)
+                    {
                         if (model.lstSubject.Count > 0)
                         {
                             foreach (var item in model.lstSubject)
@@ -101,5 +141,96 @@ namespace SM.DataAccess
 
             return lstStudentData;
         }
+
+        public List<FormValidate> ValidateStudent(StudentVM model)
+        {
+            List<FormValidate> lst = new List<FormValidate>();
+
+            lst = exe.SpExecutesSelect<FormValidate, StudentVM>("spValidateStudent", model, false);
+
+            return lst;
+        }
+
+        public List<StudentVM> SponserNotLinkedStudentData(StudentVM model)
+        {
+            List<StudentVM> lstStudentData = new List<StudentVM>();
+            lstStudentData = exe.SpExecutesSelect<StudentVM, StudentVM>("spSponserNotLinkedStudentData", model, false);
+            return lstStudentData;
+        }
+
+        public List<StudentAchievementVM> StudentAchievementData(StudentAchievementVM model)
+        {
+            List<StudentAchievementVM> lst = new List<StudentAchievementVM>();
+
+            lst = exe.SpExecutesSelect<StudentAchievementVM, StudentAchievementVM>("spStudentAchievementData", model, false);
+
+            return lst;
+        }
+
+        public DBUpdate SaveStudentAchievements(StudentAchievement model)
+        {
+            int ReturnID = 0;
+            dBUpdate = new DBUpdate();
+
+            using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required, new System.TimeSpan(0, 15, 0)))
+            {
+                try
+                {
+                    StudentAchievement studentAchievement = new StudentAchievement();
+                    studentAchievement = model.lstStudentAchievements[0];
+                    exe.SpExecutes<StudentAchievement>("spInActiveStudentAchievementsBeforeSave", studentAchievement, false);  
+
+                    ReturnID = model.lstStudentAchievements[0].StudentID;
+                    foreach (StudentAchievement obj in model.lstStudentAchievements)
+                    {
+                        exe.SpExecutes<StudentAchievement>("spSaveStudentAchievements", obj, false);
+                    }
+
+                    dBUpdate.ReturnID = ReturnID;
+                    dBUpdate.Update = true;
+
+                    scope.Complete();
+                }
+                catch (Exception ex)
+                {
+                    dBUpdate.ReturnID = ReturnID;
+                    dBUpdate.Update = false;
+                    scope.Dispose();
+                }
+            }
+
+            return dBUpdate;
+        }
+
+        public List<StudentProgress> StudentProgressData(StudentProgress model)
+        {
+            List<StudentProgress> lst = new List<StudentProgress>();
+            lst = exe.SpExecutesSelect<StudentProgress, StudentProgress>("spStudentProgressData", model, false);
+            return lst;
+        }
+
+        public DBUpdate SaveStudentProgress(StudentProgress model)
+        {
+            dBUpdate = new DBUpdate();
+
+            using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required, new System.TimeSpan(0, 15, 0)))
+            {
+                try
+                {
+                    exe.SpExecutes<StudentProgress>("spSaveStudentProgress", model, false);
+
+                    dBUpdate.Update = true;
+                    scope.Complete();
+                }
+                catch (Exception ex)
+                {
+                    dBUpdate.Update = false;
+                    scope.Dispose();
+                }
+            }
+
+            return dBUpdate;
+        }
+
     }
 }

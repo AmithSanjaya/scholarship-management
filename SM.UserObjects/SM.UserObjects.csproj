@@ -44,10 +44,14 @@
   <ItemGroup>
     <Compile Include="AjaxResponse.cs" />
     <Compile Include="DBUpdate.cs" />
+    <Compile Include="EmailTemplate.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="FormValidate.cs" />
     <Compile Include="Menu.cs" />
+    <Compile Include="PaymentScheme.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sponser.cs" />
+    <Compile Include="SponserStudent.cs" />
     <Compile Include="Student.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>

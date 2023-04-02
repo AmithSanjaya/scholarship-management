@@ -1,0 +1,97 @@
+﻿
+@{
+    ViewBag.Title = "AddEditStudentAchievement";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        @{ Html.RenderAction("StudentView", "Form");}
+        @{ Html.RenderAction("CommonView", "Form");}
+        @{ Html.RenderAction("SponserView", "SM");}
+
+        <input type="hidden" id="StudentSponserID" />
+
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                    <div class="header-title">
+                        <h4 class="card-title">Add/Edit Student Achievement</h4>
+                    </div>
+                    @{ Html.RenderAction("FormButton", "Admin");}
+                </div>
+                <div class="card-body">
+                    <form action="page-list-customers.html" data-toggle="validator">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Student : <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="View Student" href="#" id="PreviewStudent"> <i class="ri-eye-line mr-0"></i></a></label>
+                                    <select id="cmbStudent" class="selectpicker form-control" data-style="py-0"></select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Effective Date :</label>
+                                    <input class="form-control" id="EffectiveDate" name="EffectiveDate" type="date">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Achievement Title :</label>
+                                    <input type="text" class="form-control" id="StudentAchievementTitle">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Achievement Description :</label>
+                                    <textarea class="form-control" name="StudentAchievementDesc" id="StudentAchievementDesc" rows="2">
+                                            </textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="rbSchol">
+                                    <label class="custom-control-label" for="rbSchol">Send Email to Sponser <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="View Sponsers" href="#" id="PreviewSponser"> <i class="ri-eye-line mr-0"></i></a></label>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg-12">
+                    <hr />
+                    <p><button type="button" id="btnAddToGrid" class="btn btn-primary" onclick="AddtoGrid();">Add to Grid</button></p>
+                    <hr />
+                    <div class="table-responsive rounded mb-3">
+                        <table class="data-table table mb-0 tbl-server-info">
+                            <thead class="bg-white text-uppercase">
+                                <tr class="ligth ligth-data">
+                                    <th hidden>StudentID</th>
+                                    <th hidden>StudentAchievementID</th>
+                                    <th>Achievement Title</th>
+                                    <th>Achievement Description</th>
+                                    <th>Send Email</th>
+                                    <th>Effective Date</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="ligth-body" id="StudentAchievementDetail"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- Page end  -->
+        </div>
+    </div>
+</div>
+
+<script async src="~/Scripts/PageJs/StudentAchievement.js"></script>
+
+

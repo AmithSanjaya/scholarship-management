@@ -123,6 +123,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\FormController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MasterController.cs" />
     <Compile Include="Controllers\SMController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -4291,8 +4292,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="assets\images\icon\expand-window.json" />
     <Content Include="assets\images\icon\open-letter.json" />
     <Content Include="assets\images\small\data.json" />
@@ -4340,10 +4339,20 @@
     <Content Include="assets\vendor\line-awesome\dist\line-awesome\fonts\la-solid-900.ttf" />
     <Content Include="assets\vendor\line-awesome\dist\line-awesome\fonts\la-solid-900.woff" />
     <Content Include="assets\vendor\line-awesome\dist\line-awesome\fonts\la-solid-900.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Properties\PublishProfiles\scholarship-management - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\scholarship-management - ReadOnly - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\scholarship-management - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\Common.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -4355,9 +4364,18 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\PageJs\EmailTemplate.js" />
     <Content Include="Scripts\PageJs\Layout.js" />
+    <Content Include="Scripts\PageJs\LinkSponserStudent.js" />
     <Content Include="Scripts\PageJs\Login.js" />
+    <Content Include="Scripts\PageJs\SendApplicationSponser.js" />
+    <Content Include="Scripts\PageJs\SendPaymentNotification.js" />
+    <Content Include="Scripts\PageJs\Sponser.js" />
+    <Content Include="Scripts\PageJs\SponserPayment.js" />
     <Content Include="Scripts\PageJs\Student.js" />
+    <Content Include="Scripts\PageJs\StudentAchievement.js" />
+    <Content Include="Scripts\PageJs\StudentProgress.js" />
+    <Content Include="Uploads\Student\1677668841139.jpg" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -4367,7 +4385,9 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -4381,6 +4401,19 @@
     <Content Include="Views\SM\SponsershipDetails.cshtml" />
     <Content Include="Views\Form\StudentDetail.cshtml" />
     <Content Include="Views\Form\AddEditStudentDetails.cshtml" />
+    <Content Include="Views\SM\AddEditSponserDetails.cshtml" />
+    <Content Include="Views\Form\StudentView.cshtml" />
+    <Content Include="Views\SM\SponserView.cshtml" />
+    <Content Include="Views\Form\SendApplicationtoSponser.cshtml" />
+    <Content Include="Views\Form\LinkSponserStudent.cshtml" />
+    <Content Include="Views\Form\CommonView.cshtml" />
+    <Content Include="Views\Form\SendPaymentNotification.cshtml" />
+    <Content Include="Views\Admin\FormButton.cshtml" />
+    <Content Include="Views\Form\SponserPayment.cshtml" />
+    <Content Include="Views\Form\AddEditStudentAchievement.cshtml" />
+    <Content Include="Views\Form\AddEditStudentProgress.cshtml" />
+    <Content Include="Views\Master\EmailTemplate.cshtml" />
+    <Content Include="Views\Form\DocumentView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -4392,17 +4425,8 @@
     <Folder Include="assets\vendor\echarts\" />
     <Folder Include="assets\vendor\simple-datatables\" />
     <Folder Include="Models\" />
-    <Folder Include="Uploads\Student\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />

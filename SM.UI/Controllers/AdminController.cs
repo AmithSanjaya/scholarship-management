@@ -33,11 +33,16 @@ namespace SM.UI.Controllers
 
         public ActionResult SideMenu()
         {
-            //int id = UserDetail.UserID;
+            int id = UserDetail.UserID;
             List<Menu> lstMenu = new List<Menu>();
-            Menu obj = new Menu { userID = 0 };
+            Menu obj = new Menu { userID = id };
             lstMenu = new AdminDataAccess().GetUserAllowedMenu(obj);
             return PartialView("SideMenu", lstMenu);
+        }
+
+        public ActionResult FormButton()
+        {
+            return PartialView("FormButton");
         }
 
         public ActionResult UserRight()
@@ -82,7 +87,7 @@ namespace SM.UI.Controllers
                 this.ControllerContext.HttpContext.Response.Cookies.Add(UserID);
 
                 HttpCookie FullName = new HttpCookie("FullName");
-                FullName.Value = lstUser[0].FullName.ToString();
+                FullName.Value = lstUser[0].UserFullName.ToString();
                 this.ControllerContext.HttpContext.Response.Cookies.Add(FullName);
             }
             else
@@ -137,16 +142,21 @@ namespace SM.UI.Controllers
                 string UploadType = Request["UploadType"].ToString();
                 string strPath = "";
 
-                if (UploadType == "Student")
-                {
-                    strPath = "~/Uploads/Student/";
-                }
-
-                fileName = Request["StudentID"].ToString();
+                fileName = Request["FileID"].ToString();
                 string mimeType = file.ContentType;
                 System.IO.Stream fileContent = file.InputStream;
                 var InputFileName = Path.GetFileName(file.FileName);
-                InputFileName = fileName + ".jpg";
+
+                if (UploadType == "Student")
+                {
+                    strPath = "~/Uploads/Student/";
+                    InputFileName = fileName + ".jpg";
+                }
+                else if (UploadType == "StudentProgress")
+                {
+                    strPath = "~/Uploads/StudentProgress/";
+                    InputFileName = fileName + ".pdf";
+                }                
 
                 var ServerSavePath = Path.Combine(Server.MapPath(strPath) + InputFileName);
                 file.SaveAs(ServerSavePath);
@@ -159,6 +169,14 @@ namespace SM.UI.Controllers
         {
             List<FormValidate> lst = new List<FormValidate>();
             lst = new AdminDataAccess().FormValidate(model);
+
+            return Json(lst, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult FormDBValidate(FormDBValidate model)
+        {
+            List<FormDBValidate> lst = new List<FormDBValidate>();
+            lst = new AdminDataAccess().FormDBValidate(model);
 
             return Json(lst, JsonRequestBehavior.AllowGet);
         }

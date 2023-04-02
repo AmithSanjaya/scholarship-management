@@ -1,0 +1,90 @@
+﻿
+@{
+    ViewBag.Title = "SendPaymentNotification";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        @{ Html.RenderAction("StudentView", "Form");}
+        @{ Html.RenderAction("CommonView", "Form");}
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                    <div class="header-title">
+                        <h4 class="card-title">Send Payment Notification</h4>
+                    </div>
+                    @{ Html.RenderAction("FormButton", "Admin");}
+                </div>
+                <div class="card-body">
+                    <form action="page-list-customers.html" data-toggle="validator">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Effective Month :</label>
+                                    <input type="month" class="form-control" id="EffectiveMonth">
+                                </div>
+                                <button type="button" class="btn btn-secondary mt-2" data-toggle="modal" id="PreviewApp">Preview Payment Notifications</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg-12">
+                    <div class="table-responsive rounded mb-3">
+                        <table class="data-tables table mb-0 tbl-server-info">
+                            <thead class="bg-white text-uppercase">
+                                <tr class="ligth ligth-data">
+                                    <th hidden>SponserID</th>
+                                    <th>Sponser Name</th>
+                                    <th>Country</th>
+                                    <th>Payment Scheme</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="ligth-body">
+                                <tr class="ligth ligth-data">
+                                    <td hidden>0</td>
+                                    <td>Sponser Name</td>
+                                    <td>Country</td>
+                                    <td>Payment Scheme</td>
+                                    <td>
+                                        <div class="d-flex align-items-center list-action">
+                                            <a class="badge badge-info mr-2" data-placement="top" title="" data-original-title="View"
+                                               data-toggle="modal"><i class="ri-eye-line mr-0"></i></a>
+                                            <button type="button" class="btn btn-primary btn-sm mr-2" onclick="AddToGrid(event)">Add to Grid</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+                    <hr />
+                    <p>Sponsers to be send Payment Notification</p>
+                    <hr />
+
+                    <div class="table-responsive rounded mb-3">
+                        <table class="data-table table mb-0 tbl-server-info">
+                            <thead class="bg-white text-uppercase">
+                                <tr class="ligth ligth-data">
+                                    <th hidden>SponserID</th>
+                                    <th>Sponser Name</th>
+                                    <th>Country</th>
+                                    <th>Payment Scheme</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="ligth-body" id="SponserStudentDetial"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- Page end  -->
+        </div>
+    </div>
+</div>
+
+<script async src="~/Scripts/PageJs/SendPaymentNotification.js"></script>
+
