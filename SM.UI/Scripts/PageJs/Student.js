@@ -474,7 +474,7 @@ function ValidateSave() {
     });
 
     if (lstMsg["Msg"] != "") {
-        msg = lstMsg["Msg"];
+
 
         MsgBox('Error', msg, '', false);
         document.getElementById(lstMsg["FieldName"]).focus();
