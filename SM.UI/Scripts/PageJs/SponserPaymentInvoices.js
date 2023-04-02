@@ -5,7 +5,6 @@
 function GetInvoice(SponserPaymentHeaderID) {
 
     $("#ModelBody").empty();
-    //tst
 
     var model = {
         SponserPaymentHeaderID: SponserPaymentHeaderID
