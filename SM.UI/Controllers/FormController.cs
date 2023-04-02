@@ -366,6 +366,22 @@ namespace SM.UI.Controllers
             return View();
         }
 
+        public ActionResult SponserPaymentInvoices()
+        {
+            List<SponserRecievePayment> lst = new List<SponserRecievePayment>();
+            SponserRecievePayment model = new SponserRecievePayment();
+
+            lst = new StudentSponserDataAccess().SponserPaymentInvoicesData(model);
+            return View(lst);
+        }
+
+        public JsonResult SponserPaymentInvoicesData(SponserRecievePayment model)
+        {
+            List<SponserRecievePayment> lst = new List<SponserRecievePayment>();
+            lst = new StudentSponserDataAccess().SponserPaymentInvoicesData(model);
+            return Json(lst, JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult SponsersStudentData(SponserStudent model)
         {
             List<StudentVM> lst = new List<StudentVM>();
