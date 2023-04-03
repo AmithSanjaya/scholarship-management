@@ -29,6 +29,8 @@ namespace SM.UserObjects
         public DateTime InvoiceDate { get; set; }
         public string InvoiceDateName { get; set; }
         public int SponserID { get; set; }
+        public int CurrencyID { get; set; }
+        public string CurrencyName { get; set; }
         public string SponserName { get; set; }
         public decimal PaidAmount { get; set; }
         public string PaidAmountName { get; set; }

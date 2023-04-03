@@ -25,6 +25,15 @@ namespace SM.UI.Controllers
             return View();
         }
 
+        public JsonResult Currency()
+        {
+            Currency model = new Currency();
+            List<Currency> lst = new List<Currency>();
+            lst = new MasterDataAccess().Currency(model);
+
+            return Json(lst, JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult EmailTemplateDetail(EmailTemplate model)
         {
             List<EmailTemplate> lst = new List<EmailTemplate>();

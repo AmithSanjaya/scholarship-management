@@ -1,5 +1,11 @@
 ﻿$(document).ready(function () {
 
+    var model = {}
+    ajaxCall('Master/Currency', { 'model': model }, function (data) {
+        BindDropDown("PayCurrency", "CurrencyName", "CurrencyID", data);
+    });
+    $('#PayCurrency').selectpicker('refresh');
+
     FillSponser();
 
     $("#SponserStudentDetial").on("click", ".red", function () {
@@ -10,7 +16,6 @@
         var month = $('#EffectiveMonth').val().substring(5, 2);
 
         MsgBox('Confirm', 'Do you want to Remove this Record ?', function () {
-            //DeleteStudentPaymentFromSponser(id, year, month);
             row.remove();            
         }, true);
     });
@@ -110,7 +115,7 @@ function FillSponser() {
 
     var model = {
         SponserID: 0,
-        ViewTypeID: 2
+        ViewTypeID: 1
     }
     ajaxCall('SM/SponserData', { 'model': model }, function (data) {
         BindDropDown("cmbSponser", "SponserName", "SponserID", data);
@@ -274,6 +279,7 @@ function SetPayAmount() {
 }
 
 var StudentSponser = function () {
+
     this.SponserID = 0,
         this.StudentID = 0,
         this.PaymentSchemeID = 0,
@@ -281,15 +287,23 @@ var StudentSponser = function () {
         this.PaidAmount = 0,
         this.Year = 0,
         this.Month = 0,
+        this.CurrencyID = 0,
+        this.InvoiceNo = "",
+        this.InvoiceDate = "",
+        this.lstStudentSponser=""
 
-    this.Fill = function (SponserID, StudentID) {
-        this.SponserID = SponserID,
-            this.StudentID = StudentID
+    this.Fill = function () {
+        this.SponserID = $("#cmbSponser").val(),
+            this.Year = $('#EffectiveMonth').val(),
+            this.Month = $('#EffectiveMonth').val(),
+            this.CurrencyID = $("#cmbSponser").val(),
+            this.InvoiceNo = $("#cmbSponser").val(),
+            this.InvoiceDate = $("#cmbSponser").val()
     }
 }
 
 function Save() {
-    debugger;
+
     if ($('#cmbSponser').val() == 0) {
         MsgBox('Error', 'Please Select the Sponser', '', false);
         return;
@@ -309,8 +323,9 @@ function Save() {
             var lstStudentSponser = [];
 
             for (var i = 0; i < rowCount; i++) {
-                debugger;
+                
                 var StudentSponserModel = new StudentSponser();
+                StudentSponserModel.Fill();
 
                 StudentSponserModel.SponserID = $("#cmbSponser").val();
                 StudentSponserModel.EffectiveMonth = $('#EffectiveMonth').val();

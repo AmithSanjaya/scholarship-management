@@ -74,13 +74,31 @@
                                     <label>Sponser :</label>
                                     <select id="cmbSponser" class="selectpicker form-control" data-style="py-0"></select>
                                 </div>
+                                <button type="button" class="btn btn-secondary mt-2" data-toggle="modal" id="PreviewApp">Preview Previous Sponser Payments</button>
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Currency :</label>
+                                    <select id="PayCurrency" class="selectpicker form-control" data-style="py-0"></select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Effective Month :</label>
                                     <input type="month" class="form-control" id="EffectiveMonth" onchange="AddSponserPaidStudentByYearandMonth()">
                                 </div>
-                                <button type="button" class="btn btn-secondary mt-2" data-toggle="modal" id="PreviewApp">Preview Previous Sponser Payments</button>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Reference No :</label>
+                                    <input type="text" class="form-control" id="InvoiceNo">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Invoice Date :</label>
+                                    <input type="text" class="form-control" id="InvoiceDate">
+                                </div>
                             </div>
                         </div>
                     </form>

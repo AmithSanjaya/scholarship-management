@@ -47,6 +47,7 @@
     <Compile Include="EmailTemplate.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="FormValidate.cs" />
+    <Compile Include="MasterObjects.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="PaymentScheme.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

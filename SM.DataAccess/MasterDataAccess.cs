@@ -18,6 +18,13 @@ namespace SM.DataAccess
             exe = new Execute();
         }
 
+        public List<Currency> Currency(Currency model)
+        {
+            List<Currency> lst = new List<Currency>();
+            lst = exe.SpExecutesSelect<Currency, Currency>("spGetCurrency", model, false);
+            return lst;
+        }
+
         #region Email Templete
         public List<EmailTemplate> EmailTemplateDetail(EmailTemplate model)
         {
