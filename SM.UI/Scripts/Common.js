@@ -382,41 +382,43 @@ function UploadFile(UploadFileType, FileName, FileID, UploadType, Required = fal
 
     var formdata = new FormData();
 
-    if ((fileInput.files.length > 0) && (Required == true)) {
+    if (Required) {
+        if ((fileInput.files.length > 0)) {
 
-        for (i = 0; i < fileInput.files.length; i++) {
+            for (i = 0; i < fileInput.files.length; i++) {
 
-            var fileType = fileInput.files[i].name.split('.').pop();
+                var fileType = fileInput.files[i].name.split('.').pop();
 
-            if (((UploadFileType == 2) & (fileType === 'pdf')) ||
-                ((UploadFileType == 1) & (fileType === 'jpg' || fileType === 'jpeg' || fileType === 'png'))) {
+                if (((UploadFileType == 2) & (fileType === 'pdf')) ||
+                    ((UploadFileType == 1) & (fileType === 'jpg' || fileType === 'jpeg' || fileType === 'png'))) {
 
-                formdata.append(fileInput.files[i].name, fileInput.files[i]);
-                formdata.append('FileID', FileID);
-                formdata.append('UploadType', UploadType);
+                    formdata.append(fileInput.files[i].name, fileInput.files[i]);
+                    formdata.append('FileID', FileID);
+                    formdata.append('UploadType', UploadType);
+                }
+                else {
+                    MsgBox('Error', 'File Type Not Supported..!', '', false);
+                    return false;
+                }
             }
-            else {
-                MsgBox('Error', 'File Type Not Supported..!', '', false);
-                return false;
+
+            var xhr = new XMLHttpRequest();
+            var url = rootUrl + '/Admin/Upload';
+            xhr.open('POST', url);
+            xhr.send(formdata);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    document.getElementById(FileName).value = '';
+                }
             }
+
+            return true;
         }
-
-        var xhr = new XMLHttpRequest();
-        var url = rootUrl + '/Admin/Upload';
-        xhr.open('POST', url);
-        xhr.send(formdata);
-
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                document.getElementById(FileName).value = '';
-            }
+        else {
+            MsgBox('Error', 'File Type Not Uploaded..!', '', false);
+            return false;
         }
-
-        return true;
-    }
-    else {
-        MsgBox('Error', 'File Type Not Uploaded..!', '', false);
-        return false;
     }
     return true;
 }
