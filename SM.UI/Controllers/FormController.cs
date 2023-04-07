@@ -389,20 +389,11 @@ namespace SM.UI.Controllers
             return Json(lst, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult SaveSponserPaymentDetails(SponserStudent model)
+        public JsonResult SaveSponserPaymentDetails(SponserStudentVM model)
         {
             ajaxResponse = new AjaxResponse();
             dBUpdate = new DBUpdate();
             model.EnteredBy = UserDetail.UserID;
-            int year = Convert.ToInt32(model.EffectiveMonth.Substring(0, 4));
-            int month = Convert.ToInt32(model.EffectiveMonth.Substring(5, 2));
-
-            foreach (SponserStudent obj in model.lstStudents)
-            {
-                obj.Year = year;
-                obj.Month = month;
-                obj.EnteredBy = UserDetail.UserID;
-            }
             
             dBUpdate = new StudentSponserDataAccess().SaveSponserPaymentDetails(model);
 
@@ -447,8 +438,8 @@ namespace SM.UI.Controllers
         public JsonResult SponserPaidStudentByYearandMonth(SponserStudent model)
         {
             List<SponserStudent> lst = new List<SponserStudent>();
-            int year = Convert.ToInt32(model.EffectiveMonth.Substring(0, 4));
-            int month = Convert.ToInt32(model.EffectiveMonth.Substring(5, 2));
+            int year = model.Year;
+            int month = model.Month;
             model.Year = year;
             model.Month = month;
             lst = new StudentSponserDataAccess().SponserPaidStudentByYearandMonth(model);

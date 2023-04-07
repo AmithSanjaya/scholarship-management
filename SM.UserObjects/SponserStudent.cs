@@ -8,6 +8,7 @@ namespace SM.UserObjects
 {
     public class SponserStudent : User
     {
+        public int SponserPaymentHeaderID { get; set; }
         public int SponserStudentApplicationID { get; set; }
         public int SponserID { get; set; }
         public int StudentID { get; set; }
@@ -17,7 +18,8 @@ namespace SM.UserObjects
         public string LinkedOn { get; set; }
         public decimal PaidAmount { get; set; }
         public string PaidDate { get; set; }
-        public string EffectiveMonth { get; set; }
+        public decimal DueAmount { get; set; }
+        public string EffectivePeriod { get; set; }
         public int Year { get; set; }
         public int Month { get; set; }
     }
@@ -26,6 +28,7 @@ namespace SM.UserObjects
     {
         public int SponserPaymentHeaderID { get; set; }
         public string InvoiceNo { get; set; }
+        public string ReferenceNo { get; set; }
         public DateTime InvoiceDate { get; set; }
         public string InvoiceDateName { get; set; }
         public int SponserID { get; set; }
@@ -35,5 +38,23 @@ namespace SM.UserObjects
         public decimal PaidAmount { get; set; }
         public string PaidAmountName { get; set; }
         public string InvoiceEmail { get; set; }
+    }
+
+    public class SponserStudentVM : User
+    {
+        public int SponserPaymentID { get; set; }
+        public int SponserID { get; set; }
+        public int SponserPaymentHeaderID { get; set; }
+        public string InvoiceNo { get; set; }
+        public string ReferenceNo { get; set; }
+        public DateTime InvoiceDate { get; set; }
+        public int CurrencyID { get; set; }
+        public decimal PaidAmount { get; set; }
+        public decimal DueAmount { get; set; }
+        public List<SponserStudent> lstStudentSponser { get; set; }
+        public string InvoiceEmail { get; set; }
+        public int Year { get; set; }
+        public int Month { get; set; }
+        public string EffectivePeriod { get; set; }
     }
 }

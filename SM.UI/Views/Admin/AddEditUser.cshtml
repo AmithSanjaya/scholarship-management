@@ -1,0 +1,105 @@
+﻿
+@{
+    ViewBag.Title = "AddEditUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xl-3 col-lg-4">
+            <div class="card">
+
+                <div class="card-body">
+                    <form>
+                        <div class="form-group">
+                            <div class="crm-profile-img-edit position-relative">
+                                <img class="crm-profile-pic rounded avatar-100" src="../assets/images/user/11.png" alt="profile-pic">
+                                <div class="crm-p-image bg-primary">
+                                    <i class="las la-pen upload-button"></i>
+                                    <input class="file-upload" type="file" accept="image/*" id="photo">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>User Role:</label>
+                            <select name="type" class="selectpicker form-control" data-style="py-0" id="UserRole">
+                                <option>Admin</option>
+                                <option>User</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="furl">Facebook Url:</label>
+                            <input type="text" class="form-control" id="FacebookUrl">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-9 col-lg-8">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                    <div class="header-title">
+                        <h4 class="card-title">Add New User</h4>
+                    </div>
+                    @{ Html.RenderAction("FormButton", "Admin");}
+                </div>
+                <div class="card-body">
+                    <div class="new-user-info">
+                        <form>
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label for="fname">First Name:</label>
+                                    <input type="text" class="form-control" id="FirstName">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="lname">Last Name:</label>
+                                    <input type="text" class="form-control" id="LastName">
+                                </div>
+                                <div class="form-group col-sm-12">
+                                    <label for="add1">Address :</label>
+                                    <textarea class="form-control" rows="4" id="UserAddress"></textarea>
+                                </div>
+                                <div class="form-group col-sm-12">
+                                    <label>Country:</label>
+                                    <select name="type" class="selectpicker form-control" data-style="py-0" id="Country">
+                                        <option>Select Country</option>
+                                        <option>Caneda</option>
+                                        <option>Noida</option>
+                                        <option>USA</option>
+                                        <option>India</option>
+                                        <option>Africa</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="mobno">Mobile Number:</label>
+                                    <input type="text" class="form-control" id="MobileNo">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="email">Email:</label>
+                                    <input type="email" class="form-control" id="Email">
+                                </div>
+                            </div>
+                            <hr>
+                            <h5 class="mb-3">Security</h5>
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <label for="uname">User Name:</label>
+                                    <input type="text" class="form-control" id="UserName">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="pass">Password:</label>
+                                    <input type="password" class="form-control" id="Password">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="rpass">Repeat Password:</label>
+                                    <input type="password" class="form-control" id="RePassword">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -160,20 +160,30 @@ namespace SM.DataAccess
             return lstSponserStudentData;
         }
 
-        public DBUpdate SaveSponserPaymentDetails(SponserStudent model)
+        public DBUpdate SaveSponserPaymentDetails(SponserStudentVM model)
         {
             int ReturnID = 0;
+
             dBUpdate = new DBUpdate();
+            SponserStudentVM modelVM = new SponserStudentVM();
 
             using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required, new System.TimeSpan(0, 15, 0)))
             {
                 try
                 {
-                    ReturnID = model.lstStudents[0].SponserID;
-                    foreach (SponserStudent obj in model.lstStudents)
+                    int PaymentHeaderID = (int)exe.SpExecutesGetIdentity<SponserStudentVM>("spSaveSponserPaymentHeader", model, false);
+
+                    ReturnID = PaymentHeaderID;
+                    foreach (SponserStudent obj in model.lstStudentSponser)
                     {
+                        obj.SponserPaymentHeaderID = PaymentHeaderID;
                         exe.SpExecutes<SponserStudent>("spSaveSponserPayment", obj, false);
                     }
+
+                    SponserStudentVM modelHeader = new SponserStudentVM();
+                    modelHeader.SponserPaymentHeaderID = ReturnID;
+
+                    exe.SpExecutes<SponserStudentVM>("spUpdateInvoicetoSponserPayment", modelHeader, false);
 
                     dBUpdate.ReturnID = ReturnID;
                     dBUpdate.Update = true;

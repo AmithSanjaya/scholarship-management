@@ -22,10 +22,19 @@ namespace SM.DataAccess
         public List<Menu> GetUserAllowedMenu(Menu obj)
         {
             List<SqlParameter> list = new List<SqlParameter>();
+            DataTable dt;
 
             list.Add(new SqlParameter("@UserID", obj.userID));
 
-            DataTable dt = exe.SpEXecuteSelectQuery("[spGetUserAllowLevel1Menu]", list, CommandType.StoredProcedure);
+            if (obj.userID != 0)
+            {
+                dt = exe.SpEXecuteSelectQuery("[spGetUserAllowLevel1Menu]", list, CommandType.StoredProcedure);
+            }
+            else
+            {
+                dt = exe.SpEXecuteSelectQuery("[spGetLevel1Menu]", list, CommandType.StoredProcedure);
+            }
+
             List<Menu> lstMenu = new List<Menu>();
             Menu tempMenu;
             foreach (DataRow item in dt.Rows)
@@ -82,11 +91,20 @@ namespace SM.DataAccess
         private List<Menu> GetUserAllowedMenu(int userid, int menuid)
         {
             List<SqlParameter> list = new List<SqlParameter>();
+            DataTable dt;
 
             list.Add(new SqlParameter("@UserID", userid));
             list.Add(new SqlParameter("@MenuID", menuid));
 
-            DataTable dt = exe.SpEXecuteSelectQuery("[spGetUserAllowLevel2Menu]", list, CommandType.StoredProcedure);
+            if (userid != 0)
+            {
+                dt = exe.SpEXecuteSelectQuery("[spGetUserAllowLevel2Menu]", list, CommandType.StoredProcedure);
+            }
+            else
+            {
+                dt = exe.SpEXecuteSelectQuery("[spGetLevel2Menu]", list, CommandType.StoredProcedure);
+            }
+
             List<Menu> lstMenu = new List<Menu>();
             Menu tempMenu;
             foreach (DataRow item in dt.Rows)

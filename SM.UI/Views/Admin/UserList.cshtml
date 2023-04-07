@@ -1,0 +1,85 @@
+﻿
+@{
+    ViewBag.Title = "UserList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                    <div class="header-title">
+                        <h4 class="card-title">User List</h4>
+                    </div>
+                    <a href="@Url.Action("AddEditUser", "Admin")" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Add User</a>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive rounded mb-3">
+
+                        <table class="data-tables table mb-0 tbl-server-info">
+                            <thead>
+                                <tr class="ligth">
+                                    <th hidden>UserID</th>
+                                    <th>Profile</th>
+                                    <th>Name</th>
+                                    <th>Contact</th>
+                                    <th>Email</th>
+                                    <th>Country</th>
+                                    <th>Status</th>
+                                    <th>Join Date</th>
+                                    <th style="min-width: 100px">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td hidden>1</td>
+                                    <td class="text-center">
+                                        <img class="rounded img-fluid avatar-40"
+                                             src="../assets/images/user/01.jpg" alt="profile">
+                                    </td>
+                                    <td>Anna Sthesia</td>
+                                    <td>(760) 756 7568</td>
+                                    <td>annasthesia@gmail.com</td>
+                                    <td>USA</td>
+                                    <td><span class="badge bg-primary">Active</span></td>
+                                    <td>2019/12/01</td>
+                                    <td>
+                                        <div class="flex align-items-center list-user-action">
+                                            <a class="btn btn-sm bg-primary" data-toggle="tooltip" data-placement="top" title=""
+                                               data-original-title="Add" href="#"><i class="ri-eye-line mr-0"></i></a>
+                                            <a class="btn btn-sm bg-success" data-toggle="tooltip" data-placement="top" title=""
+                                               data-original-title="Edit" href="@Url.Action("AddEditUser", "Admin", new { UserID = 1,TypeID=1 })"><i class="ri-pencil-line mr-0"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td hidden>2</td>
+                                    <td class="text-center">
+                                        <img class="rounded img-fluid avatar-40"
+                                             src="../assets/images/user/01.jpg" alt="profile">
+                                    </td>
+                                    <td>Anna Sthesia</td>
+                                    <td>(760) 756 7568</td>
+                                    <td>annasthesia@gmail.com</td>
+                                    <td>USA</td>
+                                    <td><span class="badge bg-primary">Active</span></td>
+                                    <td>2019/12/01</td>
+                                    <td>
+                                        <div class="flex align-items-center list-user-action">
+                                            <a class="btn btn-sm bg-primary" data-toggle="tooltip" data-placement="top" title=""
+                                               data-original-title="Add" href="#"><i class="ri-eye-line mr-0"></i></a>
+                                            <a class="btn btn-sm bg-success" data-toggle="tooltip" data-placement="top" title=""
+                                               data-original-title="Edit" href="@Url.Action("AddEditUser", "Admin", new { UserID = 2,TypeID=1 })"><i class="ri-pencil-line mr-0"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

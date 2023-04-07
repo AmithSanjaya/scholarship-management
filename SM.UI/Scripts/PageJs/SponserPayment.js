@@ -6,14 +6,18 @@
     });
     $('#PayCurrency').selectpicker('refresh');
 
+    model = {}
+    ajaxCall('Master/PayType', { 'model': model }, function (data) {
+        BindDropDown("PayType", "PayTypeName", "PayTypeID", data);
+    });
+    $('#PayType').selectpicker('refresh');
+
     FillSponser();
 
-    $("#SponserStudentDetial").on("click", ".red", function () {
+    $("#SponserPayment").on("click", ".red", function () {
 
         var row = $(this).closest('tr');
         var id = $(this).closest('tr').children('td:eq(0)').text();
-        var year = $('#EffectiveMonth').val().substring(0, 4);
-        var month = $('#EffectiveMonth').val().substring(5, 2);
 
         MsgBox('Confirm', 'Do you want to Remove this Record ?', function () {
             row.remove();            
@@ -25,16 +29,16 @@
     });
 
     $("#PreviewApp").on("click", function () {
-       // debugger;
+
         var sponserID = $("#cmbSponser").val();
         if (sponserID > 0) {
             $('#CommonModel').modal();
-            //GetAllStudents();
+
             var model = {
                 SponserID: sponserID
             }
             ajaxCallWithoutAsync('Form/SponserPaidStudentHistoryData', { 'model': model }, function (linkeddata) {
-                //debugger;
+
                 for (var j = 0; j < linkeddata.length; j++) {
 
                     var model = {
@@ -48,7 +52,7 @@
                     $("h5.CommonHead").text('Sponser Payment History');
 
                     ajaxCallWithoutAsync('Form/StudentData', { 'model': model }, function (data) {
-                        //debugger;
+
                         tr = $('<tr class="ligth ligth-data"/>');
                         tr.append("<th hidden>StudentID</th>")
                         tr.append("<th>Student Name</th>")
@@ -88,29 +92,6 @@
     });
 });
 
-//function DeleteStudentPaymentFromSponser(studentid) {
-
-//    var sponserID = $("#cmbSponser").val();
-//    if (sponserID > 0) {
-
-//        var model = {
-//            SponserID: sponserID,
-//            StudentID: studentid,
-//            Year: year,
-//            Month: month
-//        }
-//        ajaxCall('Form/DeleteStudentPaymentFromSponser', { 'model': model }, function (data) {
-
-//            if (data.IsValid) {
-
-//            } else {
-
-//            }
-//        });
-
-//    }
-//}
-
 function FillSponser() {
 
     var model = {
@@ -121,29 +102,6 @@ function FillSponser() {
         BindDropDown("cmbSponser", "SponserName", "SponserID", data);
     });
     $('#cmbSponser').selectpicker('refresh');
-}
-
-function PaymentDetails() {
-
-    var model = {
-        SponserID: $('#cmbSponser').val(),
-        Year: 2023,
-        Month:3
-    }
-
-    $("#SponserPayment").empty();
-
-    ajaxCallWithoutAsync('Form/SponsersStudentData', { 'model': model }, function (data) {
-
-        for (var i = 0; i < data.length; i++) {
-
-        }
-
-    });
-}
-
-function PaymentSaveDetails(StudentID) {
-
 }
 
 function GetStudents() {
@@ -171,6 +129,7 @@ function GetStudents() {
                 '<td>' + data[i].GenderName + '</td>' +
                 '<td>' + data[i].CountryName + '</td>' +
                 '<td>' + data[i].SchoolName + '</td>' +
+                '<td>' + data[i].DueAmount + '</td>' +
                 '<td><div class="d-flex align-items-center list-action"><a class= "badge badge-info mr-2" data -placement="top" title = "" data -original -title="View" data -toggle="modal" onclick = "GetStudent(' + data[i].StudentID + ')"><i class="ri-eye-line mr-0"></i></a> ' +
                 '<button type = "button" class= "btn btn-primary btn-sm mr-2" onclick = "AddToGrid(event)" > Add Payment</button ></div ></td > ' +
                 '</tr> ');
@@ -196,10 +155,15 @@ function AddToGrid(event) {
     }
 
     if (isAdded === false) {
+
         $StudentID = $row.find("td:nth-child(1)").text();
+        $DueAmount = $row.find("td:nth-child(6)").text();
+        $SponserID = $("#cmbSponser").val();
 
-        $('#AddGrid').modal();
+        $('#AddGrid').modal({ backdrop: 'static', keyboard: true });
 
+        $('p.DueAmount').text($DueAmount);
+        $('#DueAmount').val($DueAmount);
         $('#SponserStudentID').val($StudentID);
         $('#PaidAmount').focus();
     }
@@ -209,73 +173,65 @@ function AddToGrid(event) {
 }
 
 function AddToGridFromModel() {
-   
-    $StudentID = $('#SponserStudentID').val();
-    if ($StudentID > 0) {
-        var model = {
-            StudentID: $StudentID
+
+    $PaidAmount = $("#PaidAmount").val() || 0;
+
+    if ($PaidAmount <= 0) {
+        MsgBox('Error', 'Paid Amount Required', '', false);
+    } else {
+
+        $StudentID = $('#SponserStudentID').val();
+
+        if ($StudentID > 0) {
+            var model = {
+                StudentID: $StudentID
+            }
+
+            ajaxCallWithoutAsync('Form/StudentDataofSponserLinked', { 'model': model }, function (linkeddata) {
+
+                for (var j = 0; j < linkeddata.length; j++) {
+
+                    model = {
+                        StudentID: $StudentID,
+                        ViewTypeID: 2
+                    }
+
+                    ajaxCallWithoutAsync('Form/StudentData', { 'model': model }, function (data) {
+
+                        GetStudentImage(data[0].Photo);
+
+                        $StudentName = data[0].FirstName + " " + data[0].LastName;
+                        $Country = data[0].CountryName;
+                        $ImgName = "<img src='" + $Img + "' class='img-fluid rounded avatar-50 mr-3' alt='image'>";
+
+                        $PayAmount = $('#PaidAmount').val();
+                        $('#PaidAmount').val(0);
+                        $DueAmount = $('#DueAmount').val();
+
+                        $("#SponserPayment").append(
+                            '<tr>' +
+                            '<td hidden>' + $StudentID + '</td>' +
+                            '<td><div class="d-flex align-items-center">' + $ImgName + '<div>' + $StudentName + '</div></div></td>' +
+                            '<td>' + $Country + '</td>' +
+                            '<td>' + $PayAmount + '</td>' +
+                            '<td hidden>' + linkeddata[j].PaymentSchemeID + '</td>' +
+                            '<td>' + linkeddata[j].PaymentSchemeName + '</td>' +
+                            '<td>' + $DueAmount + '</td>' +
+                            '<td>' +
+                            '<a class="badge bg-warning mr-2 red" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"> <i class="ri-delete-bin-line mr-0"></i></a >' +
+                            '</td > ' +
+                            '</tr> ');
+                    });
+                }
+            });
+
         }
 
-        ajaxCallWithoutAsync('Form/StudentDataofSponserLinked', { 'model': model }, function (linkeddata) {
-
-            for (var j = 0; j < linkeddata.length; j++) {
-
-                model = {
-                    StudentID: $StudentID,
-                    ViewTypeID: 2
-                }
-
-                ajaxCallWithoutAsync('Form/StudentData', { 'model': model }, function (data) {
-
-                    GetStudentImage(data[0].Photo);
-
-                    $StudentName = data[0].FirstName + " " + data[0].LastName;
-                    $Country = data[0].CountryName;
-                    $ImgName = "<img src='" + $Img + "' class='img-fluid rounded avatar-50 mr-3' alt='image'>";
-
-                    $PayAmount = $('#PaidAmount').val();
-                    $('#PaidAmount').val(0);
-                    $("#SponserPayment").append(
-                        '<tr>' +
-                        '<td hidden>' + $StudentID + '</td>' +
-                        '<td><div class="d-flex align-items-center">' + $ImgName + '<div>' + $StudentName + '</div></div></td>' +
-                        '<td>' + $Country + '</td>' +
-                        '<td>' + $PayAmount + '</td>' +
-                        '<td hidden>' + linkeddata[j].PaymentSchemeID + '</td>' +
-                        '<td>' + linkeddata[j].PaymentSchemeName + '</td>' +
-                        '<td>' + linkeddata[j].LinkedOn + '</td>' +
-                        '<td>' +
-                        '<a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" onclick = "EditPaymentInGrid(event)"> <i class="ri-pencil-line mr-0"></i></a >' +
-                        '<a class="badge bg-warning mr-2 red" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"> <i class="ri-delete-bin-line mr-0"></i></a >' +
-                        '</td > ' +
-                        '</tr> ');
-                });
-            }
-        });
-
+        $('#SponserStudentID').val(0);
+        $('p.DueAmount').text(0);
+        $('#AddGrid').hide();
     }
 
-    $('#SponserStudentID').val(0);
-    $('#AddGrid').hide();
-
-}
-
-let currentRow = '';
-
-function EditPaymentInGrid(event) {
-    //debugger;
-    var $row = $(event.target).closest("tr");
-    currentRow = $row;
-    $('#EditPaidAmount').val($row.children('td:eq(3)').text());
-    $('#EditPaymentGrid').modal();     
-}
-
-function SetPayAmount() {
-    //debugger;
-    if (currentRow != '') {
-        currentRow.children('td:eq(3)').text($('#EditPaidAmount').val());
-    }
-    currentRow = '';
 }
 
 var StudentSponser = function () {
@@ -288,17 +244,17 @@ var StudentSponser = function () {
         this.Year = 0,
         this.Month = 0,
         this.CurrencyID = 0,
+        this.DueAmount = 0,
         this.InvoiceNo = "",
         this.InvoiceDate = "",
-        this.lstStudentSponser=""
+        this.EffectivePeriod = "",
+        this.lstStudentSponser = []
 
     this.Fill = function () {
         this.SponserID = $("#cmbSponser").val(),
-            this.Year = $('#EffectiveMonth').val(),
-            this.Month = $('#EffectiveMonth').val(),
-            this.CurrencyID = $("#cmbSponser").val(),
-            this.InvoiceNo = $("#cmbSponser").val(),
-            this.InvoiceDate = $("#cmbSponser").val()
+        this.CurrencyID = $("#PayCurrency").val(),
+        this.ReferenceNo = $("#InvoiceNo").val(),
+        this.InvoiceDate = $("#InvoiceDate").val()
     }
 }
 
@@ -318,29 +274,27 @@ function Save() {
         var rowCount = document.getElementById("SponserPayment").rows.length;
         var rowData = document.getElementById("SponserPayment");
 
+        var StudentSponserModel = new StudentSponser();
+        StudentSponserModel.Fill();
+
         if (rowCount > 0) {
 
-            var lstStudentSponser = [];
+            var lstStudentSponserVM = [];
 
             for (var i = 0; i < rowCount; i++) {
-                
-                var StudentSponserModel = new StudentSponser();
-                StudentSponserModel.Fill();
 
-                StudentSponserModel.SponserID = $("#cmbSponser").val();
-                StudentSponserModel.EffectiveMonth = $('#EffectiveMonth').val();
-                StudentSponserModel.StudentID = rowData.rows[i].cells[0].innerHTML;
-                StudentSponserModel.PaidAmount = rowData.rows[i].cells[3].innerHTML;
-                StudentSponserModel.PaymentSchemeID = rowData.rows[i].cells[4].innerHTML;                
-                lstStudentSponser.push(StudentSponserModel);
+                var DetailModel = new StudentSponser();
+
+                DetailModel.StudentID = rowData.rows[i].cells[0].innerHTML;
+                DetailModel.PaidAmount = rowData.rows[i].cells[3].innerHTML;
+                DetailModel.PaymentSchemeID = rowData.rows[i].cells[4].innerHTML;
+                DetailModel.DueAmount = rowData.rows[i].cells[6].innerHTML;
+                lstStudentSponserVM.push(DetailModel);
             }
 
-            var model = {
-                EffectiveMonth : $('#EffectiveMonth').val(),
-                lstStudents: lstStudentSponser
-            }
+            StudentSponserModel.lstStudentSponser = lstStudentSponserVM;
 
-            ajaxCall('Form/SaveSponserPaymentDetails', { 'model': model }, function (data) {
+            ajaxCall('Form/SaveSponserPaymentDetails', { 'model': StudentSponserModel }, function (data) {
 
                 if (data.IsValid) {
                     MsgBox('Info', data.SucessMessage, '', true);

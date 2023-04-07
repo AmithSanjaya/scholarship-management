@@ -45,10 +45,38 @@ namespace SM.UI.Controllers
             return PartialView("FormButton");
         }
 
+        #region User Details
+        public ActionResult AddEditUser()
+        {
+            return View();
+        }
+
+        public ActionResult UserList()
+        {
+            return View();
+        }
+
         public ActionResult UserRight()
         {
             return View();
         }
+
+        public JsonResult GetSystemAllMenus()
+        {
+            List<Menu> lstMenu = new List<Menu>();
+            Menu obj = new Menu {};
+            lstMenu = new AdminDataAccess().GetUserAllowedMenu(obj);
+            return Json(lstMenu, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetUserAllowedMenu(Menu model)
+        {
+            List<Menu> lstMenu = new List<Menu>();
+
+            lstMenu = new AdminDataAccess().GetUserAllowedMenu(model);
+            return Json(lstMenu, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
 
         /// <summary>
         /// Logout
