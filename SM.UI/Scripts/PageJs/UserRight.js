@@ -166,3 +166,7 @@ function SetUserRights() {
     });
 }
 
+function Cancel() {
+    CreateAllMenus();   
+    SetUserRights();
+}
