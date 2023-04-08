@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
@@ -13,6 +14,7 @@ namespace SM.DataAccess
     public class AdminDataAccess
     {
         private Execute exe;
+        public DBUpdate dBUpdate;
 
         public AdminDataAccess()
         {
@@ -22,19 +24,10 @@ namespace SM.DataAccess
         public List<Menu> GetUserAllowedMenu(Menu obj)
         {
             List<SqlParameter> list = new List<SqlParameter>();
-            DataTable dt;
 
             list.Add(new SqlParameter("@UserID", obj.userID));
 
-            if (obj.userID != 0)
-            {
-                dt = exe.SpEXecuteSelectQuery("[spGetUserAllowLevel1Menu]", list, CommandType.StoredProcedure);
-            }
-            else
-            {
-                dt = exe.SpEXecuteSelectQuery("[spGetLevel1Menu]", list, CommandType.StoredProcedure);
-            }
-
+            DataTable dt = exe.SpEXecuteSelectQuery("[spGetUserAllowLevel1Menu]", list, CommandType.StoredProcedure);
             List<Menu> lstMenu = new List<Menu>();
             Menu tempMenu;
             foreach (DataRow item in dt.Rows)
@@ -91,20 +84,11 @@ namespace SM.DataAccess
         private List<Menu> GetUserAllowedMenu(int userid, int menuid)
         {
             List<SqlParameter> list = new List<SqlParameter>();
-            DataTable dt;
 
             list.Add(new SqlParameter("@UserID", userid));
             list.Add(new SqlParameter("@MenuID", menuid));
 
-            if (userid != 0)
-            {
-                dt = exe.SpEXecuteSelectQuery("[spGetUserAllowLevel2Menu]", list, CommandType.StoredProcedure);
-            }
-            else
-            {
-                dt = exe.SpEXecuteSelectQuery("[spGetLevel2Menu]", list, CommandType.StoredProcedure);
-            }
-
+            DataTable dt = exe.SpEXecuteSelectQuery("[spGetUserAllowLevel2Menu]", list, CommandType.StoredProcedure);
             List<Menu> lstMenu = new List<Menu>();
             Menu tempMenu;
             foreach (DataRow item in dt.Rows)
@@ -219,6 +203,56 @@ namespace SM.DataAccess
             }
 
             return lsFormValidate;
+        }
+
+        public List<UserVM> GetUsersData(UserVM model)
+        {
+            List<UserVM> lstUserData = new List<UserVM>();
+            lstUserData = exe.SpExecutesSelect<UserVM, UserVM>("spGetUserData", model, false);
+            return lstUserData;
+        }
+
+        public List<UserRolde> GetUserRoles()
+        {
+            UserRolde model = new UserRolde();
+            List<UserRolde> lstUserRolde = new List<UserRolde>();
+            lstUserRolde = exe.SpExecutesSelect<UserRolde, UserRolde>("spGetUserRoles", model, false);
+            return lstUserRolde;
+        }
+
+        public DBUpdate UpdateUser(User model)
+        {
+            int ReturnID = 0;
+            dBUpdate = new DBUpdate();
+
+            using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required, new System.TimeSpan(0, 15, 0)))
+            {
+                try
+                {
+                    if (model.Mode == 1)
+                    {
+                        ReturnID = (int)exe.SpExecutesGetIdentity<User>("spSaveUser", model, false);
+                    }
+                    else if (model.Mode == 2)
+                    {
+                        ReturnID = model.UserID;
+                        exe.SpExecutes<User>("spEditUser", model, false);
+                    }
+
+                    dBUpdate.ReturnID = ReturnID;
+                    dBUpdate.Update = true;
+
+                    scope.Complete();
+                }
+                catch (Exception ex)
+                {
+                    dBUpdate.ReturnID = ReturnID;
+                    dBUpdate.Update = false;
+                    scope.Dispose();
+                }
+            }
+
+            return dBUpdate;
         }
     }
 }

@@ -27,6 +27,7 @@ namespace SM.UserObjects
         public int EnteredBy { get; set; }
         public DateTime ModifiedOn { get; set; }
         public int ModifiedBy { get; set; }
+        public int Mode { get; set; }
     }
 
     public class UserVM
@@ -34,6 +35,7 @@ namespace SM.UserObjects
         public int UserID { get; set; }
         public string UserName { get; set; }
         public string FirstName { get; set; }
+        public string Password { get; set; }
         public string LastName { get; set; }
         public string UserFullName { get; set; }
         public int UserRoleID { get; set; }
@@ -42,13 +44,15 @@ namespace SM.UserObjects
         public string Photo { get; set; }
         public string Address { get; set; }
         public int CountryID { get; set; }
-        public int CountryName { get; set; }
+        public string CountryName { get; set; }
         public string MobileNo { get; set; }
         public string Email { get; set; }
         public string UserImage { get; set; }
         public bool IsActive { get; set; }
         public string UserStatus { get; set; }
         public string EnteredDate { get; set; }
+        public int ViewTypeID { get; set; }
+        public int Mode { get; set; }
     }
 
     public class UserRolde

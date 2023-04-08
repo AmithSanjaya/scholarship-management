@@ -17,7 +17,7 @@
     <AssemblyName>SM.UI</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -4380,6 +4380,7 @@
     <Content Include="Scripts\PageJs\StudentAchievement.js" />
     <Content Include="Scripts\PageJs\StudentProgress.js" />
     <Content Include="Scripts\PageJs\UserRight.js" />
+    <Content Include="Scripts\PageJs\UsersConfig.js" />
     <Content Include="Uploads\Student\1677668841139.jpg" />
     <Content Include="Uploads\Student\1677672582466.jpg" />
     <Content Include="Uploads\Student\1677673184668.jpg" />
@@ -4432,6 +4433,7 @@
     <Content Include="Views\Form\SponserPaymentInvoices.cshtml" />
     <Content Include="Views\Admin\AddEditUser.cshtml" />
     <Content Include="Views\Admin\UserList.cshtml" />
+    <Content Include="Views\Admin\UserView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

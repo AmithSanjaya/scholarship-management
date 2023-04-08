@@ -3,7 +3,7 @@
     ViewBag.Title = "AddEditUser";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<input type="hidden" id="UserID" />
 <div class="container-fluid">
     <div class="row">
         <div class="col-xl-3 col-lg-4">
@@ -22,9 +22,7 @@
                         </div>
                         <div class="form-group">
                             <label>User Role:</label>
-                            <select name="type" class="selectpicker form-control" data-style="py-0" id="UserRole">
-                                <option>Admin</option>
-                                <option>User</option>
+                            <select name="type" class="selectpicker form-control" data-style="py-0" id="UserRoleID">                               
                             </select>
                         </div>
                         <div class="form-group">
@@ -39,7 +37,7 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <div class="header-title">
-                        <h4 class="card-title">Add New User</h4>
+                        <h4 class="card-title FormHead">Add New User</h4>                        
                     </div>
                     @{ Html.RenderAction("FormButton", "Admin");}
                 </div>
@@ -61,13 +59,7 @@
                                 </div>
                                 <div class="form-group col-sm-12">
                                     <label>Country:</label>
-                                    <select name="type" class="selectpicker form-control" data-style="py-0" id="Country">
-                                        <option>Select Country</option>
-                                        <option>Caneda</option>
-                                        <option>Noida</option>
-                                        <option>USA</option>
-                                        <option>India</option>
-                                        <option>Africa</option>
+                                    <select name="type" class="selectpicker form-control" data-style="py-0" id="Country">                                        
                                     </select>
                                 </div>
                                 <div class="form-group col-md-6">
@@ -103,3 +95,4 @@
     </div>
 </div>
 
+<script src="~/Scripts/PageJs/UsersConfig.js"></script>

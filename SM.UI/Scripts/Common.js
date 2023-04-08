@@ -363,6 +363,30 @@ function GetSponser(SponserPassID) {
 
 }
 
+function GetUserProfile(userID) {
+
+    $('#usermodel').modal();
+
+    var model = {
+        UserID: userID,
+        ViewTypeID: 2
+    }
+
+    ajaxCall('Admin/UsersData', { 'model': model }, function (data) {
+
+        $("h4.mb-1").text(data[0].UserName);
+        document.getElementById("userRole").innerHTML = 'User Role: ' + data[0].UserRoleName;
+        document.getElementById("fbURL").innerHTML = 'Facebook Url: ' + data[0].FacebookUrl;
+        $('td.UserFullName').text(data[0].FirstName + ' ' + data[0].LastName);
+        $('td.UserContactNo').text(data[0].MobileNo);
+        $('td.UserEmail').text(data[0].Email);
+        $('td.UserCountry').text(data[0].CountryName);
+        $('td.UserCreatedOn').text(data[0].EnteredDate);
+
+    });
+
+}
+
 function GetStudentProgressPDF(FileID) {
 
     var site = rootUrl + 'Uploads/StudentProgress/' + FileID+'.pdf';

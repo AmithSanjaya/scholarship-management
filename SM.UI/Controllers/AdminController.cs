@@ -12,6 +12,7 @@ namespace SM.UI.Controllers
     public class AdminController : Controller
     {
         AjaxResponse ajaxResponse;
+        DBUpdate dBUpdate;
         // GET: Admin
 
         public AdminController()
@@ -46,15 +47,65 @@ namespace SM.UI.Controllers
         }
 
         #region User Details
+
+        public JsonResult UsersData(UserVM model)
+        {
+            List<UserVM> lst = new List<UserVM>();
+            lst = new AdminDataAccess().GetUsersData(model);
+            return Json(lst, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult UserRoles()
+        {
+            List<UserRolde> lst = new List<UserRolde>();
+            lst = new AdminDataAccess().GetUserRoles();
+            return Json(lst, JsonRequestBehavior.AllowGet);
+        }         
         public ActionResult AddEditUser()
         {
             return View();
         }
 
+        public ActionResult UserView()
+        {
+            List<UserVM> lst = new List<UserVM>();
+            UserVM model = new UserVM { };
+            lst = new AdminDataAccess().GetUsersData(model);
+            return PartialView("UserView", lst);
+        }
+
         public ActionResult UserList()
         {
-            return View();
+            UserVM model = new UserVM();
+            model.UserID = 0;            
+            List<UserVM> lst = new AdminDataAccess().GetUsersData(model);
+            return View(lst);
         }
+
+        public JsonResult UpdateUser(User model)
+        {
+            ajaxResponse = new AjaxResponse();
+            dBUpdate = new DBUpdate();
+            model.EnteredBy = UserDetail.UserID;
+            model.FacebookUrl = String.IsNullOrEmpty(model.FacebookUrl) ? "" : model.FacebookUrl;
+            model.Photo = String.IsNullOrEmpty(model.Photo) ? "" : model.Photo;
+            dBUpdate = new AdminDataAccess().UpdateUser(model);
+
+            if (dBUpdate.Update)
+            {
+                ajaxResponse.IsValid = true;
+                ajaxResponse.ReturnID = dBUpdate.ReturnID;
+                ajaxResponse.SucessMessage = "Updated Successfully..!";
+            }
+            else
+            {
+                ajaxResponse.IsValid = false;
+                ajaxResponse.ErrorMessage = "Error in Data Updating..!";
+            }
+
+            return Json(ajaxResponse, JsonRequestBehavior.AllowGet);
+        }
+
 
         public ActionResult UserRight()
         {
