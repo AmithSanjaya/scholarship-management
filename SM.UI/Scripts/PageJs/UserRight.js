@@ -10,8 +10,9 @@
 
     CreateAllMenus();
 
-    //Call this function with user click event
-    SetUserRights();
+    $('#Userlist').on('change', function () {
+        SetUserRights();
+    });
 
 });
 

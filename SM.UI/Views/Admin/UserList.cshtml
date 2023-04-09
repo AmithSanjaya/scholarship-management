@@ -39,8 +39,14 @@
                                     <tr>
                                         <td hidden>@d.UserID</td>
                                         <td class="text-center">
-                                            <img class="rounded img-fluid avatar-40"
-                                                 src="../assets/images/user/01.jpg" alt="profile">
+                                            @if (d.ImageName != "" && d.ImageName != null)
+                                            {
+                                                <img src="~/Uploads/User/@d.ImageName" class="rounded img-fluid avatar-40" alt="profile">
+                                            }
+                                            else
+                                            {
+                                                <img src="~/assets/images/user/11.png" class="rounded img-fluid avatar-40" alt="profile">
+                                            }
                                         </td>
                                         <td>@d.UserName</td>
                                         <td>@d.MobileNo</td>

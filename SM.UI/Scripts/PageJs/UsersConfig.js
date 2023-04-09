@@ -16,6 +16,7 @@
 });
 
 function FillUser() {
+
     $("#UserID").val(0);
     $("#UserRoleID").val(0);
     $('#UserRoleID').selectpicker('refresh');
@@ -43,6 +44,14 @@ function FillUser() {
         }
 
         ajaxCall('Admin/UsersData', { 'model': model }, function (data) {
+
+            $Img = GetUserImage(data[0].Photo);
+            $('#imgPreview').attr("src", $Img);
+
+            if ((data[0].Photo != "") && (data[0].Photo != null)) {
+                $('#UserImgID').val(data[0].Photo);
+            }
+
             $("#UserID").val(data[0].UserID);
             $("h4.FormHead").text('Edit User');
             $("#UserRoleID").val(data[0].UserRoleID);
@@ -98,7 +107,7 @@ function Save() {
 
     var model = {};
 
-    //if (ValidateSave()) {
+    if (ValidateSave()) {
         MsgBox('Confirm', 'Do you want to Save ?', function () {
 
             var model = new User();
@@ -108,34 +117,53 @@ function Save() {
 
             if (model.UserID != 0) {
                 model.Mode = 2;
+                model.Photo = $('#StudentImgID').val();
             }
 
-            ajaxCall('Admin/UpdateUser', { 'model': model }, function (data) {
+            if ($('#photo').val() != "" && $('#photo').val() != null) {
+                model.Photo = Date.now();
+            } 
 
-                if (data.IsValid) {
-                    $("#UserID").val(0);
-                    $("#UserRoleID").val(0);
-                    $('#UserRoleID').selectpicker('refresh');
+            if (UploadFile(2, 'photo', model.Photo, 'User', false)) {
 
-                    $("#FacebookUrl").val('');
-                    $("#FirstName").val('');
-                    $("#LastName").val('');
-                    $("#UserAddress").val('');
-                    $("#Country").val(0);
-                    $('#Country').selectpicker('refresh');
+                ajaxCall('Admin/UpdateUser', { 'model': model }, function (data) {
 
-                    $("#MobileNo").val('');
-                    $("#Email").val('');
-                    $("#UserName").val('');
-                    $("#Password").val('');
-                    $("#RePassword").val('');
-                    MsgBox('Info', data.SucessMessage, '', true);
-                } else {
-                    MsgBox('Error', data.ErrorMessage, '', false);
-                }
-            });
+                    if (data.IsValid) {
+                        MsgBox('Info', data.SucessMessage, '', true);
+                    } else {
+                        MsgBox('Error', data.ErrorMessage, '', false);
+                    }
+                });
+            }
+
         }, true);
-    //}
+    }
+}
+
+function ValidateSave() {
+
+    var msg = "";
+    var lstMsg = [];
+
+    var model = {
+        MenuID: 26
+    }
+
+    ajaxCallWithoutAsync('Admin/FormValidate', { 'model': model }, function (data) {
+        lstMsg = ValidateError(data);
+    });
+
+    if (lstMsg["Msg"] != "") {
+        msg = lstMsg["Msg"];
+
+        MsgBox('Error', msg, '', false);
+        document.getElementById(lstMsg["FieldName"]).focus();
+
+        return false;
+    }
+
+
+    return true;
 }
 
 var FormValidate = function () {

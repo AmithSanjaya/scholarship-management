@@ -280,6 +280,18 @@ function GetStudentImage(Img) {
 
 }
 
+function GetUserImage(Img) {
+
+    if (Img == "" || Img == null) {
+        $Img = "../assets/images/user/11.png";
+    } else {
+        $Img = "../Uploads/User/" + Img + ".jpg";
+    }
+
+    return $Img;
+
+}
+
 function MsgBox(Type, Msg, callback, reload) {
 
     var title_hr = '';

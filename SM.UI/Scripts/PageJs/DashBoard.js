@@ -3,37 +3,54 @@
     //Top Widget
     var model = {};
 
-    ajaxCall('Admin/GetTopWidget', { 'model': model }, function (data) {
+    setInterval(function () {
 
-        $("h4.TotalStudent").text(data[0].StudentCount);
-        $("h4.TotalSponser").text(data[0].SponsorsCount);
-        $("h4.BirthDays").text(data[0].BirthDayCount);
+        ajaxCall('Admin/GetTopWidget', { 'model': model }, function (data) {
 
-    });
+            $("h4.TotalStudent").text(data[0].StudentCount);
+            $("h4.TotalSponser").text(data[0].SponsorsCount);
+            $("h4.BirthDays").text(data[0].BirthDayCount);
+
+        });
+    }, 10000);
 
     //Middle Widget
+
+    $ImgName = "<img src='../assets/images/loader.gif' class='img-fluid rounded avatar-50 mr-3' alt='image'>";
+    $("span.Middle").html($ImgName);
+
+    setInterval(function () {
+
+    $("#layout1-chart-5").html("");
     if (jQuery("#layout1-chart-5").length) {
 
         var lstSponser = [];
         var lstStudent = [];
         var lstMonth = [];
 
-        ajaxCallWithoutAsync('Admin/GetMiddleWidget', { 'model': model }, function (data) {
+            ajaxCallWithoutAsync('Admin/GetMiddleWidget', { 'model': model }, function (data) {
 
-            $('#SponserPercentage').text(data[0].SponserPercentage+'%');
-            $('#StudentPercentage').text(data[0].StudentPercentage+'%');
+                $("span.Middle").text("");
+                $("span.MiddleProgressLeft1").html("<span class='progress-bar'></span>");
+                $("span.MiddleProgressRight1").html("<span class='progress-bar'></span>");
 
-            $("h5.StudentCount").text(data[0].TotalStudentCount);
-            $("h5.SponserCount").text(data[0].TotalSponserCount);
+                $("span.MiddleProgressLeft2").html("<span class='progress-bar'></span>");
+                $("span.MiddleProgressRight2").html("<span class='progress-bar'></span>");
 
-            for (var i = 0; i < data.length; i++) {
+                $('#SponserPercentage').text(data[0].SponserPercentage+'%');
+                $('#StudentPercentage').text(data[0].StudentPercentage+'%');
 
-                lstMonth.push(data[i].MonthName);
-                lstSponser.push(data[i].SponserCount);
-                lstStudent.push(data[i].StudentCount);
-            }
+                $("h5.StudentCount").text(data[0].TotalStudentCount);
+                $("h5.SponserCount").text(data[0].TotalSponserCount);
 
-        });
+                for (var i = 0; i < data.length; i++) {
+
+                    lstMonth.push(data[i].MonthName);
+                    lstSponser.push(data[i].SponserCount);
+                    lstStudent.push(data[i].StudentCount);
+                }
+
+            });
 
         options = {
             series: [{
@@ -102,56 +119,76 @@
         document.addEventListener('ChangeColorMode', function (e) {
             apexChartUpdate(chart, e.detail)
         })
-    }
-
-    //Right 1 Widget
-    ajaxCall('Admin/GetRight1Widget', { 'model': model }, function (data) {
-
-        $("span.R1p1").text(data[0].SponserStudentNotLinkCount);
-        $("span.R1p2").text(data[0].SponserDueCount);
-        $("span.R1p3").text(data[0].EmailtobeSendSponserCount);
-        $("span.R1p4").text(data[0].StudentPhotoCount);
-
-        if (data[0].SponserStudentNotLinkCount == 0)
-            $('#a1').attr("href", "javascript:void(0);");
-
-        if (data[0].SponserDueCount == 0)
-            $('#a2').attr("href", "javascript:void(0);");
-
-        if (data[0].EmailtobeSendSponserCount == 0)
-            $('#a3').attr("href", "javascript:void(0);");
-
-        if (data[0].StudentPhotoCount == 0)
-            $('#a4').attr("href", "javascript:void(0);");
-
-    });
-
-    //Right 2 Widget
-    ajaxCall('Admin/GetRight2Widget', { 'model': model }, function (data) {
-
-        for (var i = 0; i < data.length; i++) {
-
-            $Img = GetStudentImage(data[i].Photo);
-
-            $StudentName = data[i].FullName;
-            $Distict = data[i].DistrictName;
-            $Country = data[i].CountryName;
-            $ImgName = "<img src='" + $Img + "' class='img-fluid rounded avatar-50 mr-3' alt='image'>";
-            $BeforeDays = data[i].BeforeDays;
-
-            $("#Right2Widget").append(
-                '<a href="#" class="list-group-item list-group-item-action" onclick = "GetStudent(' + data[i].StudentID + ')">' +
-                '<div class="d-flex w-100 justify-content-between">' +
-                '<div class="d-flex align-items-center">' + $ImgName +
-                '<div>' + $StudentName +
-                '<p class="mb-0"><small>' + $Distict + ', ' + $Country+'</small></p>'+
-                '</div>' +
-                '</div>' +
-                '<small class="text-muted">' + $BeforeDays + ' days ago</small>' +
-                '</div>' +
-                '</a>');
         }
 
-    });
+    }, 10000);
+
+    //Right 1 Widget
+    $ImgName = "<img src='../assets/images/loader.gif' class='img-fluid rounded avatar-50 mr-3' alt='image'>";
+    $("span.Right1").html($ImgName);
+
+    setInterval(function () {
+
+        ajaxCall('Admin/GetRight1Widget', { 'model': model }, function (data) {
+
+            $("span.Right1").text("");
+
+            $("span.R1p1").text(data[0].SponserStudentNotLinkCount);
+            $("span.R1p2").text(data[0].SponserDueCount);
+            $("span.R1p3").text(data[0].EmailtobeSendSponserCount);
+            $("span.R1p4").text(data[0].StudentPhotoCount);
+
+            if (data[0].SponserStudentNotLinkCount == 0)
+                $('#a1').attr("href", "javascript:void(0);");
+
+            if (data[0].SponserDueCount == 0)
+                $('#a2').attr("href", "javascript:void(0);");
+
+            if (data[0].EmailtobeSendSponserCount == 0)
+                $('#a3').attr("href", "javascript:void(0);");
+
+            if (data[0].StudentPhotoCount == 0)
+                $('#a4').attr("href", "javascript:void(0);");
+
+        });
+
+    }, 7000);
+
+    //Right 2 Widget
+    $ImgName = "<img src='../assets/images/loader.gif' class='img-fluid rounded avatar-50 mr-3' alt='image'>";
+    $("span.Right2").html($ImgName);
+
+    setInterval(function () {
+
+        ajaxCall('Admin/GetRight2Widget', { 'model': model }, function (data) {
+
+            $("span.Right2").text("");
+            $("#Right2Widget").html("");
+
+            for (var i = 0; i < data.length; i++) {
+
+                $Img = GetStudentImage(data[i].Photo);
+
+                $StudentName = data[i].FullName;
+                $Distict = data[i].DistrictName;
+                $Country = data[i].CountryName;
+                $ImgName = "<img src='" + $Img + "' class='img-fluid rounded avatar-50 mr-3' alt='image'>";
+                $BeforeDays = data[i].BeforeDays;
+
+                $("#Right2Widget").append(
+                    '<a href="#" class="list-group-item list-group-item-action" onclick = "GetStudent(' + data[i].StudentID + ')">' +
+                    '<div class="d-flex w-100 justify-content-between">' +
+                    '<div class="d-flex align-items-center">' + $ImgName +
+                    '<div>' + $StudentName +
+                    '<p class="mb-0"><small>' + $Distict + ', ' + $Country+'</small></p>'+
+                    '</div>' +
+                    '</div>' +
+                    '<small class="text-muted">' + $BeforeDays + ' days ago</small>' +
+                    '</div>' +
+                    '</a>');
+            }
+
+        });
+    }, 10000);
 
 });

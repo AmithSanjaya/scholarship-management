@@ -42,6 +42,7 @@ namespace SM.UserObjects
         public string UserRoleName { get; set; }
         public string FacebookUrl { get; set; }
         public string Photo { get; set; }
+        public string ImageName { get; set; }
         public string Address { get; set; }
         public int CountryID { get; set; }
         public string CountryName { get; set; }

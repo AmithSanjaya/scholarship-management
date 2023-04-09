@@ -4438,6 +4438,7 @@
     <Content Include="Views\Admin\Right1Widget.cshtml" />
     <Content Include="Views\Admin\Right2Widget.cshtml" />
     <Content Include="Views\Admin\TopWidget.cshtml" />
+    <Content Include="Views\SM\Dashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -109,11 +109,11 @@ function ValidateSave() {
         MenuID: 10
     }
 
-    ajaxCall('Admin/FormValidate', { 'model': model }, function (data) {
+    ajaxCallWithoutAsync('Admin/FormValidate', { 'model': model }, function (data) {
         lstMsg = ValidateError(data);
     });
 
-    if (lstMsg["Msg"] != "" && lstMsg["Msg"] != Null) {
+    if (lstMsg["Msg"] != "") {
         msg = lstMsg["Msg"];
 
         MsgBox('Error', msg, '', false);

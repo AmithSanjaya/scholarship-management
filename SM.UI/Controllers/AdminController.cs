@@ -345,7 +345,12 @@ namespace SM.UI.Controllers
                 {
                     strPath = "~/Uploads/StudentProgress/";
                     InputFileName = fileName + ".pdf";
-                }                
+                }
+                else if (UploadType == "User")
+                {
+                    strPath = "~/Uploads/User/";
+                    InputFileName = fileName + ".jpg";
+                }
 
                 var ServerSavePath = Path.Combine(Server.MapPath(strPath) + InputFileName);
                 file.SaveAs(ServerSavePath);
