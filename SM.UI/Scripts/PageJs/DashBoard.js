@@ -112,6 +112,18 @@
         $("span.R1p3").text(data[0].EmailtobeSendSponserCount);
         $("span.R1p4").text(data[0].StudentPhotoCount);
 
+        if (data[0].SponserStudentNotLinkCount == 0)
+            $('#a1').attr("href", "javascript:void(0);");
+
+        if (data[0].SponserDueCount == 0)
+            $('#a2').attr("href", "javascript:void(0);");
+
+        if (data[0].EmailtobeSendSponserCount == 0)
+            $('#a3').attr("href", "javascript:void(0);");
+
+        if (data[0].StudentPhotoCount == 0)
+            $('#a4').attr("href", "javascript:void(0);");
+
     });
 
     //Right 2 Widget

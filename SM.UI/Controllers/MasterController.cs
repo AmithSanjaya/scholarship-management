@@ -34,6 +34,15 @@ namespace SM.UI.Controllers
             return Json(lst, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult PayType()
+        {
+            PayType model = new PayType();
+            List<PayType> lst = new List<PayType>();
+            lst = new MasterDataAccess().PayType(model);
+
+            return Json(lst, JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult EmailTemplateDetail(EmailTemplate model)
         {
             List<EmailTemplate> lst = new List<EmailTemplate>();

@@ -33,7 +33,9 @@ namespace SM.UserObjects
         public string InvoiceDateName { get; set; }
         public int SponserID { get; set; }
         public int CurrencyID { get; set; }
+        public int PayTypeID { get; set; }
         public string CurrencyName { get; set; }
+        public string PayTypeName { get; set; }
         public string SponserName { get; set; }
         public decimal PaidAmount { get; set; }
         public string PaidAmountName { get; set; }
@@ -49,6 +51,7 @@ namespace SM.UserObjects
         public string ReferenceNo { get; set; }
         public DateTime InvoiceDate { get; set; }
         public int CurrencyID { get; set; }
+        public int PayTypeID { get; set; }
         public decimal PaidAmount { get; set; }
         public decimal DueAmount { get; set; }
         public List<SponserStudent> lstStudentSponser { get; set; }
@@ -56,5 +59,11 @@ namespace SM.UserObjects
         public int Year { get; set; }
         public int Month { get; set; }
         public string EffectivePeriod { get; set; }
+    }
+
+    public class PayType
+    {
+        public int PayTypeID { get; set; }
+        public string PayTypeName { get; set; }
     }
 }

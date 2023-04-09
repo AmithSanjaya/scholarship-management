@@ -1,5 +1,7 @@
 ﻿$(document).ready(function () {
+
     var model = {};
+
     ajaxCall('Admin/UsersData', { 'model': model }, function (data) {
         BindDropDown("Userlist", "UserName", "UserID", data);
     });

@@ -25,6 +25,13 @@ namespace SM.DataAccess
             return lst;
         }
 
+        public List<PayType> PayType(PayType model)
+        {
+            List<PayType> lst = new List<PayType>();
+            lst = exe.SpExecutesSelect<PayType, PayType>("spGetPayType", model, false);
+            return lst;
+        }
+
         #region Email Templete
         public List<EmailTemplate> EmailTemplateDetail(EmailTemplate model)
         {

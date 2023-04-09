@@ -98,6 +98,12 @@ namespace SM.UI.Controllers
 
             model.StudentID = 0;
             model.ViewTypeID = 1;
+            model.Mode = 0;
+
+            if ((Request.QueryString["Mode"] != null && Request.QueryString["Mode"] != ""))
+            {
+                model.Mode = Convert.ToInt32(Request.QueryString["Mode"].ToString());
+            }
 
             lstStudent = new StudentDataAccess().StudentData(model);
             return View(lstStudent);

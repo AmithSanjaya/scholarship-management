@@ -113,7 +113,7 @@ function ValidateSave() {
         lstMsg = ValidateError(data);
     });
 
-    if (lstMsg["Msg"] != "") {
+    if (lstMsg["Msg"] != "" && lstMsg["Msg"] != Null) {
         msg = lstMsg["Msg"];
 
         MsgBox('Error', msg, '', false);

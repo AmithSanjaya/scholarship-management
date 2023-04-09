@@ -1,6 +1,7 @@
 ﻿$(document).ready(function () {
 
     var model = {}
+
     ajaxCall('Master/Currency', { 'model': model }, function (data) {
         BindDropDown("PayCurrency", "CurrencyName", "CurrencyID", data);
     });
@@ -244,6 +245,7 @@ var StudentSponser = function () {
         this.Year = 0,
         this.Month = 0,
         this.CurrencyID = 0,
+        this.PayTypeID = 0,
         this.DueAmount = 0,
         this.InvoiceNo = "",
         this.InvoiceDate = "",
@@ -253,6 +255,7 @@ var StudentSponser = function () {
     this.Fill = function () {
         this.SponserID = $("#cmbSponser").val(),
         this.CurrencyID = $("#PayCurrency").val(),
+        this.PayTypeID = $("#PayType").val(),
         this.ReferenceNo = $("#InvoiceNo").val(),
         this.InvoiceDate = $("#InvoiceDate").val()
     }

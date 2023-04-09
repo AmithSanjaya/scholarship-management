@@ -112,8 +112,21 @@
     });
 
     FillStudent();
-
+    FillStudentMode();
 });
+
+function FillStudentMode() {
+
+    let searchParams = new URLSearchParams(window.location.search)
+
+    if (searchParams.has('Mode') == true) {
+
+        let param = searchParams.get('Mode');
+        if (param == 1) {
+            $("h4.ModeHead").text('Student Details (Pending Photo Uploads)');
+        }
+    }
+}
 
 function FillStudent() {
 
