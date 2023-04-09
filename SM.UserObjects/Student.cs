@@ -209,6 +209,7 @@ namespace SM.UserObjects
 
         public decimal PaidAmount { get; set; }
         public decimal DueAmount { get; set; }
+        public int BeforeDays { get; set; }
     }
 
     public class StudentAchievement : User

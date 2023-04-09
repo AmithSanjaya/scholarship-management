@@ -46,6 +46,64 @@ namespace SM.UI.Controllers
             return PartialView("FormButton");
         }
 
+        #region DashBoard
+        public ActionResult TopWidget()
+        {
+            return PartialView("TopWidget");
+        }
+
+        public ActionResult MiddleWidget()
+        {
+            return PartialView("MiddleWidget");
+        }
+
+        public ActionResult Right1Widget()
+        {
+            return PartialView("Right1Widget");
+        }
+
+        public ActionResult Right2Widget()
+        {
+            return PartialView("Right2Widget");
+        }
+
+        public JsonResult GetTopWidget()
+        {
+            List<TopWidget> lst = new List<TopWidget>();
+            TopWidget model = new TopWidget { };
+
+            lst = new AdminDataAccess().GetTopWidget(model);
+            return Json(lst, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetMiddleWidget()
+        {
+            List<MiddleWidget> lst = new List<MiddleWidget>();
+            MiddleWidget model = new MiddleWidget { };
+
+            lst = new AdminDataAccess().GetMiddleWidget(model);
+            return Json(lst, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetRight1Widget()
+        {
+            List<Right1Widget> lst = new List<Right1Widget>();
+            Right1Widget model = new Right1Widget { };
+
+            lst = new AdminDataAccess().GetRight1Widget(model);
+            return Json(lst, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetRight2Widget()
+        {
+            List<StudentVM> lst = new List<StudentVM>();
+            StudentVM model = new StudentVM { };
+
+            lst = new AdminDataAccess().GetRight2Widget(model);
+            return Json(lst, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
         #region User Details
 
         public JsonResult UsersData(UserVM model)

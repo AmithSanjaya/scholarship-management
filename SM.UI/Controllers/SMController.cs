@@ -19,6 +19,11 @@ namespace SM.UI.Controllers
             return View();
         }
 
+        public ActionResult Dashboard()
+        {
+            return View();
+        }
+
         #region Sponsers
         public ActionResult SponsershipDetails()
         {

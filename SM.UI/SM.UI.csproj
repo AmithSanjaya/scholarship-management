@@ -17,7 +17,7 @@
     <AssemblyName>SM.UI</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -4434,6 +4434,10 @@
     <Content Include="Views\Admin\AddEditUser.cshtml" />
     <Content Include="Views\Admin\UserList.cshtml" />
     <Content Include="Views\Admin\UserView.cshtml" />
+    <Content Include="Views\Admin\MiddleWidget.cshtml" />
+    <Content Include="Views\Admin\Right1Widget.cshtml" />
+    <Content Include="Views\Admin\Right2Widget.cshtml" />
+    <Content Include="Views\Admin\TopWidget.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

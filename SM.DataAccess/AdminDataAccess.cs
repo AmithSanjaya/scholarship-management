@@ -21,6 +21,40 @@ namespace SM.DataAccess
             exe = new Execute();
         }
 
+        #region Dashboard
+        public List<TopWidget> GetTopWidget(TopWidget model)
+        {
+            List<TopWidget> lst = new List<TopWidget>();
+            lst = exe.SpExecutesSelect<TopWidget, TopWidget>("spDashBoardTopWidget", model, false);
+
+            return lst;
+        }
+
+        public List<MiddleWidget> GetMiddleWidget(MiddleWidget model)
+        {
+            List<MiddleWidget> lst = new List<MiddleWidget>();
+            lst = exe.SpExecutesSelect<MiddleWidget, MiddleWidget>("spDashBoardMiddleWidget", model, false);
+
+            return lst;
+        }
+
+        public List<Right1Widget> GetRight1Widget(Right1Widget model)
+        {
+            List<Right1Widget> lst = new List<Right1Widget>();
+            lst = exe.SpExecutesSelect<Right1Widget, Right1Widget>("spDashBoardRight1Widget", model, false);
+
+            return lst;
+        }
+
+        public List<StudentVM> GetRight2Widget(StudentVM model)
+        {
+            List<StudentVM> lst = new List<StudentVM>();
+            lst = exe.SpExecutesSelect<StudentVM, StudentVM>("spDashBoardRight2Widget", model, false);
+
+            return lst;
+        }
+        #endregion
+
         public List<Menu> GetUserAllowedMenu(Menu obj)
         {
             List<SqlParameter> list = new List<SqlParameter>();

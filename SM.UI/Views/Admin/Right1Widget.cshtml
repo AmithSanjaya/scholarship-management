@@ -1,0 +1,13 @@
+﻿<div class="card-header d-flex justify-content-between">
+    <div class="header-title">
+        <h4 class="card-title">To do List</h4>
+    </div>
+</div>
+<div class="card-body">
+    <div class="iq-todo-page">
+        <p><a href="@Url.Action("LinkSponserStudent", "Form", new {})"><i class="ri-checkbox-blank-circle-fill text-success"></i> Sponser/Student Not Assigned <span class="badge badge-success ml-2 float-right R1p1"></span></a></p>
+        <p><a href="@Url.Action("SponserPayment", "Form", new { Mode=1 })"><i class="ri-checkbox-blank-circle-fill text-warning"></i> Sponser Due Payments <span class="badge badge-warning ml-2 float-right R1p2"></span></a></p>
+        <p><a href="javascript:void(0);"><i class="ri-checkbox-blank-circle-fill text-danger"></i> Email Send to Sponsers <span class="badge badge-danger ml-2 float-right R1p3"></span> </a></p>
+        <p><a href="@Url.Action("StudentDetail", "Form", new { Mode=1 })"><i class="ri-checkbox-blank-circle-fill text-primary"></i> Pending Student's Photo uploads <span class="badge badge-primary ml-2 float-right R1p4"></span></a></p>
+    </div>
+</div>
