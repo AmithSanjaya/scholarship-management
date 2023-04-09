@@ -56,6 +56,7 @@
     <Compile Include="SponserStudent.cs" />
     <Compile Include="Student.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="UserMenu.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

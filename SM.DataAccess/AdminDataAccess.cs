@@ -288,5 +288,64 @@ namespace SM.DataAccess
 
             return dBUpdate;
         }
+
+        public DBUpdate SaveUserAccessRights(UserMenu model)
+        {
+            int ReturnID = 0;
+            dBUpdate = new DBUpdate();
+            using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required, new System.TimeSpan(0, 15, 0)))
+            {
+                try
+                {
+                    UserMenu userMenu = new UserMenu();
+                    userMenu = model.lstMenu[0];
+                    exe.SpExecutes<UserMenu>("spRemoveExistingUserRights", userMenu, false);
+
+                    ReturnID = model.lstMenu[0].UserID;
+                    foreach (UserMenu obj in model.lstMenu)
+                    {
+                        exe.SpExecutes<UserMenu>("spSaveUserRights", obj, false);
+                    }
+
+                    dBUpdate.ReturnID = ReturnID;
+                    dBUpdate.Update = true;
+
+                    scope.Complete();
+                }
+                catch (Exception ex)
+                {
+                    dBUpdate.ReturnID = ReturnID;
+                    dBUpdate.Update = false;
+                    scope.Dispose();
+                }
+            }
+
+            return dBUpdate;
+        }
+
+        public DBUpdate DeleteUserAccessRights(UserMenu model)
+        {
+            int ReturnID = 0;
+            dBUpdate = new DBUpdate();
+            using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required, new System.TimeSpan(0, 15, 0)))
+            {
+                try
+                {
+                    exe.SpExecutes<UserMenu>("spRemoveExistingUserRights", model, false);
+                    ReturnID = model.UserID;                  
+                    dBUpdate.ReturnID = ReturnID;
+                    dBUpdate.Update = true;
+                    scope.Complete();
+                }
+                catch (Exception ex)
+                {
+                    dBUpdate.ReturnID = ReturnID;
+                    dBUpdate.Update = false;
+                    scope.Dispose();
+                }
+            }
+
+            return dBUpdate;
+        }
     }
 }

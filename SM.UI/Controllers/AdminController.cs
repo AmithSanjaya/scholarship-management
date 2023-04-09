@@ -185,6 +185,58 @@ namespace SM.UI.Controllers
             lstMenu = new AdminDataAccess().GetUserAllowedMenu(model);
             return Json(lstMenu, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult SaveUserAccessRights(UserMenu model)
+        {
+            ajaxResponse = new AjaxResponse();
+            dBUpdate = new DBUpdate();
+            model.EnteredBy = UserDetail.UserID;
+
+            foreach (UserMenu obj in model.lstMenu)
+            {
+                obj.EnteredBy = UserDetail.UserID;
+                
+            }
+            dBUpdate = new AdminDataAccess().SaveUserAccessRights(model);
+
+            if (dBUpdate.Update)
+            {
+                ajaxResponse.IsValid = true;
+                ajaxResponse.ReturnID = dBUpdate.ReturnID;
+                ajaxResponse.SucessMessage = "Saved Successfully..!";
+            }
+            else
+            {
+                ajaxResponse.IsValid = false;
+                ajaxResponse.ErrorMessage = "Error in Data Saving..!";
+            }
+
+            return Json(ajaxResponse, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult DeleteUserAccessRights(UserMenu model)
+        {
+            ajaxResponse = new AjaxResponse();
+            dBUpdate = new DBUpdate();
+            model.EnteredBy = UserDetail.UserID;
+            
+            dBUpdate = new AdminDataAccess().DeleteUserAccessRights(model);
+
+            if (dBUpdate.Update)
+            {
+                ajaxResponse.IsValid = true;
+                ajaxResponse.ReturnID = dBUpdate.ReturnID;
+                ajaxResponse.SucessMessage = "Deleted Successfully..!";
+            }
+            else
+            {
+                ajaxResponse.IsValid = false;
+                ajaxResponse.ErrorMessage = "Error in Data Deleting..!";
+            }
+
+            return Json(ajaxResponse, JsonRequestBehavior.AllowGet);
+        }
+
         #endregion
 
         /// <summary>

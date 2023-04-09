@@ -20,6 +20,7 @@ namespace SM.UserObjects
         public string CSSClass { get; set; }
         public List<Menu> ChildMenus { get; set; }
         public int userID { get; set; }
+        public int EnteredBy { get; set; }
         public List<Menu> lstMenu { get; set; }
     }
 }
