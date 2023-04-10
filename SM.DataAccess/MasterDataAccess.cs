@@ -73,5 +73,34 @@ namespace SM.DataAccess
             return dBUpdate;
         }
         #endregion
+
+        #region Document
+        public DBUpdate UpdateDocument(Document model)
+        {
+            dBUpdate = new DBUpdate();
+
+            using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required, new System.TimeSpan(0, 15, 0)))
+            {
+                try
+                {
+                    if (model.Mode == 1)
+                    {
+                        exe.SpExecutes<Document>("spSaveDocument", model, false);
+                    }
+
+                    dBUpdate.Update = true;
+
+                    scope.Complete();
+                }
+                catch (Exception ex)
+                {
+                    dBUpdate.Update = false;
+                    scope.Dispose();
+                }
+            }
+
+            return dBUpdate;
+        }
+        #endregion
     }
 }

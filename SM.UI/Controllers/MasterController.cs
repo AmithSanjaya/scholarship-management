@@ -72,5 +72,34 @@ namespace SM.UI.Controllers
             return Json(ajaxResponse, JsonRequestBehavior.AllowGet);
         }
         #endregion
+
+        #region Document Detail
+        public ActionResult AddDocument()
+        {
+            return View();
+        }
+
+        public JsonResult UpdateDocument(Document model)
+        {
+            ajaxResponse = new AjaxResponse();
+            dBUpdate = new DBUpdate();
+            model.EnteredBy = UserDetail.UserID;
+
+            dBUpdate = new MasterDataAccess().UpdateDocument(model);
+
+            if (dBUpdate.Update)
+            {
+                ajaxResponse.IsValid = true;
+                ajaxResponse.SucessMessage = "Updated Successfully..!";
+            }
+            else
+            {
+                ajaxResponse.IsValid = false;
+                ajaxResponse.ErrorMessage = "Error in Data Updating..!";
+            }
+
+            return Json(ajaxResponse, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
     }
 }

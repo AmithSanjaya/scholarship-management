@@ -53,6 +53,14 @@ namespace SM.DataAccess
 
             return lst;
         }
+
+        public List<WidgetInterval> GetWidgetInterval(WidgetInterval model)
+        {
+            List<WidgetInterval> lst = new List<WidgetInterval>();
+            lst = exe.SpExecutesSelect<WidgetInterval, WidgetInterval>("spGetDashboardWidgetInterval", model, false);
+
+            return lst;
+        }
         #endregion
 
         public List<Menu> GetUserAllowedMenu(Menu obj)

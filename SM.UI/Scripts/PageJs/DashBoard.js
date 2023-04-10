@@ -1,8 +1,22 @@
 ﻿$(document).ready(function () {
 
-    //Top Widget
     var model = {};
 
+    $TopWidgetInterval = 0;
+    $MiddleWidgetInterval = 0;
+    $Right1WidgetInterval = 0;
+    $Right2WidgetInterval = 0;
+
+    ajaxCallWithoutAsync('Admin/GetWidgetInterval', { 'model': model }, function (data) {
+
+        $TopWidgetInterval = data[0].TopWidget;
+        $MiddleWidgetInterval = data[0].MiddleWidget;
+        $Right1WidgetInterval = data[0].Right1Widget;
+        $Right2WidgetInterval = data[0].Right2Widget;
+
+    });
+
+    //Top Widget
     setInterval(function () {
 
         ajaxCall('Admin/GetTopWidget', { 'model': model }, function (data) {
@@ -12,7 +26,7 @@
             $("h4.BirthDays").text(data[0].BirthDayCount);
 
         });
-    }, 10000);
+    }, $TopWidgetInterval);
 
     //Middle Widget
 
@@ -121,7 +135,7 @@
         })
         }
 
-    }, 10000);
+    }, $MiddleWidgetInterval);
 
     //Right 1 Widget
     $ImgName = "<img src='../assets/images/loader.gif' class='img-fluid rounded avatar-50 mr-3' alt='image'>";
@@ -152,7 +166,7 @@
 
         });
 
-    }, 7000);
+    }, $Right1WidgetInterval);
 
     //Right 2 Widget
     $ImgNameWidget = "<img src='../assets/images/loader.gif' class='img-fluid rounded avatar-50 mr-3' alt='image'>";
@@ -191,6 +205,6 @@
             $("span.Right2").text("");
         });
         $("span.Right2").text("");
-    }, 10000);
+    }, $Right2WidgetInterval);
 
 });

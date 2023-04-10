@@ -102,6 +102,15 @@ namespace SM.UI.Controllers
             lst = new AdminDataAccess().GetRight2Widget(model);
             return Json(lst, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult GetWidgetInterval()
+        {
+            List<WidgetInterval> lst = new List<WidgetInterval>();
+            WidgetInterval model = new WidgetInterval { };
+
+            lst = new AdminDataAccess().GetWidgetInterval(model);
+            return Json(lst, JsonRequestBehavior.AllowGet);
+        }
         #endregion
 
         #region User Details
@@ -350,6 +359,10 @@ namespace SM.UI.Controllers
                 {
                     strPath = "~/Uploads/User/";
                     InputFileName = fileName + ".jpg";
+                }
+                else if (UploadType == "Document")
+                {
+                    strPath = "~/Uploads/Document/";
                 }
 
                 var ServerSavePath = Path.Combine(Server.MapPath(strPath) + InputFileName);

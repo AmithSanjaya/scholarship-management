@@ -4368,6 +4368,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\PageJs\DashBoard.js" />
+    <Content Include="Scripts\PageJs\Document.js" />
     <Content Include="Scripts\PageJs\EmailTemplate.js" />
     <Content Include="Scripts\PageJs\Layout.js" />
     <Content Include="Scripts\PageJs\LinkSponserStudent.js" />
@@ -4440,6 +4441,7 @@
     <Content Include="Views\Admin\Right2Widget.cshtml" />
     <Content Include="Views\Admin\TopWidget.cshtml" />
     <Content Include="Views\SM\Dashboard.cshtml" />
+    <Content Include="Views\Master\AddDocument.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
