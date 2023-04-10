@@ -418,7 +418,6 @@ function UploadFile(UploadFileType, FileName, FileID, UploadType, Required = fal
 
     var formdata = new FormData();
 
-    if (Required) {
         if ((fileInput.files.length > 0)) {
 
             for (i = 0; i < fileInput.files.length; i++) {
@@ -451,10 +450,10 @@ function UploadFile(UploadFileType, FileName, FileID, UploadType, Required = fal
 
             return true;
         }
-        else {
-            MsgBox('Error', 'File Type Not Uploaded..!', '', false);
-            return false;
-        }
+        else if (Required) {
+                MsgBox('Error', 'File Type Not Uploaded..!', '', false);
+                return false;
     }
+
     return true;
 }

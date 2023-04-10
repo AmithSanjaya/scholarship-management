@@ -12,6 +12,17 @@
 
     $('#UserRole').selectpicker('refresh');
 
+    $('#photo').change(function () {
+        const file = this.files[0];
+        if (file) {
+            let reader = new FileReader();
+            reader.onload = function (event) {
+                $('#imgPreview').attr('src', event.target.result);
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+
     FillUser();
 });
 
@@ -124,7 +135,7 @@ function Save() {
                 model.Photo = Date.now();
             } 
 
-            if (UploadFile(2, 'photo', model.Photo, 'User', false)) {
+            if (UploadFile(1, 'photo', model.Photo, 'User', false)) {
 
                 ajaxCall('Admin/UpdateUser', { 'model': model }, function (data) {
 

@@ -155,14 +155,15 @@
     }, 7000);
 
     //Right 2 Widget
-    $ImgName = "<img src='../assets/images/loader.gif' class='img-fluid rounded avatar-50 mr-3' alt='image'>";
-    $("span.Right2").html($ImgName);
+    $ImgNameWidget = "<img src='../assets/images/loader.gif' class='img-fluid rounded avatar-50 mr-3' alt='image'>";
+    $("span.Right2").html($ImgNameWidget);
 
     setInterval(function () {
 
+        $("span.Right2").html($ImgNameWidget);
+
         ajaxCall('Admin/GetRight2Widget', { 'model': model }, function (data) {
 
-            $("span.Right2").text("");
             $("#Right2Widget").html("");
 
             for (var i = 0; i < data.length; i++) {
@@ -187,8 +188,9 @@
                     '</div>' +
                     '</a>');
             }
-
+            $("span.Right2").text("");
         });
+        $("span.Right2").text("");
     }, 10000);
 
 });
