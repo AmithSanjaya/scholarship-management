@@ -4442,6 +4442,7 @@
     <Content Include="Views\Admin\TopWidget.cshtml" />
     <Content Include="Views\SM\Dashboard.cshtml" />
     <Content Include="Views\Master\AddDocument.cshtml" />
+    <Content Include="Views\Master\DocumentDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

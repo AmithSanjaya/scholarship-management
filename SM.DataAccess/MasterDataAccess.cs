@@ -75,6 +75,12 @@ namespace SM.DataAccess
         #endregion
 
         #region Document
+        public List<Document> GetDocumentDetial(Document model)
+        {
+            List<Document> lst = new List<Document>();
+            lst = exe.SpExecutesSelect<Document, Document>("spGetDocumentDetail", model, false);
+            return lst;
+        }
         public DBUpdate UpdateDocument(Document model)
         {
             dBUpdate = new DBUpdate();

@@ -11,7 +11,16 @@
 
             model.Mode = 1;
 
-            if (UploadFile(3, 'customFile', model.Attachment, 'Document', false)) {
+            if ($('#customFile').val() != "" && $('#customFile').val() != null) {
+                model.Attachment = Date.now();
+            }
+
+            if (UploadFile(3, 'customFile', model.Attachment, 'Document', true)) {
+
+                var fileInput = document.getElementById('customFile');
+                var fileType = fileInput.files[0].name.split('.').pop();
+
+                model.Attachment = model.Attachment + '.' + fileType;
 
                 ajaxCall('Master/UpdateDocument', { 'model': model }, function (data) {
 

@@ -431,6 +431,7 @@ function UploadFile(UploadFileType, FileName, FileID, UploadType, Required = fal
                     formdata.append(fileInput.files[i].name, fileInput.files[i]);
                     formdata.append('FileID', FileID);
                     formdata.append('UploadType', UploadType);
+                    formdata.append('FileType', fileType);
                 }
                 else {
                     MsgBox('Error', 'File Type Not Supported..!', '', false);

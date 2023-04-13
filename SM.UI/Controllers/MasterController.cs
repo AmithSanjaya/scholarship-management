@@ -79,6 +79,14 @@ namespace SM.UI.Controllers
             return View();
         }
 
+        public ActionResult DocumentDetail()
+        {
+            Document model = new Document();
+            model.DocumentID = 0;
+            List<Document> lst = new MasterDataAccess().GetDocumentDetial(model);
+            return View(lst);
+        }
+
         public JsonResult UpdateDocument(Document model)
         {
             ajaxResponse = new AjaxResponse();

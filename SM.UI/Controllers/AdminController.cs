@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using SM.DataAccess;
 using System.IO;
+using System.Configuration;
 
 namespace SM.UI.Controllers
 {
@@ -331,6 +332,8 @@ namespace SM.UI.Controllers
 
         public JsonResult Upload()
         {
+            string UploadURL = ConfigurationManager.AppSettings["Uploads"];
+
             for (int i = 0; i < Request.Files.Count; i++)
             {
                 HttpPostedFileBase file = Request.Files[i];
@@ -338,7 +341,8 @@ namespace SM.UI.Controllers
                 int fileSize = file.ContentLength;
                 string fileName = file.FileName;
                 string UploadType = Request["UploadType"].ToString();
-                string strPath = "";
+                string FileType = Request["FileType"].ToString();
+                string strPath = UploadURL;
 
                 fileName = Request["FileID"].ToString();
                 string mimeType = file.ContentType;
@@ -347,25 +351,26 @@ namespace SM.UI.Controllers
 
                 if (UploadType == "Student")
                 {
-                    strPath = "~/Uploads/Student/";
+                    strPath += "Student\\";
                     InputFileName = fileName + ".jpg";
                 }
                 else if (UploadType == "StudentProgress")
                 {
-                    strPath = "~/Uploads/StudentProgress/";
+                    strPath += "StudentProgress\\";
                     InputFileName = fileName + ".pdf";
                 }
                 else if (UploadType == "User")
                 {
-                    strPath = "~/Uploads/User/";
+                    strPath += "User\\";
                     InputFileName = fileName + ".jpg";
                 }
                 else if (UploadType == "Document")
                 {
-                    strPath = "~/Uploads/Document/";
+                    strPath += "Document\\";
+                    InputFileName = fileName + "." + FileType;
                 }
 
-                var ServerSavePath = Path.Combine(Server.MapPath(strPath) + InputFileName);
+                string ServerSavePath = Path.Combine(strPath + InputFileName);
                 file.SaveAs(ServerSavePath);
             }
 
