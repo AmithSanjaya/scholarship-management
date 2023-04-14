@@ -4375,6 +4375,7 @@
     <Content Include="Scripts\PageJs\Login.js" />
     <Content Include="Scripts\PageJs\SendApplicationSponser.js" />
     <Content Include="Scripts\PageJs\SendPaymentNotification.js" />
+    <Content Include="Scripts\PageJs\SendProgressNotification.js" />
     <Content Include="Scripts\PageJs\Sponser.js" />
     <Content Include="Scripts\PageJs\SponserPayment.js" />
     <Content Include="Scripts\PageJs\SponserPaymentInvoices.js" />
@@ -4443,6 +4444,7 @@
     <Content Include="Views\SM\Dashboard.cshtml" />
     <Content Include="Views\Master\AddDocument.cshtml" />
     <Content Include="Views\Master\DocumentDetail.cshtml" />
+    <Content Include="Views\Form\SendProgressNotification.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

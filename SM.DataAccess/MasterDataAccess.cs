@@ -18,6 +18,13 @@ namespace SM.DataAccess
             exe = new Execute();
         }
 
+        public List<EffectiveYears> EffectiveYears(EffectiveYears model)
+        {
+            List<EffectiveYears> lst = new List<EffectiveYears>();
+            lst = exe.SpExecutesSelect<EffectiveYears, EffectiveYears>("spGetEffectiveYears", model, false);
+            return lst;
+        }
+
         public List<Currency> Currency(Currency model)
         {
             List<Currency> lst = new List<Currency>();

@@ -366,6 +366,35 @@ namespace SM.UI.Controllers
         }
         #endregion
 
+        #region Send Progress Notificatiion
+        public ActionResult SendProgressNotification()
+        {
+            return View();
+        }
+
+        public JsonResult SaveStudentProgressNotification(StudentProgressNotification model)
+        {
+            ajaxResponse = new AjaxResponse();
+            dBUpdate = new DBUpdate();
+            model.EnteredBy = UserDetail.UserID;
+
+            dBUpdate = new StudentDataAccess().SaveStudentProgressNotification(model);
+
+            if (dBUpdate.Update)
+            {
+                ajaxResponse.IsValid = true;
+                ajaxResponse.SucessMessage = "Updated Successfully..!";
+            }
+            else
+            {
+                ajaxResponse.IsValid = false;
+                ajaxResponse.ErrorMessage = "Error in Data Updating..!";
+            }
+
+            return Json(ajaxResponse, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
         #region Payment of Sponser
         public ActionResult SponserPayment()
         {

@@ -11,6 +11,11 @@ namespace SM.UserObjects
 
     }
 
+    public class EffectiveYears
+    {
+        public int Year { get; set; }
+    }
+
     public class Currency
     {
         public int CurrencyID { get; set; }

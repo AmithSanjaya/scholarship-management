@@ -138,6 +138,10 @@ namespace SM.DataAccess
             {
                 lstStudentData = exe.SpExecutesSelect<StudentVM, StudentVM>("spStudentAllData", model, false);
             }
+            else if (model.ViewTypeID == 10)
+            {
+                lstStudentData = exe.SpExecutesSelect<StudentVM, StudentVM>("spStudentPendingProgressData", model, false);
+            }
 
             return lstStudentData;
         }
@@ -231,6 +235,34 @@ namespace SM.DataAccess
 
             return dBUpdate;
         }
+
+        public DBUpdate SaveStudentProgressNotification(StudentProgressNotification model)
+        {
+            dBUpdate = new DBUpdate();
+
+            using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required, new System.TimeSpan(0, 15, 0)))
+            {
+                try
+                {
+                    foreach (StudentProgressNotification obj in model.lstStudentProgressNotification)
+                    {
+                        obj.EnteredBy = model.EnteredBy;
+                        exe.SpExecutes<StudentProgressNotification>("spSaveStudentProgressNotification", obj, false);
+                    }
+
+                    dBUpdate.Update = true;
+                    scope.Complete();
+                }
+                catch (Exception ex)
+                {
+                    dBUpdate.Update = false;
+                    scope.Dispose();
+                }
+            }
+
+            return dBUpdate;
+        }
+        
 
     }
 }

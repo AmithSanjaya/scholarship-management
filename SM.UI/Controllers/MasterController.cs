@@ -25,6 +25,15 @@ namespace SM.UI.Controllers
             return View();
         }
 
+        public JsonResult EffectiveYears()
+        {
+            EffectiveYears model = new EffectiveYears();
+            List<EffectiveYears> lst = new List<EffectiveYears>();
+            lst = new MasterDataAccess().EffectiveYears(model);
+
+            return Json(lst, JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult Currency()
         {
             Currency model = new Currency();
