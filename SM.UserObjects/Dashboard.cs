@@ -37,4 +37,12 @@ namespace SM.UserObjects
         public int EmailtobeSendSponserCount { get; set; }
         public int StudentPhotoCount { get; set; }
     }
+
+    public class WidgetInterval
+    {
+        public int TopWidget { get; set; }
+        public int MiddleWidget { get; set; }
+        public int Right1Widget { get; set; }
+        public int Right2Widget { get; set; }
+    }
 }

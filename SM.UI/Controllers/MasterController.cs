@@ -25,6 +25,15 @@ namespace SM.UI.Controllers
             return View();
         }
 
+        public JsonResult EffectiveYears()
+        {
+            EffectiveYears model = new EffectiveYears();
+            List<EffectiveYears> lst = new List<EffectiveYears>();
+            lst = new MasterDataAccess().EffectiveYears(model);
+
+            return Json(lst, JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult Currency()
         {
             Currency model = new Currency();
@@ -57,6 +66,43 @@ namespace SM.UI.Controllers
             model.EnteredBy = UserDetail.UserID;
 
             dBUpdate = new MasterDataAccess().UpdateEmailTemplate(model);
+
+            if (dBUpdate.Update)
+            {
+                ajaxResponse.IsValid = true;
+                ajaxResponse.SucessMessage = "Updated Successfully..!";
+            }
+            else
+            {
+                ajaxResponse.IsValid = false;
+                ajaxResponse.ErrorMessage = "Error in Data Updating..!";
+            }
+
+            return Json(ajaxResponse, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+        #region Document Detail
+        public ActionResult AddDocument()
+        {
+            return View();
+        }
+
+        public ActionResult DocumentDetail()
+        {
+            Document model = new Document();
+            model.DocumentID = 0;
+            List<Document> lst = new MasterDataAccess().GetDocumentDetial(model);
+            return View(lst);
+        }
+
+        public JsonResult UpdateDocument(Document model)
+        {
+            ajaxResponse = new AjaxResponse();
+            dBUpdate = new DBUpdate();
+            model.EnteredBy = UserDetail.UserID;
+
+            dBUpdate = new MasterDataAccess().UpdateDocument(model);
 
             if (dBUpdate.Update)
             {

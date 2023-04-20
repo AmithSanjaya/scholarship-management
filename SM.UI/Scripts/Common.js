@@ -425,11 +425,13 @@ function UploadFile(UploadFileType, FileName, FileID, UploadType, Required = fal
                 var fileType = fileInput.files[i].name.split('.').pop();
 
                 if (((UploadFileType == 2) & (fileType === 'pdf')) ||
-                    ((UploadFileType == 1) & (fileType === 'jpg' || fileType === 'jpeg' || fileType === 'png'))) {
+                    ((UploadFileType == 1) & (fileType === 'jpg' || fileType === 'jpeg' || fileType === 'png')) ||
+                    ((UploadFileType == 3) & (fileType === 'pdf' || fileType === 'doc' || fileType === 'docx' || fileType === 'xls' || fileType === 'xlsx'))) {
 
                     formdata.append(fileInput.files[i].name, fileInput.files[i]);
                     formdata.append('FileID', FileID);
                     formdata.append('UploadType', UploadType);
+                    formdata.append('FileType', fileType);
                 }
                 else {
                     MsgBox('Error', 'File Type Not Supported..!', '', false);

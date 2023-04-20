@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewBag.Title = "AddDocument";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <input type="hidden" id="StudentSponserID" />
+
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                    <div class="header-title">
+                        <h4 class="card-title">Add Document</h4>
+                    </div>
+                    @{ Html.RenderAction("FormButton", "Admin");}
+                </div>
+                <div class="card-body">
+                    <form action="page-list-customers.html" data-toggle="validator">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Document Title :</label>
+                                    <input type="text" class="form-control" id="DocumentTitle">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Document Description :</label>
+                                    <textarea class="form-control" rows="3" id="DocumentDescription"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Attachment :</label>
+                                    <div class="custom-file mb-3">
+                                        <input type="file" class="custom-file-input" id="customFile" name="customFile">
+                                        <label class="custom-file-label" for="customFile" id="customFileLabel" name="customFileLabel">Choose file</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- Page end  -->
+        </div>
+    </div>
+</div>
+
+<script async src="~/Scripts/PageJs/Document.js"></script>
+

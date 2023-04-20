@@ -1,0 +1,58 @@
+﻿@model IEnumerable<SM.UserObjects.Document>
+@{
+    ViewBag.Title = "DocumentDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                    <div class="header-title">
+                        <h4 class="card-title">Document Details</h4>
+                    </div>
+                    <a href="@Url.Action("AddDocument", "Master")" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Add Document</a>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive rounded mb-3">
+
+                        <table class="data-tables table mb-0 tbl-server-info" id="UsersList" name="UsersList">
+                            <thead>
+                                <tr class="ligth">
+                                    <th hidden>DocumentID</th>
+                                    <th>DocumentTitle</th>
+                                    <th>Added On</th>
+                                    <th style="min-width: 100px">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var d in Model)
+                                {
+                                    <tr>
+                                        <td hidden>@d.DocumentID</td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div>
+                                                    @d.DocumentTitle
+                                                    <p class="mb-0"><small>@d.DocumentDescription</small></p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>@d.AddedDateName</td>
+                                        <td>
+                                            <div class="d-flex align-items-center list-action">
+                                                <a href="~/Uploads/Document/@d.Attachment" download=@d.DocumentTitle.Replace(' ','_')_@d.Attachment>Download</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

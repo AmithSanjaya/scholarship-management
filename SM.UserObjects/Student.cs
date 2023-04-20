@@ -210,6 +210,9 @@ namespace SM.UserObjects
         public decimal PaidAmount { get; set; }
         public decimal DueAmount { get; set; }
         public int BeforeDays { get; set; }
+        public int ProgressSend { get; set; }
+        public int ProgressNotification { get; set; }
+        public int ProgressYear { get; set; }
     }
 
     public class StudentAchievement : User
@@ -255,5 +258,16 @@ namespace SM.UserObjects
         public string FilePath { get; set; }
         public string EffectiveMonth { get; set; }
         
+    }
+
+    public class StudentProgressNotification : User
+    {
+        public int StudentProgressNotificationID { get; set; }
+        public int EffectiveYear { get; set; }
+        public int StudentID { get; set; }
+        public int ProgressSend { get; set; }
+        public int ProgressNotification { get; set; }
+
+        public List<StudentProgressNotification> lstStudentProgressNotification { get; set; }
     }
 }

@@ -18,6 +18,13 @@ namespace SM.DataAccess
             exe = new Execute();
         }
 
+        public List<EffectiveYears> EffectiveYears(EffectiveYears model)
+        {
+            List<EffectiveYears> lst = new List<EffectiveYears>();
+            lst = exe.SpExecutesSelect<EffectiveYears, EffectiveYears>("spGetEffectiveYears", model, false);
+            return lst;
+        }
+
         public List<Currency> Currency(Currency model)
         {
             List<Currency> lst = new List<Currency>();
@@ -57,6 +64,41 @@ namespace SM.DataAccess
                     else if (model.Mode == 2)
                     {
                         exe.SpExecutes<EmailTemplate>("spEditEmailTemplate", model, false);
+                    }
+
+                    dBUpdate.Update = true;
+
+                    scope.Complete();
+                }
+                catch (Exception ex)
+                {
+                    dBUpdate.Update = false;
+                    scope.Dispose();
+                }
+            }
+
+            return dBUpdate;
+        }
+        #endregion
+
+        #region Document
+        public List<Document> GetDocumentDetial(Document model)
+        {
+            List<Document> lst = new List<Document>();
+            lst = exe.SpExecutesSelect<Document, Document>("spGetDocumentDetail", model, false);
+            return lst;
+        }
+        public DBUpdate UpdateDocument(Document model)
+        {
+            dBUpdate = new DBUpdate();
+
+            using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required, new System.TimeSpan(0, 15, 0)))
+            {
+                try
+                {
+                    if (model.Mode == 1)
+                    {
+                        exe.SpExecutes<Document>("spSaveDocument", model, false);
                     }
 
                     dBUpdate.Update = true;

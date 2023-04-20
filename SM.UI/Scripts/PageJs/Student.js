@@ -295,7 +295,7 @@ function Save() {
                 model.Photo = Date.now();
             }              
 
-            if (UploadFile(2, 'photo', model.Photo, 'Student', false)) {
+            if (UploadFile(1, 'photo', model.Photo, 'Student', false)) {
 
                 var rowCount = document.getElementById("tblDetails").rows.length;
                 var rowData = document.getElementById("tblDetails");

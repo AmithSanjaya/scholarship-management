@@ -51,6 +51,15 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.ReportViewer.Common, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.2012.Runtime.11.0.3452.0\lib\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.2012.Runtime.11.0.3452.0\lib\Microsoft.ReportViewer.ProcessingObjectModel.DLL</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.2012.Runtime.11.0.3452.0\lib\Microsoft.ReportViewer.WebForms.DLL</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -124,11 +133,19 @@
     <Compile Include="Controllers\FormController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MasterController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\SMController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\Report.aspx.cs">
+      <DependentUpon>Report.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\Report.aspx.designer.cs">
+      <DependentUpon>Report.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\css\backend-plugin.min.css" />
@@ -4354,6 +4371,7 @@
     <None Include="Properties\PublishProfiles\scholarship-management - ReadOnly - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\scholarship-management - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Reports\Report.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\Common.js" />
@@ -4368,12 +4386,14 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\PageJs\DashBoard.js" />
+    <Content Include="Scripts\PageJs\Document.js" />
     <Content Include="Scripts\PageJs\EmailTemplate.js" />
     <Content Include="Scripts\PageJs\Layout.js" />
     <Content Include="Scripts\PageJs\LinkSponserStudent.js" />
     <Content Include="Scripts\PageJs\Login.js" />
     <Content Include="Scripts\PageJs\SendApplicationSponser.js" />
     <Content Include="Scripts\PageJs\SendPaymentNotification.js" />
+    <Content Include="Scripts\PageJs\SendProgressNotification.js" />
     <Content Include="Scripts\PageJs\Sponser.js" />
     <Content Include="Scripts\PageJs\SponserPayment.js" />
     <Content Include="Scripts\PageJs\SponserPaymentInvoices.js" />
@@ -4440,6 +4460,10 @@
     <Content Include="Views\Admin\Right2Widget.cshtml" />
     <Content Include="Views\Admin\TopWidget.cshtml" />
     <Content Include="Views\SM\Dashboard.cshtml" />
+    <Content Include="Views\Master\AddDocument.cshtml" />
+    <Content Include="Views\Master\DocumentDetail.cshtml" />
+    <Content Include="Views\Form\SendProgressNotification.cshtml" />
+    <Content Include="Views\Report\StudentList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
