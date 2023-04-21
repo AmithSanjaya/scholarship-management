@@ -14,5 +14,10 @@ namespace SM.UserObjects
             DataSet = 2,
             DataRow = 3
         }
+
+        public enum ReportName
+        {
+            StudentDetailReport =1
+        }
     }
 }

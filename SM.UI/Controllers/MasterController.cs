@@ -13,6 +13,10 @@ namespace SM.UI.Controllers
         AjaxResponse ajaxResponse;
         DBUpdate dBUpdate;
 
+        /// <summary>
+        /// dfldfkdn jfdkjflkdsf kfdjlkfjdslfjdslfjdslfjlsd jlfdjlfjdslf sdlj ljfldsjlfdsfs
+        /// </summary>
+        /// <returns></returns>
         // GET: Master
         public ActionResult Index()
         {

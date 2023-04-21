@@ -16,6 +16,11 @@
                     </div>
                     @{ Html.RenderAction("FormButton", "Admin");}
                 </div>
+                <div class="form-group pull-right">
+                    <button type="button" class="btn btn-success" onclick="Report()" id="btnSave">
+                        <i class="fa fa-download"> </i> Preview
+                    </button>
+                </div>
                 <div class="card-body">
                     <form action="page-list-customers.html" data-toggle="validator">
 

@@ -96,6 +96,77 @@ namespace SM.DataAccess
             }
         }
 
+        public DataTable SpExecutesSelectDatatable<M>(string cmdText, M paramn, bool ignoreModelParrameterCase)
+        {
+            DataSet ds = new DataSet();
+            SqlDataAdapter ad = new SqlDataAdapter();
+            SqlCmd = new SqlCommand();
+            SqlConnection conn = null;
+            try
+            {
+                conn = DBConnection.OpenConnectiion();
+                SqlCmd.Connection = conn;
+                SqlCmd.CommandText = cmdText;
+                SqlCmd.CommandType = CommandType.StoredProcedure;
+                SqlCmd.CommandTimeout = 10000;
+
+                if (SqlCmd.Connection.State != ConnectionState.Open)
+                    return null;
+
+                SqlCommandBuilder.DeriveParameters(SqlCmd);
+                PropertyInfo[] Props = typeof(M).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+
+                foreach (SqlParameter prr in SqlCmd.Parameters)
+                {
+                    bool found = false;
+                    if (prr.ParameterName.ToUpper() == "@RETURN_VALUE")
+                        continue;
+                    for (int i = 0; i < Props.Length && !found; i++)
+                    {
+                        string prName = "@" + Props[i].Name;
+
+                        if (ignoreModelParrameterCase)
+                        {
+                            if (prr.ParameterName.ToUpper() == prName.ToUpper())
+                            {
+                                prr.Value = Props[i].GetValue(paramn, null);
+                                found = true;
+                            }
+                        }
+                        else
+                        {
+                            if (prr.ParameterName == prName)
+                            {
+                                PropertyInfo px = Props[i];
+                                prr.Value = Props[i].GetValue(paramn, null);
+                                found = true;
+                            }
+                        }
+                    }
+                }
+                ad = new SqlDataAdapter(SqlCmd);
+                ad.Fill(ds);
+                ad.Dispose();
+                conn.Close();
+
+                DataTable datatable = ds.Tables[0];
+
+                return datatable;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                if (conn != null && conn.State == ConnectionState.Open)
+                    conn.Close();
+                if (conn != null)
+                    conn.Dispose();
+                SqlCmd = null;
+            }
+        }
+
         public void SpExecutes<M>(string cmdText, M paramn, bool ignoreModelParrameterCase)
         {
             DataSet ds = new DataSet();
