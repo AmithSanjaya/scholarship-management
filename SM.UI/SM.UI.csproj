@@ -4406,6 +4406,7 @@
     <Content Include="Scripts\PageJs\Student.js" />
     <Content Include="Scripts\PageJs\StudentAchievement.js" />
     <Content Include="Scripts\PageJs\StudentDetailReport.js" />
+    <Content Include="Scripts\PageJs\StudentPayment.js" />
     <Content Include="Scripts\PageJs\StudentProgress.js" />
     <Content Include="Scripts\PageJs\UserRight.js" />
     <Content Include="Scripts\PageJs\UsersConfig.js" />
@@ -4471,6 +4472,8 @@
     <Content Include="Views\Master\DocumentDetail.cshtml" />
     <Content Include="Views\Form\SendProgressNotification.cshtml" />
     <Content Include="Views\Report\StudentDetailReport.cshtml" />
+    <Content Include="Views\Form\StudentPayment.cshtml" />
+    <Content Include="Views\Form\StudentPaymentBankProcess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

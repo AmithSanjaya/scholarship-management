@@ -262,7 +262,49 @@ namespace SM.DataAccess
 
             return dBUpdate;
         }
-        
 
+        public DBUpdate SaveStudentPaymentDetails(StudentPaymentVM model)
+        {
+            int ReturnID = 0;
+
+            dBUpdate = new DBUpdate();
+            SponserStudentVM modelVM = new SponserStudentVM();
+
+            using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required, new System.TimeSpan(0, 15, 0)))
+            {
+                try
+                {
+                    exe.SpExecutes<StudentPaymentVM>("spUpdateStudentPayment", model, false);
+
+                    foreach (StudentPaymentVM obj in model.lstStudentPay)
+                    {
+                        obj.EnteredBy = model.EnteredBy;
+                        obj.Year = model.Year;
+                        obj.Month = model.Month;
+                        exe.SpExecutes<StudentPaymentVM>("spSaveStudentPayment", obj, false);
+                    }
+
+                    dBUpdate.ReturnID = ReturnID;
+                    dBUpdate.Update = true;
+
+                    scope.Complete();
+                }
+                catch (Exception ex)
+                {
+                    dBUpdate.ReturnID = ReturnID;
+                    dBUpdate.Update = false;
+                    scope.Dispose();
+                }
+            }
+
+            return dBUpdate;
+        }
+
+        public List<StudentPaymentVM> StudentPaymentData(StudentPaymentVM model)
+        {
+            List<StudentPaymentVM> lst = new List<StudentPaymentVM>();
+            lst = exe.SpExecutesSelect<StudentPaymentVM, StudentPaymentVM>("spStudentPaymentData", model, false);
+            return lst;
+        }
     }
 }

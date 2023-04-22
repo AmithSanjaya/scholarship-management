@@ -1,0 +1,134 @@
+﻿
+@{
+    ViewBag.Title = "StudentPayment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="modal fade" id="AddGrid" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="popup text-left">
+                    <h4 class="mb-3">Add Payment to Student</h4>
+                    <input type="hidden" id="StudentID" />
+                    <div class="content create-workform bg-body">
+                        <div class="pb-3">
+
+                            <div class="form-group">
+                                <label>Payment Amount :</label>
+                                <input class="form-control" id="PayAmount" type="number">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" onclick="AddToGridFromModel()" data-dismiss="modal">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        @{ Html.RenderAction("StudentView", "Form");}
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                    <div class="header-title">
+                        <h4 class="card-title">Student Payment</h4>
+                    </div>
+                    @{ Html.RenderAction("FormButton", "Admin");}
+                </div>
+                <div class="card-body">
+                    <form action="page-list-customers.html" data-toggle="validator">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Effective Month :</label>
+                                    <input type="month" class="form-control" id="EffectiveMonth">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg-12">
+                    <div class="table-responsive rounded mb-3">
+                        <table class="data-tables table mb-0 tbl-server-info">
+                            <thead class="bg-white text-uppercase">
+                                <tr class="ligth ligth-data">
+                                    <th hidden>StudentID</th>
+                                    <th>Student Name</th>
+                                    <th>Gender</th>
+                                    <th>District</th>
+                                    <th>School Name</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="ligth-body">
+                                @foreach (var d in Model)
+                                {
+                                    //"@(Url.Action(item.Action, item.Controller) == Request.Url.AbsolutePath ? "active" : string.Empty) <tr class="@if (d.bIsActive == false) { "table-secondary" }@">"
+                                    <tr class="@(d.bIsActive == false ? "table-secondary" : string.Empty)">
+                                        <td hidden>@d.StudentID</td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                @if (d.ImageName != "" && d.ImageName != null)
+                                                {
+                                                    <img src="~/Uploads/Student/@d.ImageName" class="img-fluid rounded avatar-50 mr-3" alt="image">
+                                                }
+                                                else
+                                                {
+                                                    <img src="~/assets/images/user/11.png" class="img-fluid rounded avatar-50 mr-3" alt="image">
+                                                }
+                                                <div>
+                                                    @d.StudentName
+                                                    <p class="mb-0"><small>@d.CountryName</small></p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>@d.GenderName</td>
+                                        <td>@d.DistrictName</td>
+                                        <td>@d.SchoolName</td>
+                                        <td>
+                                            <div class="d-flex align-items-center list-action">
+                                                <a class="badge badge-info mr-2" data-placement="top" title="" data-original-title="View"
+                                                   data-toggle="tooltip" onclick="GetStudent(@d.StudentID)"><i class="ri-eye-line mr-0"></i></a>
+                                                <button type="button" class="btn btn-primary btn-sm mr-2" onclick="AddToGrid(event)"> Add Payment</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <hr />
+                    <p>Payment Details</p>
+                    <hr />
+
+                    <div class="table-responsive rounded mb-3">
+                        <table class="data-table table mb-0 tbl-server-info">
+                            <thead class="bg-white text-uppercase">
+                                <tr class="ligth ligth-data">
+                                    <th hidden>StudentID</th>
+                                    <th>Student Name</th>
+                                    <th>Country</th>
+                                    <th>Paid Amount</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="ligth-body" id="StudentPaymentGrid"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Page end  -->
+</div>
+
+<script async src="~/Scripts/PageJs/StudentPayment.js"></script>
+

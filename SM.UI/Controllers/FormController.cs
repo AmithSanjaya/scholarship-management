@@ -560,5 +560,58 @@ namespace SM.UI.Controllers
             return Json(ajaxResponse, JsonRequestBehavior.AllowGet);
         }
         #endregion
+
+        #region Student Payment
+        public ActionResult StudentPayment()
+        {
+            StudentVM model = new StudentVM();
+
+            List<StudentVM> lstStudent = new List<StudentVM>();
+
+            model.StudentID = 0;
+            model.ViewTypeID = 1;
+            model.Mode = 0;
+            model.ViewMode = 1;
+
+            lstStudent = new StudentDataAccess().StudentData(model);
+            return View(lstStudent);
+        }
+
+        public JsonResult StudentPaymentData(StudentPaymentVM model)
+        {
+            List<StudentPaymentVM> lst = new List<StudentPaymentVM>();
+            lst = new StudentDataAccess().StudentPaymentData(model);
+            return Json(lst, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult SaveStudentPaymentDetails(StudentPaymentVM model)
+        {
+            ajaxResponse = new AjaxResponse();
+            dBUpdate = new DBUpdate();
+            model.EnteredBy = UserDetail.UserID;
+
+            dBUpdate = new StudentDataAccess().SaveStudentPaymentDetails(model);
+
+            if (dBUpdate.Update)
+            {
+                ajaxResponse.IsValid = true;
+                ajaxResponse.SucessMessage = "Updated Successfully..!";
+            }
+            else
+            {
+                ajaxResponse.IsValid = false;
+                ajaxResponse.ErrorMessage = "Error in Data Updating..!";
+            }
+
+            return Json(ajaxResponse, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+        #region Bank Process for Student
+        public ActionResult StudentPaymentBankProcess()
+        {
+            return View();
+        }
+        #endregion
     }
 }
