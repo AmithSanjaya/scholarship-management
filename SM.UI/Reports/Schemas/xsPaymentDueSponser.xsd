@@ -18,6 +18,8 @@
 				<xs:element name="DueAmount" type="xs:decimal" />
 				<xs:element name="DueDate" type="xs:dateTime" />
 				<xs:element name="LastPaidDate" type="xs:dateTime" />
+				<xs:element name="CompanyName" type="xs:string" />
+				<xs:element name="VendorName" type="xs:string" />
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
