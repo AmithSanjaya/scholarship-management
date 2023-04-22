@@ -151,6 +151,7 @@
             $("span.R1p2").text(data[0].SponserDueCount);
             $("span.R1p3").text(data[0].EmailtobeSendSponserCount);
             $("span.R1p4").text(data[0].StudentPhotoCount);
+            $("span.R1p5").text(data[0].StudentAnnualProgressCount);
 
             if (data[0].SponserStudentNotLinkCount == 0)
                 $('#a1').attr("href", "javascript:void(0);");
@@ -163,6 +164,9 @@
 
             if (data[0].StudentPhotoCount == 0)
                 $('#a4').attr("href", "javascript:void(0);");
+
+            if (data[0].StudentAnnualProgressCount == 0)
+                $('#a5').attr("href", "javascript:void(0);");
 
         });
 

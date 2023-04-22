@@ -36,6 +36,7 @@ namespace SM.UserObjects
         public int SponserDueCount { get; set; }
         public int EmailtobeSendSponserCount { get; set; }
         public int StudentPhotoCount { get; set; }
+        public int StudentAnnualProgressCount { get; set; }
     }
 
     public class WidgetInterval
