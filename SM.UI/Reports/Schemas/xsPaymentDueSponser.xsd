@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="xsPaymentDueSponser"
+    targetNamespace="http://tempuri.org/xsPaymentDueSponser.xsd"
+    elementFormDefault="qualified"
+    xmlns="http://tempuri.org/xsPaymentDueSponser.xsd"
+    xmlns:mstns="http://tempuri.org/xsPaymentDueSponser.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+	<xs:element name="PaymentDueSponser">
+		<xs:complexType>
+			<xs:sequence>				
+				<xs:element name="SponserName" type="xs:string" />
+				<xs:element name="Country" type="xs:string" />
+				<xs:element name="Email" type="xs:string" />
+				<xs:element name="Address" type="xs:string" />				
+				<xs:element name="ContactNo" type="xs:string" />
+				<xs:element name="PaymentScheme" type="xs:string" />
+				<xs:element name="DueAmount" type="xs:decimal" />
+				<xs:element name="DueDate" type="xs:dateTime" />
+				<xs:element name="LastPaidDate" type="xs:dateTime" />
+				<xs:element name="CompanyName" type="xs:string" />
+				<xs:element name="VendorName" type="xs:string" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
+

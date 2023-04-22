@@ -1,14 +1,29 @@
 ﻿$(document).ready(function () {
+
     ajaxCall("Admin/CheckSession", {}, onLogin);
 
+    Welcome();
+    setInterval(function () {
+
+        Welcome();
+
+    }, 7000);
+});
+
+function Welcome() {
+
+    $Msg = new Date($.now()).toDateString();
+
+    $('#HomeDisplay').text($Msg);
+
     $thehours = new Date().getHours();
-    $themessage='';
+    $themessage = '';
     $morning = ('Good morning');
     $afternoon = ('Good afternoon');
     $evening = ('Good evening');
 
     if ($thehours >= 0 && $thehours < 12) {
-        $themessage =$morning;
+        $themessage = $morning;
     } else if ($thehours >= 12 && $thehours < 17) {
         $themessage = $afternoon;
 
@@ -16,8 +31,9 @@
         $themessage = $evening;
     }
 
-    $('#greeting').append($themessage);
-});
+    $('#greeting').text($themessage);
+
+}
 
 function onLogin(message) {
 

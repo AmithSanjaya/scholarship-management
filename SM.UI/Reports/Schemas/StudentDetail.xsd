@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="StudentDetail"
+    targetNamespace="http://tempuri.org/StudentDetail.xsd"
+    elementFormDefault="qualified"
+    xmlns="http://tempuri.org/StudentDetail.xsd"
+    xmlns:mstns="http://tempuri.org/StudentDetail.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+  <xs:element name="StudentDetail">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="StudentName" type="xs:string" />
+        <xs:element name="Country" type="xs:string" />
+        <xs:element name="District" type="xs:string" />
+        <xs:element name="Address" type="xs:string" />
+        <xs:element name="School" type="xs:string" />
+        <xs:element name="ContactNo" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

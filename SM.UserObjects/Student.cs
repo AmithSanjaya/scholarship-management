@@ -213,6 +213,8 @@ namespace SM.UserObjects
         public int ProgressSend { get; set; }
         public int ProgressNotification { get; set; }
         public int ProgressYear { get; set; }
+
+        public int ViewMode { get; set; }
     }
 
     public class StudentAchievement : User
@@ -269,5 +271,15 @@ namespace SM.UserObjects
         public int ProgressNotification { get; set; }
 
         public List<StudentProgressNotification> lstStudentProgressNotification { get; set; }
+    }
+
+    public class StudentPaymentVM : User
+    {
+        public int StudentID { get; set; }
+        public int Year { get; set; }
+        public int Month { get; set; }
+        public decimal PaidAmount { get; set; }
+
+        public List<StudentPaymentVM> lstStudentPay { get; set; }
     }
 }

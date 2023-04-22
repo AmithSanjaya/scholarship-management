@@ -47,6 +47,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Web, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -4370,6 +4373,18 @@
     <None Include="Properties\PublishProfiles\scholarship-management - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\scholarship-management - ReadOnly - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\scholarship-management - Web Deploy.pubxml" />
+    <None Include="Reports\Schemas\StudentDetail.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Reports\Schemas\xsAnnualProgressReport.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Reports\Schemas\xsPaymentDueSponser.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Reports\Schemas\xsStudentBankReport.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Reports\Report.aspx" />
     <Content Include="Scripts\bootstrap.js" />
@@ -4391,6 +4406,7 @@
     <Content Include="Scripts\PageJs\Layout.js" />
     <Content Include="Scripts\PageJs\LinkSponserStudent.js" />
     <Content Include="Scripts\PageJs\Login.js" />
+    <Content Include="Scripts\PageJs\PaymentDueSponsersReport.js" />
     <Content Include="Scripts\PageJs\SendApplicationSponser.js" />
     <Content Include="Scripts\PageJs\SendPaymentNotification.js" />
     <Content Include="Scripts\PageJs\SendProgressNotification.js" />
@@ -4399,6 +4415,10 @@
     <Content Include="Scripts\PageJs\SponserPaymentInvoices.js" />
     <Content Include="Scripts\PageJs\Student.js" />
     <Content Include="Scripts\PageJs\StudentAchievement.js" />
+    <Content Include="Scripts\PageJs\StudentAnnualProgressPendingReport.js" />
+    <Content Include="Scripts\PageJs\StudentDetailReport.js" />
+    <Content Include="Scripts\PageJs\StudentPayment.js" />
+    <Content Include="Scripts\PageJs\StudentPaymentBankReport.js" />
     <Content Include="Scripts\PageJs\StudentProgress.js" />
     <Content Include="Scripts\PageJs\UserRight.js" />
     <Content Include="Scripts\PageJs\UsersConfig.js" />
@@ -4463,7 +4483,11 @@
     <Content Include="Views\Master\AddDocument.cshtml" />
     <Content Include="Views\Master\DocumentDetail.cshtml" />
     <Content Include="Views\Form\SendProgressNotification.cshtml" />
-    <Content Include="Views\Report\StudentList.cshtml" />
+    <Content Include="Views\Report\StudentDetailReport.cshtml" />
+    <Content Include="Views\Form\StudentPayment.cshtml" />
+    <Content Include="Views\Form\StudentPaymentBankProcess.cshtml" />
+    <Content Include="Views\Report\PaymentDueSponsers.cshtml" />
+    <Content Include="Views\Report\AnnualProgressPending.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

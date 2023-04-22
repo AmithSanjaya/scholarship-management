@@ -14,5 +14,14 @@ namespace SM.UserObjects
             DataSet = 2,
             DataRow = 3
         }
+
+        public enum ReportName
+        {
+            StudentDetailReport =1,
+            PaymentDueSponserListReport = 2,
+            StudentAnnualProgressReport = 3,
+            StudentBankReport=4,
+            StudentBankReportDownload=5
+        }
     }
 }

@@ -1,9 +1,5 @@
 ﻿$(document).ready(function () {
 
-    $Msg = new Date($.now()).toDateString();
- 
-    $('#HomeDisplay').text($Msg);
-
     $(document).keypress(function (e) {
         if (e.which === 13) {
             $('#btnLogin').click();
