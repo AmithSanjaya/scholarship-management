@@ -22,11 +22,30 @@ namespace SM.UI.Controllers
             return View();
         }
 
+        public ActionResult PaymentDueSponsers()
+        {
+            return View();
+        }
+
+        public ActionResult AnnualProgressPending()
+        {
+            return View();
+        }
+
         #region Report Model
         public JsonResult StudentDetailReportModel(StudentReport model)
         {
             AjaxResponse ar = new AjaxResponse();
             Session["StudentDetailReport"] = model;
+            ar.SucessMessage = "Success";
+            ar.IsValid = true;
+            return Json(ar, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult StudentBankReportModel(StudentBankReport model)
+        {
+            AjaxResponse ar = new AjaxResponse();
+            Session["StudentBankReport"] = model;
             ar.SucessMessage = "Success";
             ar.IsValid = true;
             return Json(ar, JsonRequestBehavior.AllowGet);

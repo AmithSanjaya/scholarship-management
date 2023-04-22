@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="xsStudentBankReport"
+    targetNamespace="http://tempuri.org/xsStudentBankReport.xsd"
+    elementFormDefault="qualified"
+    xmlns="http://tempuri.org/xsStudentBankReport.xsd"
+    xmlns:mstns="http://tempuri.org/xsStudentBankReport.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+  <xs:element name="StudentBankReport">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="StudentName" type="xs:string" />
+        <xs:element name="NICNo" type="xs:string" />
+        <xs:element name="BankBranch" type="xs:string" />
+        <xs:element name="AccountNo" type="xs:string" />
+        <xs:element name="PaidAmount" type="xs:decimal" />
+        <xs:element name="BankCode" type="xs:string" />
+        <xs:element name="BranchCode" type="xs:string" />
+        <xs:element name="Currency" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

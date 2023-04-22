@@ -17,7 +17,7 @@
     <AssemblyName>SM.UI</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -4382,6 +4382,9 @@
     <None Include="Reports\Schemas\xsPaymentDueSponser.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Reports\Schemas\xsStudentBankReport.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Reports\Report.aspx" />
     <Content Include="Scripts\bootstrap.js" />
@@ -4403,6 +4406,7 @@
     <Content Include="Scripts\PageJs\Layout.js" />
     <Content Include="Scripts\PageJs\LinkSponserStudent.js" />
     <Content Include="Scripts\PageJs\Login.js" />
+    <Content Include="Scripts\PageJs\PaymentDueSponsersReport.js" />
     <Content Include="Scripts\PageJs\SendApplicationSponser.js" />
     <Content Include="Scripts\PageJs\SendPaymentNotification.js" />
     <Content Include="Scripts\PageJs\SendProgressNotification.js" />
@@ -4411,8 +4415,10 @@
     <Content Include="Scripts\PageJs\SponserPaymentInvoices.js" />
     <Content Include="Scripts\PageJs\Student.js" />
     <Content Include="Scripts\PageJs\StudentAchievement.js" />
+    <Content Include="Scripts\PageJs\StudentAnnualProgressPendingReport.js" />
     <Content Include="Scripts\PageJs\StudentDetailReport.js" />
     <Content Include="Scripts\PageJs\StudentPayment.js" />
+    <Content Include="Scripts\PageJs\StudentPaymentBankReport.js" />
     <Content Include="Scripts\PageJs\StudentProgress.js" />
     <Content Include="Scripts\PageJs\UserRight.js" />
     <Content Include="Scripts\PageJs\UsersConfig.js" />
@@ -4480,6 +4486,8 @@
     <Content Include="Views\Report\StudentDetailReport.cshtml" />
     <Content Include="Views\Form\StudentPayment.cshtml" />
     <Content Include="Views\Form\StudentPaymentBankProcess.cshtml" />
+    <Content Include="Views\Report\PaymentDueSponsers.cshtml" />
+    <Content Include="Views\Report\AnnualProgressPending.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

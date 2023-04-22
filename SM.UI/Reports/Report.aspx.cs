@@ -36,6 +36,8 @@ namespace SM.UI.Reports
                 string strReportName = Request.QueryString["RPT"].ToString();
                 string strReporFile = strReportName+".rpt";
 
+                int RType = Convert.ToInt32(Request.QueryString["Type"].ToString());
+
                 string strPath = "~/Reports/"+ strReporFile;
 
                 rd.Load(Server.MapPath(strPath));
@@ -53,7 +55,14 @@ namespace SM.UI.Reports
                 CrystalReportViewer1.ReportSource = rd;
                 CrystalReportViewer1.DataBind();
 
-                rd.ExportToHttpResponse(ExportFormatType.PortableDocFormat, Response, false, "ExportedReport");
+                if (RType == 1)
+                {
+                    rd.ExportToHttpResponse(ExportFormatType.PortableDocFormat, Response, false, strReportName);
+                }
+                else if (RType == 2)
+                {
+                    rd.ExportToHttpResponse(ExportFormatType.ExcelWorkbook, Response, false, strReportName);
+                }
             }
             catch (Exception ex)
             {
@@ -69,6 +78,11 @@ namespace SM.UI.Reports
             {
                 StudentReport model = (StudentReport)Session["StudentDetailReport"];
                 dt = new ReportDataAccess().StudentDetailReport(model);
+            }
+            else if (strReport == ReportName.StudentBankReport.ToString() || strReport == ReportName.StudentBankReportDownload.ToString())
+            {
+                StudentBankReport model = (StudentBankReport)Session["StudentBankReport"];
+                dt = new ReportDataAccess().StudentBankReport(model);
             }
 
             return dt;

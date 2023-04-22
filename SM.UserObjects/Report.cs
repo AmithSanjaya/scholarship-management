@@ -22,6 +22,12 @@ namespace SM.UserObjects
         public int DistrictID { get; set; }
     }
 
+    public class StudentBankReport
+    {
+        public int Year { get; set; }
+        public int Month { get; set; }
+    }
+
     public class PaymentDueSponserListReport
     {
         public string SponserName { get; set; }

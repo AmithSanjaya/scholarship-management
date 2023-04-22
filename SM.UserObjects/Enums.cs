@@ -20,6 +20,8 @@ namespace SM.UserObjects
             StudentDetailReport =1,
             PaymentDueSponserListReport = 2,
             StudentAnnualProgressReport = 3,
+            StudentBankReport=4,
+            StudentBankReportDownload=5
         }
     }
 }
