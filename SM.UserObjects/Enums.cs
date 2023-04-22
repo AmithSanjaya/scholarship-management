@@ -17,7 +17,9 @@ namespace SM.UserObjects
 
         public enum ReportName
         {
-            StudentDetailReport =1
+            StudentDetailReport =1,
+            PaymentDueSponserListReport = 2,
+            StudentAnnualProgressReport = 3,
         }
     }
 }
