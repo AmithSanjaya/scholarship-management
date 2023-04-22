@@ -17,7 +17,9 @@
 				<xs:element name="School" type="xs:string" />
 				<xs:element name="ContactNo" type="xs:string" />
 				<xs:element name="LastSubmissionDate" type="xs:dateTime" />
-				<xs:element name="NextSubmissionDate" type="xs:dateTime" />				
+				<xs:element name="NextSubmissionDate" type="xs:dateTime" />
+				<xs:element name="CompanyName" type="xs:string" />
+				<xs:element name="VendorName" type="xs:string" />
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>

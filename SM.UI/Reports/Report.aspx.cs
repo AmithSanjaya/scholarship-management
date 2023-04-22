@@ -84,7 +84,16 @@ namespace SM.UI.Reports
                 StudentBankReport model = (StudentBankReport)Session["StudentBankReport"];
                 dt = new ReportDataAccess().StudentBankReport(model);
             }
-
+            else if (strReport == ReportName.PaymentDueSponserListReport.ToString())
+            {
+                StudentReport model = (StudentReport)Session["StudentDetailReport"];
+                dt = new ReportDataAccess().PaymentDueSponserReport(model);
+            }
+            else if (strReport == ReportName.StudentAnnualProgressReport.ToString())
+            {
+                StudentReport model = (StudentReport)Session["StudentDetailReport"];
+                dt = new ReportDataAccess().StudentAnnualProgressPendingReport(model);
+            }
             return dt;
         } 
 
