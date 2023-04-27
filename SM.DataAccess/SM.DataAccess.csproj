@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="AdminDataAccess.cs" />
     <Compile Include="DBConnection.cs" />
+    <Compile Include="EmailDataAccess.cs" />
     <Compile Include="Execute.cs" />
     <Compile Include="MasterDataAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

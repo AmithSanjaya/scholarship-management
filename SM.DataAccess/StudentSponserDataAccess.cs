@@ -185,6 +185,20 @@ namespace SM.DataAccess
 
                     exe.SpExecutes<SponserStudentVM>("spUpdateInvoicetoSponserPayment", modelHeader, false);
 
+                    //Send Email
+                    List<MailSendingAddress> lstEmailData = new List<MailSendingAddress>();
+                    lstEmailData = exe.SpExecutesSelect<MailSendingAddress, SponserStudentVM>("spGetEmailSponserPayment", modelHeader, false);
+
+                    MailSendingAddress modelEmail = new MailSendingAddress();
+                    modelEmail.lstEmail = lstEmailData;
+
+                    if (!new EmailDataAccess().SendEmail(modelEmail))
+                    {
+                        dBUpdate.ReturnID = ReturnID;
+                        dBUpdate.Update = false;
+                        scope.Dispose();
+                    }
+
                     dBUpdate.ReturnID = ReturnID;
                     dBUpdate.Update = true;
 

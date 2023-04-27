@@ -23,5 +23,12 @@ namespace SM.UserObjects
             StudentBankReport=4,
             StudentBankReportDownload=5
         }
+
+        public enum MailSendTypeID
+        {
+            To=1,
+            CC=1,
+            BCC = 3
+        }
     }
 }
