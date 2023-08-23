@@ -342,7 +342,7 @@ namespace SM.UI.Controllers
                 string fileName = file.FileName;
                 string UploadType = Request["UploadType"].ToString();
                 string FileType = Request["FileType"].ToString();
-                string strPath = UploadURL;
+                string strPath = "~/Uploads";
 
                 fileName = Request["FileID"].ToString();
                 string mimeType = file.ContentType;
@@ -351,26 +351,27 @@ namespace SM.UI.Controllers
 
                 if (UploadType == "Student")
                 {
-                    strPath += "Student\\";
+                    strPath += "/Student/";
                     InputFileName = fileName + ".jpg";
                 }
                 else if (UploadType == "StudentProgress")
                 {
-                    strPath += "StudentProgress\\";
+                    strPath += "/StudentProgress/";
                     InputFileName = fileName + ".pdf";
                 }
                 else if (UploadType == "User")
                 {
-                    strPath += "User\\";
+                    strPath += "/User/";
                     InputFileName = fileName + ".jpg";
                 }
                 else if (UploadType == "Document")
                 {
-                    strPath += "Document\\";
+                    strPath += "/Document/";
                     InputFileName = fileName + "." + FileType;
                 }
 
-                string ServerSavePath = Path.Combine(strPath + InputFileName);
+                var ServerSavePath = Path.Combine(Server.MapPath(strPath) + InputFileName);
+                //string ServerSavePath = Path.Combine(strPath + InputFileName);
                 file.SaveAs(ServerSavePath);
             }
 
