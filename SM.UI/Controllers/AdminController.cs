@@ -334,48 +334,57 @@ namespace SM.UI.Controllers
         {
             string UploadURL = ConfigurationManager.AppSettings["Uploads"];
 
-            for (int i = 0; i < Request.Files.Count; i++)
+            try
             {
-                HttpPostedFileBase file = Request.Files[i];
-
-                int fileSize = file.ContentLength;
-                string fileName = file.FileName;
-                string UploadType = Request["UploadType"].ToString();
-                string FileType = Request["FileType"].ToString();
-                string strPath = "~/Uploads";
-
-                fileName = Request["FileID"].ToString();
-                string mimeType = file.ContentType;
-                System.IO.Stream fileContent = file.InputStream;
-                var InputFileName = Path.GetFileName(file.FileName);
-
-                if (UploadType == "Student")
+                for (int i = 0; i < Request.Files.Count; i++)
                 {
-                    strPath += "/Student/";
-                    InputFileName = fileName + ".jpg";
-                }
-                else if (UploadType == "StudentProgress")
-                {
-                    strPath += "/StudentProgress/";
-                    InputFileName = fileName + ".pdf";
-                }
-                else if (UploadType == "User")
-                {
-                    strPath += "/User/";
-                    InputFileName = fileName + ".jpg";
-                }
-                else if (UploadType == "Document")
-                {
-                    strPath += "/Document/";
-                    InputFileName = fileName + "." + FileType;
+                    HttpPostedFileBase file = Request.Files[i];
+
+                    int fileSize = file.ContentLength;
+                    string fileName = file.FileName;
+                    string UploadType = Request["UploadType"].ToString();
+                    string FileType = Request["FileType"].ToString();
+                    string strPath = "~/Uploads"; // "~/www/siteroot/Uploads";
+
+                    fileName = Request["FileID"].ToString();
+                    string mimeType = file.ContentType;
+                    System.IO.Stream fileContent = file.InputStream;
+                    var InputFileName = Path.GetFileName(file.FileName);
+
+                    if (UploadType == "Student")
+                    {
+                        strPath += "/Student/";
+                        InputFileName = fileName + ".jpg";
+                    }
+                    else if (UploadType == "StudentProgress")
+                    {
+                        strPath += "/StudentProgress/";
+                        InputFileName = fileName + ".pdf";
+                    }
+                    else if (UploadType == "User")
+                    {
+                        strPath += "/User/";
+                        InputFileName = fileName + ".jpg";
+                    }
+                    else if (UploadType == "Document")
+                    {
+                        strPath += "/Document/";
+                        InputFileName = fileName + "." + FileType;
+                    }
+
+                    strPath += InputFileName;
+                    var ServerSavePath = Server.MapPath(strPath);
+                    //var ServerSavePath = Path.Combine(Server.MapPath(strPath) + InputFileName);
+                    //string ServerSavePath = Path.Combine(strPath + InputFileName);
+                    file.SaveAs(ServerSavePath);
                 }
 
-                var ServerSavePath = Path.Combine(Server.MapPath(strPath) + InputFileName);
-                //string ServerSavePath = Path.Combine(strPath + InputFileName);
-                file.SaveAs(ServerSavePath);
+                return Json("Uploaded " + Request.Files.Count + " files");
             }
-
-            return Json("Uploaded " + Request.Files.Count + " files");
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public JsonResult FormValidate(FormValidate model)
