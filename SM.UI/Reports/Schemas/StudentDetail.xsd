@@ -15,6 +15,7 @@
         <xs:element name="Address" type="xs:string" />
         <xs:element name="School" type="xs:string" />
         <xs:element name="ContactNo" type="xs:string" />
+        <xs:element name="SponserName" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
