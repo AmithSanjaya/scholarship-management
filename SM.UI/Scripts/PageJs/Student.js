@@ -164,20 +164,20 @@ function FillStudent() {
 
             $("#StudentAddress").val(data[0].Address);
 
-            $("#StudentCounty").val(data[0].CountryID);
+            $("#StudentCounty").val(data[0].CountryID).change();
             $('#StudentCounty').selectpicker('refresh');
 
-            $("#StudentDistrict").val(data[0].DistictID);
+            $("#StudentDistrict").val(data[0].DistictID).change();
             $('#StudentDistrict').selectpicker('refresh');
 
-            $("#StudentRace").val(data[0].RaceID);
+            $("#StudentRace").val(data[0].RaceID).change();
             $('#StudentRace').selectpicker('refresh');
 
-            $("#StudentReligion").val(data[0].ReligionID);
+            $("#StudentReligion").val(data[0].ReligionID).change();
             $('#StudentReligion').selectpicker('refresh');
 
-            $("#StudentPollingDivision").val(data[0].PollingDivision);
-            $("#StudentSecretariaDivision").val(data[0].DivisionalSecretariatDivision);
+            $("#StudentPollingDivision").val(data[0].PollingDivision).change();
+            $("#StudentSecretariaDivision").val(data[0].DivisionalSecretariatDivision).change();
 
             $("#StudentNIC").val(data[0].NICNo);
             $('#rbInactive').prop('checked', !data[0].bIsActive);
