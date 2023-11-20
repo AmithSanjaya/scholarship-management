@@ -68,7 +68,7 @@
 
         options = {
             series: [{
-                name: 'Sponsers',
+                name: 'Sponsors',
                 data: lstSponser
             }, {
                 name: 'Students',

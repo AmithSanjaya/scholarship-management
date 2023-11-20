@@ -2,7 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Mail;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using static SM.UserObjects.Enums;
@@ -11,8 +14,6 @@ namespace SM.DataAccess
 {
     public class EmailDataAccess
     {
-        private Execute exe;
-
         public bool SendEmail(MailSendingAddress Emailmodel)
         {
             try
@@ -30,13 +31,22 @@ namespace SM.DataAccess
                     model.SMTPClient = item.SMTPClient;
                 }
 
-                SmtpClient smtpClient = new SmtpClient(model.SMTPClient);
-                smtpClient.Port = 587;
-                smtpClient.DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network;
+                SmtpClient smtpClient = new SmtpClient(model.SMTPClient, 465);               
+                smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                NetworkCredential basicCredential = new NetworkCredential(model.EmailUserName, model.Emailpassword);
                 smtpClient.UseDefaultCredentials = false;
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
+                ServicePointManager.ServerCertificateValidationCallback = delegate (object s, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) { return true; };
+
+
+                smtpClient.Credentials = basicCredential;               
                 smtpClient.EnableSsl = true;
-                smtpClient.Credentials = new System.Net.NetworkCredential(model.EmailUserName, model.Emailpassword);
+                
+
                 MailMessage mailMessage = new MailMessage();
+                mailMessage.Subject = Emailmodel.lstEmail[0].EmailSubject;
+                mailMessage.Body = "TEST";
+                mailMessage.From = new MailAddress(model.FromEmailAddress, "Lak Saviya Foundation");
 
                 foreach (MailSendingAddress emailAddress in Emailmodel.lstEmail)
                 {
@@ -47,13 +57,21 @@ namespace SM.DataAccess
                     else if (emailAddress.SendTypeID == Convert.ToInt32(MailSendTypeID.BCC))
                         mailMessage.Bcc.Add(emailAddress.EmailAddress);
 
-                    mailMessage.Subject = emailAddress.EmailSubject;
-                    mailMessage.Body = emailAddress.EmailBody;
+                    
+                    
                 }
                
                 mailMessage.IsBodyHtml = true;
-                mailMessage.From = new MailAddress(model.FromEmailAddress);
-                smtpClient.Send(mailMessage);
+               
+                smtpClient.Send(mailMessage);   
+
+     
+                
+
+                //System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
+                //ServicePointManager.ServerCertificateValidationCallback = delegate (object s, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) { return true; };
+
+              
 
                 return true;
             }
