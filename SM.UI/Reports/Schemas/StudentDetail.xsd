@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema id="StudentDetail"
-    targetNamespace="http://tempuri.org/StudentDetail.xsd"
-    elementFormDefault="qualified"
-    xmlns="http://tempuri.org/StudentDetail.xsd"
-    xmlns:mstns="http://tempuri.org/StudentDetail.xsd"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  targetNamespace="http://tempuri.org/StudentDetail.xsd"
+  elementFormDefault="qualified"
+  xmlns="http://tempuri.org/StudentDetail.xsd"
+  xmlns:mstns="http://tempuri.org/StudentDetail.xsd"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
 >
   <xs:element name="StudentDetail">
     <xs:complexType>
@@ -15,6 +15,18 @@
         <xs:element name="Address" type="xs:string" />
         <xs:element name="School" type="xs:string" />
         <xs:element name="ContactNo" type="xs:string" />
+        <xs:element name="Status" type="xs:string" />
+        <xs:element name="RecieptIssued" type="xs:string" />
+        <xs:element name="Paid" type="xs:string" />
+        <xs:element name="SponserName" type="xs:string" />
+        <xs:element name="SponserOtherName" type="xs:string" />
+        <xs:element name="StudentYear" type="xs:int" />
+        <xs:element name="Age" type="xs:string" />
+        <xs:element name="AccountNo" type="xs:string" />
+        <xs:element name="BankBranchName" type="xs:string" />
+        <xs:element name="AccountName" type="xs:string" />
+        <xs:element name="SONumber" type="xs:string" />
+        <xs:element name="PaidInCountry" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

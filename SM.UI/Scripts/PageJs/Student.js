@@ -58,37 +58,37 @@
     });
 
     var model = {}
-    ajaxCall('Form/StudentExamType', { 'model': model }, function (data) {
+    ajaxCallWithoutAsync('Form/StudentExamType', { 'model': model }, function (data) {
         BindDropDown("ExamType", "ExamTypeName", "StudentExamTypeID", data);
     });
     $('#ExamType').selectpicker('refresh');
 
-    ajaxCall('Form/SubjectGrade', { 'model': model }, function (data) {
+    ajaxCallWithoutAsync('Form/SubjectGrade', { 'model': model }, function (data) {
         BindDropDown("SubjectGrade", "GradeName", "GradeID", data);
     });
     $('#SubjectGrade').selectpicker('refresh');
 
-    ajaxCall('Form/Country', { 'model': model }, function (data) {
+    ajaxCallWithoutAsync('Form/Country', { 'model': model }, function (data) {
         BindDropDown("StudentCounty", "CountryName", "CountryID", data);
     });
     $('#StudentCounty').selectpicker('refresh');
 
-    ajaxCall('Form/District', { 'model': model }, function (data) {
+    ajaxCallWithoutAsync('Form/District', { 'model': model }, function (data) {
         BindDropDown("StudentDistrict", "DistrictName", "DistictID", data);
     });
     $('#StudentDistrict').selectpicker('refresh');
 
-    ajaxCall('Form/Race', { 'model': model }, function (data) {
+    ajaxCallWithoutAsync('Form/Race', { 'model': model }, function (data) {
         BindDropDown("StudentRace", "RaceName", "RaceID", data);
     });
     $('#StudentRace').selectpicker('refresh');
 
-    ajaxCall('Form/Religion', { 'model': model }, function (data) {
+    ajaxCallWithoutAsync('Form/Religion', { 'model': model }, function (data) {
         BindDropDown("StudentReligion", "ReligionName", "ReligionID", data);
     });
     $('#StudentReligion').selectpicker('refresh');
 
-    ajaxCall('Form/BankBranch', { 'model': model }, function (data) {
+    ajaxCallWithoutAsync('Form/BankBranch', { 'model': model }, function (data) {
         BindDropDown("StudentBank", "BankBranchName", "BankBranchID", data);
     });
     $('#StudentBank').selectpicker('refresh');
@@ -164,20 +164,20 @@ function FillStudent() {
 
             $("#StudentAddress").val(data[0].Address);
 
-            $("#StudentCounty").val(data[0].CountryID).change();
+            $("#StudentCounty").val(data[0].CountryID).trigger("change");
             $('#StudentCounty').selectpicker('refresh');
 
-            $("#StudentDistrict").val(data[0].DistictID).change();
+            $("#StudentDistrict").val(data[0].DistictID).trigger("change");
             $('#StudentDistrict').selectpicker('refresh');
 
             $("#StudentRace").val(data[0].RaceID).change();
             $('#StudentRace').selectpicker('refresh');
 
-            $("#StudentReligion").val(data[0].ReligionID).change();
+            $("#StudentReligion").val(data[0].ReligionID).trigger("change");
             $('#StudentReligion').selectpicker('refresh');
 
-            $("#StudentPollingDivision").val(data[0].PollingDivision).change();
-            $("#StudentSecretariaDivision").val(data[0].DivisionalSecretariatDivision).change();
+            $("#StudentPollingDivision").val(data[0].PollingDivision);
+            $("#StudentSecretariaDivision").val(data[0].DivisionalSecretariatDivision);
 
             $("#StudentNIC").val(data[0].NICNo);
             $('#rbInactive').prop('checked', !data[0].bIsActive);
@@ -246,7 +246,7 @@ function FillStudent() {
             $("#AccountName").val(data[0].AccountName);
             $("#AccountNo").val(data[0].AccountNo);
 
-            $("#StudentBank").val(data[0].BankBranchID);
+            $("#StudentBank").val(data[0].BankBranchID).trigger("change");
             $('#StudentBank').selectpicker('refresh');
 
             $("#DescribeWhyScholarship").val(data[0].DescribeWhyScholarship);
