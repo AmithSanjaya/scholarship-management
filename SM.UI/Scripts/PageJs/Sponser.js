@@ -1,12 +1,12 @@
 ﻿$(document).ready(function () {
         
     var model = {}
-    ajaxCall('SM/PaymentSchems', { 'model': model }, function (data) {
+    ajaxCallWithoutAsync('SM/PaymentSchems', { 'model': model }, function (data) {
         BindDropDown("SponserPayScheme", "PaymentSchemeName", "PaymentSchemeID", data);
     });
     $('#SponserPayScheme').selectpicker('refresh');
 
-    ajaxCall('Form/Country', { 'model': model }, function (data) {
+    ajaxCallWithoutAsync('Form/Country', { 'model': model }, function (data) {
         BindDropDown("SponserCounty", "CountryName", "CountryID", data);
     }); 
     
