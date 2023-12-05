@@ -17,6 +17,7 @@
         <xs:element name="BankCode" type="xs:string" />
         <xs:element name="BranchCode" type="xs:string" />
         <xs:element name="Currency" type="xs:string" />
+		<xs:element name="VendorName" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
