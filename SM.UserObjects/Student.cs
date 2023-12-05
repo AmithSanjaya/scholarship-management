@@ -9,6 +9,7 @@ namespace SM.UserObjects
     public class Student : User
     {
         public int StudentID { get; set; }
+        public string StudentNo { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string FullName { get; set; }
@@ -128,6 +129,7 @@ namespace SM.UserObjects
     public class StudentVM : User
     {
         public int StudentID { get; set; }
+        public string StudentNo { get; set; }
         public string StudentName { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

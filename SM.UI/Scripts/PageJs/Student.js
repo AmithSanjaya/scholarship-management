@@ -152,6 +152,8 @@ function FillStudent() {
                 $('#StudentImgID').val(data[0].Photo);
             }
 
+            $("#StudentNo").val(data[0].StudentNo);
+
             $("#StudentFirstName").val(data[0].FirstName);
             $("#StudentLastName").val(data[0].LastName);
             $("#StudentFullName").val(data[0].FullName);
@@ -334,6 +336,7 @@ var FormValidate = function () {
 var Student = function () {
 
     this.StudentID = 0;
+    this.StudentNo = "";
     this.FirstName = "";
     this.LastName = "";
     this.FullName = "";
@@ -393,6 +396,7 @@ var Student = function () {
     this.Fill = function () {
 
         this.StudentID = $("#StudentID").val() || 0;
+        this.StudentNo = $("#StudentNo").val();
         this.FirstName = $("#StudentFirstName").val();
         this.LastName = $("#StudentLastName").val();
         this.FullName = $("#StudentFullName").val();
