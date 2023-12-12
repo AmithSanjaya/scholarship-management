@@ -18,6 +18,9 @@ namespace SM.UserObjects
         public int Mode { get; set; }
         public int ViewTypeID { get; set; }
         public string Status { get; set; }
+
+        public bool bIsActive { get; set; }
+        public string InactiveReason { get; set; }
     }
 
     public class SponserVM : User
@@ -35,6 +38,9 @@ namespace SM.UserObjects
         public int ViewTypeID { get; set; }
         public int TypeID { get; set; }
         public string Status { get; set; }
+
+        public bool bIsActive { get; set; }
+        public string InactiveReason { get; set; }
     }
 }
 

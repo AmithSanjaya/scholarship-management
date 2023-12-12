@@ -45,7 +45,7 @@ namespace SM.DataAccess
 
                 MailMessage mailMessage = new MailMessage();
                 mailMessage.Subject = Emailmodel.lstEmail[0].EmailSubject;
-                mailMessage.Body = "TEST";
+                mailMessage.Body = Emailmodel.lstEmail[0].EmailBody;
                 mailMessage.From = new MailAddress(model.FromEmailAddress, "Lak Saviya Foundation");
 
                 foreach (MailSendingAddress emailAddress in Emailmodel.lstEmail)

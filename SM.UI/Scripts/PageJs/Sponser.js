@@ -1,4 +1,17 @@
 ﻿$(document).ready(function () {
+
+    $("#InactiveDIV").hide();
+
+    $("#ReasonForInactive").val("");
+
+    $("#rbInactive").change(function () {
+        if (this.checked) {
+            $("#InactiveDIV").show();
+        } else {
+            $("#ReasonForInactive").val("");
+            $("#InactiveDIV").hide();
+        }
+    });
         
     var model = {}
     ajaxCallWithoutAsync('SM/PaymentSchems', { 'model': model }, function (data) {
@@ -42,6 +55,11 @@ function FillSponser() {
 
             $("#SponserPayScheme").val(data[0].PaymentSchemeID);
             $('#SponserPayScheme').selectpicker('refresh');
+
+            $('#rbInactive').prop('checked', !data[0].bIsActive);
+            $('#rbInactive').trigger("change");
+
+            $("#ReasonForInactive").val(data[0].InactiveReason);
 
         });
     }
@@ -88,6 +106,8 @@ var Sponsor = function () {
     this.ContactNo = "";
     this.PaymentSchemeID = 0;
     this.CountryID = 0;
+    this.bIsActive = "";
+    this.InactiveReason = "";
     
     this.Fill = function () {
         this.SponserID = $("#SponserID").val() || 0;
@@ -97,6 +117,9 @@ var Sponsor = function () {
         this.ContactNo = $("#SponserPhoneNo").val();
         this.PaymentSchemeID = $("#SponserPayScheme").val();
         this.CountryID = $("#SponserCounty").val();
+
+        this.bIsActive = $('#rbInactive').prop('checked');
+        this.InactiveReason = $("#ReasonForInactive").val();
     }
 }
 
