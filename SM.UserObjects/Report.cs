@@ -28,6 +28,13 @@ namespace SM.UserObjects
         public int Month { get; set; }
     }
 
+    public class StudentPaymentReport
+    {
+        public int SponserID { get; set; }
+        public int Year { get; set; }
+        public int Month { get; set; }
+    }
+
     public class PaymentDueSponserListReport
     {
         public string SponserName { get; set; }

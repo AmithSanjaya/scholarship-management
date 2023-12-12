@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="xsSudentPayment"
+    targetNamespace="http://tempuri.org/xsSudentPayment.xsd"
+    elementFormDefault="qualified"
+    xmlns="http://tempuri.org/xsSudentPayment.xsd"
+    xmlns:mstns="http://tempuri.org/xsSudentPayment.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+  <xs:element name="SudentPayment">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="StudentName" type="xs:string" />
+        <xs:element name="CountryName" type="xs:string" />
+        <xs:element name="SponserName" type="xs:string" />
+        <xs:element name="AccountName" type="xs:string" />
+        <xs:element name="PaidAmount" type="xs:decimal" />
+        <xs:element name="VendorName" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
+

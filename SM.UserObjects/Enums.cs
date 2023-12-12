@@ -21,7 +21,8 @@ namespace SM.UserObjects
             PaymentDueSponserListReport = 2,
             StudentAnnualProgressReport = 3,
             StudentBankReport=4,
-            StudentBankReportDownload=5
+            StudentBankReportDownload=5,
+            StudentPaymentReport = 6,
         }
 
         public enum MailSendTypeID

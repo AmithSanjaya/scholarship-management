@@ -42,5 +42,11 @@ namespace SM.DataAccess
             dt = exe.SpExecutesSelectDatatable<StudentReport>("spPaymentDueSponserReport", model, false);
             return dt;
         }
+
+        public DataTable StudentPaymentReportDate(StudentPaymentReport model)
+        {
+            dt = exe.SpExecutesSelectDatatable<StudentPaymentReport>("spStudentPaymentReport", model, false);
+            return dt;
+        }
     }
 }

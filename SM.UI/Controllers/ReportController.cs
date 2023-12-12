@@ -55,7 +55,15 @@ namespace SM.UI.Controllers
             ar.IsValid = true;
             return Json(ar, JsonRequestBehavior.AllowGet);
         }
-        
+
+        public JsonResult StudentPaymentReportModel(StudentPaymentReport model)
+        {
+            AjaxResponse ar = new AjaxResponse();
+            Session["StudentPaymentReport"] = model;
+            ar.SucessMessage = "Success";
+            ar.IsValid = true;
+            return Json(ar, JsonRequestBehavior.AllowGet);
+        }
 
         #endregion
     }
