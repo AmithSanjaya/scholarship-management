@@ -32,6 +32,11 @@ namespace SM.UI.Controllers
             return View();
         }
 
+        public ActionResult StudentPaymentReport()
+        {
+            return View();
+        }
+
         #region Report Model
         public JsonResult StudentDetailReportModel(StudentReport model)
         {

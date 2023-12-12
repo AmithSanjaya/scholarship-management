@@ -4422,6 +4422,7 @@
     <Content Include="Scripts\PageJs\StudentDetailReport.js" />
     <Content Include="Scripts\PageJs\StudentPayment.js" />
     <Content Include="Scripts\PageJs\StudentPaymentBankReport.js" />
+    <Content Include="Scripts\PageJs\StudentPaymentReport.js" />
     <Content Include="Scripts\PageJs\StudentProgress.js" />
     <Content Include="Scripts\PageJs\UserRight.js" />
     <Content Include="Scripts\PageJs\UsersConfig.js" />
@@ -4491,6 +4492,7 @@
     <Content Include="Views\Form\StudentPaymentBankProcess.cshtml" />
     <Content Include="Views\Report\PaymentDueSponsers.cshtml" />
     <Content Include="Views\Report\AnnualProgressPending.cshtml" />
+    <Content Include="Views\Report\StudentPaymentReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
