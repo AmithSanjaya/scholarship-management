@@ -108,7 +108,29 @@ namespace SM.UI.Reports
 
             if (strReport == ReportName.StudentDetailReport.ToString())
             {
+                StudentReport model = (StudentReport)Session["StudentDetailReport"];
                 arrLstDefaultParam.Add(new ReportVM { ParameterName = "Year", ParameterValue = "2023" });
+                arrLstDefaultParam.Add(new ReportVM { ParameterName = "SubHeading", ParameterValue = model.SubHeading });
+            }
+            else if (strReport == ReportName.StudentBankReport.ToString() || strReport == ReportName.StudentBankReportDownload.ToString())
+            {
+                StudentBankReport model = (StudentBankReport)Session["StudentBankReport"];
+                arrLstDefaultParam.Add(new ReportVM { ParameterName = "SubHeading", ParameterValue = model.SubHeading });
+            }
+            else if (strReport == ReportName.PaymentDueSponserListReport.ToString())
+            {
+                StudentReport model = (StudentReport)Session["StudentDetailReport"];
+                arrLstDefaultParam.Add(new ReportVM { ParameterName = "SubHeading", ParameterValue = model.SubHeading });
+            }
+            else if (strReport == ReportName.StudentAnnualProgressReport.ToString())
+            {
+                StudentReport model = (StudentReport)Session["StudentDetailReport"];
+                arrLstDefaultParam.Add(new ReportVM { ParameterName = "SubHeading", ParameterValue = model.SubHeading });
+            }
+            else if (strReport == ReportName.StudentPaymentReport.ToString())
+            {
+                StudentPaymentReport model = (StudentPaymentReport)Session["StudentPaymentReport"];
+                arrLstDefaultParam.Add(new ReportVM { ParameterName = "SubHeading", ParameterValue = model.SubHeading });
             }
             return arrLstDefaultParam;
         }

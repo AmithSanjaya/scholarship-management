@@ -19,10 +19,20 @@ function Preview() {
     var rpt = "";
     var url = rootUrl;
 
+    const comboBox = document.getElementById('StudentCounty'); 
+    const selectedOption = comboBox.options[comboBox.selectedIndex];
+    const selectedCountryText = selectedOption.text;
+
+    const comboBox2 = document.getElementById('StudentDistrict');
+    const selectedOption2 = comboBox2.options[comboBox.selectedIndex];
+    const selectedDistrictText = selectedOption2.text;
+
+    const subheading = "Country : " + selectedCountryText + " And District : " + selectedDistrictText;
     rpt = "StudentDetailReport";
     var model = {
         CountryID: $("#StudentCounty").val(),
-        DistrictID: $("#StudentDistrict").val()
+        DistrictID: $("#StudentDistrict").val(),
+        SubHeading: subheading,
     };
 
     ajaxCall('Report/StudentDetailReportModel', { 'model': model }, function (data) {

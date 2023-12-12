@@ -14,9 +14,16 @@ function Preview() {
     var rpt = "";
     var url = rootUrl;
 
+    const comboBox = document.getElementById('SponserCounty');
+    const selectedOption = comboBox.options[comboBox.selectedIndex];
+    const selectedCountryText = selectedOption.text;
+
+    const subheading = "Country : " + selectedCountryText;
+
     rpt = "PaymentDueSponserListReport";
     var model = {
-        CountryID: $("#SponserCounty").val()
+        CountryID: $("#SponserCounty").val(),
+        SubHeading: subheading,
     };
 
     ajaxCall('Report/StudentDetailReportModel', { 'model': model }, function (data) {

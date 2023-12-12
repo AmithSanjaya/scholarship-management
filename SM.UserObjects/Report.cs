@@ -20,12 +20,14 @@ namespace SM.UserObjects
         public int StudentID { get; set; }
         public int CountryID { get; set; }
         public int DistrictID { get; set; }
+        public string SubHeading { get; set; }
     }
 
     public class StudentBankReport
     {
         public int Year { get; set; }
         public int Month { get; set; }
+        public string SubHeading { get; set; }
     }
 
     public class StudentPaymentReport
@@ -33,6 +35,7 @@ namespace SM.UserObjects
         public int SponserID { get; set; }
         public int Year { get; set; }
         public int Month { get; set; }
+        public string SubHeading { get; set; }
     }
 
     public class PaymentDueSponserListReport
@@ -45,7 +48,8 @@ namespace SM.UserObjects
         public string PaymentScheme { get; set; }
         public decimal DueAmount { get; set; }
         public DateTime DueDate { get; set; }
-        public DateTime LastPaidDate { get; set; }		
+        public DateTime LastPaidDate { get; set; }
+        public string SubHeading { get; set; }
     }
 
     public class StudentAnnualProgressReport
@@ -59,5 +63,6 @@ namespace SM.UserObjects
         public string ContactNo { get; set; }        
         public DateTime LastSubmissionDate { get; set; }
         public DateTime NextSubmissionDate { get; set; }
+        public string SubHeading { get; set; }
     }
 }

@@ -27,11 +27,20 @@ function Preview() {
         return;
     }
 
+    const comboBox = document.getElementById('SponsorID');
+    const selectedOption = comboBox.options[comboBox.selectedIndex];
+    const selectedCountryText = selectedOption.text;
+    
+    const selectedDistrictText = $("#EffectiveMonth").val();
+
+    const subheading = "Sponser : " + selectedCountryText + " in : " + selectedDistrictText;
+
     rpt = "StudentPaymentReport";
     var model = {
         SponserID: $("#SponsorID").val(),
         Year: $("#EffectiveMonth").val().split('-')[0],
         Month: $("#EffectiveMonth").val().split('-')[1],
+        SubHeading: subheading,
     };
 
     ajaxCall('Report/StudentPaymentReportModel', { 'model': model }, function (data) {
