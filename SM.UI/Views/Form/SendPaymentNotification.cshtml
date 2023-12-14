@@ -8,6 +8,7 @@
     <div class="row">
         @{ Html.RenderAction("StudentView", "Form");}
         @{ Html.RenderAction("CommonView", "Form");}
+        @{ Html.RenderAction("SponserView", "SM");}
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
@@ -31,7 +32,7 @@
                 </div>
                 <div class="col-lg-12">
                     <div class="table-responsive rounded mb-3">
-                        <table class="data-tables table mb-0 tbl-server-info">
+                        <table class="data-tables table mb-0 tbl-server-info" id="SponserNotificationDetial">
                             <thead class="bg-white text-uppercase">
                                 <tr class="ligth ligth-data">
                                     <th hidden>SponserID</th>
@@ -41,21 +42,7 @@
                                     <th>Action</th>
                                 </tr>
                             </thead>
-                            <tbody class="ligth-body">
-                                <tr class="ligth ligth-data">
-                                    <td hidden>0</td>
-                                    <td>Sponser Name</td>
-                                    <td>Country</td>
-                                    <td>Payment Scheme</td>
-                                    <td>
-                                        <div class="d-flex align-items-center list-action">
-                                            <a class="badge badge-info mr-2" data-placement="top" title="" data-original-title="View"
-                                               data-toggle="modal"><i class="ri-eye-line mr-0"></i></a>
-                                            <button type="button" class="btn btn-primary btn-sm mr-2" onclick="AddToGrid(event)">Add to Grid</button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
+                            <tbody class="ligth-body"></tbody>
                         </table>
                     </div>
                 </div>
@@ -66,7 +53,7 @@
                     <hr />
 
                     <div class="table-responsive rounded mb-3">
-                        <table class="data-table table mb-0 tbl-server-info">
+                        <table class="table mb-0 tbl-server-info" id="SponserNotificationtbl">
                             <thead class="bg-white text-uppercase">
                                 <tr class="ligth ligth-data">
                                     <th hidden>SponserID</th>
@@ -76,7 +63,7 @@
                                     <th>Action</th>
                                 </tr>
                             </thead>
-                            <tbody class="ligth-body" id="SponserStudentDetial"></tbody>
+                            <tbody class="ligth-body" id="SponserNotificationDetialAdd"></tbody>
                         </table>
                     </div>
                 </div>

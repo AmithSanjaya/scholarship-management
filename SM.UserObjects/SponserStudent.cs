@@ -24,6 +24,20 @@ namespace SM.UserObjects
         public int Month { get; set; }
     }
 
+    public class SponserPaymentNotification : User
+    {
+        public int SponserID { get; set; }
+        public string SponserName { get; set; }
+        public int PaymentSchemeID { get; set; }
+        public string PaymentSchemeName { get; set; }
+        public string CountryName { get; set; }
+
+        public List<SponserPaymentNotification> lstSponserPaymentNotification { get; set; }
+
+        public int Year { get; set; }
+        public int Month { get; set; }
+    }
+
     public class SponserRecievePayment : User
     {
         public int SponserPaymentHeaderID { get; set; }

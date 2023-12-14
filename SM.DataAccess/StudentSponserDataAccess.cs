@@ -160,6 +160,49 @@ namespace SM.DataAccess
             return lstSponserStudentData;
         }
 
+        public List<SponserPaymentNotification> SponserPaymentNotification(SponserPaymentNotification model)
+        {
+            List<SponserPaymentNotification> lst = new List<SponserPaymentNotification>();
+            lst = exe.SpExecutesSelect<SponserPaymentNotification, SponserPaymentNotification>("spGetSponsorsForNotification", model, false);
+            return lst;
+        }
+
+        public DBUpdate SaveSponserPaymentNotification(SponserPaymentNotification model)
+        {
+            int ReturnID = 0;
+
+            dBUpdate = new DBUpdate();
+            SponserPaymentNotification modelVM = new SponserPaymentNotification();
+
+            using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required, new System.TimeSpan(0, 15, 0)))
+            {
+                try
+                {
+                    foreach (SponserPaymentNotification obj in model.lstSponserPaymentNotification)
+                    {
+                        obj.Year = model.Year;
+                        obj.Month = model.Month;
+                        obj.EnteredBy = model.EnteredBy;
+
+                        exe.SpExecutes<SponserPaymentNotification>("spSaveSponserPaymentNotification", obj, false);
+                    }
+
+                    dBUpdate.ReturnID = ReturnID;
+                    dBUpdate.Update = true;
+
+                    scope.Complete();
+                }
+                catch (Exception ex)
+                {
+                    dBUpdate.ReturnID = ReturnID;
+                    dBUpdate.Update = false;
+                    scope.Dispose();
+                }
+            }
+
+            return dBUpdate;
+        }
+
         public DBUpdate SaveSponserPaymentDetails(SponserStudentVM model)
         {
             int ReturnID = 0;

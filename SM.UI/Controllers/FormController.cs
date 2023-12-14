@@ -364,6 +364,13 @@ namespace SM.UI.Controllers
 
             return View(lst);
         }
+
+        public JsonResult SponserPaymentNotification(SponserPaymentNotification model)
+        {
+            List<SponserPaymentNotification> lst = new List<SponserPaymentNotification>();
+            lst = new StudentSponserDataAccess().SponserPaymentNotification(model);
+            return Json(lst, JsonRequestBehavior.AllowGet);
+        }
         #endregion
 
         #region Send Progress Notificatiion
@@ -422,6 +429,29 @@ namespace SM.UI.Controllers
             List<StudentVM> lst = new List<StudentVM>();
             lst = new StudentSponserDataAccess().SponsersStudentData(model);
             return Json(lst, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult SaveSponserPaymentNotification(SponserPaymentNotification model)
+        {
+            ajaxResponse = new AjaxResponse();
+            dBUpdate = new DBUpdate();
+            model.EnteredBy = UserDetail.UserID;
+
+            dBUpdate = new StudentSponserDataAccess().SaveSponserPaymentNotification(model);
+
+            if (dBUpdate.Update)
+            {
+                ajaxResponse.IsValid = true;
+                ajaxResponse.ReturnID = dBUpdate.ReturnID;
+                ajaxResponse.SucessMessage = "Saved Successfully..!";
+            }
+            else
+            {
+                ajaxResponse.IsValid = false;
+                ajaxResponse.ErrorMessage = "Error in Data Saving..!";
+            }
+
+            return Json(ajaxResponse, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult SaveSponserPaymentDetails(SponserStudentVM model)
