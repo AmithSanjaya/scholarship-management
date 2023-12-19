@@ -42,6 +42,8 @@ namespace SM.UI.Reports
 
                 rd.Load(Server.MapPath(strPath));
 
+                rd.SetDataSource(ReportData(strReportName));
+
                 //Set report Parameter  
                 List<ReportVM> reportParam = new List<ReportVM>();
                 reportParam = ReportDefaultPatam(strReportName);
@@ -51,7 +53,6 @@ namespace SM.UI.Reports
                     rd.SetParameterValue(reportParam[k].ParameterName, reportParam[k].ParameterValue);
                 }
 
-                rd.SetDataSource(ReportData(strReportName));
                 CrystalReportViewer1.ReportSource = rd;
                 CrystalReportViewer1.DataBind();
 
@@ -73,32 +74,47 @@ namespace SM.UI.Reports
         private DataTable ReportData(string strReport)
         {
             DataTable dt = new DataTable();
+            string SubHeading="";
 
             if (strReport == ReportName.StudentDetailReport.ToString())
             {
                 StudentReport model = (StudentReport)Session["StudentDetailReport"];
+                SubHeading = model.SubHeading;
                 dt = new ReportDataAccess().StudentDetailReport(model);
             }
             else if (strReport == ReportName.StudentBankReport.ToString() || strReport == ReportName.StudentBankReportDownload.ToString())
             {
                 StudentBankReport model = (StudentBankReport)Session["StudentBankReport"];
+                SubHeading = model.SubHeading;
                 dt = new ReportDataAccess().StudentBankReport(model);
             }
             else if (strReport == ReportName.PaymentDueSponserListReport.ToString())
             {
                 StudentReport model = (StudentReport)Session["StudentDetailReport"];
+                SubHeading = model.SubHeading;
                 dt = new ReportDataAccess().PaymentDueSponserReport(model);
             }
             else if (strReport == ReportName.StudentAnnualProgressReport.ToString())
             {
                 StudentReport model = (StudentReport)Session["StudentDetailReport"];
+                SubHeading = model.SubHeading;
                 dt = new ReportDataAccess().StudentAnnualProgressPendingReport(model);
             }
             else if (strReport == ReportName.StudentPaymentReport.ToString())
             {
                 StudentPaymentReport model = (StudentPaymentReport)Session["StudentPaymentReport"];
+                SubHeading = model.SubHeading;
                 dt = new ReportDataAccess().StudentPaymentReportDate(model);
             }
+
+            System.Data.DataColumn v = new System.Data.DataColumn("VendorName", typeof(System.String));
+            v.DefaultValue = UserDetail.VendorName;
+            dt.Columns.Add(v);
+
+            System.Data.DataColumn cl = new System.Data.DataColumn("SubHeading", typeof(System.String));
+            cl.DefaultValue = SubHeading;
+            dt.Columns.Add(cl);
+
             return dt;
         } 
 
@@ -109,28 +125,23 @@ namespace SM.UI.Reports
             if (strReport == ReportName.StudentDetailReport.ToString())
             {
                 StudentReport model = (StudentReport)Session["StudentDetailReport"];
-                arrLstDefaultParam.Add(new ReportVM { ParameterName = "Year", ParameterValue = "2023" });
-                arrLstDefaultParam.Add(new ReportVM { ParameterName = "SubHeading", ParameterValue = model.SubHeading });
             }
             else if (strReport == ReportName.StudentBankReport.ToString() || strReport == ReportName.StudentBankReportDownload.ToString())
             {
                 StudentBankReport model = (StudentBankReport)Session["StudentBankReport"];
-                arrLstDefaultParam.Add(new ReportVM { ParameterName = "SubHeading", ParameterValue = model.SubHeading });
             }
             else if (strReport == ReportName.PaymentDueSponserListReport.ToString())
             {
                 StudentReport model = (StudentReport)Session["StudentDetailReport"];
-                arrLstDefaultParam.Add(new ReportVM { ParameterName = "SubHeading", ParameterValue = model.SubHeading });
             }
             else if (strReport == ReportName.StudentAnnualProgressReport.ToString())
             {
                 StudentReport model = (StudentReport)Session["StudentDetailReport"];
-                arrLstDefaultParam.Add(new ReportVM { ParameterName = "SubHeading", ParameterValue = model.SubHeading });
+                //arrLstDefaultParam.Add(new ReportVM { ParameterName = "SubHeading", ParameterValue = model.SubHeading });
             }
             else if (strReport == ReportName.StudentPaymentReport.ToString())
             {
                 StudentPaymentReport model = (StudentPaymentReport)Session["StudentPaymentReport"];
-                arrLstDefaultParam.Add(new ReportVM { ParameterName = "SubHeading", ParameterValue = model.SubHeading });
             }
             return arrLstDefaultParam;
         }
@@ -141,6 +152,12 @@ namespace SM.UI.Reports
             // Value.ToString() allows for Value being DBNull, but will also convert int, double, etc.
             return Value == null ? "" : Value.ToString();
 
+        }
+
+        private ReportParameter CreateReportParameter(string paramName, string pramValue)
+        {
+            ReportParameter aParam = new ReportParameter(paramName, pramValue);
+            return aParam;
         }
     }
 }

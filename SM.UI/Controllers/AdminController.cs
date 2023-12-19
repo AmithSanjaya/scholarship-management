@@ -288,6 +288,14 @@ namespace SM.UI.Controllers
                 HttpCookie FullName = new HttpCookie("FullName");
                 FullName.Value = lstUser[0].UserFullName.ToString();
                 this.ControllerContext.HttpContext.Response.Cookies.Add(FullName);
+
+                HttpCookie CompanyName = new HttpCookie("CompanyName");
+                CompanyName.Value = lstUser[0].CompanyName.ToString();
+                this.ControllerContext.HttpContext.Response.Cookies.Add(CompanyName);
+
+                HttpCookie VendorName = new HttpCookie("VendorName");
+                VendorName.Value = lstUser[0].VendorName.ToString();
+                this.ControllerContext.HttpContext.Response.Cookies.Add(VendorName);
             }
             else
             {
@@ -311,6 +319,14 @@ namespace SM.UI.Controllers
             HttpCookie FullName = this.ControllerContext.HttpContext.Request.Cookies["FullName"];
             FullName.Value = "";
             this.ControllerContext.HttpContext.Response.Cookies.Add(FullName);
+
+            HttpCookie CompanyName = this.ControllerContext.HttpContext.Request.Cookies["CompanyName"];
+            CompanyName.Value = "";
+            this.ControllerContext.HttpContext.Response.Cookies.Add(CompanyName);
+
+            HttpCookie VendorName = this.ControllerContext.HttpContext.Request.Cookies["VendorName"];
+            FullName.Value = "";
+            this.ControllerContext.HttpContext.Response.Cookies.Add(VendorName);
 
         }
 
