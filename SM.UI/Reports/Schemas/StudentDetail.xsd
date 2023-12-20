@@ -28,6 +28,7 @@
         <xs:element name="SONumber" type="xs:string" />
         <xs:element name="PaidInCountry" type="xs:string" />
         <xs:element name="VendorName" type="xs:string" />
+        <xs:element name="SubHeading" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

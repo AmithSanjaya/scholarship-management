@@ -20,6 +20,7 @@
 				<xs:element name="NextSubmissionDate" type="xs:dateTime" />
 				<xs:element name="CompanyName" type="xs:string" />
 				<xs:element name="VendorName" type="xs:string" />
+        <xs:element name="SubHeading" type="xs:string" />
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>

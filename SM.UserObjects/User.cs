@@ -28,6 +28,8 @@ namespace SM.UserObjects
         public DateTime ModifiedOn { get; set; }
         public int ModifiedBy { get; set; }
         public int Mode { get; set; }
+        public string VendorName { get; set; }
+        public string CompanyName { get; set; }
     }
 
     public class UserVM
@@ -70,6 +72,19 @@ namespace SM.UserObjects
         public static string FirstName { get { return GetLoggedUserFirstName(); } }
         public static string FullName { get { return GetLoggedUserFullName(); } }
         public static int PermissionID { get { return GetLoggedPermissionID(); } }
+        public static string VendorName { get { return GetVenderName(); } }
+
+        private static string GetVenderName()
+        {
+            string value = "";
+            HttpCookie cookie = HttpContext.Current.Request.Cookies["VendorName"];
+
+            if (cookie != null && !String.IsNullOrEmpty(cookie.Value))
+            {
+                value = cookie.Value;
+            }
+            return value;
+        }
 
         private static int GetLoggedUser()
         {
