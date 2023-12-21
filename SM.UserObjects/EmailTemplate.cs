@@ -22,6 +22,7 @@ namespace SM.UserObjects
         public string FromEmailAddress { get; set; }
         public string Emailpassword { get; set; }
         public string SMTPClient { get; set; }
+        public int PortNo { get; set; }
     }
 
     public class MailSendingAddress

@@ -31,7 +31,7 @@ namespace SM.DataAccess
                     model.SMTPClient = item.SMTPClient;
                 }
 
-                SmtpClient smtpClient = new SmtpClient(model.SMTPClient, 465);               
+                SmtpClient smtpClient = new SmtpClient(model.SMTPClient, model.PortNo);               
                 smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
                 NetworkCredential basicCredential = new NetworkCredential(model.EmailUserName, model.Emailpassword);
                 smtpClient.UseDefaultCredentials = false;
